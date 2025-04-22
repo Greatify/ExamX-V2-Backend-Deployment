@@ -192,7 +192,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          frepository: 'Greatify/ExamX-V2-Backend-Deployment'
+          repository: 'Greatify/ExamX-V2-Backend-Deployment'
           ref: 'main'
           fetch-depth: 0
 
