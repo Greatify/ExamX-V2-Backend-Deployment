@@ -1,0 +1,99 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: examxv2-backend
+  labels:
+    app: examxv2-backend
+spec:
+  replicas: 1 # Ensure we have at least 2 replicas for zero downtime
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0 # Ensures zero downtime by not allowing any unavailable pods
+  selector:
+    matchLabels:
+      app: examxv2-backend
+  template:
+    metadata:
+      labels:
+        app: examxv2-backend
+    spec:
+      serviceAccountName: examxv2-sa # Placeholder, overridden in overlays
+      terminationGracePeriodSeconds: 30
+      volumes:
+        - name: examxv2-secrets-volume
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: examxv2-backend-secrets
+        - name: nginx-config
+          configMap:
+            name: nginx-config
+        - name: nginx-cache
+          emptyDir: {}
+        - name: config-volume
+          configMap:
+            name: nginx-config
+            items:
+              - key: nginx.conf
+                path: nginx.conf
+        - name: examxv2-backend-storage
+          persistentVolumeClaim:
+            claimName: examxv2-backend-pvc
+      containers:
+        - name: examxv2-backend
+          image: 399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:EXM_150_Template_preview_and_e-20250422-060651-f486f61 # Dev-specific image
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              cpu: "8"
+              memory: "16Gi"
+            limits:
+              cpu: "16"
+              memory: "32Gi"
+          ports:
+            - containerPort: 80
+              protocol: TCP
+          env:
+            # - name: REDIS_URL
+            #   value: "redis://redis-service:6379"
+            - name: WORKERS
+              value: "16"
+          volumeMounts:
+            - name: examxv2-secrets-volume
+              mountPath: /mnt/secret-store
+              readOnly: true
+            - name: config-volume
+              mountPath: /etc/nginx/nginx.conf
+              subPath: nginx.conf
+            - name: nginx-config
+              mountPath: /etc/nginx/conf.d/default.conf
+              subPath: default.conf
+            - name: nginx-cache
+              mountPath: /var/cache/nginx
+            - name: examxv2-backend-storage
+              mountPath: /app/media
+          lifecycle:
+            postStart:
+              exec:
+                command: ["cp", "-R", "/mnt/secret-store/.env", "/app/examx/.env"]
+          livenessProbe:
+            httpGet:
+              path: /api/health/
+              port: 80
+            initialDelaySeconds: 60
+            timeoutSeconds: 5
+            periodSeconds: 30
+            successThreshold: 1
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /api/ready/
+              port: 80
+            initialDelaySeconds: 30
+            timeoutSeconds: 10
+            periodSeconds: 20
+            successThreshold: 1
+            failureThreshold: 3
