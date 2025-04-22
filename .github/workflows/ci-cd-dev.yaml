@@ -1,0 +1,85 @@
+name: Deploy to Development
+on:
+  workflow_dispatch:
+    inputs:
+      image:
+        description: 'Docker image to deploy'
+        required: true
+      sha:
+        description: 'Git SHA of the commit'
+        required: true
+  
+jobs:
+  deploy-dev:
+    runs-on: ubuntu-latest
+    environment: dev
+    steps:
+      - name: Debug Info
+        run: |
+          echo "Image: ${{ github.event.inputs.image }}"
+          echo "SHA: ${{ github.event.inputs.sha }}"
+
+      - name: Checkout code
+        uses: actions/checkout@v3
+  
+      - name: Set image tag from dispatch input
+        run: echo "BACKEND_IMAGE=${{ github.event.inputs.image }}" >> $GITHUB_ENV
+          
+      - name: Update deployment image tags
+        run: |
+          yq -i '.spec.template.spec.containers[0].image = env(BACKEND_IMAGE)' k8s/base/deployment/backend-deployment.yaml
+          yq -i '.spec.template.spec.containers[0].image = env(BACKEND_IMAGE)' k8s/base/deployment/celery-worker-deployment.yaml
+          yq -i '.spec.template.spec.containers[0].image = env(BACKEND_IMAGE)' k8s/base/deployment/celery-beat-deployment.yaml
+          
+      - name: Commit changes
+        run: |
+          git config --local user.email "hariharen@greatify.ai"
+          git config --local user.name "Hariharen"
+          git add k8s/base/deployment/backend-deployment.yaml
+          git add k8s/base/deployment/celery-worker-deployment.yaml
+          git add k8s/base/deployment/celery-beat-deployment.yaml
+          git commit -m "Update image tags for deployment"
+          
+      # - name: Push to protected branch
+      #   uses: CasperWA/push-protected@v2
+      #   with:
+      #     token: ${{ secrets.PAT_TOKEN }}
+      #     branch: dev
+      #     unprotect_reviews: true
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v3
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Update kube config
+        run: aws eks update-kubeconfig --name dev-stg-cluster --region ap-south-1
+
+      - name: Apply Kubernetes configuration to dev
+        run: |
+          kubectl apply -k k8s/overlays/dev
+          
+      - name: Slack Notification on Successful Deployment
+        if: success()
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          fields: repo,ref,workflow,eventName
+          author_name: Backend Deployment Success
+          mention: ${{ github.actor }}
+          if_mention: success
+          job_name: deploy-dev
+          channel: examxv2-backend-alerts
+          username: ExamX-V2-CICD
+          text: |
+            :rocket: *Deployment to dev environment succeeded*
+            
+            *Push by:* @${{ github.actor }}
+            *Commit:* ${{ github.sha }}
+            *Commit message:* ${{ github.event.head_commit.message }}
+            
+            @${{ github.actor }}, your changes have been deployed successfully. Please verify the deployment in the dev environment.
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
