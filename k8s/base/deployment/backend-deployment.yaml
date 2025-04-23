@@ -79,21 +79,4 @@ spec:
             postStart:
               exec:
                 command: ["cp", "-R", "/mnt/secret-store/.env", "/app/examx/.env"]
-          livenessProbe:
-            httpGet:
-              path: /api/health/
-              port: 80
-            initialDelaySeconds: 60
-            timeoutSeconds: 5
-            periodSeconds: 30
-            successThreshold: 1
-            failureThreshold: 3
-          readinessProbe:
-            httpGet:
-              path: /api/ready/
-              port: 80
-            initialDelaySeconds: 30
-            timeoutSeconds: 10
-            periodSeconds: 20
-            successThreshold: 1
-            failureThreshold: 3
+          
