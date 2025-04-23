@@ -16,14 +16,14 @@ jobs:
     steps:
       - name: Display deployment information
         run: |
-          echo "Image: ${{ github.event.inputs.image }}"
-          echo "SHA: ${{ github.event.inputs.sha }}"
+          echo "Image: ${{ inputs.image }}"
+          echo "SHA: ${{ inputs.sha }}"
 
       - name: Checkout repository code
         uses: actions/checkout@v3
   
       - name: Set docker image tag from workflow input
-        run: echo "BACKEND_IMAGE=${{ github.event.inputs.image }}" >> $GITHUB_ENV
+        run: echo "BACKEND_IMAGE=${{ inputs.image }}" >> $GITHUB_ENV
           
       - name: Update deployment image tags
         run: |
