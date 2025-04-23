@@ -167,7 +167,7 @@ jobs:
           author_name: Docker Build Failure 🐳
           mention: ${{ github.actor }}
           if_mention: always
-          job_name: build-docker-image
+          job_name: build-backend-staging-image
           channel: examxv2-backend-alerts
           username: ExamX-V2-CICD
           text: |
@@ -192,7 +192,7 @@ jobs:
       - security-password-check
       - build-backend-staging-image
     if: always() && (github.event.inputs.full_deployment == 'false' || needs.build-backend-staging-image.result == 'success')
-    environment: staging
+    environment: stg
     steps:
       - name: Checkout deployment repository
         uses: actions/checkout@v3
@@ -261,7 +261,7 @@ jobs:
           author_name: Deployment Success
           mention: ${{ github.actor }}
           if_mention: success
-          job_name: deploy-staging
+          job_name: deploy-backend-staging
           channel: examxv2-backend-alerts
           username: ExamX-V2-CICD
           text: |

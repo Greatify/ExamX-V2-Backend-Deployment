@@ -70,7 +70,7 @@ jobs:
           author_name: Backend Deployment Success
           mention: ${{ github.actor }}
           if_mention: success
-          job_name: deploy-development
+          job_name: deploy-backend-development
           channel: examxv2-backend-alerts
           username: ExamX-V2-CICD
           text: |
