@@ -8,22 +8,26 @@ on:
       sha:
         description: 'Git SHA of the commit'
         required: true
+      commit_message:
+        description: 'Original commit message'
+        required: true
   
 jobs:
   deploy-backend-development:
     runs-on: ubuntu-latest
     environment: dev
     steps:
-      - name: Display deployment information
+      - name: Display Deployment Information
         run: |
-          echo "Image: ${{ inputs.image }}"
-          echo "SHA: ${{ inputs.sha }}"
+          echo "Image: ${{ github.event.inputs.image }}"
+          echo "SHA: ${{ github.event.inputs.sha }}"
+          echo "Commit Message: ${{ github.event.inputs.commit_message }}"
 
       - name: Checkout repository code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
   
       - name: Set docker image tag from workflow input
-        run: echo "BACKEND_IMAGE=${{ inputs.image }}" >> $GITHUB_ENV
+        run: echo "BACKEND_IMAGE=${{ github.event.inputs.image }}" >> $GITHUB_ENV
           
       - name: Update deployment image tags
         run: |
