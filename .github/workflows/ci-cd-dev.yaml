@@ -43,6 +43,7 @@ jobs:
           git add k8s/base/deployment/celery-worker-deployment.yaml
           git add k8s/base/deployment/celery-beat-deployment.yaml
           git commit -m "Update image tags for development deployment"
+          git push origin main
           
       # - name: Push to protected branch
       #   uses: CasperWA/push-protected@v2
