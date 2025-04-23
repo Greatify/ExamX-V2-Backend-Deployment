@@ -264,7 +264,7 @@ jobs:
           channel: examxv2-backend-alerts
           username: ExamX-V2-CICD
           text: |
-            🚀 *Production Deployment Successful*
+            :rocket: *Production Deployment Successful*
             
             *Deployment by:* @${{ github.actor }}
             *Commit:* ${{ github.sha }}
