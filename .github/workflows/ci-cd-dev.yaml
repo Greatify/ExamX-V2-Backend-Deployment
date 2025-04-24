@@ -83,7 +83,7 @@ jobs:
             
             *Deployment by:* @${{ github.actor }}
             *Commit:* ${{ github.sha }}
-            *Commit message:* ${{ github.event.head_commit.message }}
+            *Commit message:* ${{ github.event.inputs.commit_message }}
             
             @${{ github.actor }}, your changes have been deployed successfully to Development.
             Please verify the deployment and conduct necessary tests.
