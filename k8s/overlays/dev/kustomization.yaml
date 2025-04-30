@@ -39,6 +39,12 @@ patches:
               env:
               - name: WORKERS
                 value: "2"
+              - name: OPIK_API_KEY
+                value: "Y5T3WoqNxJ22ypw1M8qivydis"
+              - name: OPIK_WORKSPACE
+                value: "priya97"
+              - name: OPIK_PROJECT
+                value: "Default Project"
     target:
       kind: Deployment
       name: examxv2-backend
