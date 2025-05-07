@@ -44,7 +44,7 @@ spec:
             claimName: examxv2-backend-pvc
       containers:
         - name: examxv2-backend
-          image: 399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:86cyvy57k_Exam_X_Super_Admin__-20250507-102805-0fda431 # Dev-specific image
+          image: 399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:EXM_287_staff_question_paper_b-20250507-104547-8c5c2eb # Dev-specific image
           imagePullPolicy: IfNotPresent
           resources:
             requests:
