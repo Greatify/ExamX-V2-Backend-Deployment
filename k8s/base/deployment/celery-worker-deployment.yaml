@@ -33,7 +33,7 @@ spec:
             claimName: examxv2-backend-pvc
       containers:
         - name: celery-worker
-          image: 399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:EXM_332_custom_tag_bug_fix___2-20250512-124939-cd04005
+          image: 399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:EXM_54____Robust_Notification_-20250512-131827-4e2874d
           imagePullPolicy: IfNotPresent
           resources:
             requests:
