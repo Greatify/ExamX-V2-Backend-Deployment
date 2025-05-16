@@ -44,7 +44,7 @@ spec:
             claimName: examxv2-backend-pvc
       containers:
         - name: examxv2-backend
-          image: 399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:GE_10140_Integrate_Tesseract_P-20250516-152709-e842831 # Dev-specific image
+          image: 399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:Update_Tesseract_path_in_setti-20250516-163209-ab688be # Dev-specific image
           imagePullPolicy: IfNotPresent
           resources:
             requests:
