@@ -53,7 +53,7 @@ data:
         variables_hash_max_size 2048;
 
         # Logging Settings
-        access_log /var/log/nginx/access.log combined;
+        access_log /var/log/nginx/access.log combined buffer=512k flush=1m;
         error_log /var/log/nginx/error.log warn;
 
         # Gzip Settings
@@ -132,13 +132,17 @@ data:
 
         server_tokens off;
         
-        # Security headers
+        # Enhanced Security headers
         add_header X-Frame-Options "SAMEORIGIN" always;
         add_header X-XSS-Protection "1; mode=block" always;
         add_header X-Content-Type-Options "nosniff" always;
-        add_header Referrer-Policy "no-referrer-when-downgrade" always;
-        add_header Content-Security-Policy "default-src * data: 'unsafe-eval' 'unsafe-inline'" always;
+        add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+        add_header Permissions-Policy "geolocation=(), microphone=(), camera=()" always;
+        add_header Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https:; frame-ancestors 'self'; form-action 'self';" always;
         add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;
+
+        # Cookie security settings
+        proxy_cookie_path / "/; HttpOnly; Secure; SameSite=Strict";
 
         # Invalid content type error response
         location @invalid_content_type {
@@ -149,9 +153,17 @@ data:
 
         # API endpoints
         location /api/ {
+            # Cookie security settings for API
+            proxy_cookie_path /api/ "/api/; HttpOnly; Secure; SameSite=Strict";
+            
             error_page 418 = @invalid_content_type;
             if ($needs_validation) {
                 return 418;
+            }
+
+            # Block common attack patterns
+            if ($request_uri ~* "\.(php|asp|aspx|jsp|cgi)$") {
+                return 403;
             }
 
             proxy_pass http://backend;
