@@ -31,10 +31,10 @@ patches:
               resources:
                 requests:
                   cpu: "2"
-                  memory: "8Gi"
+                  memory: "16Gi"
                 limits:
                   cpu: "4"
-                  memory: "16Gi"
+                  memory: "32Gi"
               env:
               - name: WORKERS
                 value: "4"
@@ -58,10 +58,10 @@ patches:
               resources:
                 requests:
                   cpu: "1"
-                  memory: "4Gi"
+                  memory: "10Gi"
                 limits:
                   cpu: "2"
-                  memory: "8Gi"
+                  memory: "20Gi"
     target:
       kind: Deployment
       name: celery-worker
@@ -81,10 +81,10 @@ patches:
               resources:
                 requests:
                   cpu: "1"
-                  memory: "4Gi"
+                  memory: "10Gi"
                 limits:
                   cpu: "2"
-                  memory: "8Gi"
+                  memory: "20Gi"
     target:
       kind: Deployment
       name: celery-beat
