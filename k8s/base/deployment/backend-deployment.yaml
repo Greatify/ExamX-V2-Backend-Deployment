@@ -44,7 +44,7 @@ spec:
             claimName: examxv2-backend-pvc
       containers:
         - name: examxv2-backend
-          image: 399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:Enhance_WATI_webhook_handling_-20250520-111200-ea6159e # Dev-specific image
+          image: 399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-20250520-115004-93d125fdcdf41e9df48e6787d9391d178b9a2e6b # Dev-specific image
           imagePullPolicy: IfNotPresent
           resources:
             requests:
