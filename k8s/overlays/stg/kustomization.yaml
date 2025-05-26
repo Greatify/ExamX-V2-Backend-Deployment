@@ -96,11 +96,6 @@ patches:
         annotations:
           alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-south-1:399600302704:certificate/3ac85857-f810-414f-903b-1ab46d8e1520
           alb.ingress.kubernetes.io/auth-tls-verify-client: "optional"
-          alb.ingress.kubernetes.io/auth-tls-secret: "stg-examxv2/client-ca-cert"
-          alb.ingress.kubernetes.io/custom-response-headers: >-
-            SSL-Client-Cert:${tls.client_cert}~
-            SSL-Client-Verify:${tls.client_verified}~
-            SSL-Client-DN:${tls.client_subject_dn}
           alb.ingress.kubernetes.io/cors-allow-origin: >-
             https://examx.co,https://www.examx.co,https://*.examx.co
       spec:

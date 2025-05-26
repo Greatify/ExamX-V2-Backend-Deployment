@@ -27,9 +27,8 @@ metadata:
     alb.ingress.kubernetes.io/cors-allow-origin: >-
       https://TO_BE_REPLACED,https://www.TO_BE_REPLACED,https://*.TO_BE_REPLACED
     alb.ingress.kubernetes.io/cors-allow-credentials: 'true'
-    alb.ingress.kubernetes.io/cors-expose-headers: '*, Authorization'
+    alb.ingress.kubernetes.io/cors-expose-headers: Accept,Content-Type,Authorization,X-Database-Choice,X-CSRFToken,Baggage,Sentry-Trace,X-Timezone,X-Idempotency-Key
     alb.ingress.kubernetes.io/cors-max-age: '86400'
-    
     # Client certificate configuration with passthrough mode
     alb.ingress.kubernetes.io/backend-protocol: "HTTP"
     
