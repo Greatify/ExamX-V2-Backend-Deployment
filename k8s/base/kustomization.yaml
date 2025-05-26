@@ -13,8 +13,8 @@ resources:
   - services/examxv2-backend-service.yaml
   # - services/redis-service.yaml
   
-  # Network
-  # - ingress/ingress.yaml
+  #Network
+  - ingress/ingress.yaml
   
   # Configurations
   - configmap/nginx-config.yaml
