@@ -33,7 +33,7 @@ spec:
             claimName: examxv2-backend-pvc
       containers:
         - name: celery-worker
-          image: 399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:Refactor_CORS_settings_to_use_-20250527-093403-1335016
+          image: 399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-20250527-094555-63382b00046e66154d93e15fd020e5c12a16fc88
           imagePullPolicy: IfNotPresent
           resources:
             requests:
