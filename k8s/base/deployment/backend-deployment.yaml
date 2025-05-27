@@ -44,7 +44,7 @@ spec:
             claimName: examxv2-backend-pvc
       containers:
         - name: examxv2-backend
-          image: 399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-20250527-092216-90f98d236a44ea9c693975a59f54158262c5910b # Dev-specific image
+          image: 399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:Refactor_CORS_settings_to_use_-20250527-093403-1335016 # Dev-specific image
           imagePullPolicy: IfNotPresent
           resources:
             requests:
