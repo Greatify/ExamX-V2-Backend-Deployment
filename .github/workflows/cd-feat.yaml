@@ -61,75 +61,9 @@ jobs:
       - name: Create feature overlay directory
         run: |
           mkdir -p k8s/overlays/${{ env.FEAT_ENV_NAME }}
-          
-      - name: Prepare custom .env if provided
-        run: |
-          if [ "${{ github.event.inputs.has_custom_env }}" = "true" ]; then
-            echo "Preparing custom .env file..."
-            echo "${{ github.event.inputs.custom_env_content }}" | base64 -d > custom_env_file.txt
-            
-            # Validate the .env content
-            if [ -s custom_env_file.txt ]; then
-              echo "Custom .env file prepared successfully ($(wc -l < custom_env_file.txt) lines)"
-              # Show first few non-sensitive lines for verification
-              echo "Sample content (first 3 lines, excluding secrets):"
-              head -3 custom_env_file.txt | grep -v -i "password\|secret\|key\|token" || echo "No safe content to display"
-            else
-              echo "::warning::Custom .env content appears to be empty"
-            fi
-          else
-            echo "No custom .env provided, will use default secrets"
-          fi
 
       - name: Generate feature environment kustomization
         run: |
-          # Determine environment setup method
-          if [ "${{ github.event.inputs.has_custom_env }}" = "true" ]; then
-            ENV_SETUP_TYPE="custom"
-            VOLUME_MOUNTS='
-                        volumeMounts:
-                        - name: custom-env
-                          mountPath: /app/.env
-                          subPath: .env'
-            VOLUMES='
-                      volumes:
-                      - name: custom-env
-                        configMap:
-                          name: custom-env-config'
-            SECRET_SECTION=""
-          else
-            ENV_SETUP_TYPE="default"
-            VOLUME_MOUNTS='
-                        volumeMounts:
-                        - name: secrets-store-inline
-                          mountPath: "/mnt/secrets-store"
-                          readOnly: true'
-            VOLUMES='
-                      volumes:
-                      - name: secrets-store-inline
-                        csi:
-                          driver: secrets-store.csi.k8s.io
-                          readOnly: true
-                          volumeAttributes:
-                            secretProviderClass: "examxv2-backend-secrets"'
-            SECRET_SECTION='
-            # Secrets patches - use dev secrets for features
-            - patch: |-
-                apiVersion: secrets-store.csi.x-k8s.io/v1
-                kind: SecretProviderClass
-                metadata:
-                  name: examxv2-backend-secrets
-                spec:
-                  parameters:
-                    objects: |
-                      - objectName: arn:aws:secretsmanager:ap-south-1:399600302704:secret:examxv2-secrets-1uLP4S
-                        objectAlias: ".env"
-                        objectType: "secretsmanager"
-              target:
-                kind: SecretProviderClass
-                name: examxv2-backend-secrets'
-          fi
-
           cat > k8s/overlays/${{ env.FEAT_ENV_NAME }}/kustomization.yaml << EOF
           apiVersion: kustomize.config.k8s.io/v1beta1
           kind: Kustomization
@@ -138,7 +72,6 @@ jobs:
           resources:
             - ../../base
             - namespace.yaml
-            - storage/
           
           labels:
             - pairs:
@@ -146,7 +79,6 @@ jobs:
                 tier: feat
                 branch: ${{ github.event.inputs.clean_branch_name }}
                 requester: ${{ github.event.inputs.requester }}
-                env-type: $ENV_SETUP_TYPE
               includeSelectors: false
           
           patches:
@@ -179,8 +111,6 @@ jobs:
                           value: "true"
                         - name: BRANCH_NAME
                           value: "${{ github.event.inputs.branch_name }}"
-                        - name: ENV_TYPE
-                          value: "$ENV_SETUP_TYPE"$VOLUME_MOUNTS$VOLUMES
               target:
                 kind: Deployment
                 name: examxv2-backend
@@ -204,7 +134,7 @@ jobs:
                             memory: "1Gi"
                           limits:
                             cpu: "0.5"
-                            memory: "2Gi"$VOLUME_MOUNTS$VOLUMES
+                            memory: "2Gi"
               target:
                 kind: Deployment
                 name: celery-worker
@@ -228,7 +158,7 @@ jobs:
                             memory: "512Mi"
                           limits:
                             cpu: "0.25"
-                            memory: "1Gi"$VOLUME_MOUNTS$VOLUMES
+                            memory: "1Gi"
               target:
                 kind: Deployment
                 name: celery-beat
@@ -243,7 +173,7 @@ jobs:
                     alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-south-1:399600302704:certificate/f191c431-422f-42a6-85ec-13eabec5272f
                     alb.ingress.kubernetes.io/cors-allow-origin: >-
                       https://${{ env.SUBDOMAIN }}.examx.cloud,https://examx.cloud,https://www.examx.cloud
-                    alb.ingress.kubernetes.io/tags: Environment=feature,Branch=${{ github.event.inputs.clean_branch_name }},EnvType=$ENV_SETUP_TYPE
+                    alb.ingress.kubernetes.io/tags: Environment=feature,Branch=${{ github.event.inputs.clean_branch_name }}
                 spec:
                   rules:
                     - host: ${{ env.SUBDOMAIN }}.examx.cloud
@@ -262,7 +192,7 @@ jobs:
                       secretName: tls-secret
               target:
                 kind: Ingress
-                name: examxv2-ingress$SECRET_SECTION
+                name: examxv2-ingress
           EOF
 
       - name: Create namespace manifest
@@ -278,80 +208,10 @@ jobs:
               tier: feat
               branch: ${{ github.event.inputs.clean_branch_name }}
               requester: ${{ github.event.inputs.requester }}
-              env-type: ${{ github.event.inputs.has_custom_env == 'true' && 'custom' || 'default' }}
             annotations:
               examx.cloud/created-by: ${{ github.event.inputs.requester }}
               examx.cloud/branch: ${{ github.event.inputs.branch_name }}
               examx.cloud/commit: ${{ github.event.inputs.sha }}
-              examx.cloud/env-type: ${{ github.event.inputs.has_custom_env == 'true' && 'custom' || 'default' }}
-          EOF
-
-      - name: Create custom .env ConfigMap if provided
-        run: |
-          if [ "${{ github.event.inputs.has_custom_env }}" = "true" ]; then
-            mkdir -p k8s/overlays/${{ env.FEAT_ENV_NAME }}
-            cat > k8s/overlays/${{ env.FEAT_ENV_NAME }}/custom-env-configmap.yaml << EOF
-          apiVersion: v1
-          kind: ConfigMap
-          metadata:
-            name: custom-env-config
-            namespace: ${{ env.FEAT_NAMESPACE }}
-            labels:
-              environment: feature
-              tier: feat
-              branch: ${{ github.event.inputs.clean_branch_name }}
-          data:
-            .env: |
-          $(sed 's/^/      /' custom_env_file.txt)
-          EOF
-            
-            # Add the ConfigMap to kustomization resources
-            echo "    - custom-env-configmap.yaml" >> k8s/overlays/${{ env.FEAT_ENV_NAME }}/kustomization.yaml
-            
-            echo "Custom .env ConfigMap created successfully"
-          else
-            echo "Skipping custom .env ConfigMap creation - using default secrets"
-          fi
-
-      - name: Create storage manifests
-        run: |
-          mkdir -p k8s/overlays/${{ env.FEAT_ENV_NAME }}/storage
-          
-          # Create PV
-          cat > k8s/overlays/${{ env.FEAT_ENV_NAME }}/storage/pv.yaml << EOF
-          apiVersion: v1
-          kind: PersistentVolume
-          metadata:
-            name: ${{ env.FEAT_ENV_NAME }}-pv
-            labels:
-              environment: feature
-              branch: ${{ github.event.inputs.clean_branch_name }}
-          spec:
-            capacity:
-              storage: 10Gi
-            accessModes:
-              - ReadWriteOnce
-            persistentVolumeReclaimPolicy: Delete
-            storageClassName: gp2
-            awsElasticBlockStore:
-              volumeID: vol-feat-${{ github.event.inputs.clean_branch_name }}
-              fsType: ext4
-          EOF
-          
-          # Create PVC
-          cat > k8s/overlays/${{ env.FEAT_ENV_NAME }}/storage/pvc.yaml << EOF
-          apiVersion: v1
-          kind: PersistentVolumeClaim
-          metadata:
-            name: ${{ env.FEAT_ENV_NAME }}-pvc
-            namespace: ${{ env.FEAT_NAMESPACE }}
-          spec:
-            accessModes:
-              - ReadWriteOnce
-            resources:
-              requests:
-                storage: 10Gi
-            storageClassName: gp2
           EOF
 
       - name: Configure AWS credentials for deployment
@@ -394,7 +254,6 @@ jobs:
             *Deployed by:* @${{ github.event.inputs.requester }}
             *Commit:* `${{ github.event.inputs.sha }}`
             *Commit message:* ${{ github.event.inputs.commit_message }}
-            *Environment Type:* ${{ github.event.inputs.has_custom_env == 'true' && '🔧 Custom .env' || '🏗️ Default secrets' }}
             
             🌐 *Access URL:* https://${{ env.SUBDOMAIN }}.examx.cloud
             
@@ -431,6 +290,4 @@ jobs:
       - name: Clean up temporary files
         if: always()
         run: |
-          rm -rf k8s/overlays/${{ env.FEAT_ENV_NAME }}
-          rm -f cleanup-cronjob.yaml
-          rm -f custom_env_file.txt 
+          rm -rf k8s/overlays/${{ env.FEAT_ENV_NAME }} 
