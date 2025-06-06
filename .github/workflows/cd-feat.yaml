@@ -1,0 +1,436 @@
+name: Deploy Feature Environment
+
+on:
+  workflow_dispatch:
+    inputs:
+      image:
+        description: 'Docker image to deploy'
+        required: true
+      branch_name:
+        description: 'Original branch name'
+        required: true
+      clean_branch_name:
+        description: 'Cleaned branch name for environment'
+        required: true
+      sha:
+        description: 'Git SHA of the commit'
+        required: true
+      commit_message:
+        description: 'Original commit message'
+        required: true
+      requester:
+        description: 'User who requested the deployment'
+        required: true
+      has_custom_env:
+        description: 'Whether custom .env content is provided'
+        required: false
+        default: 'false'
+      custom_env_content:
+        description: 'Base64 encoded custom .env content'
+        required: false
+        default: ''
+  
+jobs:
+  deploy-feature-environment:
+    runs-on: ubuntu-latest
+    environment: dev  # Using dev environment for AWS credentials
+    steps:
+      - name: Display Deployment Information
+        run: |
+          echo "Image: ${{ github.event.inputs.image }}"
+          echo "Branch: ${{ github.event.inputs.branch_name }}"
+          echo "Clean Branch: ${{ github.event.inputs.clean_branch_name }}"
+          echo "SHA: ${{ github.event.inputs.sha }}"
+          echo "Commit Message: ${{ github.event.inputs.commit_message }}"
+          echo "Requester: ${{ github.event.inputs.requester }}"
+          echo "Has Custom Env: ${{ github.event.inputs.has_custom_env }}"
+
+      - name: Checkout repository code
+        uses: actions/checkout@v4
+  
+      - name: Set environment variables
+        run: |
+          echo "FEAT_ENV_NAME=feat-${{ github.event.inputs.clean_branch_name }}" >> $GITHUB_ENV
+          echo "FEAT_NAMESPACE=feat-${{ github.event.inputs.clean_branch_name }}-examxv2" >> $GITHUB_ENV
+          echo "BACKEND_IMAGE=${{ github.event.inputs.image }}" >> $GITHUB_ENV
+          
+          # Generate unique subdomain
+          SUBDOMAIN="${{ github.event.inputs.clean_branch_name }}"
+          echo "SUBDOMAIN=$SUBDOMAIN" >> $GITHUB_ENV
+          
+      - name: Create feature overlay directory
+        run: |
+          mkdir -p k8s/overlays/${{ env.FEAT_ENV_NAME }}
+          
+      - name: Prepare custom .env if provided
+        run: |
+          if [ "${{ github.event.inputs.has_custom_env }}" = "true" ]; then
+            echo "Preparing custom .env file..."
+            echo "${{ github.event.inputs.custom_env_content }}" | base64 -d > custom_env_file.txt
+            
+            # Validate the .env content
+            if [ -s custom_env_file.txt ]; then
+              echo "Custom .env file prepared successfully ($(wc -l < custom_env_file.txt) lines)"
+              # Show first few non-sensitive lines for verification
+              echo "Sample content (first 3 lines, excluding secrets):"
+              head -3 custom_env_file.txt | grep -v -i "password\|secret\|key\|token" || echo "No safe content to display"
+            else
+              echo "::warning::Custom .env content appears to be empty"
+            fi
+          else
+            echo "No custom .env provided, will use default secrets"
+          fi
+
+      - name: Generate feature environment kustomization
+        run: |
+          # Determine environment setup method
+          if [ "${{ github.event.inputs.has_custom_env }}" = "true" ]; then
+            ENV_SETUP_TYPE="custom"
+            VOLUME_MOUNTS='
+                        volumeMounts:
+                        - name: custom-env
+                          mountPath: /app/.env
+                          subPath: .env'
+            VOLUMES='
+                      volumes:
+                      - name: custom-env
+                        configMap:
+                          name: custom-env-config'
+            SECRET_SECTION=""
+          else
+            ENV_SETUP_TYPE="default"
+            VOLUME_MOUNTS='
+                        volumeMounts:
+                        - name: secrets-store-inline
+                          mountPath: "/mnt/secrets-store"
+                          readOnly: true'
+            VOLUMES='
+                      volumes:
+                      - name: secrets-store-inline
+                        csi:
+                          driver: secrets-store.csi.k8s.io
+                          readOnly: true
+                          volumeAttributes:
+                            secretProviderClass: "examxv2-backend-secrets"'
+            SECRET_SECTION='
+            # Secrets patches - use dev secrets for features
+            - patch: |-
+                apiVersion: secrets-store.csi.x-k8s.io/v1
+                kind: SecretProviderClass
+                metadata:
+                  name: examxv2-backend-secrets
+                spec:
+                  parameters:
+                    objects: |
+                      - objectName: arn:aws:secretsmanager:ap-south-1:399600302704:secret:examxv2-secrets-1uLP4S
+                        objectAlias: ".env"
+                        objectType: "secretsmanager"
+              target:
+                kind: SecretProviderClass
+                name: examxv2-backend-secrets'
+          fi
+
+          cat > k8s/overlays/${{ env.FEAT_ENV_NAME }}/kustomization.yaml << EOF
+          apiVersion: kustomize.config.k8s.io/v1beta1
+          kind: Kustomization
+          namespace: ${{ env.FEAT_NAMESPACE }}
+          
+          resources:
+            - ../../base
+            - namespace.yaml
+            - storage/
+          
+          labels:
+            - pairs:
+                environment: feature
+                tier: feat
+                branch: ${{ github.event.inputs.clean_branch_name }}
+                requester: ${{ github.event.inputs.requester }}
+                env-type: $ENV_SETUP_TYPE
+              includeSelectors: false
+          
+          patches:
+            # Backend Deployment patches
+            - patch: |-
+                apiVersion: apps/v1
+                kind: Deployment
+                metadata:
+                  name: examxv2-backend
+                spec:
+                  replicas: 1
+                  template:
+                    spec:
+                      containers:
+                      - name: examxv2-backend
+                        image: ${{ env.BACKEND_IMAGE }}
+                        resources:
+                          requests:
+                            cpu: "0.5"
+                            memory: "2Gi"
+                          limits:
+                            cpu: "1"
+                            memory: "4Gi"
+                        env:
+                        - name: WORKERS
+                          value: "1"
+                        - name: DJANGO_DEBUG
+                          value: "True"
+                        - name: FEATURE_ENV
+                          value: "true"
+                        - name: BRANCH_NAME
+                          value: "${{ github.event.inputs.branch_name }}"
+                        - name: ENV_TYPE
+                          value: "$ENV_SETUP_TYPE"$VOLUME_MOUNTS$VOLUMES
+              target:
+                kind: Deployment
+                name: examxv2-backend
+          
+            # Celery Worker patches
+            - patch: |-
+                apiVersion: apps/v1
+                kind: Deployment
+                metadata:
+                  name: celery-worker
+                spec:
+                  replicas: 1
+                  template:
+                    spec:
+                      containers:
+                      - name: celery-worker
+                        image: ${{ env.BACKEND_IMAGE }}
+                        resources:
+                          requests:
+                            cpu: "0.25"
+                            memory: "1Gi"
+                          limits:
+                            cpu: "0.5"
+                            memory: "2Gi"$VOLUME_MOUNTS$VOLUMES
+              target:
+                kind: Deployment
+                name: celery-worker
+          
+            # Celery Beat patches
+            - patch: |-
+                apiVersion: apps/v1
+                kind: Deployment
+                metadata:
+                  name: celery-beat
+                spec:
+                  replicas: 1
+                  template:
+                    spec:
+                      containers:
+                      - name: celery-beat
+                        image: ${{ env.BACKEND_IMAGE }}
+                        resources:
+                          requests:
+                            cpu: "0.1"
+                            memory: "512Mi"
+                          limits:
+                            cpu: "0.25"
+                            memory: "1Gi"$VOLUME_MOUNTS$VOLUMES
+              target:
+                kind: Deployment
+                name: celery-beat
+          
+            # Ingress patches with unique subdomain
+            - patch: |-
+                apiVersion: networking.k8s.io/v1
+                kind: Ingress
+                metadata:
+                  name: examxv2-ingress
+                  annotations:
+                    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-south-1:399600302704:certificate/f191c431-422f-42a6-85ec-13eabec5272f
+                    alb.ingress.kubernetes.io/cors-allow-origin: >-
+                      https://${{ env.SUBDOMAIN }}.examx.cloud,https://examx.cloud,https://www.examx.cloud
+                    alb.ingress.kubernetes.io/tags: Environment=feature,Branch=${{ github.event.inputs.clean_branch_name }},EnvType=$ENV_SETUP_TYPE
+                spec:
+                  rules:
+                    - host: ${{ env.SUBDOMAIN }}.examx.cloud
+                      http:
+                        paths:
+                          - path: /
+                            pathType: Prefix
+                            backend:
+                              service:
+                                name: examxv2-backend-service
+                                port:
+                                  number: 80
+                  tls:
+                    - hosts:
+                        - ${{ env.SUBDOMAIN }}.examx.cloud
+                      secretName: tls-secret
+              target:
+                kind: Ingress
+                name: examxv2-ingress$SECRET_SECTION
+          EOF
+
+      - name: Create namespace manifest
+        run: |
+          mkdir -p k8s/overlays/${{ env.FEAT_ENV_NAME }}
+          cat > k8s/overlays/${{ env.FEAT_ENV_NAME }}/namespace.yaml << EOF
+          apiVersion: v1
+          kind: Namespace
+          metadata:
+            name: ${{ env.FEAT_NAMESPACE }}
+            labels:
+              environment: feature
+              tier: feat
+              branch: ${{ github.event.inputs.clean_branch_name }}
+              requester: ${{ github.event.inputs.requester }}
+              env-type: ${{ github.event.inputs.has_custom_env == 'true' && 'custom' || 'default' }}
+            annotations:
+              examx.cloud/created-by: ${{ github.event.inputs.requester }}
+              examx.cloud/branch: ${{ github.event.inputs.branch_name }}
+              examx.cloud/commit: ${{ github.event.inputs.sha }}
+              examx.cloud/env-type: ${{ github.event.inputs.has_custom_env == 'true' && 'custom' || 'default' }}
+          EOF
+
+      - name: Create custom .env ConfigMap if provided
+        run: |
+          if [ "${{ github.event.inputs.has_custom_env }}" = "true" ]; then
+            mkdir -p k8s/overlays/${{ env.FEAT_ENV_NAME }}
+            cat > k8s/overlays/${{ env.FEAT_ENV_NAME }}/custom-env-configmap.yaml << EOF
+          apiVersion: v1
+          kind: ConfigMap
+          metadata:
+            name: custom-env-config
+            namespace: ${{ env.FEAT_NAMESPACE }}
+            labels:
+              environment: feature
+              tier: feat
+              branch: ${{ github.event.inputs.clean_branch_name }}
+          data:
+            .env: |
+          $(sed 's/^/      /' custom_env_file.txt)
+          EOF
+            
+            # Add the ConfigMap to kustomization resources
+            echo "    - custom-env-configmap.yaml" >> k8s/overlays/${{ env.FEAT_ENV_NAME }}/kustomization.yaml
+            
+            echo "Custom .env ConfigMap created successfully"
+          else
+            echo "Skipping custom .env ConfigMap creation - using default secrets"
+          fi
+
+      - name: Create storage manifests
+        run: |
+          mkdir -p k8s/overlays/${{ env.FEAT_ENV_NAME }}/storage
+          
+          # Create PV
+          cat > k8s/overlays/${{ env.FEAT_ENV_NAME }}/storage/pv.yaml << EOF
+          apiVersion: v1
+          kind: PersistentVolume
+          metadata:
+            name: ${{ env.FEAT_ENV_NAME }}-pv
+            labels:
+              environment: feature
+              branch: ${{ github.event.inputs.clean_branch_name }}
+          spec:
+            capacity:
+              storage: 10Gi
+            accessModes:
+              - ReadWriteOnce
+            persistentVolumeReclaimPolicy: Delete
+            storageClassName: gp2
+            awsElasticBlockStore:
+              volumeID: vol-feat-${{ github.event.inputs.clean_branch_name }}
+              fsType: ext4
+          EOF
+          
+          # Create PVC
+          cat > k8s/overlays/${{ env.FEAT_ENV_NAME }}/storage/pvc.yaml << EOF
+          apiVersion: v1
+          kind: PersistentVolumeClaim
+          metadata:
+            name: ${{ env.FEAT_ENV_NAME }}-pvc
+            namespace: ${{ env.FEAT_NAMESPACE }}
+          spec:
+            accessModes:
+              - ReadWriteOnce
+            resources:
+              requests:
+                storage: 10Gi
+            storageClassName: gp2
+          EOF
+
+      - name: Configure AWS credentials for deployment
+        uses: aws-actions/configure-aws-credentials@v3
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Update Kubernetes configuration
+        run: aws eks update-kubeconfig --name dev-stg-cluster --region ap-south-1
+
+      - name: Deploy to feature environment
+        run: |
+          kubectl apply -k k8s/overlays/${{ env.FEAT_ENV_NAME }}
+          
+          # Wait for deployment to be ready
+          kubectl wait --for=condition=available --timeout=300s deployment/examxv2-backend -n ${{ env.FEAT_NAMESPACE }}
+          
+          # Get pod status
+          kubectl get pods -n ${{ env.FEAT_NAMESPACE }}
+
+      - name: Send deployment success notification
+        if: success()
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          fields: repo,ref,workflow,eventName
+          author_name: Feature Environment Deployed 🚀
+          mention: ${{ github.event.inputs.requester }}
+          if_mention: success
+          job_name: deploy-feature-environment
+          channel: examxv2-backend-alerts
+          username: ExamX-V2-CICD
+          text: |
+            🚀 *Feature environment deployed successfully*
+            
+            *Branch:* `${{ github.event.inputs.branch_name }}`
+            *Environment:* `${{ env.FEAT_ENV_NAME }}`
+            *Deployed by:* @${{ github.event.inputs.requester }}
+            *Commit:* `${{ github.event.inputs.sha }}`
+            *Commit message:* ${{ github.event.inputs.commit_message }}
+            *Environment Type:* ${{ github.event.inputs.has_custom_env == 'true' && '🔧 Custom .env' || '🏗️ Default secrets' }}
+            
+            🌐 *Access URL:* https://${{ env.SUBDOMAIN }}.examx.cloud
+            
+            @${{ github.event.inputs.requester }}, your feature environment is ready for testing!
+            
+            💡 *Cleanup:* Run cleanup workflows when you're done testing
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+      - name: Send deployment failure notification
+        if: failure()
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          fields: repo,ref,workflow,eventName
+          author_name: Feature Environment Deployment Failed ❌
+          mention: ${{ github.event.inputs.requester }}
+          if_mention: failure
+          job_name: deploy-feature-environment
+          channel: examxv2-backend-alerts
+          username: ExamX-V2-CICD
+          text: |
+            ❌ *Feature environment deployment failed*
+            
+            *Branch:* `${{ github.event.inputs.branch_name }}`
+            *Environment:* `${{ env.FEAT_ENV_NAME }}`
+            *Requested by:* @${{ github.event.inputs.requester }}
+            *Commit:* `${{ github.event.inputs.sha }}`
+            
+            Please check the workflow logs and try again.
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          
+      - name: Clean up temporary files
+        if: always()
+        run: |
+          rm -rf k8s/overlays/${{ env.FEAT_ENV_NAME }}
+          rm -f cleanup-cronjob.yaml
+          rm -f custom_env_file.txt 
