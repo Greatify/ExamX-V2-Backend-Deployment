@@ -91,7 +91,7 @@ patches:
       metadata:
         name: examxv2-ingress
         annotations:
-          alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-south-1:399600302704:certificate/3ac85857-f810-414f-903b-1ab46d8e1520
+          alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-south-1:399600302704:certificate/b1a2ebc1-bf6b-4a73-a7f9-69ad12e8c4c9
           alb.ingress.kubernetes.io/auth-tls-verify-client: "optional"
           alb.ingress.kubernetes.io/cors-allow-origin: >-
             https://klockwork.ai,https://www.klockwork.ai,https://*.klockwork.ai
