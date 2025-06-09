@@ -1,0 +1,155 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: uat-examxv2
+
+resources:
+  - ../../base
+  # Note: No PVC/PV resources for UAT as per requirement
+
+labels:
+  - pairs:
+      environment: uat
+      tier: uat
+    includeSelectors: false
+
+patches:
+  # Backend Deployment patches
+  - patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: examxv2-backend
+      spec:
+        replicas: 1
+        template:
+          spec:
+            serviceAccountName: examxv2-stg-secret-service
+            volumes:
+              - name: examxv2-secrets-volume
+                csi:
+                  driver: secrets-store.csi.k8s.io
+                  readOnly: true
+                  volumeAttributes:
+                    secretProviderClass: examxv2-backend-secrets
+              - name: nginx-config
+                configMap:
+                  name: nginx-config
+              - name: nginx-cache
+                emptyDir: {}
+              - name: config-volume
+                configMap:
+                  name: nginx-config
+                  items:
+                    - key: nginx.conf
+                      path: nginx.conf
+            containers:
+            - name: examxv2-backend
+              resources:
+                requests:
+                  cpu: "1"
+                  memory: "4Gi"
+                limits:
+                  cpu: "2"
+                  memory: "8Gi"
+              env:
+              - name: WORKERS
+                value: "2"
+              volumeMounts:
+                - name: examxv2-secrets-volume
+                  mountPath: /mnt/secret-store
+                  readOnly: true
+                - name: config-volume
+                  mountPath: /etc/nginx/nginx.conf
+                  subPath: nginx.conf
+                - name: nginx-config
+                  mountPath: /etc/nginx/conf.d/default.conf
+                  subPath: default.conf
+                - name: nginx-cache
+                  mountPath: /var/cache/nginx
+    target:
+      kind: Deployment
+      name: examxv2-backend
+
+  # Celery Worker patches
+  - patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: celery-worker
+      spec:
+        replicas: 1
+        template:
+          spec:
+            serviceAccountName: examxv2-stg-secret-service
+            containers:
+            - name: celery-worker
+              resources:
+                requests:
+                  cpu: "500m"
+                  memory: "2Gi"
+                limits:
+                  cpu: "1"
+                  memory: "4Gi"
+    target:
+      kind: Deployment
+      name: celery-worker
+
+  # Celery beat patches
+  - patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: celery-beat
+      spec:
+        replicas: 1
+        template:
+          spec:
+            serviceAccountName: examxv2-stg-secret-service
+            containers:
+            - name: celery-beat
+              resources:
+                requests:
+                  cpu: "500m"
+                  memory: "2Gi"
+                limits:
+                  cpu: "1"
+                  memory: "4Gi"
+    target:
+      kind: Deployment
+      name: celery-beat
+
+  # Ingress patches - Using UAT specific domain
+  - patch: |-
+      apiVersion: networking.k8s.io/v1
+      kind: Ingress
+      metadata:
+        name: examxv2-ingress
+        annotations:
+          alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-south-1:399600302704:certificate/3ac85857-f810-414f-903b-1ab46d8e1520
+          alb.ingress.kubernetes.io/auth-tls-verify-client: "optional"
+          alb.ingress.kubernetes.io/cors-allow-origin: >-
+            https://uat.examx.co,https://uat-examx.co,https://*.uat.examx.co
+      spec:
+        tls:
+          - hosts:
+              - uat.examx.co
+            secretName: tls-secret
+    target:
+      kind: Ingress
+      name: examxv2-ingress
+
+  # Secrets patches - Using UAT secret ARN
+  - patch: |-
+      apiVersion: secrets-store.csi.x-k8s.io/v1
+      kind: SecretProviderClass
+      metadata:
+        name: examxv2-backend-secrets
+      spec:
+        parameters:
+          objects: |
+            - objectName: arn:aws:secretsmanager:ap-south-1:399600302704:secret:examxv2-backend-uat-9G4vRf
+              objectAlias: ".env"
+              objectType: "secretsmanager"
+    target:
+      kind: SecretProviderClass
+      name: examxv2-backend-secrets 

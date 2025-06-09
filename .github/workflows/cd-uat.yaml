@@ -1,0 +1,305 @@
+name: Deploy to UAT
+
+on:
+  workflow_dispatch:
+    inputs:
+      deploy_password:
+        description: 'Enter deployment password'
+        required: true
+        type: string
+      full_deployment:
+        description: 'Run full deployment (build images & deploy)'
+        required: false
+        type: boolean
+        default: false
+      deploy_branch:
+        description: 'Enter branch name to deploy'
+        required: true
+        type: string
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  security-password-check:
+    runs-on: ubuntu-latest
+    environment: uat
+    steps:
+      - name: Verify deployment password
+        id: password-check
+        continue-on-error: true
+        run: |
+          CORRECT_PASSWORD="${{ secrets.DEPLOY_PASSWORD }}"
+          INPUT_PASSWORD="${{ github.event.inputs.deploy_password }}"
+          
+          if [[ "$INPUT_PASSWORD" != "$CORRECT_PASSWORD" ]]; then
+            echo "::error::Invalid deployment password"
+            exit 1
+          fi
+          echo "Password verified successfully"
+
+      - name: Send unauthorized attempt alert
+        if: steps.password-check.outcome == 'failure'
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          fields: repo,message,commit,eventName,ref,workflow
+          author_name: Deployment Security Alert 🚨
+          mention: channel
+          if_mention: always
+          job_name: security-check
+          channel: examxv2-backend-alerts
+          username: ExamX-V2-CICD
+          text: |
+            🚨 *Unauthorized Deployment Attempt* 
+            *User:* `${{ github.actor }}`
+            *Workflow:* Deploy to UAT
+            *Status:* Failed - Invalid Password
+            
+            This incident has been logged for security monitoring.
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+      - name: Block deployment on invalid password
+        if: steps.password-check.outcome == 'failure'
+        run: |
+          echo "::error::Authentication failed - Deployment blocked"
+          exit 1
+
+  build-backend-uat-image:
+    needs: security-password-check
+    if: github.event.inputs.full_deployment == 'true'
+    runs-on: ubuntu-latest
+    environment: uat
+    steps:
+      - name: Checkout repository code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.inputs.deploy_branch }}
+          repository: 'Greatify/ExamX-V2-Backend'
+          token: ${{ secrets.REPO_DISPATCH_TOKEN }}
+          
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+        with:
+          version: v0.12.0
+          driver-opts: |
+            image=moby/buildkit:v0.12.0
+          buildkitd-flags: |
+            --debug
+            --allow-insecure-entitlement security.insecure
+            --allow-insecure-entitlement network.host
+          config-inline: |
+            [registry."docker.io"]
+              mirrors = ["mirror.gcr.io"]
+            [worker.oci]
+              max-parallelism = 12
+
+      - name: Free disk space
+        run: |
+          sudo rm -rf /usr/share/dotnet
+          sudo rm -rf /opt/ghc
+          sudo rm -rf "/usr/local/share/boost"
+          sudo rm -rf "$AGENT_TOOLSDIRECTORY"
+          sudo apt-get clean
+          docker system prune -af
+          df -h
+
+      - name: Configure AWS credentials for ECR
+        uses: aws-actions/configure-aws-credentials@v3
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+        
+      - name: Generate UAT image tag
+        id: generate-tag
+        run: |
+          TIMESTAMP=$(date +'%Y%m%d-%H%M%S')
+          COMMIT_ID=$(git rev-parse HEAD)
+          IMAGE_TAG="uat-${TIMESTAMP}-${COMMIT_ID}"
+          
+          echo "IMAGE_TAG=$IMAGE_TAG" >> $GITHUB_OUTPUT
+          echo "Generated Image Tag: $IMAGE_TAG"
+
+      - name: Cache Docker layers
+        uses: actions/cache@v3
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-buildx-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-buildx-
+  
+      - name: Build and push Backend Docker image to ECR
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.login-ecr.outputs.registry }}/examxv2-backend:${{ steps.generate-tag.outputs.IMAGE_TAG }}
+          platforms: linux/amd64
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache-new
+  
+      - name: Move cache directory
+        run: |
+          rm -rf /tmp/.buildx-cache
+          mv /tmp/.buildx-cache-new /tmp/.buildx-cache
+
+      - name: Save image tag to file
+        run: |
+          echo "${{ steps.login-ecr.outputs.registry }}/examxv2-backend:${{ steps.generate-tag.outputs.IMAGE_TAG }}" > backend_image_tag.txt
+
+      - name: Send Docker build failure notification
+        if: failure()
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          fields: repo,ref,workflow,eventName
+          author_name: Docker Build Failure 🐳
+          mention: ${{ github.actor }}
+          if_mention: always
+          job_name: build-backend-uat-image
+          channel: examxv2-backend-alerts
+          username: ExamX-V2-CICD
+          text: |
+            ❌ *Docker build failed for UAT deployment* 🐳
+            *Pusher:* @${{ github.actor }}
+            *Commit:* ${{ github.sha }}
+            *Commit message:* ${{ github.event.head_commit.message }}
+            Please fix the Docker build issues.
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          
+      - name: Upload backend image tag file
+        uses: actions/upload-artifact@v4
+        with:
+          name: backend-image-tag
+          path: backend_image_tag.txt
+          if-no-files-found: error
+
+  deploy-backend-uat:
+    runs-on: ubuntu-latest
+    needs: 
+      - security-password-check
+      - build-backend-uat-image
+    if: always() && (github.event.inputs.full_deployment == 'false' || needs.build-backend-uat-image.result == 'success')
+    environment: uat
+    steps:
+      - name: Checkout deployment repository
+        uses: actions/checkout@v3
+        with:
+          repository: 'Greatify/ExamX-V2-Backend-Deployment'
+          ref: 'main'
+          fetch-depth: 0
+
+      - name: Download image tag files
+        if: github.event.inputs.full_deployment == 'true'
+        uses: actions/download-artifact@v4
+        with:
+          name: backend-image-tag
+          path: .
+
+      - name: Set image tags as environment variables
+        if: github.event.inputs.full_deployment == 'true'
+        run: |
+          echo "BACKEND_IMAGE=$(cat backend_image_tag.txt)" >> $GITHUB_ENV
+          
+      - name: Update deployment image tags
+        if: github.event.inputs.full_deployment == 'true'
+        run: |
+          yq -i '.spec.template.spec.containers[0].image = env(BACKEND_IMAGE)' k8s/base/deployment/backend-deployment.yaml
+          yq -i '.spec.template.spec.containers[0].image = env(BACKEND_IMAGE)' k8s/base/deployment/celery-worker-deployment.yaml
+          yq -i '.spec.template.spec.containers[0].image = env(BACKEND_IMAGE)' k8s/base/deployment/celery-beat-deployment.yaml
+      
+      - name: Commit and push changes
+        if: github.event.inputs.full_deployment == 'true'
+        run: |
+          git config --local user.email "hariharen@greatify.ai"
+          git config --local user.name "Hariharen"
+          git add k8s/base/deployment/backend-deployment.yaml
+          git add k8s/base/deployment/celery-worker-deployment.yaml
+          git add k8s/base/deployment/celery-beat-deployment.yaml
+          git commit -m "Update image tags for UAT deployment"
+          git push origin main
+
+      - name: Configure AWS credentials for deployment
+        uses: aws-actions/configure-aws-credentials@v3
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Update Kubernetes configuration
+        run: aws eks update-kubeconfig --name dev-stg-cluster --region ap-south-1
+
+      - name: Deploy to UAT environment
+        run: |
+          kubectl apply -k k8s/overlays/uat
+
+    #   - name: Verify deployment
+    #     run: |
+    #       echo "Waiting for deployments to be ready..."
+    #       kubectl wait --for=condition=available --timeout=300s deployment/examxv2-backend -n uat-examxv2
+    #       kubectl wait --for=condition=available --timeout=300s deployment/celery-worker -n uat-examxv2
+    #       kubectl wait --for=condition=available --timeout=300s deployment/celery-beat -n uat-examxv2
+          
+    #       echo "Deployment status:"
+    #       kubectl get deployments -n uat-examxv2
+    #       kubectl get pods -n uat-examxv2
+
+      - name: Send deployment success notification
+        if: success()
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          fields: repo,message,commit,author,action,eventName,ref,workflow
+          author_name: Deployment Success
+          mention: ${{ github.actor }}
+          if_mention: success
+          job_name: deploy-backend-uat
+          channel: examxv2-backend-alerts
+          username: ExamX-V2-CICD
+          text: |
+            :rocket: *UAT Deployment Successful*
+            
+            *Deployment by:* @${{ github.actor }}
+            *Commit:* ${{ github.sha }}
+            *Branch:* ${{ github.ref_name }}
+            
+            @${{ github.actor }}, your changes have been deployed successfully to UAT.
+            Please verify the deployment and conduct necessary tests.
+        
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+      - name: Send deployment failure notification
+        if: failure()
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          fields: repo,message,commit,author,action,eventName,ref,workflow
+          author_name: Deployment Failure ❌
+          mention: ${{ github.actor }}
+          if_mention: failure
+          job_name: deploy-backend-uat
+          channel: examxv2-backend-alerts
+          username: ExamX-V2-CICD
+          text: |
+            ❌ *UAT Deployment Failed*
+            
+            *Deployment by:* @${{ github.actor }}
+            *Commit:* ${{ github.sha }}
+            *Branch:* ${{ github.ref_name }}
+            
+            @${{ github.actor }}, please check the deployment logs and fix the issues.
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} 
