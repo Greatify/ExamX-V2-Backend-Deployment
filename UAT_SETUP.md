@@ -20,8 +20,10 @@ This document describes the UAT (User Acceptance Testing) environment setup for 
 - **Secret Provider**: AWS Secrets Manager
 
 ### Storage Configuration
-- **PVC**: Not configured (removed as per requirement)
+- **PVC**: Not configured (completely removed as per requirement)
+- **EFS**: Not used in UAT environment
 - **Persistent Volumes**: Not used in UAT environment
+- **Volume Mounts**: Only secrets and config volumes, no persistent storage
 
 ### Resource Allocation
 
@@ -48,8 +50,8 @@ This document describes the UAT (User Acceptance Testing) environment setup for 
 - **Memory Limit**: 4Gi
 
 ### Ingress Configuration
-- **Domain**: `uat.examx.co`
-- **CORS Origins**: `https://uat.examx.co,https://uat-examx.co,https://*.uat.examx.co`
+- **Domain**: `klockwork.ai`
+- **CORS Origins**: `https://klockwork.ai,https://www.klockwork.ai,https://*.klockwork.ai`
 - **Certificate ARN**: `arn:aws:acm:ap-south-1:399600302704:certificate/3ac85857-f810-414f-903b-1ab46d8e1520`
 
 ## Deployment Workflow
@@ -109,7 +111,7 @@ Make sure the following secrets are configured in the `uat` environment:
 1. **No PVC/PV**: UAT environment doesn't use persistent volume claims
 2. **Lower Resources**: Reduced CPU and memory allocation for cost optimization
 3. **UAT-specific Secrets**: Uses `examxv2-backend-uat` secret
-4. **UAT Domain**: Uses `uat.examx.co` domain
+4. **UAT Domain**: Uses `klockwork.ai` domain
 5. **Reduced Workers**: Only 2 backend workers vs 4 in staging
 
 ## Manual Deployment Commands

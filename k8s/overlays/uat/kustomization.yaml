@@ -70,55 +70,51 @@ patches:
       kind: Deployment
       name: examxv2-backend
 
-  # Celery Worker patches
-  - patch: |-
-      apiVersion: apps/v1
-      kind: Deployment
-      metadata:
-        name: celery-worker
-      spec:
-        replicas: 1
-        template:
-          spec:
-            serviceAccountName: examxv2-stg-secret-service
-            containers:
-            - name: celery-worker
-              resources:
-                requests:
-                  cpu: "500m"
-                  memory: "2Gi"
-                limits:
-                  cpu: "1"
-                  memory: "4Gi"
-    target:
+  # Remove PVC volume from celery-worker using JSON patch
+  - target:
       kind: Deployment
       name: celery-worker
+    patch: |-
+      - op: remove
+        path: /spec/template/spec/volumes/1
+      - op: remove  
+        path: /spec/template/spec/containers/0/volumeMounts/1
+      - op: replace
+        path: /spec/template/spec/serviceAccountName
+        value: examxv2-stg-secret-service
+      - op: replace
+        path: /spec/template/spec/containers/0/resources
+        value:
+          requests:
+            cpu: "500m"
+            memory: "2Gi"
+          limits:
+            cpu: "1"
+            memory: "4Gi"
 
-  # Celery beat patches
-  - patch: |-
-      apiVersion: apps/v1
-      kind: Deployment
-      metadata:
-        name: celery-beat
-      spec:
-        replicas: 1
-        template:
-          spec:
-            serviceAccountName: examxv2-stg-secret-service
-            containers:
-            - name: celery-beat
-              resources:
-                requests:
-                  cpu: "500m"
-                  memory: "2Gi"
-                limits:
-                  cpu: "1"
-                  memory: "4Gi"
-    target:
+  # Remove PVC volume from celery-beat using JSON patch  
+  - target:
       kind: Deployment
       name: celery-beat
+    patch: |-
+      - op: remove
+        path: /spec/template/spec/volumes/1
+      - op: remove
+        path: /spec/template/spec/containers/0/volumeMounts/1
+      - op: replace
+        path: /spec/template/spec/serviceAccountName
+        value: examxv2-stg-secret-service
+      - op: replace
+        path: /spec/template/spec/containers/0/resources
+        value:
+          requests:
+            cpu: "500m"
+            memory: "2Gi"
+          limits:
+            cpu: "1"
+            memory: "4Gi"
 
-  # Ingress patches - Using UAT specific domain
+  # Ingress patches - Using klockwork.ai domain
   - patch: |-
       apiVersion: networking.k8s.io/v1
       kind: Ingress
@@ -128,11 +124,11 @@ patches:
           alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-south-1:399600302704:certificate/3ac85857-f810-414f-903b-1ab46d8e1520
           alb.ingress.kubernetes.io/auth-tls-verify-client: "optional"
           alb.ingress.kubernetes.io/cors-allow-origin: >-
-            https://uat.examx.co,https://uat-examx.co,https://*.uat.examx.co
+            https://klockwork.ai,https://www.klockwork.ai,https://*.klockwork.ai
       spec:
         tls:
           - hosts:
-              - uat.examx.co
+              - klockwork.ai
             secretName: tls-secret
     target:
       kind: Ingress
