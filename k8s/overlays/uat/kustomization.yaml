@@ -56,11 +56,11 @@ patches:
         path: /spec/template/spec/containers/0/resources
         value:
           requests:
-            cpu: "500m"
-            memory: "2Gi"
-          limits:
             cpu: "1"
             memory: "4Gi"
+          limits:
+            cpu: "2"
+            memory: "8Gi"
 
   # Remove PVC volume from celery-beat using JSON patch  
   - target:
@@ -78,11 +78,11 @@ patches:
         path: /spec/template/spec/containers/0/resources
         value:
           requests:
-            cpu: "500m"
-            memory: "2Gi"
-          limits:
             cpu: "1"
             memory: "4Gi"
+          limits:
+            cpu: "2"
+            memory: "8Gi"
 
   # Ingress patches - Using klockwork.ai domain
   - patch: |-
