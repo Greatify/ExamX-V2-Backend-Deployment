@@ -13,62 +13,32 @@ labels:
     includeSelectors: false
 
 patches:
-  # Backend Deployment patches
-  - patch: |-
-      apiVersion: apps/v1
-      kind: Deployment
-      metadata:
-        name: examxv2-backend
-      spec:
-        replicas: 1
-        template:
-          spec:
-            serviceAccountName: examxv2-stg-secret-service
-            volumes:
-              - name: examxv2-secrets-volume
-                csi:
-                  driver: secrets-store.csi.k8s.io
-                  readOnly: true
-                  volumeAttributes:
-                    secretProviderClass: examxv2-backend-secrets
-              - name: nginx-config
-                configMap:
-                  name: nginx-config
-              - name: nginx-cache
-                emptyDir: {}
-              - name: config-volume
-                configMap:
-                  name: nginx-config
-                  items:
-                    - key: nginx.conf
-                      path: nginx.conf
-            containers:
-            - name: examxv2-backend
-              resources:
-                requests:
-                  cpu: "1"
-                  memory: "4Gi"
-                limits:
-                  cpu: "2"
-                  memory: "8Gi"
-              env:
-              - name: WORKERS
-                value: "2"
-              volumeMounts:
-                - name: examxv2-secrets-volume
-                  mountPath: /mnt/secret-store
-                  readOnly: true
-                - name: config-volume
-                  mountPath: /etc/nginx/nginx.conf
-                  subPath: nginx.conf
-                - name: nginx-config
-                  mountPath: /etc/nginx/conf.d/default.conf
-                  subPath: default.conf
-                - name: nginx-cache
-                  mountPath: /var/cache/nginx
-    target:
+  # Remove PVC volume from backend using JSON patch
+  - target:
       kind: Deployment
       name: examxv2-backend
+    patch: |-
+      - op: remove
+        path: /spec/template/spec/volumes/4
+      - op: remove
+        path: /spec/template/spec/containers/0/volumeMounts/4
+      - op: replace
+        path: /spec/template/spec/serviceAccountName
+        value: examxv2-stg-secret-service
+      - op: replace
+        path: /spec/template/spec/containers/0/resources
+        value:
+          requests:
+            cpu: "1"
+            memory: "4Gi"
+          limits:
+            cpu: "2"
+            memory: "8Gi"
+      - op: replace
+        path: /spec/template/spec/containers/0/env
+        value:
+          - name: WORKERS
+            value: "2"
 
   # Remove PVC volume from celery-worker using JSON patch
   - target:
