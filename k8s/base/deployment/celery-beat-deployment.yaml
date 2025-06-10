@@ -33,7 +33,7 @@ spec:
             claimName: examxv2-backend-pvc
       containers:
         - name: celery-beat
-          image: 399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:validation_message_question_bu-20250610-135742-6f684fd
+          image: 399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-20250610-140758-6993594ab3cb5d8242a511ac44bdb20132e2057f
           imagePullPolicy: IfNotPresent
           resources:
             requests:
