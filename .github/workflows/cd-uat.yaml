@@ -3,10 +3,10 @@ name: Deploy to UAT
 on:
   workflow_dispatch:
     inputs:
-      deploy_password:
-        description: 'Enter deployment password'
-        required: true
-        type: string
+      # deploy_password:
+      #   description: 'Enter deployment password'
+      #   required: true
+      #   type: string
       full_deployment:
         description: 'Run full deployment (build images & deploy)'
         required: false
@@ -22,53 +22,53 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  security-password-check:
-    runs-on: ubuntu-latest
-    environment: uat
-    steps:
-      - name: Verify deployment password
-        id: password-check
-        continue-on-error: true
-        run: |
-          CORRECT_PASSWORD="${{ secrets.DEPLOY_PASSWORD }}"
-          INPUT_PASSWORD="${{ github.event.inputs.deploy_password }}"
+  # security-password-check:
+  #   runs-on: ubuntu-latest
+  #   environment: uat
+  #   steps:
+  #     - name: Verify deployment password
+  #       id: password-check
+  #       continue-on-error: true
+  #       run: |
+  #         CORRECT_PASSWORD="${{ secrets.DEPLOY_PASSWORD }}"
+  #         INPUT_PASSWORD="${{ github.event.inputs.deploy_password }}"
           
-          if [[ "$INPUT_PASSWORD" != "$CORRECT_PASSWORD" ]]; then
-            echo "::error::Invalid deployment password"
-            exit 1
-          fi
-          echo "Password verified successfully"
+  #         if [[ "$INPUT_PASSWORD" != "$CORRECT_PASSWORD" ]]; then
+  #           echo "::error::Invalid deployment password"
+  #           exit 1
+  #         fi
+  #         echo "Password verified successfully"
 
-      - name: Send unauthorized attempt alert
-        if: steps.password-check.outcome == 'failure'
-        uses: 8398a7/action-slack@v3
-        with:
-          status: ${{ job.status }}
-          fields: repo,message,commit,eventName,ref,workflow
-          author_name: Deployment Security Alert 🚨
-          mention: channel
-          if_mention: always
-          job_name: security-check
-          channel: examxv2-backend-alerts
-          username: ExamX-V2-CICD
-          text: |
-            🚨 *Unauthorized Deployment Attempt* 
-            *User:* `${{ github.actor }}`
-            *Workflow:* Deploy to UAT
-            *Status:* Failed - Invalid Password
+  #     - name: Send unauthorized attempt alert
+  #       if: steps.password-check.outcome == 'failure'
+  #       uses: 8398a7/action-slack@v3
+  #       with:
+  #         status: ${{ job.status }}
+  #         fields: repo,message,commit,eventName,ref,workflow
+  #         author_name: Deployment Security Alert 🚨
+  #         mention: channel
+  #         if_mention: always
+  #         job_name: security-check
+  #         channel: examxv2-backend-alerts
+  #         username: ExamX-V2-CICD
+  #         text: |
+  #           🚨 *Unauthorized Deployment Attempt* 
+  #           *User:* `${{ github.actor }}`
+  #           *Workflow:* Deploy to UAT
+  #           *Status:* Failed - Invalid Password
             
-            This incident has been logged for security monitoring.
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+  #           This incident has been logged for security monitoring.
+  #       env:
+  #         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
-      - name: Block deployment on invalid password
-        if: steps.password-check.outcome == 'failure'
-        run: |
-          echo "::error::Authentication failed - Deployment blocked"
-          exit 1
+  #     - name: Block deployment on invalid password
+  #       if: steps.password-check.outcome == 'failure'
+  #       run: |
+  #         echo "::error::Authentication failed - Deployment blocked"
+  #         exit 1
 
   build-backend-uat-image:
-    needs: security-password-check
+    # needs: security-password-check
     if: github.event.inputs.full_deployment == 'true'
     runs-on: ubuntu-latest
     environment: uat
@@ -189,7 +189,6 @@ jobs:
   deploy-backend-uat:
     runs-on: ubuntu-latest
     needs: 
-      - security-password-check
       - build-backend-uat-image
     if: always() && (github.event.inputs.full_deployment == 'false' || needs.build-backend-uat-image.result == 'success')
     environment: uat
