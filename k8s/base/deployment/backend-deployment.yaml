@@ -44,7 +44,7 @@ spec:
             claimName: examxv2-backend-pvc
       containers:
         - name: examxv2-backend
-          image: 399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:Remove_deprecated_Celery_confi-20250611-162206-647a0a7 # Dev-specific image
+          image: 399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:Refactor_Celery_configuration_-20250611-164102-4df6bec # Dev-specific image
           imagePullPolicy: IfNotPresent
           resources:
             requests:
