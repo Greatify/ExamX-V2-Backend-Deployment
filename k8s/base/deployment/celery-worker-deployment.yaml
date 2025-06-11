@@ -54,12 +54,11 @@ spec:
             - -A
             - examx
             - worker
+            - -Q
+            - default
             - -l
-            - info
+            - debug
             - -E
-            - --concurrency=4
-            - --max-tasks-per-child=25
-            - --prefetch-multiplier=1
           volumeMounts:
             - name: examxv2-secrets-volume
               mountPath: /mnt/secret-store
