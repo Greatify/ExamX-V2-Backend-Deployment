@@ -42,17 +42,24 @@ spec:
             limits:
               cpu: "2"
               memory: "32Gi"
-          # env:
-          #   - name: REDIS_URL
-          #     value: redis://redis-service:6379
+          env:
+            - name: CELERY_WORKER_CONCURRENCY
+              value: "4"
+            - name: CELERY_WORKER_MAX_TASKS_PER_CHILD
+              value: "25"
+            - name: CELERY_WORKER_PREFETCH_MULTIPLIER
+              value: "1"
           command:
             - celery
             - -A
             - examx
             - worker
             - -l
-            - debug
+            - info
             - -E
+            - --concurrency=4
+            - --max-tasks-per-child=25
+            - --prefetch-multiplier=1
           volumeMounts:
             - name: examxv2-secrets-volume
               mountPath: /mnt/secret-store
