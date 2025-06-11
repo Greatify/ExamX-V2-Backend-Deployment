@@ -42,13 +42,13 @@ spec:
             limits:
               cpu: "2"
               memory: "32Gi"
-          env:
-            - name: CELERY_WORKER_CONCURRENCY
-              value: "4"
-            - name: CELERY_WORKER_MAX_TASKS_PER_CHILD
-              value: "25"
-            - name: CELERY_WORKER_PREFETCH_MULTIPLIER
-              value: "1"
+          # env:
+          #   - name: CELERY_WORKER_CONCURRENCY
+          #     value: "4"
+          #   - name: CELERY_WORKER_MAX_TASKS_PER_CHILD
+          #     value: "25"
+          #   - name: CELERY_WORKER_PREFETCH_MULTIPLIER
+          #     value: "1"
           command:
             - celery
             - -A
