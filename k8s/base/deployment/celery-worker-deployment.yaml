@@ -54,8 +54,6 @@ spec:
             - -A
             - examx
             - worker
-            - -Q
-            - default
             - -l
             - debug
             - -E
