@@ -44,7 +44,7 @@ spec:
             claimName: examxv2-backend-pvc
       containers:
         - name: examxv2-backend
-          image: 399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:Merge_branch__dev__of_https___-20250612-132456-cfd341e # Dev-specific image
+          image: 399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:EXM_785_Passage_Question__CO_P-20250612-133427-fda2110 # Dev-specific image
           imagePullPolicy: IfNotPresent
           resources:
             requests:
