@@ -30,10 +30,10 @@ patches:
               resources:
                 requests:
                   cpu: "2"
-                  memory: "8Gi"
+                  memory: "10Gi"
                 limits:
                   cpu: "4"
-                  memory: "16Gi"
+                  memory: "20Gi"
               env:
               - name: WORKERS
                 value: "4"
@@ -57,10 +57,10 @@ patches:
               resources:
                 requests:
                   cpu: "1"
-                  memory: "4Gi"
+                  memory: "10Gi"
                 limits:
                   cpu: "2"
-                  memory: "8Gi"
+                  memory: "20Gi"
     target:
       kind: Deployment
       name: celery-worker-default
@@ -81,10 +81,10 @@ patches:
               resources:
                 requests:
                   cpu: "1"
-                  memory: "8Gi"
+                  memory: "10Gi"
                 limits:
                   cpu: "2"
-                  memory: "16Gi"
+                  memory: "20Gi"
     target:
       kind: Deployment
       name: celery-bulk-upload-worker
@@ -105,36 +105,36 @@ patches:
               resources:
                 requests:
                   cpu: "1"
-                  memory: "8Gi"
+                  memory: "10Gi"
                 limits:
                   cpu: "2"
-                  memory: "16Gi"
+                  memory: "20Gi"
     target:
       kind: Deployment
       name: celery-enrichment-worker
   # Celery beat patches
-  - patch: |-
-      apiVersion: apps/v1
-      kind: Deployment
-      metadata:
-        name: celery-beat
-      spec:
-        replicas: 1
-        template:
-          spec:
-            serviceAccountName: examxv2-stg-secret-service
-            containers:
-            - name: celery-beat
-              resources:
-                requests:
-                  cpu: "1"
-                  memory: "4Gi"
-                limits:
-                  cpu: "2"
-                  memory: "8Gi"
-    target:
-      kind: Deployment
-      name: celery-beat
+  # - patch: |-
+  #     apiVersion: apps/v1
+  #     kind: Deployment
+  #     metadata:
+  #       name: celery-beat
+  #     spec:
+  #       replicas: 1
+  #       template:
+  #         spec:
+  #           serviceAccountName: examxv2-stg-secret-service
+  #           containers:
+  #           - name: celery-beat
+  #             resources:
+  #               requests:
+  #                 cpu: "1"
+  #                 memory: "4Gi"
+  #               limits:
+  #                 cpu: "2"
+  #                 memory: "8Gi"
+  #   target:
+  #     kind: Deployment
+  #     name: celery-beat
 
   # Celery Flower patches
   - patch: |-

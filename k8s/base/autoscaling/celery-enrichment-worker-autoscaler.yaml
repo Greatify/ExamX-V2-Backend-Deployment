@@ -1,0 +1,44 @@
+# base/autoscaling/celery-enrichment-worker-autoscaler.yaml
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: celery-enrichment-worker-autoscaler
+  labels:
+    app: celery-enrichment-worker-autoscaler
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: celery-enrichment-worker  # Enrichment deployment name for AI processing
+  minReplicas: 1
+  maxReplicas: 10  # Moderate scaling for AI processing
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 80  # Higher CPU threshold for AI processing
+    - type: Resource
+      resource:
+        name: memory
+        target:
+          type: Utilization
+          averageUtilization: 75  # Memory threshold for AI models
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: 300  # Longer stabilization for AI tasks (5 mins)
+      policies:
+      - type: Percent
+        value: 25  # Very conservative scale down for AI processing
+        periodSeconds: 120
+    scaleUp:
+      stabilizationWindowSeconds: 60  # Moderate scale up time for AI processing
+      policies:
+      - type: Percent
+        value: 50  # Moderate scale up percentage
+        periodSeconds: 30
+      - type: Pods
+        value: 2  # Scale up 2 pods at a time for AI processing
+        periodSeconds: 30
+      selectPolicy: Max 
