@@ -80,10 +80,10 @@ patches:
             - name: celery-bulk-upload-worker
               resources:
                 requests:
-                  cpu: "1"
+                  cpu: "2"
                   memory: "10Gi"
                 limits:
-                  cpu: "2"
+                  cpu: "4"
                   memory: "20Gi"
     target:
       kind: Deployment
@@ -104,10 +104,10 @@ patches:
             - name: celery-enrichment-worker
               resources:
                 requests:
-                  cpu: "1"
+                  cpu: "2"
                   memory: "10Gi"
                 limits:
-                  cpu: "2"
+                  cpu: "4"
                   memory: "20Gi"
     target:
       kind: Deployment

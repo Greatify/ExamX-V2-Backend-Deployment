@@ -57,10 +57,10 @@ patches:
             - name: celery-worker-default
               resources:
                 requests:
-                  cpu: "1"
+                  cpu: "2"
                   memory: "10Gi"
                 limits:
-                  cpu: "2"
+                  cpu: "4"
                   memory: "20Gi"
     target:
       kind: Deployment
@@ -114,28 +114,28 @@ patches:
       kind: Deployment
       name: celery-enrichment-worker
   # Celery beat patches
-  - patch: |-
-      apiVersion: apps/v1
-      kind: Deployment
-      metadata:
-        name: celery-beat
-      spec:
-        replicas: 1
-        template:
-          spec:
-            serviceAccountName: examxv2-production-sa
-            containers:
-            - name: celery-beat
-              resources:
-                requests:
-                  cpu: "1"
-                  memory: "10Gi"
-                limits:
-                  cpu: "2"
-                  memory: "20Gi"
-    target:
-      kind: Deployment
-      name: celery-beat
+  # - patch: |-
+  #     apiVersion: apps/v1
+  #     kind: Deployment
+  #     metadata:
+  #       name: celery-beat
+  #     spec:
+  #       replicas: 1
+  #       template:
+  #         spec:
+  #           serviceAccountName: examxv2-production-sa
+  #           containers:
+  #           - name: celery-beat
+  #             resources:
+  #               requests:
+  #                 cpu: "1"
+  #                 memory: "10Gi"
+  #               limits:
+  #                 cpu: "2"
+  #                 memory: "20Gi"
+  #   target:
+  #     kind: Deployment
+  #     name: celery-beat
 
   # Celery Flower patches
   - patch: |-

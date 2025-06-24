@@ -56,10 +56,10 @@ patches:
             - name: celery-worker-default
               resources:
                 requests:
-                  cpu: "1"
+                  cpu: "2"
                   memory: "4Gi"
                 limits:
-                  cpu: "2"
+                  cpu: "4"
                   memory: "8Gi"
     target:
       kind: Deployment
@@ -80,10 +80,10 @@ patches:
             - name: celery-bulk-upload-worker
               resources:
                 requests:
-                  cpu: "1"
+                  cpu: "2"
                   memory: "4Gi"
                 limits:
-                  cpu: "2"
+                  cpu: "4"
                   memory: "8Gi"
     target:
       kind: Deployment
@@ -157,7 +157,7 @@ patches:
         name: celery-worker-enrichment-hpa
       spec:
         minReplicas: 1  
-        maxReplicas: 3  
+        maxReplicas: 6  
     target:
       kind: HorizontalPodAutoscaler
       name: celery-worker-enrichment-hpa
@@ -169,7 +169,7 @@ patches:
         name: celery-worker-bulk-ops-hpa
       spec:
         minReplicas: 1  
-        maxReplicas: 3  
+        maxReplicas: 6  
     target:
       kind: HorizontalPodAutoscaler
       name: celery-worker-bulk-ops-hpa
