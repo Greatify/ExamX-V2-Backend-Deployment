@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: celery-flower
+  labels:
+    app: celery-flower
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 5555
+      protocol: TCP
+      name: http
+  selector:
+    app: celery-flower 

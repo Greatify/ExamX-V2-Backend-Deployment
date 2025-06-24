@@ -9,10 +9,12 @@ resources:
   - deployment/celery-beat-deployment.yaml
   - deployment/celery-bulk-upload-worker-deployment.yaml
   - deployment/celery-enrichment-worker-deployment.yaml
+  - deployment/celery-flower-deployment.yaml
   # - deployment/redis-deployment.yaml
   
   # Services
   - services/examxv2-backend-service.yaml
+  - services/celery-flower-service.yaml
   # - services/redis-service.yaml
   
   #Network

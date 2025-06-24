@@ -136,6 +136,30 @@ patches:
     target:
       kind: Deployment
       name: celery-beat
+
+  # Celery Flower patches
+  - patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: celery-flower
+      spec:
+        replicas: 1
+        template:
+          spec:
+            serviceAccountName: examxv2-production-sa
+            containers:
+            - name: flower
+              resources:
+                requests:
+                  cpu: "1"
+                  memory: "4Gi"
+                limits:
+                  cpu: "2"
+                  memory: "8Gi"
+    target:
+      kind: Deployment
+      name: celery-flower
   # Backend Autoscaler patches
   - patch: |-
       apiVersion: autoscaling/v2

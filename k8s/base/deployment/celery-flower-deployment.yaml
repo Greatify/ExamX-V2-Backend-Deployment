@@ -1,0 +1,75 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: celery-flower
+  labels:
+    app: celery-flower
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: celery-flower
+  template:
+    metadata:
+      labels:
+        app: celery-flower
+    spec:
+      serviceAccountName: examxv2-sa # Placeholder, to be overridden
+      terminationGracePeriodSeconds: 30
+      volumes:
+        - name: examxv2-secrets-volume
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "examxv2-backend-secrets"
+        - name: examxv2-backend-storage
+          persistentVolumeClaim:
+            claimName: examxv2-backend-pvc
+      containers:
+        - name: flower
+          # Using ExamX backend image which has Celery and Flower installed
+          image: 399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:EXM_739___Need_a_Terminology_C-20250617-063820-499ce20
+          imagePullPolicy: IfNotPresent
+          command:
+            - "celery"
+            - "-A"
+            - "examx"
+            - "flower"
+            - "--port=5555"
+            - "--address=0.0.0.0"
+            - "--persistent=True"
+            - "--inspect_timeout=10000"
+            - "--max_tasks=10000"
+          ports:
+            - containerPort: 5555
+              name: http
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "256Mi"
+            limits:
+              cpu: "200m"
+              memory: "512Mi"
+          env:
+            - name: CELERY_BROKER_URL
+              valueFrom:
+                secretKeyRef:
+                  name: examxv2-backend-secrets
+                  key: REDIS_URL
+                  optional: true
+          volumeMounts:
+            - name: examxv2-secrets-volume
+              mountPath: /mnt/secret-store
+              readOnly: true
+            - name: examxv2-backend-storage
+              mountPath: /app/media
+          lifecycle:
+            postStart:
+              exec:
+                command: ['cp', '-R', '/mnt/secret-store/.env', '/app/examx/.env'] 
