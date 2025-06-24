@@ -47,14 +47,14 @@ patches:
       apiVersion: apps/v1
       kind: Deployment
       metadata:
-        name: celery-worker
+        name: celery-worker-default
       spec:
         replicas: 1
         template:
           spec:
             serviceAccountName: examxv2-production-sa
             containers:
-            - name: celery-worker
+            - name: celery-worker-default
               resources:
                 requests:
                   cpu: "1"
@@ -64,7 +64,7 @@ patches:
                   memory: "20Gi"
     target:
       kind: Deployment
-      name: celery-worker
+      name: celery-worker-default
   
   # Celery Bulk Upload Worker patches
   - patch: |-
@@ -177,12 +177,13 @@ patches:
       apiVersion: autoscaling/v2
       kind: HorizontalPodAutoscaler
       metadata:
-        name: celery-worker-autoscaler
+        name: celery-worker-default-autoscaler
       spec:
-        minReplicas: 2
+        scaleTargetRef:
+          name: celery-worker-default-autoscaler
     target:
       kind: HorizontalPodAutoscaler
-      name: celery-worker-autoscaler
+      name: celery-worker-default-autoscaler
 
   # Ingress patches
   - patch: |-

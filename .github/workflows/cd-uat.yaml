@@ -197,7 +197,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           repository: 'Greatify/ExamX-V2-Backend-Deployment'
-          ref: 'bug-celery'
+          ref: 'main'
           fetch-depth: 0
 
       - name: Download image tag files
@@ -216,8 +216,11 @@ jobs:
         if: github.event.inputs.full_deployment == 'true'
         run: |
           yq -i '.spec.template.spec.containers[0].image = env(BACKEND_IMAGE)' k8s/base/deployment/backend-deployment.yaml
-          yq -i '.spec.template.spec.containers[0].image = env(BACKEND_IMAGE)' k8s/base/deployment/celery-worker-deployment.yaml
+          yq -i '.spec.template.spec.containers[0].image = env(BACKEND_IMAGE)' k8s/base/deployment/celery-worker-default-deployment.yaml
           yq -i '.spec.template.spec.containers[0].image = env(BACKEND_IMAGE)' k8s/base/deployment/celery-beat-deployment.yaml
+          yq -i '.spec.template.spec.containers[0].image = env(BACKEND_IMAGE)' k8s/base/deployment/celery-bulk-upload-worker-deployment.yaml
+          yq -i '.spec.template.spec.containers[0].image = env(BACKEND_IMAGE)' k8s/base/deployment/celery-enrichment-worker-deployment.yaml
+          yq -i '.spec.template.spec.containers[0].image = env(BACKEND_IMAGE)' k8s/base/deployment/celery-flower-deployment.yaml
       
       - name: Commit and push changes
         if: github.event.inputs.full_deployment == 'true'
@@ -225,10 +228,13 @@ jobs:
           git config --local user.email "hariharen@greatify.ai"
           git config --local user.name "Hariharen"
           git add k8s/base/deployment/backend-deployment.yaml
-          git add k8s/base/deployment/celery-worker-deployment.yaml
+          git add k8s/base/deployment/celery-worker-default-deployment.yaml
           git add k8s/base/deployment/celery-beat-deployment.yaml
+          git add k8s/base/deployment/celery-bulk-upload-worker-deployment.yaml
+          git add k8s/base/deployment/celery-enrichment-worker-deployment.yaml
+          git add k8s/base/deployment/celery-flower-deployment.yaml
           git commit -m "Update image tags for UAT deployment"
-          git push origin bug-celery
+          git push origin main
 
       - name: Configure AWS credentials for deployment
         uses: aws-actions/configure-aws-credentials@v3
@@ -248,8 +254,7 @@ jobs:
     #     run: |
     #       echo "Waiting for deployments to be ready..."
     #       kubectl wait --for=condition=available --timeout=300s deployment/examxv2-backend -n uat-examxv2
-    #       kubectl wait --for=condition=available --timeout=300s deployment/celery-worker -n uat-examxv2
-    #       kubectl wait --for=condition=available --timeout=300s deployment/celery-beat -n uat-examxv2
+    #       kubectl wait --for=condition=available --timeout=300s deployment/celery-worker-default -n uat-examxv2
           
     #       echo "Deployment status:"
     #       kubectl get deployments -n uat-examxv2

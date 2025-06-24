@@ -54,14 +54,14 @@ patches:
       apiVersion: apps/v1
       kind: Deployment
       metadata:
-        name: celery-worker
+        name: celery-worker-default
       spec:
         replicas: 1
         template:
           spec:
             serviceAccountName: dev-examxv2-sa
             containers:
-            - name: celery-worker
+            - name: celery-worker-default
               resources:
                 requests:
                   cpu: "1"
@@ -71,7 +71,7 @@ patches:
                   memory: "6Gi"
     target:
       kind: Deployment
-      name: celery-worker
+      name: celery-worker-default
   
   # Celery Bulk Upload Worker patches
   - patch: |-

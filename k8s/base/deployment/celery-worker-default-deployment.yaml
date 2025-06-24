@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: celery-worker
+  name: celery-worker-default
   labels:
-    app: celery-worker
+    app: celery-worker-default
 spec:
   replicas: 1 # Default value, will be overridden in overlays
   strategy:
@@ -13,11 +13,11 @@ spec:
       maxUnavailable: 0 # Ensures zero downtime by not allowing any unavailable pods
   selector:
     matchLabels:
-      app: celery-worker
+      app: celery-worker-default
   template:
     metadata:
       labels:
-        app: celery-worker
+        app: celery-worker-default
     spec:
       serviceAccountName: examxv2-sa # Placeholder, to be overridden
       terminationGracePeriodSeconds: 30
@@ -32,7 +32,7 @@ spec:
           persistentVolumeClaim:
             claimName: examxv2-backend-pvc
       containers:
-        - name: celery-worker
+        - name: celery-worker-default
           image: 399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-20250624-051429-33d82326d497b9eabf944f01c601904d21e81d5e
           imagePullPolicy: IfNotPresent
           resources:
