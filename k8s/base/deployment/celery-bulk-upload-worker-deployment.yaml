@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: celery-bulk-upload-worker
+  labels:
+    app: celery-bulk-upload-worker
+spec:
+  replicas: 1 # Default value, will be overridden in overlays
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0 # Ensures zero downtime by not allowing any unavailable pods
+  selector:
+    matchLabels:
+      app: celery-bulk-upload-worker
+  template:
+    metadata:
+      labels:
+        app: celery-bulk-upload-worker
+    spec:
+      serviceAccountName: examxv2-sa # Placeholder, to be overridden
+      terminationGracePeriodSeconds: 30
+      volumes:
+        - name: examxv2-secrets-volume
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "examxv2-backend-secrets"
+        - name: examxv2-backend-storage
+          persistentVolumeClaim:
+            claimName: examxv2-backend-pvc
+      containers:
+        - name: celery-bulk-upload-worker
+          image: 399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-20250624-051429-33d82326d497b9eabf944f01c601904d21e81d5e
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              cpu: "1"
+              memory: "16Gi"
+            limits:
+              cpu: "2"
+              memory: "32Gi"
+          command:
+            - celery
+            - -A
+            - examx
+            - worker
+            - -Q
+            - bulk_upload
+            - -c
+            - "4"
+            - -l
+            - debug
+            - -E
+          volumeMounts:
+            - name: examxv2-secrets-volume
+              mountPath: /mnt/secret-store
+              readOnly: true
+            - name: examxv2-backend-storage
+              mountPath: /app/media
+          lifecycle:
+            postStart:
+              exec:
+                command: ['cp', '-R', '/mnt/secret-store/.env', '/app/examx/.env'] 

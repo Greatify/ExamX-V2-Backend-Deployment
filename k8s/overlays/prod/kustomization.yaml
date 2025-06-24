@@ -65,6 +65,54 @@ patches:
     target:
       kind: Deployment
       name: celery-worker
+  
+  # Celery Bulk Upload Worker patches
+  - patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: celery-bulk-upload-worker
+      spec:
+        replicas: 3
+        template:
+          spec:
+            serviceAccountName: examxv2-production-sa
+            containers:
+            - name: celery-bulk-upload-worker
+              resources:
+                requests:
+                  cpu: "2"
+                  memory: "16Gi"
+                limits:
+                  cpu: "4"
+                  memory: "32Gi"
+    target:
+      kind: Deployment
+      name: celery-bulk-upload-worker
+
+  # Celery Enrichment Worker patches
+  - patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: celery-enrichment-worker
+      spec:
+        replicas: 3
+        template:
+          spec:
+            serviceAccountName: examxv2-production-sa
+            containers:
+            - name: celery-enrichment-worker
+              resources:
+                requests:
+                  cpu: "2"
+                  memory: "16Gi"
+                limits:
+                  cpu: "4"
+                  memory: "32Gi"
+    target:
+      kind: Deployment
+      name: celery-enrichment-worker
   # Celery beat patches
   - patch: |-
       apiVersion: apps/v1

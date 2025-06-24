@@ -72,6 +72,54 @@ patches:
     target:
       kind: Deployment
       name: celery-worker
+  
+  # Celery Bulk Upload Worker patches
+  - patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: celery-bulk-upload-worker
+      spec:
+        replicas: 1
+        template:
+          spec:
+            serviceAccountName: dev-examxv2-sa
+            containers:
+            - name: celery-bulk-upload-worker
+              resources:
+                requests:
+                  cpu: "500m"
+                  memory: "8Gi"
+                limits:
+                  cpu: "1"
+                  memory: "16Gi"
+    target:
+      kind: Deployment
+      name: celery-bulk-upload-worker
+
+  # Celery Enrichment Worker patches
+  - patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: celery-enrichment-worker
+      spec:
+        replicas: 1
+        template:
+          spec:
+            serviceAccountName: dev-examxv2-sa
+            containers:
+            - name: celery-enrichment-worker
+              resources:
+                requests:
+                  cpu: "500m"
+                  memory: "8Gi"
+                limits:
+                  cpu: "1"
+                  memory: "16Gi"
+    target:
+      kind: Deployment
+      name: celery-enrichment-worker
 # Celery beat patches - only mutable fields
   - patch: |-
       apiVersion: apps/v1

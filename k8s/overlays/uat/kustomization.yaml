@@ -4,7 +4,8 @@ namespace: uat-examxv2
 
 resources:
   - ../../base
-  # Note: No PVC/PV resources for UAT as per requirement
+  - storage/pv.yaml
+  - storage/pvc.yaml
 
 labels:
   - pairs:
@@ -13,59 +14,170 @@ labels:
     includeSelectors: false
 
 patches:
-  # Remove PVC volume from backend using JSON patch
-  - target:
+  # Backend Deployment patches
+  - patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: examxv2-backend
+      spec:
+        replicas: 1
+        template:
+          spec:
+            serviceAccountName: examxv2-stg-secret-service
+            containers:
+            - name: examxv2-backend
+              resources:
+                requests:
+                  cpu: "1"
+                  memory: "4Gi"
+                limits:
+                  cpu: "2"
+                  memory: "8Gi"
+              env:
+              - name: WORKERS
+                value: "2"
+    target:
       kind: Deployment
       name: examxv2-backend
-    patch: |-
-      - op: remove
-        path: /spec/template/spec/volumes/4
-      - op: remove
-        path: /spec/template/spec/containers/0/volumeMounts/4
-      - op: replace
-        path: /spec/template/spec/serviceAccountName
-        value: examxv2-stg-secret-service
-      - op: replace
-        path: /spec/template/spec/containers/0/resources
-        value:
-          requests:
-            cpu: "1"
-            memory: "4Gi"
-          limits:
-            cpu: "2"
-            memory: "8Gi"
-      - op: replace
-        path: /spec/template/spec/containers/0/env
-        value:
-          - name: WORKERS
-            value: "2"
 
-  # Remove PVC volume from celery-worker using JSON patch
-  - target:
+  # Celery Worker patches
+  - patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: celery-worker
+      spec:
+        replicas: 1
+        template:
+          spec:
+            serviceAccountName: examxv2-stg-secret-service
+            containers:
+            - name: celery-worker
+              resources:
+                requests:
+                  cpu: "1"
+                  memory: "4Gi"
+                limits:
+                  cpu: "2"
+                  memory: "8Gi"
+    target:
       kind: Deployment
       name: celery-worker
-    patch: |-
-      - op: remove
-        path: /spec/template/spec/volumes/1
-      - op: remove  
-        path: /spec/template/spec/containers/0/volumeMounts/1
-      - op: replace
-        path: /spec/template/spec/serviceAccountName
-        value: examxv2-stg-secret-service
-      - op: replace
-        path: /spec/template/spec/containers/0/resources
-        value:
-          requests:
-            cpu: "1"
-            memory: "4Gi"
-          limits:
-            cpu: "2"
-            memory: "8Gi"
+  
+  # Celery Bulk Upload Worker patches
+  - patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: celery-bulk-upload-worker
+      spec:
+        replicas: 1
+        template:
+          spec:
+            serviceAccountName: examxv2-stg-secret-service
+            containers:
+            - name: celery-bulk-upload-worker
+              resources:
+                requests:
+                  cpu: "1"
+                  memory: "8Gi"
+                limits:
+                  cpu: "2"
+                  memory: "16Gi"
+    target:
+      kind: Deployment
+      name: celery-bulk-upload-worker
 
-  # Remove PVC volume from celery-beat using JSON patch  
-  - target:
+  # Celery Enrichment Worker patches
+  - patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: celery-enrichment-worker
+      spec:
+        replicas: 1
+        template:
+          spec:
+            serviceAccountName: examxv2-stg-secret-service
+            containers:
+            - name: celery-enrichment-worker
+              resources:
+                requests:
+                  cpu: "1"
+                  memory: "8Gi"
+                limits:
+                  cpu: "2"
+                  memory: "16Gi"
+    target:
+      kind: Deployment
+      name: celery-enrichment-worker
+
+  # Celery beat patches
+  - patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: celery-beat
+      spec:
+        replicas: 1
+        template:
+          spec:
+            serviceAccountName: examxv2-stg-secret-service
+            containers:
+            - name: celery-beat
+              resources:
+                requests:
+                  cpu: "1"
+                  memory: "4Gi"
+                limits:
+                  cpu: "2"
+                  memory: "8Gi"
+    target:
       kind: Deployment
       name: celery-beat
+  
+  # UAT Autoscaler patches
+  - patch: |-
+      apiVersion: autoscaling/v2
+      kind: HorizontalPodAutoscaler
+      metadata:
+        name: celery-worker-default-hpa
+      spec:
+        minReplicas: 2  
+        maxReplicas: 6  
+    target:
+      kind: HorizontalPodAutoscaler
+      name: celery-worker-default-hpa
+
+  - patch: |-
+      apiVersion: autoscaling/v2
+      kind: HorizontalPodAutoscaler
+      metadata:
+        name: celery-worker-enrichment-hpa
+      spec:
+        minReplicas: 1  
+        maxReplicas: 3  
+    target:
+      kind: HorizontalPodAutoscaler
+      name: celery-worker-enrichment-hpa
+
+  - patch: |-
+      apiVersion: autoscaling/v2
+      kind: HorizontalPodAutoscaler
+      metadata:
+        name: celery-worker-bulk-ops-hpa
+      spec:
+        minReplicas: 1  
+        maxReplicas: 3  
+    target:
+      kind: HorizontalPodAutoscaler
+      name: celery-worker-bulk-ops-hpa
+
+  # Remove PVC volume from celery-flower using JSON patch
+  - target:
+      kind: Deployment
+      name: celery-flower
     patch: |-
       - op: remove
         path: /spec/template/spec/volumes/1
@@ -84,7 +196,7 @@ patches:
             cpu: "2"
             memory: "8Gi"
 
-  # Ingress patches - Using klockwork.ai domain
+  # Ingress patches
   - patch: |-
       apiVersion: networking.k8s.io/v1
       kind: Ingress
@@ -104,7 +216,7 @@ patches:
       kind: Ingress
       name: examxv2-ingress
 
-  # Secrets patches - Using UAT secret ARN
+  # Secrets patches
   - patch: |-
       apiVersion: secrets-store.csi.x-k8s.io/v1
       kind: SecretProviderClass

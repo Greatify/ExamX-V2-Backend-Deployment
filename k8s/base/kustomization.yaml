@@ -7,6 +7,8 @@ resources:
   - deployment/backend-deployment.yaml
   - deployment/celery-worker-deployment.yaml
   - deployment/celery-beat-deployment.yaml
+  - deployment/celery-bulk-upload-worker-deployment.yaml
+  - deployment/celery-enrichment-worker-deployment.yaml
   # - deployment/redis-deployment.yaml
   
   # Services
