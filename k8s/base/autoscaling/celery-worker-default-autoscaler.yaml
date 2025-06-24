@@ -1,15 +1,15 @@
-# base/autoscaling/celery-worker-autoscaler.yaml
+# base/autoscaling/celery-worker-default-autoscaler.yaml
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: celery-worker-autoscaler
+  name: celery-worker-default-autoscaler
   labels:
-    app: celery-worker-autoscaler
+    app: celery-worker-default-autoscaler
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: celery-worker  # Common deployment name for both environments
+    name: celery-worker-default  # Default deployment name for general tasks
   minReplicas: 1
   maxReplicas: 20
   metrics:

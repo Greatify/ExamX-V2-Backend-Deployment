@@ -216,8 +216,11 @@ jobs:
         if: github.event.inputs.full_deployment == 'true'
         run: |
           yq -i '.spec.template.spec.containers[0].image = env(BACKEND_IMAGE)' k8s/base/deployment/backend-deployment.yaml
-          yq -i '.spec.template.spec.containers[0].image = env(BACKEND_IMAGE)' k8s/base/deployment/celery-worker-deployment.yaml
+          yq -i '.spec.template.spec.containers[0].image = env(BACKEND_IMAGE)' k8s/base/deployment/celery-worker-default-deployment.yaml
           yq -i '.spec.template.spec.containers[0].image = env(BACKEND_IMAGE)' k8s/base/deployment/celery-beat-deployment.yaml
+          yq -i '.spec.template.spec.containers[0].image = env(BACKEND_IMAGE)' k8s/base/deployment/celery-bulk-upload-worker-deployment.yaml
+          yq -i '.spec.template.spec.containers[0].image = env(BACKEND_IMAGE)' k8s/base/deployment/celery-enrichment-worker-deployment.yaml
+          yq -i '.spec.template.spec.containers[0].image = env(BACKEND_IMAGE)' k8s/base/deployment/celery-flower-deployment.yaml
       
       - name: Commit and push changes
         if: github.event.inputs.full_deployment == 'true'
@@ -225,8 +228,11 @@ jobs:
           git config --local user.email "hariharen@greatify.ai"
           git config --local user.name "Hariharen"
           git add k8s/base/deployment/backend-deployment.yaml
-          git add k8s/base/deployment/celery-worker-deployment.yaml
+          git add k8s/base/deployment/celery-worker-default-deployment.yaml
           git add k8s/base/deployment/celery-beat-deployment.yaml
+          git add k8s/base/deployment/celery-bulk-upload-worker-deployment.yaml
+          git add k8s/base/deployment/celery-enrichment-worker-deployment.yaml
+          git add k8s/base/deployment/celery-flower-deployment.yaml
           git commit -m "Update image tags for production deployment"
           git push origin main
       

@@ -46,14 +46,14 @@ patches:
       apiVersion: apps/v1
       kind: Deployment
       metadata:
-        name: celery-worker
+        name: celery-worker-default
       spec:
         replicas: 1
         template:
           spec:
             serviceAccountName: examxv2-stg-secret-service
             containers:
-            - name: celery-worker
+            - name: celery-worker-default
               resources:
                 requests:
                   cpu: "1"
@@ -63,7 +63,55 @@ patches:
                   memory: "8Gi"
     target:
       kind: Deployment
-      name: celery-worker
+      name: celery-worker-default
+  
+  # Celery Bulk Upload Worker patches
+  - patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: celery-bulk-upload-worker
+      spec:
+        replicas: 2
+        template:
+          spec:
+            serviceAccountName: examxv2-stg-secret-service
+            containers:
+            - name: celery-bulk-upload-worker
+              resources:
+                requests:
+                  cpu: "1"
+                  memory: "8Gi"
+                limits:
+                  cpu: "2"
+                  memory: "16Gi"
+    target:
+      kind: Deployment
+      name: celery-bulk-upload-worker
+
+  # Celery Enrichment Worker patches
+  - patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: celery-enrichment-worker
+      spec:
+        replicas: 2
+        template:
+          spec:
+            serviceAccountName: examxv2-stg-secret-service
+            containers:
+            - name: celery-enrichment-worker
+              resources:
+                requests:
+                  cpu: "1"
+                  memory: "8Gi"
+                limits:
+                  cpu: "2"
+                  memory: "16Gi"
+    target:
+      kind: Deployment
+      name: celery-enrichment-worker
   # Celery beat patches
   - patch: |-
       apiVersion: apps/v1
@@ -87,6 +135,30 @@ patches:
     target:
       kind: Deployment
       name: celery-beat
+
+  # Celery Flower patches
+  - patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: celery-flower
+      spec:
+        replicas: 1
+        template:
+          spec:
+            serviceAccountName: examxv2-stg-secret-service
+            containers:
+            - name: flower
+              resources:
+                requests:
+                  cpu: "1"
+                  memory: "4Gi"
+                limits:
+                  cpu: "2"
+                  memory: "8Gi"
+    target:
+      kind: Deployment
+      name: celery-flower
   # Ingress patches
   - patch: |-
       apiVersion: networking.k8s.io/v1

@@ -72,13 +72,16 @@ jobs:
           resources:
             # Include base resources except secrets
             - ../../base/deployment/backend-deployment.yaml
-            - ../../base/deployment/celery-worker-deployment.yaml
+            - ../../base/deployment/celery-worker-default-deployment.yaml
             - ../../base/deployment/celery-beat-deployment.yaml
+            - ../../base/deployment/celery-bulk-upload-worker-deployment.yaml
+            - ../../base/deployment/celery-enrichment-worker-deployment.yaml
+            - ../../base/deployment/celery-flower-deployment.yaml
             - ../../base/services/examxv2-backend-service.yaml
             - ../../base/ingress/ingress.yaml
             - ../../base/configmap/nginx-config.yaml
             - ../../base/autoscaling/backend-autoscaler.yaml
-            - ../../base/autoscaling/celery-worker-autoscaler.yaml
+            - ../../base/autoscaling/celery-worker-default-autoscaler.yaml
             - ../../base/autoscaling/celery-beat-autoscaler.yaml
             - namespace.yaml
           
@@ -150,7 +153,7 @@ jobs:
                 apiVersion: apps/v1
                 kind: Deployment
                 metadata:
-                  name: celery-worker
+                  name: celery-worker-default
                 spec:
                   replicas: 1
                   template:
@@ -168,7 +171,7 @@ jobs:
                               - key: nginx.conf
                                 path: nginx.conf
                       containers:
-                      - name: celery-worker
+                      - name: celery-worker-default
                         image: ${{ env.BACKEND_IMAGE }}
                         resources:
                           requests:
@@ -188,7 +191,7 @@ jobs:
                             mountPath: /var/cache/nginx
               target:
                 kind: Deployment
-                name: celery-worker
+                name: celery-worker-default
           
             # Ultra-simple Celery Beat - only nginx volumes
             - patch: |-

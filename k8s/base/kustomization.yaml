@@ -5,12 +5,16 @@ kind: Kustomization
 resources:
   # Core deployments
   - deployment/backend-deployment.yaml
-  - deployment/celery-worker-deployment.yaml
+  - deployment/celery-worker-default-deployment.yaml
   - deployment/celery-beat-deployment.yaml
+  - deployment/celery-bulk-upload-worker-deployment.yaml
+  - deployment/celery-enrichment-worker-deployment.yaml
+  - deployment/celery-flower-deployment.yaml
   # - deployment/redis-deployment.yaml
   
   # Services
   - services/examxv2-backend-service.yaml
+  - services/celery-flower-service.yaml
   # - services/redis-service.yaml
   
   #Network
@@ -22,7 +26,7 @@ resources:
   
   # Autoscaling
   - autoscaling/backend-autoscaler.yaml
-  - autoscaling/celery-worker-autoscaler.yaml
+  - autoscaling/celery-worker-default-autoscaler.yaml
   - autoscaling/celery-beat-autoscaler.yaml
   # - autoscaling/redis-autoscaler.yaml
  
