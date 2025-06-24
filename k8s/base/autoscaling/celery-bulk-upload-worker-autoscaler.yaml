@@ -1,0 +1,44 @@
+# base/autoscaling/celery-bulk-upload-worker-autoscaler.yaml
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: celery-bulk-upload-worker-autoscaler
+  labels:
+    app: celery-bulk-upload-worker-autoscaler
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: celery-bulk-upload-worker  # Bulk upload deployment name
+  minReplicas: 1
+  maxReplicas: 15  # Higher max for bulk processing
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 75  # Slightly higher CPU threshold for bulk processing
+    - type: Resource
+      resource:
+        name: memory
+        target:
+          type: Utilization
+          averageUtilization: 85  # Higher memory threshold for file processing
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: 120  # Longer stabilization for bulk operations
+      policies:
+      - type: Percent
+        value: 50  # More conservative scale down for bulk processing
+        periodSeconds: 60
+    scaleUp:
+      stabilizationWindowSeconds: 30  # Quick scale up for bulk processing
+      policies:
+      - type: Percent
+        value: 100
+        periodSeconds: 15
+      - type: Pods
+        value: 3  # Scale up 3 pods at a time for bulk processing
+        periodSeconds: 15
+      selectPolicy: Max 

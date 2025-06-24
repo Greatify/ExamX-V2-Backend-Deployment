@@ -1,0 +1,44 @@
+# base/autoscaling/celery-flower-autoscaler.yaml
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: celery-flower-autoscaler
+  labels:
+    app: celery-flower-autoscaler
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: celery-flower  # Flower monitoring UI deployment
+  minReplicas: 1
+  maxReplicas: 3  # Minimal scaling for monitoring UI
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 80  # Higher threshold since it's lightweight
+    - type: Resource
+      resource:
+        name: memory
+        target:
+          type: Utilization
+          averageUtilization: 80  # Higher threshold for monitoring UI
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: 300  # 5 minutes stabilization
+      policies:
+      - type: Percent
+        value: 50  # Conservative scale down
+        periodSeconds: 60
+    scaleUp:
+      stabilizationWindowSeconds: 30  # Quick scale up if needed
+      policies:
+      - type: Percent
+        value: 100
+        periodSeconds: 15
+      - type: Pods
+        value: 1  # Scale up 1 pod at a time
+        periodSeconds: 15
+      selectPolicy: Max 

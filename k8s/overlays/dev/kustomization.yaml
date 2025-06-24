@@ -39,12 +39,6 @@ patches:
               env:
               - name: WORKERS
                 value: "2"
-              - name: OPIK_API_KEY
-                value: "Y5T3WoqNxJ22ypw1M8qivydis"
-              - name: OPIK_WORKSPACE
-                value: "priya97"
-              - name: OPIK_PROJECT
-                value: "Default Project"
     target:
       kind: Deployment
       name: examxv2-backend
@@ -68,7 +62,7 @@ patches:
                   memory: "4Gi"
                 limits:
                   cpu: "2"
-                  memory: "6Gi"
+                  memory: "8Gi"
     target:
       kind: Deployment
       name: celery-worker-default
@@ -88,11 +82,11 @@ patches:
             - name: celery-bulk-upload-worker
               resources:
                 requests:
-                  cpu: "500m"
-                  memory: "8Gi"
-                limits:
                   cpu: "1"
-                  memory: "16Gi"
+                  memory: "4Gi"
+                limits:
+                  cpu: "2"
+                  memory: "8Gi"
     target:
       kind: Deployment
       name: celery-bulk-upload-worker
@@ -112,37 +106,37 @@ patches:
             - name: celery-enrichment-worker
               resources:
                 requests:
-                  cpu: "500m"
-                  memory: "8Gi"
-                limits:
-                  cpu: "1"
-                  memory: "16Gi"
-    target:
-      kind: Deployment
-      name: celery-enrichment-worker
-# Celery beat patches - only mutable fields
-  - patch: |-
-      apiVersion: apps/v1
-      kind: Deployment
-      metadata:
-        name: celery-beat
-      spec:
-        replicas: 1
-        template:
-          spec:
-            serviceAccountName: dev-examxv2-sa
-            containers:
-            - name: celery-beat
-              resources:
-                requests:
                   cpu: "1"
                   memory: "4Gi"
                 limits:
                   cpu: "2"
-                  memory: "6Gi"
+                  memory: "8Gi"
     target:
       kind: Deployment
-      name: celery-beat
+      name: celery-enrichment-worker
+# # Celery beat patches - only mutable fields
+#   - patch: |-
+#       apiVersion: apps/v1
+#       kind: Deployment
+#       metadata:
+#         name: celery-beat
+#       spec:
+#         replicas: 1
+#         template:
+#           spec:
+#             serviceAccountName: dev-examxv2-sa
+#             containers:
+#             - name: celery-beat
+#               resources:
+#                 requests:
+#                   cpu: "1"
+#                   memory: "4Gi"
+#                 limits:
+#                   cpu: "2"
+#                   memory: "8Gi"
+#     target:
+#       kind: Deployment
+#       name: celery-beat
 
   # Celery Flower patches
   - patch: |-
