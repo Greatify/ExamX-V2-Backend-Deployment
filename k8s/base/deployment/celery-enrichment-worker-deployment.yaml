@@ -33,7 +33,7 @@ spec:
             claimName: examxv2-backend-pvc
       containers:
         - name: celery-enrichment-worker
-          image: 399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-20250720-152222-8ccac24c4ea9b260027b6f236384cb367373894a
+          image: 399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-20250720-152235-8ccac24c4ea9b260027b6f236384cb367373894a
           imagePullPolicy: IfNotPresent
           resources:
             requests:
