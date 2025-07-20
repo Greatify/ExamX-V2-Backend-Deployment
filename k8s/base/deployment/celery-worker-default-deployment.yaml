@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: celery-beat
+  name: celery-worker-default
   labels:
-    app: celery-beat
+    app: celery-worker-default
 spec:
   replicas: 1 # Default value, will be overridden in overlays
   strategy:
@@ -13,11 +13,11 @@ spec:
       maxUnavailable: 0 # Ensures zero downtime by not allowing any unavailable pods
   selector:
     matchLabels:
-      app: celery-beat
+      app: celery-worker-default
   template:
     metadata:
       labels:
-        app: celery-beat
+        app: celery-worker-default
     spec:
       serviceAccountName: examxv2-sa # Placeholder, to be overridden
       terminationGracePeriodSeconds: 30
@@ -32,26 +32,31 @@ spec:
           persistentVolumeClaim:
             claimName: examxv2-backend-pvc
       containers:
-        - name: celery-beat
+        - name: celery-worker-default
           image: 399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-20250719-112728-4c42ba250b39818093d0f52302c7136ba1b7d9c2
           imagePullPolicy: IfNotPresent
           resources:
             requests:
               cpu: "1"
-              memory: "8Gi"
+              memory: "16Gi"
             limits:
               cpu: "2"
-              memory: "16Gi"
+              memory: "32Gi"
           # env:
-          #   - name: REDIS_URL
-          #     value: redis://redis-service:6379
+          #   - name: CELERY_WORKER_CONCURRENCY
+          #     value: "4"
+          #   - name: CELERY_WORKER_MAX_TASKS_PER_CHILD
+          #     value: "25"
+          #   - name: CELERY_WORKER_PREFETCH_MULTIPLIER
+          #     value: "1"
           command:
             - celery
             - -A
             - examx
-            - beat
+            - worker
             - -l
-            - info
+            - debug
+            - -E
           volumeMounts:
             - name: examxv2-secrets-volume
               mountPath: /mnt/secret-store

@@ -24,6 +24,10 @@ patches:
       spec:
         replicas: 2
         template:
+          metadata:
+            annotations:
+              ad.datadoghq.com/examxv2-backend.logs: '[{"source":"examx-backend","service":"examx-backend"}]'
+              ad.datadoghq.com/tags: '{"env":"production","team":"backend","service":"examx-backend"}'
           spec:
             serviceAccountName: examxv2-production-sa
             containers:
@@ -31,13 +35,13 @@ patches:
               resources:
                 requests:
                   cpu: "2"
-                  memory: "10Gi"
+                  memory: "16Gi"
                 limits:
                   cpu: "4"
-                  memory: "20Gi"
+                  memory: "32Gi"
               env:
               - name: WORKERS
-                value: "4"
+                value: "8"
     target:
       kind: Deployment
       name: examxv2-backend
@@ -47,47 +51,135 @@ patches:
       apiVersion: apps/v1
       kind: Deployment
       metadata:
-        name: celery-worker
+        name: celery-worker-default
       spec:
         replicas: 1
         template:
+          metadata:
+            annotations:
+              ad.datadoghq.com/celery-worker-default.logs: '[{"source":"examxv2-celery","service":"examxv2-celery"}]'
+              ad.datadoghq.com/tags: '{"env":"production","team":"backend","service":"examxv2-celery"}'
           spec:
             serviceAccountName: examxv2-production-sa
             containers:
-            - name: celery-worker
+            - name: celery-worker-default
               resources:
                 requests:
-                  cpu: "1"
+                  cpu: "2"
                   memory: "10Gi"
                 limits:
-                  cpu: "2"
+                  cpu: "4"
                   memory: "20Gi"
     target:
       kind: Deployment
-      name: celery-worker
-  # Celery beat patches
+      name: celery-worker-default
+  
+  # Celery Bulk Upload Worker patches
   - patch: |-
       apiVersion: apps/v1
       kind: Deployment
       metadata:
-        name: celery-beat
+        name: celery-bulk-upload-worker
       spec:
-        replicas: 1
+        replicas: 3
         template:
+          metadata:
+            annotations:
+              ad.datadoghq.com/celery-bulk-upload-worker.logs: '[{"source":"examxv2-celery-bulk","service":"examxv2-celery-bulk"}]'
+              ad.datadoghq.com/tags: '{"env":"production","team":"backend","service":"examxv2-celery-bulk"}'
           spec:
             serviceAccountName: examxv2-production-sa
             containers:
-            - name: celery-beat
+            - name: celery-bulk-upload-worker
               resources:
                 requests:
-                  cpu: "1"
+                  cpu: "2"
                   memory: "10Gi"
                 limits:
-                  cpu: "2"
+                  cpu: "4"
                   memory: "20Gi"
     target:
       kind: Deployment
-      name: celery-beat
+      name: celery-bulk-upload-worker
+
+  # Celery Enrichment Worker patches
+  - patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: celery-enrichment-worker
+      spec:
+        replicas: 3
+        template:
+          metadata:
+            annotations:
+              ad.datadoghq.com/celery-enrichment-worker.logs: '[{"source":"examxv2-celery-enrichment","service":"examxv2-celery-enrichment"}]'
+              ad.datadoghq.com/tags: '{"env":"production","team":"backend","service":"examxv2-celery-enrichment"}'
+          spec:
+            serviceAccountName: examxv2-production-sa
+            containers:
+            - name: celery-enrichment-worker
+              resources:
+                requests:
+                  cpu: "2"
+                  memory: "10Gi"
+                limits:
+                  cpu: "4"
+                  memory: "20Gi"
+    target:
+      kind: Deployment
+      name: celery-enrichment-worker
+  # Celery beat patches
+  # - patch: |-
+  #     apiVersion: apps/v1
+  #     kind: Deployment
+  #     metadata:
+  #       name: celery-beat
+  #     spec:
+  #       replicas: 1
+  #       template:
+  #         spec:
+  #           serviceAccountName: examxv2-production-sa
+  #           containers:
+  #           - name: celery-beat
+  #             resources:
+  #               requests:
+  #                 cpu: "1"
+  #                 memory: "10Gi"
+  #               limits:
+  #                 cpu: "2"
+  #                 memory: "20Gi"
+  #   target:
+  #     kind: Deployment
+  #     name: celery-beat
+
+  # Celery Flower patches
+  - patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: celery-flower
+      spec:
+        replicas: 1
+        template:
+          metadata:
+            annotations:
+              ad.datadoghq.com/celery-flower.logs: '[{"source":"examxv2-flower","service":"examxv2-flower"}]'
+              ad.datadoghq.com/tags: '{"env":"production","team":"backend","service":"examxv2-flower"}'
+          spec:
+            serviceAccountName: examxv2-production-sa
+            containers:
+            - name: flower
+              resources:
+                requests:
+                  cpu: "1"
+                  memory: "4Gi"
+                limits:
+                  cpu: "2"
+                  memory: "8Gi"
+    target:
+      kind: Deployment
+      name: celery-flower
   # Backend Autoscaler patches
   - patch: |-
       apiVersion: autoscaling/v2
@@ -105,12 +197,15 @@ patches:
       apiVersion: autoscaling/v2
       kind: HorizontalPodAutoscaler
       metadata:
-        name: celery-worker-autoscaler
+        name: celery-worker-default-autoscaler
       spec:
-        minReplicas: 2
+        scaleTargetRef:
+          apiVersion: apps/v1
+          kind: Deployment
+          name: celery-worker-default
     target:
       kind: HorizontalPodAutoscaler
-      name: celery-worker-autoscaler
+      name: celery-worker-default-autoscaler
 
   # Ingress patches
   - patch: |-
