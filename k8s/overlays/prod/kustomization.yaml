@@ -22,7 +22,7 @@ patches:
       metadata:
         name: examxv2-backend
       spec:
-        replicas: 3
+        replicas: 4
         template:
           spec:
             serviceAccountName: examxv2-production-sa
@@ -73,7 +73,7 @@ patches:
       metadata:
         name: celery-bulk-upload-worker
       spec:
-        replicas: 3
+        replicas: 1
         template:
           spec:
             serviceAccountName: examxv2-production-sa
@@ -97,7 +97,7 @@ patches:
       metadata:
         name: celery-enrichment-worker
       spec:
-        replicas: 3
+        replicas: 1
         template:
           spec:
             serviceAccountName: examxv2-production-sa
@@ -121,7 +121,7 @@ patches:
       metadata:
         name: celery-question-generator-ai-worker
       spec:
-        replicas: 3
+        replicas: 1
         template:
           spec:
             serviceAccountName: examxv2-production-sa
