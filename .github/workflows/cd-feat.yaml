@@ -72,14 +72,18 @@ jobs:
           resources:
             # Include base resources except secrets
             - ../../base/deployment/backend-deployment.yaml
-            - ../../base/deployment/celery-worker-deployment.yaml
-            - ../../base/deployment/celery-beat-deployment.yaml
+            - ../../base/deployment/celery-worker-default-deployment.yaml
+            - ../../base/deployment/celery-enrichment-worker-deployment.yaml
+            - ../../base/deployment/celery-bulk-upload-worker-deployment.yaml
+            - ../../base/deployment/celery-question-generator-ai-worker-deployment.yaml
             - ../../base/services/examxv2-backend-service.yaml
             - ../../base/ingress/ingress.yaml
             - ../../base/configmap/nginx-config.yaml
             - ../../base/autoscaling/backend-autoscaler.yaml
             - ../../base/autoscaling/celery-worker-autoscaler.yaml
-            - ../../base/autoscaling/celery-beat-autoscaler.yaml
+            - ../../base/autoscaling/celery-enrichment-worker-autoscaler.yaml
+            - ../../base/autoscaling/celery-bulk-upload-worker-autoscaler.yaml
+            - ../../base/autoscaling/celery-question-generator-ai-worker-autoscaler.yaml
             - namespace.yaml
           
           labels:
@@ -145,12 +149,12 @@ jobs:
                 kind: Deployment
                 name: examxv2-backend
           
-            # Ultra-simple Celery Worker - only nginx volumes
+            # Ultra-simple Celery Worker Default - only nginx volumes
             - patch: |-
                 apiVersion: apps/v1
                 kind: Deployment
                 metadata:
-                  name: celery-worker
+                  name: celery-worker-default
                 spec:
                   replicas: 1
                   template:
@@ -168,7 +172,7 @@ jobs:
                               - key: nginx.conf
                                 path: nginx.conf
                       containers:
-                      - name: celery-worker
+                      - name: celery-worker-default
                         image: ${{ env.BACKEND_IMAGE }}
                         resources:
                           requests:
@@ -188,14 +192,15 @@ jobs:
                             mountPath: /var/cache/nginx
               target:
                 kind: Deployment
-                name: celery-worker
+                name: celery-worker-default
           
-            # Ultra-simple Celery Beat - only nginx volumes
+
+            # Ultra-simple Celery Enrichment Worker - only nginx volumes
             - patch: |-
                 apiVersion: apps/v1
                 kind: Deployment
                 metadata:
-                  name: celery-beat
+                  name: celery-enrichment-worker
                 spec:
                   replicas: 1
                   template:
@@ -213,15 +218,15 @@ jobs:
                               - key: nginx.conf
                                 path: nginx.conf
                       containers:
-                      - name: celery-beat
+                      - name: celery-enrichment-worker
                         image: ${{ env.BACKEND_IMAGE }}
                         resources:
                           requests:
-                            cpu: "0.1"
-                            memory: "512Mi"
-                          limits:
                             cpu: "0.25"
                             memory: "1Gi"
+                          limits:
+                            cpu: "0.5"
+                            memory: "2Gi"
                         volumeMounts:
                           - name: config-volume
                             mountPath: /etc/nginx/nginx.conf
@@ -233,7 +238,97 @@ jobs:
                             mountPath: /var/cache/nginx
               target:
                 kind: Deployment
-                name: celery-beat
+                name: celery-enrichment-worker
+          
+            # Ultra-simple Celery Bulk Upload Worker - only nginx volumes
+            - patch: |-
+                apiVersion: apps/v1
+                kind: Deployment
+                metadata:
+                  name: celery-bulk-upload-worker
+                spec:
+                  replicas: 1
+                  template:
+                    spec:
+                      volumes:
+                        - name: nginx-config
+                          configMap:
+                            name: nginx-config
+                        - name: nginx-cache
+                          emptyDir: {}
+                        - name: config-volume
+                          configMap:
+                            name: nginx-config
+                            items:
+                              - key: nginx.conf
+                                path: nginx.conf
+                      containers:
+                      - name: celery-bulk-upload-worker
+                        image: ${{ env.BACKEND_IMAGE }}
+                        resources:
+                          requests:
+                            cpu: "0.25"
+                            memory: "1Gi"
+                          limits:
+                            cpu: "0.5"
+                            memory: "2Gi"
+                        volumeMounts:
+                          - name: config-volume
+                            mountPath: /etc/nginx/nginx.conf
+                            subPath: nginx.conf
+                          - name: nginx-config
+                            mountPath: /etc/nginx/conf.d/default.conf
+                            subPath: default.conf
+                          - name: nginx-cache
+                            mountPath: /var/cache/nginx
+              target:
+                kind: Deployment
+                name: celery-bulk-upload-worker
+          
+            # Ultra-simple Celery Question Generator AI Worker - only nginx volumes
+            - patch: |-
+                apiVersion: apps/v1
+                kind: Deployment
+                metadata:
+                  name: celery-question-generator-ai-worker
+                spec:
+                  replicas: 1
+                  template:
+                    spec:
+                      volumes:
+                        - name: nginx-config
+                          configMap:
+                            name: nginx-config
+                        - name: nginx-cache
+                          emptyDir: {}
+                        - name: config-volume
+                          configMap:
+                            name: nginx-config
+                            items:
+                              - key: nginx.conf
+                                path: nginx.conf
+                      containers:
+                      - name: celery-question-generator-ai-worker
+                        image: ${{ env.BACKEND_IMAGE }}
+                        resources:
+                          requests:
+                            cpu: "0.25"
+                            memory: "1Gi"
+                          limits:
+                            cpu: "0.5"
+                            memory: "2Gi"
+                        volumeMounts:
+                          - name: config-volume
+                            mountPath: /etc/nginx/nginx.conf
+                            subPath: nginx.conf
+                          - name: nginx-config
+                            mountPath: /etc/nginx/conf.d/default.conf
+                            subPath: default.conf
+                          - name: nginx-cache
+                            mountPath: /var/cache/nginx
+              target:
+                kind: Deployment
+                name: celery-question-generator-ai-worker
           
             # Ingress patches with unique subdomain
             - patch: |-

@@ -4,7 +4,8 @@ namespace: uat-examxv2
 
 resources:
   - ../../base
-  # Note: No PVC/PV resources for UAT as per requirement
+  - storage/pv.yaml
+  - storage/pvc.yaml
 
 labels:
   - pairs:
@@ -13,15 +14,11 @@ labels:
     includeSelectors: false
 
 patches:
-  # Remove PVC volume from backend using JSON patch
+  # Update backend configuration for UAT
   - target:
       kind: Deployment
       name: examxv2-backend
     patch: |-
-      - op: remove
-        path: /spec/template/spec/volumes/4
-      - op: remove
-        path: /spec/template/spec/containers/0/volumeMounts/4
       - op: replace
         path: /spec/template/spec/serviceAccountName
         value: examxv2-stg-secret-service
@@ -40,15 +37,11 @@ patches:
           - name: WORKERS
             value: "2"
 
-  # Remove PVC volume from celery-worker using JSON patch
+  # Update celery-worker configuration for UAT
   - target:
       kind: Deployment
       name: celery-worker-default
     patch: |-
-      - op: remove
-        path: /spec/template/spec/volumes/1
-      - op: remove  
-        path: /spec/template/spec/containers/0/volumeMounts/1
       - op: replace
         path: /spec/template/spec/serviceAccountName
         value: examxv2-stg-secret-service
@@ -62,27 +55,7 @@ patches:
             cpu: "2"
             memory: "8Gi"
 
-  # Remove PVC volume from celery-beat using JSON patch  
-  - target:
-      kind: Deployment
-      name: celery-beat
-    patch: |-
-      - op: remove
-        path: /spec/template/spec/volumes/1
-      - op: remove
-        path: /spec/template/spec/containers/0/volumeMounts/1
-      - op: replace
-        path: /spec/template/spec/serviceAccountName
-        value: examxv2-stg-secret-service
-      - op: replace
-        path: /spec/template/spec/containers/0/resources
-        value:
-          requests:
-            cpu: "1"
-            memory: "4Gi"
-          limits:
-            cpu: "2"
-            memory: "8Gi"
+
 
   # Ingress patches - Using klockwork.ai domain
   - patch: |-

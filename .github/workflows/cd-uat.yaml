@@ -216,8 +216,10 @@ jobs:
         if: github.event.inputs.full_deployment == 'true'
         run: |
           yq -i '.spec.template.spec.containers[0].image = env(BACKEND_IMAGE)' k8s/base/deployment/backend-deployment.yaml
-          yq -i '.spec.template.spec.containers[0].image = env(BACKEND_IMAGE)' k8s/base/deployment/celery-worker-deployment.yaml
-          yq -i '.spec.template.spec.containers[0].image = env(BACKEND_IMAGE)' k8s/base/deployment/celery-beat-deployment.yaml
+          yq -i '.spec.template.spec.containers[0].image = env(BACKEND_IMAGE)' k8s/base/deployment/celery-worker-default-deployment.yaml
+          yq -i '.spec.template.spec.containers[0].image = env(BACKEND_IMAGE)' k8s/base/deployment/celery-enrichment-worker-deployment.yaml
+          yq -i '.spec.template.spec.containers[0].image = env(BACKEND_IMAGE)' k8s/base/deployment/celery-bulk-upload-worker-deployment.yaml
+          yq -i '.spec.template.spec.containers[0].image = env(BACKEND_IMAGE)' k8s/base/deployment/celery-question-generator-ai-worker-deployment.yaml
       
       - name: Commit and push changes
         if: github.event.inputs.full_deployment == 'true'
@@ -225,8 +227,10 @@ jobs:
           git config --local user.email "hariharen@greatify.ai"
           git config --local user.name "Hariharen"
           git add k8s/base/deployment/backend-deployment.yaml
-          git add k8s/base/deployment/celery-worker-deployment.yaml
-          git add k8s/base/deployment/celery-beat-deployment.yaml
+          git add k8s/base/deployment/celery-worker-default-deployment.yaml
+          git add k8s/base/deployment/celery-enrichment-worker-deployment.yaml
+          git add k8s/base/deployment/celery-bulk-upload-worker-deployment.yaml
+          git add k8s/base/deployment/celery-question-generator-ai-worker-deployment.yaml
           git commit -m "Update image tags for UAT deployment"
           git push origin main
 
@@ -248,37 +252,11 @@ jobs:
     #     run: |
     #       echo "Waiting for deployments to be ready..."
     #       kubectl wait --for=condition=available --timeout=300s deployment/examxv2-backend -n uat-examxv2
-    #       kubectl wait --for=condition=available --timeout=300s deployment/celery-worker -n uat-examxv2
-    #       kubectl wait --for=condition=available --timeout=300s deployment/celery-beat -n uat-examxv2
+    #       kubectl wait --for=condition=available --timeout=300s deployment/celery-worker-default -n uat-examxv2
           
     #       echo "Deployment status:"
     #       kubectl get deployments -n uat-examxv2
     #       kubectl get pods -n uat-examxv2
-
-      - name: Send deployment success notification
-        if: success()
-        uses: 8398a7/action-slack@v3
-        with:
-          status: ${{ job.status }}
-          fields: repo,message,commit,author,action,eventName,ref,workflow
-          author_name: Deployment Success
-          mention: ${{ github.actor }}
-          if_mention: success
-          job_name: deploy-backend-uat
-          channel: examxv2-backend-alerts
-          username: ExamX-V2-CICD
-          text: |
-            :rocket: *UAT Deployment Successful*
-            
-            *Deployment by:* @${{ github.actor }}
-            *Commit:* ${{ github.sha }}
-            *Branch:* ${{ github.ref_name }}
-            
-            @${{ github.actor }}, your changes have been deployed successfully to UAT.
-            Please verify the deployment and conduct necessary tests.
-        
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
       - name: Send deployment failure notification
         if: failure()
@@ -299,6 +277,8 @@ jobs:
             *Commit:* ${{ github.sha }}
             *Branch:* ${{ github.ref_name }}
             
-            @${{ github.actor }}, please check the deployment logs and fix the issues.
+            @${{ github.actor }}, the UAT deployment has failed.
+            Please check the logs and fix the issues immediately.
+        
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} 

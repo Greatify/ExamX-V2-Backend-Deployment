@@ -64,29 +64,7 @@ patches:
     target:
       kind: Deployment
       name: celery-worker-default
-  # Celery beat patches
-  - patch: |-
-      apiVersion: apps/v1
-      kind: Deployment
-      metadata:
-        name: celery-beat
-      spec:
-        replicas: 1
-        template:
-          spec:
-            serviceAccountName: examxv2-stg-secret-service
-            containers:
-            - name: celery-beat
-              resources:
-                requests:
-                  cpu: "1"
-                  memory: "4Gi"
-                limits:
-                  cpu: "2"
-                  memory: "8Gi"
-    target:
-      kind: Deployment
-      name: celery-beat
+
 
   # Celery Bulk Upload Worker patches
   - patch: |-

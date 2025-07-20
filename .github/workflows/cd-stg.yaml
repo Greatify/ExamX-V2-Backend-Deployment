@@ -217,8 +217,10 @@ jobs:
         if: github.event.inputs.full_deployment == 'true'
         run: |
           yq -i '.spec.template.spec.containers[0].image = env(BACKEND_IMAGE)' k8s/base/deployment/backend-deployment.yaml
-          yq -i '.spec.template.spec.containers[0].image = env(BACKEND_IMAGE)' k8s/base/deployment/celery-worker-deployment.yaml
-          yq -i '.spec.template.spec.containers[0].image = env(BACKEND_IMAGE)' k8s/base/deployment/celery-beat-deployment.yaml
+          yq -i '.spec.template.spec.containers[0].image = env(BACKEND_IMAGE)' k8s/base/deployment/celery-worker-default-deployment.yaml
+          yq -i '.spec.template.spec.containers[0].image = env(BACKEND_IMAGE)' k8s/base/deployment/celery-enrichment-worker-deployment.yaml
+          yq -i '.spec.template.spec.containers[0].image = env(BACKEND_IMAGE)' k8s/base/deployment/celery-bulk-upload-worker-deployment.yaml
+          yq -i '.spec.template.spec.containers[0].image = env(BACKEND_IMAGE)' k8s/base/deployment/celery-question-generator-ai-worker-deployment.yaml
       
       - name: Commit and push changes
         if: github.event.inputs.full_deployment == 'true'
@@ -226,8 +228,10 @@ jobs:
           git config --local user.email "hariharen@greatify.ai"
           git config --local user.name "Hariharen"
           git add k8s/base/deployment/backend-deployment.yaml
-          git add k8s/base/deployment/celery-worker-deployment.yaml
-          git add k8s/base/deployment/celery-beat-deployment.yaml
+          git add k8s/base/deployment/celery-worker-default-deployment.yaml
+          git add k8s/base/deployment/celery-enrichment-worker-deployment.yaml
+          git add k8s/base/deployment/celery-bulk-upload-worker-deployment.yaml
+          git add k8s/base/deployment/celery-question-generator-ai-worker-deployment.yaml
           git commit -m "Update image tags for staging deployment"
           git push origin main
       
@@ -253,26 +257,26 @@ jobs:
         run: |
           kubectl apply -k k8s/overlays/stg
 
-      - name: Send deployment success notification
-        if: success()
+      - name: Send deployment failure notification
+        if: failure()
         uses: 8398a7/action-slack@v3
         with:
           status: ${{ job.status }}
           fields: repo,message,commit,author,action,eventName,ref,workflow
-          author_name: Deployment Success
+          author_name: Deployment Failure ❌
           mention: ${{ github.actor }}
-          if_mention: success
+          if_mention: failure
           job_name: deploy-backend-staging
           channel: examxv2-backend-alerts
           username: ExamX-V2-CICD
           text: |
-            :rocket: *Staging Deployment Successful*
+            ❌ *Staging Deployment Failed*
             
             *Deployment by:* @${{ github.actor }}
             *Commit:* ${{ github.sha }}
             *Branch:* ${{ github.ref_name }}
             
-            @${{ github.actor }}, your changes have been deployed successfully to Staging.
-            Please verify the deployment and conduct necessary tests.
+            @${{ github.actor }}, the staging deployment has failed.
+            Please check the logs and fix the issues immediately.
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
