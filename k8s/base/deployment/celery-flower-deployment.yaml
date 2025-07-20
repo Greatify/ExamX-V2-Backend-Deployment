@@ -33,7 +33,7 @@ spec:
             claimName: examxv2-backend-pvc
       containers:
         - name: flower
-          image: 399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-20250720-120337-e27d1ff303ed914de474e21d415b6a01aed23d68
+          image: 399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-20250720-160048-8fab8e9287f6a1dea6e70e5a9fac27455354a254
           imagePullPolicy: IfNotPresent
           resources:
             requests:
@@ -65,4 +65,3 @@ spec:
             postStart:
               exec:
                 command: ['cp', '-R', '/mnt/secret-store/.env', '/app/examx/.env']
- 
