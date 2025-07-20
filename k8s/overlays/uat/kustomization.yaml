@@ -43,7 +43,7 @@ patches:
   # Remove PVC volume from celery-worker using JSON patch
   - target:
       kind: Deployment
-      name: celery-worker
+      name: celery-worker-default
     patch: |-
       - op: remove
         path: /spec/template/spec/volumes/1

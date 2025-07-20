@@ -54,14 +54,14 @@ patches:
       apiVersion: apps/v1
       kind: Deployment
       metadata:
-        name: celery-worker
+        name: celery-worker-default
       spec:
         replicas: 1
         template:
           spec:
             serviceAccountName: dev-examxv2-sa
             containers:
-            - name: celery-worker
+            - name: celery-worker-default
               resources:
                 requests:
                   cpu: "1"
@@ -71,30 +71,78 @@ patches:
                   memory: "6Gi"
     target:
       kind: Deployment
-      name: celery-worker
-# Celery beat patches - only mutable fields
+      name: celery-worker-default
+  # Celery Bulk Upload Worker patches
   - patch: |-
       apiVersion: apps/v1
       kind: Deployment
       metadata:
-        name: celery-beat
+        name: celery-bulk-upload-worker
       spec:
         replicas: 1
         template:
           spec:
             serviceAccountName: dev-examxv2-sa
             containers:
-            - name: celery-beat
+            - name: celery-bulk-upload-worker
               resources:
                 requests:
                   cpu: "1"
                   memory: "4Gi"
                 limits:
                   cpu: "2"
-                  memory: "6Gi"
+                  memory: "8Gi"
     target:
       kind: Deployment
-      name: celery-beat
+      name: celery-bulk-upload-worker
+
+  # Celery Enrichment Worker patches
+  - patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: celery-enrichment-worker
+      spec:
+        replicas: 1
+        template:
+          spec:
+            serviceAccountName: dev-examxv2-sa
+            containers:
+            - name: celery-enrichment-worker
+              resources:
+                requests:
+                  cpu: "1"
+                  memory: "4Gi"
+                limits:
+                  cpu: "2"
+                  memory: "8Gi"
+    target:
+      kind: Deployment
+      name: celery-enrichment-worker
+
+  # Celery Question Generator AI Worker patches
+  - patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: celery-question-generator-ai-worker
+      spec:
+        replicas: 1
+        template:
+          spec:
+            serviceAccountName: dev-examxv2-sa
+            containers:
+            - name: celery-question-generator-ai-worker
+              resources:
+                requests:
+                  cpu: "1"
+                  memory: "4Gi"
+                limits:
+                  cpu: "2"
+                  memory: "8Gi"
+    target:
+      kind: Deployment
+      name: celery-question-generator-ai-worker
   # Ingress patches
   - patch: |-
       apiVersion: networking.k8s.io/v1

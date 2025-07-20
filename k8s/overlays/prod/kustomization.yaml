@@ -24,20 +24,16 @@ patches:
       spec:
         replicas: 2
         template:
-          metadata:
-            annotations:
-              ad.datadoghq.com/examxv2-backend.logs: '[{"source":"examx-backend","service":"examx-backend"}]'
-              ad.datadoghq.com/tags: '{"env":"production","team":"backend","service":"examx-backend"}'
           spec:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: examxv2-backend
               resources:
                 requests:
-                  cpu: "2"
+                  cpu: "4"
                   memory: "16Gi"
                 limits:
-                  cpu: "4"
+                  cpu: "8"
                   memory: "32Gi"
               env:
               - name: WORKERS
@@ -55,10 +51,6 @@ patches:
       spec:
         replicas: 1
         template:
-          metadata:
-            annotations:
-              ad.datadoghq.com/celery-worker-default.logs: '[{"source":"examxv2-celery","service":"examxv2-celery"}]'
-              ad.datadoghq.com/tags: '{"env":"production","team":"backend","service":"examxv2-celery"}'
           spec:
             serviceAccountName: examxv2-production-sa
             containers:
@@ -83,10 +75,6 @@ patches:
       spec:
         replicas: 3
         template:
-          metadata:
-            annotations:
-              ad.datadoghq.com/celery-bulk-upload-worker.logs: '[{"source":"examxv2-celery-bulk","service":"examxv2-celery-bulk"}]'
-              ad.datadoghq.com/tags: '{"env":"production","team":"backend","service":"examxv2-celery-bulk"}'
           spec:
             serviceAccountName: examxv2-production-sa
             containers:
@@ -111,10 +99,6 @@ patches:
       spec:
         replicas: 3
         template:
-          metadata:
-            annotations:
-              ad.datadoghq.com/celery-enrichment-worker.logs: '[{"source":"examxv2-celery-enrichment","service":"examxv2-celery-enrichment"}]'
-              ad.datadoghq.com/tags: '{"env":"production","team":"backend","service":"examxv2-celery-enrichment"}'
           spec:
             serviceAccountName: examxv2-production-sa
             containers:
@@ -129,6 +113,30 @@ patches:
     target:
       kind: Deployment
       name: celery-enrichment-worker
+
+  # Celery Question Generator AI Worker patches
+  - patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: celery-question-generator-ai-worker
+      spec:
+        replicas: 3
+        template:
+          spec:
+            serviceAccountName: examxv2-production-sa
+            containers:
+            - name: celery-question-generator-ai-worker
+              resources:
+                requests:
+                  cpu: "2"
+                  memory: "10Gi"
+                limits:
+                  cpu: "4"
+                  memory: "20Gi"
+    target:
+      kind: Deployment
+      name: celery-question-generator-ai-worker
   # Celery beat patches
   # - patch: |-
   #     apiVersion: apps/v1
@@ -162,10 +170,6 @@ patches:
       spec:
         replicas: 1
         template:
-          metadata:
-            annotations:
-              ad.datadoghq.com/celery-flower.logs: '[{"source":"examxv2-flower","service":"examxv2-flower"}]'
-              ad.datadoghq.com/tags: '{"env":"production","team":"backend","service":"examxv2-flower"}'
           spec:
             serviceAccountName: examxv2-production-sa
             containers:
@@ -206,6 +210,51 @@ patches:
     target:
       kind: HorizontalPodAutoscaler
       name: celery-worker-default-autoscaler
+
+  # Celery Bulk Upload Worker Autoscaler patches
+  - patch: |-
+      apiVersion: autoscaling/v2
+      kind: HorizontalPodAutoscaler
+      metadata:
+        name: celery-bulk-upload-worker-autoscaler
+      spec:
+        scaleTargetRef:
+          apiVersion: apps/v1
+          kind: Deployment
+          name: celery-bulk-upload-worker
+    target:
+      kind: HorizontalPodAutoscaler
+      name: celery-bulk-upload-worker-autoscaler
+
+  # Celery Enrichment Worker Autoscaler patches
+  - patch: |-
+      apiVersion: autoscaling/v2
+      kind: HorizontalPodAutoscaler
+      metadata:
+        name: celery-enrichment-worker-autoscaler
+      spec:
+        scaleTargetRef:
+          apiVersion: apps/v1
+          kind: Deployment
+          name: celery-enrichment-worker
+    target:
+      kind: HorizontalPodAutoscaler
+      name: celery-enrichment-worker-autoscaler
+
+  # Celery Question Generator AI Worker Autoscaler patches
+  - patch: |-
+      apiVersion: autoscaling/v2
+      kind: HorizontalPodAutoscaler
+      metadata:
+        name: celery-question-generator-ai-worker-autoscaler
+      spec:
+        scaleTargetRef:
+          apiVersion: apps/v1
+          kind: Deployment
+          name: celery-question-generator-ai-worker
+    target:
+      kind: HorizontalPodAutoscaler
+      name: celery-question-generator-ai-worker-autoscaler
 
   # Ingress patches
   - patch: |-

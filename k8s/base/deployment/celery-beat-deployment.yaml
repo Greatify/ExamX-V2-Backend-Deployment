@@ -33,25 +33,22 @@ spec:
             claimName: examxv2-backend-pvc
       containers:
         - name: celery-beat
-          image: 399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-20250719-112728-4c42ba250b39818093d0f52302c7136ba1b7d9c2
+          image: 399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-20250720-120337-e27d1ff303ed914de474e21d415b6a01aed23d68
           imagePullPolicy: IfNotPresent
           resources:
             requests:
               cpu: "1"
-              memory: "8Gi"
+              memory: "4Gi"
             limits:
               cpu: "2"
-              memory: "16Gi"
-          # env:
-          #   - name: REDIS_URL
-          #     value: redis://redis-service:6379
+              memory: "8Gi"
           command:
             - celery
             - -A
             - examx
             - beat
             - -l
-            - info
+            - debug
           volumeMounts:
             - name: examxv2-secrets-volume
               mountPath: /mnt/secret-store
@@ -61,4 +58,4 @@ spec:
           lifecycle:
             postStart:
               exec:
-                command: ['cp', '-R', '/mnt/secret-store/.env', '/app/examx/.env']
+                command: ['cp', '-R', '/mnt/secret-store/.env', '/app/examx/.env'] 
