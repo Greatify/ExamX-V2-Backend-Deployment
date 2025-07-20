@@ -77,6 +77,30 @@ patches:
       kind: Ingress
       name: examxv2-ingress
 
+  # Celery Flower patches for UAT
+  - patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: celery-flower
+      spec:
+        replicas: 1
+        template:
+          spec:
+            serviceAccountName: examxv2-stg-secret-service
+            containers:
+            - name: flower
+              resources:
+                requests:
+                  cpu: "1"
+                  memory: "4Gi"
+                limits:
+                  cpu: "2"
+                  memory: "8Gi"
+    target:
+      kind: Deployment
+      name: celery-flower
+
   # Secrets patches - Using UAT secret ARN
   - patch: |-
       apiVersion: secrets-store.csi.x-k8s.io/v1

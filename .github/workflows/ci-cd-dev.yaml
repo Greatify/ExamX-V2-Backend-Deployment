@@ -36,6 +36,7 @@ jobs:
           yq -i '.spec.template.spec.containers[0].image = env(BACKEND_IMAGE)' k8s/base/deployment/celery-enrichment-worker-deployment.yaml
           yq -i '.spec.template.spec.containers[0].image = env(BACKEND_IMAGE)' k8s/base/deployment/celery-bulk-upload-worker-deployment.yaml
           yq -i '.spec.template.spec.containers[0].image = env(BACKEND_IMAGE)' k8s/base/deployment/celery-question-generator-ai-worker-deployment.yaml
+          yq -i '.spec.template.spec.containers[0].image = env(BACKEND_IMAGE)' k8s/base/deployment/celery-flower-deployment.yaml
           
       - name: Commit and push changes
         run: |
@@ -46,6 +47,7 @@ jobs:
           git add k8s/base/deployment/celery-enrichment-worker-deployment.yaml
           git add k8s/base/deployment/celery-bulk-upload-worker-deployment.yaml
           git add k8s/base/deployment/celery-question-generator-ai-worker-deployment.yaml
+          git add k8s/base/deployment/celery-flower-deployment.yaml
           git commit -m "Update image tags for development deployment"
           git push origin main
           

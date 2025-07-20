@@ -76,7 +76,9 @@ jobs:
             - ../../base/deployment/celery-enrichment-worker-deployment.yaml
             - ../../base/deployment/celery-bulk-upload-worker-deployment.yaml
             - ../../base/deployment/celery-question-generator-ai-worker-deployment.yaml
+            - ../../base/deployment/celery-flower-deployment.yaml
             - ../../base/services/examxv2-backend-service.yaml
+            - ../../base/services/celery-flower-service.yaml
             - ../../base/ingress/ingress.yaml
             - ../../base/configmap/nginx-config.yaml
             - ../../base/autoscaling/backend-autoscaler.yaml
@@ -84,6 +86,7 @@ jobs:
             - ../../base/autoscaling/celery-enrichment-worker-autoscaler.yaml
             - ../../base/autoscaling/celery-bulk-upload-worker-autoscaler.yaml
             - ../../base/autoscaling/celery-question-generator-ai-worker-autoscaler.yaml
+            - ../../base/autoscaling/celery-flower-autoscaler.yaml
             - namespace.yaml
           
           labels:
@@ -329,6 +332,64 @@ jobs:
               target:
                 kind: Deployment
                 name: celery-question-generator-ai-worker
+          
+            # Ultra-simple Celery Flower - only nginx volumes
+            - patch: |-
+                apiVersion: apps/v1
+                kind: Deployment
+                metadata:
+                  name: celery-flower
+                spec:
+                  replicas: 1
+                  template:
+                    spec:
+                      volumes:
+                        - name: nginx-config
+                          configMap:
+                            name: nginx-config
+                        - name: nginx-cache
+                          emptyDir: {}
+                        - name: config-volume
+                          configMap:
+                            name: nginx-config
+                            items:
+                              - key: nginx.conf
+                                path: nginx.conf
+                      containers:
+                      - name: flower
+                        image: ${{ env.BACKEND_IMAGE }}
+                        resources:
+                          requests:
+                            cpu: "1"
+                            memory: "4Gi"
+                          limits:
+                            cpu: "2"
+                            memory: "8Gi"
+                        command:
+                          - celery
+                          - -A
+                          - examx
+                          - flower
+                          - --port=5555
+                          - --address=0.0.0.0
+                          - --persistent=True
+                          - --inspect_timeout=10000
+                          - --max_tasks=10000
+                        ports:
+                          - containerPort: 5555
+                            protocol: TCP
+                        volumeMounts:
+                          - name: config-volume
+                            mountPath: /etc/nginx/nginx.conf
+                            subPath: nginx.conf
+                          - name: nginx-config
+                            mountPath: /etc/nginx/conf.d/default.conf
+                            subPath: default.conf
+                          - name: nginx-cache
+                            mountPath: /var/cache/nginx
+              target:
+                kind: Deployment
+                name: celery-flower
           
             # Ingress patches with unique subdomain
             - patch: |-

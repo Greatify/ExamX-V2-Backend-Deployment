@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: celery-flower
+  labels:
+    app: celery-flower
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: celery-flower
+  template:
+    metadata:
+      labels:
+        app: celery-flower
+    spec:
+      serviceAccountName: examxv2-sa
+      terminationGracePeriodSeconds: 30
+      volumes:
+        - name: examxv2-secrets-volume
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "examxv2-backend-secrets"
+        - name: examxv2-backend-storage
+          persistentVolumeClaim:
+            claimName: examxv2-backend-pvc
+      containers:
+        - name: flower
+          image: 399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-20250720-120337-e27d1ff303ed914de474e21d415b6a01aed23d68
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              cpu: "1"
+              memory: "4Gi"
+            limits:
+              cpu: "2"
+              memory: "8Gi"
+          command:
+            - celery
+            - -A
+            - examx
+            - flower
+            - --port=5555
+            - --address=0.0.0.0
+            - --persistent=True
+            - --inspect_timeout=10000
+            - --max_tasks=10000
+          ports:
+            - containerPort: 5555
+              protocol: TCP
+          volumeMounts:
+            - name: examxv2-secrets-volume
+              mountPath: /mnt/secret-store
+              readOnly: true
+            - name: examxv2-backend-storage
+              mountPath: /app/media
+          lifecycle:
+            postStart:
+              exec:
+                command: ['cp', '-R', '/mnt/secret-store/.env', '/app/examx/.env']
+ 

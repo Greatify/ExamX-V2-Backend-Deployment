@@ -10,10 +10,12 @@ resources:
   - deployment/celery-bulk-upload-worker-deployment.yaml
   - deployment/celery-enrichment-worker-deployment.yaml
   - deployment/celery-question-generator-ai-worker-deployment.yaml
+  - deployment/celery-flower-deployment.yaml
   # - deployment/redis-deployment.yaml
   
   # Services
   - services/examxv2-backend-service.yaml
+  - services/celery-flower-service.yaml
   # - services/redis-service.yaml
   
   #Network
@@ -30,5 +32,6 @@ resources:
   - autoscaling/celery-bulk-upload-worker-autoscaler.yaml
   - autoscaling/celery-enrichment-worker-autoscaler.yaml
   - autoscaling/celery-question-generator-ai-worker-autoscaler.yaml
+  - autoscaling/celery-flower-autoscaler.yaml
   # - autoscaling/redis-autoscaler.yaml
  

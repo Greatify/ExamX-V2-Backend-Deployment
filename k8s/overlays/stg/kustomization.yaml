@@ -73,7 +73,7 @@ patches:
       metadata:
         name: celery-bulk-upload-worker
       spec:
-        replicas: 2
+        replicas: 1
         template:
           spec:
             serviceAccountName: examxv2-stg-secret-service
@@ -97,7 +97,7 @@ patches:
       metadata:
         name: celery-enrichment-worker
       spec:
-        replicas: 2
+        replicas: 1
         template:
           spec:
             serviceAccountName: examxv2-stg-secret-service
@@ -121,7 +121,7 @@ patches:
       metadata:
         name: celery-question-generator-ai-worker
       spec:
-        replicas: 2
+        replicas: 1
         template:
           spec:
             serviceAccountName: examxv2-stg-secret-service
@@ -137,6 +137,31 @@ patches:
     target:
       kind: Deployment
       name: celery-question-generator-ai-worker
+
+  # Celery Flower patches
+  - patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: celery-flower
+      spec:
+        replicas: 1
+        template:
+          spec:
+            serviceAccountName: examxv2-stg-secret-service
+            containers:
+            - name: flower
+              resources:
+                requests:
+                  cpu: "1"
+                  memory: "4Gi"
+                limits:
+                  cpu: "2"
+                  memory: "8Gi"
+    target:
+      kind: Deployment
+      name: celery-flower
+
   # Ingress patches
   - patch: |-
       apiVersion: networking.k8s.io/v1
