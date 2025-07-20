@@ -44,7 +44,7 @@ spec:
             claimName: examxv2-backend-pvc
       containers:
         - name: examxv2-backend
-          image: 399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-20250720-185441-2e697fc73621bd52f862522316bf8f1968a75d5a
+          image: 399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:EXM_1101_Change_delay_to_apply-20250720-193911-5fb60c8
           imagePullPolicy: IfNotPresent
           resources:
             requests:
