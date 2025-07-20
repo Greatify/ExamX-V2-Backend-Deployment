@@ -2,9 +2,9 @@
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: celery-worker-autoscaler
+  name: celery-worker-default-autoscaler
   labels:
-    app: celery-worker-autoscaler
+    app: celery-worker-default-autoscaler
 spec:
   scaleTargetRef:
     apiVersion: apps/v1

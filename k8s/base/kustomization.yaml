@@ -25,7 +25,7 @@ resources:
   
   # Autoscaling
   - autoscaling/backend-autoscaler.yaml
-  - autoscaling/celery-worker-autoscaler.yaml
+  - autoscaling/celery-worker-default-autoscaler.yaml
   # - autoscaling/celery-beat-autoscaler.yaml
   - autoscaling/celery-bulk-upload-worker-autoscaler.yaml
   - autoscaling/celery-enrichment-worker-autoscaler.yaml
