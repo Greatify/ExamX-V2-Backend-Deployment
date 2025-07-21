@@ -44,7 +44,7 @@ spec:
             claimName: examxv2-backend-pvc
       containers:
         - name: examxv2-backend
-          image: 399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-20250720-194737-60378e0daba63475b2db6821fc99da3e349d4b98
+          image: 399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-20250720-194602-60378e0daba63475b2db6821fc99da3e349d4b98
           imagePullPolicy: IfNotPresent
           resources:
             requests:
@@ -84,7 +84,7 @@ spec:
               path: /api/health/
               port: 80
             initialDelaySeconds: 180
-            timeoutSeconds: 30
+            timeoutSeconds: 45
             periodSeconds: 60
             successThreshold: 1
             failureThreshold: 5
@@ -93,7 +93,7 @@ spec:
               path: /api/ready/
               port: 80
             initialDelaySeconds: 120
-            timeoutSeconds: 30
+            timeoutSeconds: 45
             periodSeconds: 30
             successThreshold: 1
             failureThreshold: 5
