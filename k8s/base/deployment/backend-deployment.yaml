@@ -44,7 +44,7 @@ spec:
             claimName: examxv2-backend-pvc
       containers:
         - name: examxv2-backend
-          image: 399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:EXM_1104____timezone_implement-20250722-111247-3d7fb1e
+          image: 399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:EXM_1104____timezone_implement-20250722-130538-6ab8945
           imagePullPolicy: IfNotPresent
           resources:
             requests:
