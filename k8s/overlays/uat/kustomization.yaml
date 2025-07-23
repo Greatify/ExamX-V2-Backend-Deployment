@@ -55,6 +55,60 @@ patches:
             cpu: "2"
             memory: "8Gi"
 
+  # Update celery-bulk-upload-worker configuration for UAT
+  - target:
+      kind: Deployment
+      name: celery-bulk-upload-worker
+    patch: |-
+      - op: replace
+        path: /spec/template/spec/serviceAccountName
+        value: examxv2-stg-secret-service
+      - op: replace
+        path: /spec/template/spec/containers/0/resources
+        value:
+          requests:
+            cpu: "1"
+            memory: "4Gi"
+          limits:
+            cpu: "2"
+            memory: "8Gi"
+
+  # Update celery-enrichment-worker configuration for UAT
+  - target:
+      kind: Deployment
+      name: celery-enrichment-worker
+    patch: |-
+      - op: replace
+        path: /spec/template/spec/serviceAccountName
+        value: examxv2-stg-secret-service
+      - op: replace
+        path: /spec/template/spec/containers/0/resources
+        value:
+          requests:
+            cpu: "1"
+            memory: "4Gi"
+          limits:
+            cpu: "2"
+            memory: "8Gi"
+
+  # Update celery-question-generator-ai-worker configuration for UAT
+  - target:
+      kind: Deployment
+      name: celery-question-generator-ai-worker
+    patch: |-
+      - op: replace
+        path: /spec/template/spec/serviceAccountName
+        value: examxv2-stg-secret-service
+      - op: replace
+        path: /spec/template/spec/containers/0/resources
+        value:
+          requests:
+            cpu: "1"
+            memory: "4Gi"
+          limits:
+            cpu: "2"
+            memory: "8Gi"
+
 
 
   # Ingress patches - Using klockwork.ai domain
