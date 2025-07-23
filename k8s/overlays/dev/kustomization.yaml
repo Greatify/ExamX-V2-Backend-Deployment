@@ -143,6 +143,31 @@ patches:
     target:
       kind: Deployment
       name: celery-question-generator-ai-worker
+
+  # Celery Flower patches for dev
+  - patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: celery-flower
+      spec:
+        replicas: 1
+        template:
+          spec:
+            serviceAccountName: dev-examxv2-sa
+            containers:
+            - name: flower
+              resources:
+                requests:
+                  cpu: "1"
+                  memory: "4Gi"
+                limits:
+                  cpu: "2"
+                  memory: "8Gi"
+    target:
+      kind: Deployment
+      name: celery-flower
+
   # Ingress patches
   - patch: |-
       apiVersion: networking.k8s.io/v1
