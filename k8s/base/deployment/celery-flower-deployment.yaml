@@ -33,7 +33,7 @@ spec:
             claimName: examxv2-backend-pvc
       containers:
         - name: flower
-          image: 399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:EXM_1169____Bump_aiohttp_from_-20250724-044314-f3ba1e3
+          image: 399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:_3358_EXM_1120___Auto_generate-20250724-050344-42d7dd4
           imagePullPolicy: IfNotPresent
           resources:
             requests:
