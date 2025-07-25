@@ -33,7 +33,7 @@ spec:
             claimName: examxv2-backend-pvc
       containers:
         - name: celery-question-generator-ai-worker
-          image: 399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-20250725-110843-808bbf03f0dd8f4a36ccb2ad376ab83b13732d1e
+          image: 399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:_3391_Exm_1188_ai_question_cre-20250725-114428-fed8126
           imagePullPolicy: IfNotPresent
           resources:
             requests:
