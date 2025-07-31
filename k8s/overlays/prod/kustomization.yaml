@@ -191,7 +191,7 @@ patches:
       metadata:
         name: examxv2-backend-pod-autoscaler
       spec:
-        minReplicas: 4
+        minReplicas: 2
     target:
       kind: HorizontalPodAutoscaler
       name: examxv2-backend-pod-autoscaler
