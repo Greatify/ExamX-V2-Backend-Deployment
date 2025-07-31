@@ -31,13 +31,13 @@ patches:
               resources:
                 requests:
                   cpu: "4"
-                  memory: "16Gi"
+                  memory: "10Gi"
                 limits:
-                  cpu: "8"
-                  memory: "32Gi"
+                  cpu: "6"
+                  memory: "20Gi"
               env:
               - name: WORKERS
-                value: "8"
+                value: "6"
     target:
       kind: Deployment
       name: examxv2-backend
