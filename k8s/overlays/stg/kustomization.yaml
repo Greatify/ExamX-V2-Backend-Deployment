@@ -29,11 +29,11 @@ patches:
             - name: examxv2-backend
               resources:
                 requests:
+                  cpu: "1"
+                  memory: "4Gi"
+                limits:
                   cpu: "2"
                   memory: "8Gi"
-                limits:
-                  cpu: "4"
-                  memory: "16Gi"
               env:
               - name: WORKERS
                 value: "4"
