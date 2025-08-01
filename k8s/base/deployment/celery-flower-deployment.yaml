@@ -33,7 +33,7 @@ spec:
             claimName: examxv2-backend-pvc
       containers:
         - name: flower
-          image: 399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:EXM_1237_Time_zone_Issue__chan-20250801-085744-6de4a69
+          image: 399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:Exm_1247_For_grace_time_exam_s-20250801-092047-c96aa0c
           imagePullPolicy: IfNotPresent
           resources:
             requests:
