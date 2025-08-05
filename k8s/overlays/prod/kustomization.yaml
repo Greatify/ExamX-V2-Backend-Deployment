@@ -267,6 +267,10 @@ patches:
           alb.ingress.kubernetes.io/auth-tls-verify-client: "optional"
           alb.ingress.kubernetes.io/cors-allow-origin: >-
             https://examx.ai,https://www.examx.ai,https://*.examx.ai
+          alb.ingress.kubernetes.io/load-balancer-attributes: >-
+            access_logs.s3.enabled=true,
+            access_logs.s3.bucket=examx-v2-production-logs,
+            access_logs.s3.prefix=ELBLogs/Backend
       spec:
         tls:
           - hosts:
