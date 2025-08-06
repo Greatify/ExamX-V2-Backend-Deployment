@@ -33,7 +33,7 @@ spec:
             claimName: examxv2-backend-pvc
       containers:
         - name: celery-bulk-upload-worker
-          image: 399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:EXM_1306____Add_health_check_p-20250806-131341-4c24a64
+          image: 399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-20250806-131855-cab621946131f84b52b525cebd73a4202641471b
           imagePullPolicy: IfNotPresent
           resources:
             requests:
