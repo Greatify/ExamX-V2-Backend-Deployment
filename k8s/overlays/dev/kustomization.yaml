@@ -39,12 +39,14 @@ patches:
               env:
               - name: WORKERS
                 value: "2"
+              - name: OPIK_URL_OVERRIDE
+                value: "https://www.comet.com/opik/api"
               - name: OPIK_API_KEY
                 value: "Y5T3WoqNxJ22ypw1M8qivydis"
               - name: OPIK_WORKSPACE
-                value: "priya97"
-              - name: OPIK_PROJECT
-                value: "Default Project"
+                value: "greatify-prod"
+              - name: OPIK_PROJECT_NAME
+                value: "Dev"
     target:
       kind: Deployment
       name: examxv2-backend
@@ -69,6 +71,15 @@ patches:
                 limits:
                   cpu: "2"
                   memory: "6Gi"
+              env:
+              - name: OPIK_URL_OVERRIDE
+                value: "https://www.comet.com/opik/api"
+              - name: OPIK_API_KEY
+                value: "Y5T3WoqNxJ22ypw1M8qivydis"
+              - name: OPIK_WORKSPACE
+                value: "greatify-prod"
+              - name: OPIK_PROJECT_NAME
+                value: "Dev"
     target:
       kind: Deployment
       name: celery-worker-default
@@ -92,6 +103,15 @@ patches:
                 limits:
                   cpu: "2"
                   memory: "8Gi"
+              env:
+              - name: OPIK_URL_OVERRIDE
+                value: "https://www.comet.com/opik/api"
+              - name: OPIK_API_KEY
+                value: "Y5T3WoqNxJ22ypw1M8qivydis"
+              - name: OPIK_WORKSPACE
+                value: "greatify-prod"
+              - name: OPIK_PROJECT_NAME
+                value: "Dev"
     target:
       kind: Deployment
       name: celery-bulk-upload-worker
@@ -116,6 +136,15 @@ patches:
                 limits:
                   cpu: "2"
                   memory: "8Gi"
+              env:
+              - name: OPIK_URL_OVERRIDE
+                value: "https://www.comet.com/opik/api"
+              - name: OPIK_API_KEY
+                value: "Y5T3WoqNxJ22ypw1M8qivydis"
+              - name: OPIK_WORKSPACE
+                value: "greatify-prod"
+              - name: OPIK_PROJECT_NAME
+                value: "Dev"
     target:
       kind: Deployment
       name: celery-enrichment-worker
@@ -140,6 +169,15 @@ patches:
                 limits:
                   cpu: "2"
                   memory: "8Gi"
+              env:
+              - name: OPIK_URL_OVERRIDE
+                value: "https://www.comet.com/opik/api"
+              - name: OPIK_API_KEY
+                value: "Y5T3WoqNxJ22ypw1M8qivydis"
+              - name: OPIK_WORKSPACE
+                value: "greatify-prod"
+              - name: OPIK_PROJECT_NAME
+                value: "Dev"
     target:
       kind: Deployment
       name: celery-question-generator-ai-worker
