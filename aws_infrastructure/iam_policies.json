@@ -1,0 +1,121 @@
+{
+  "ExamXLambdaExecutionRole": {
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Effect": "Allow",
+        "Principal": {
+          "Service": "lambda.amazonaws.com"
+        },
+        "Action": "sts:AssumeRole"
+      }
+    ]
+  },
+  "ExamXLambdaExecutionPolicy": {
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Sid": "BasicLambdaExecution",
+        "Effect": "Allow",
+        "Action": [
+          "logs:CreateLogGroup",
+          "logs:CreateLogStream",
+          "logs:PutLogEvents"
+        ],
+        "Resource": "arn:aws:logs:*:*:*"
+      },
+      {
+        "Sid": "S3Access",
+        "Effect": "Allow",
+        "Action": [
+          "s3:GetObject",
+          "s3:PutObject",
+          "s3:DeleteObject"
+        ],
+        "Resource": [
+          "arn:aws:s3:::examx-lambda-payloads/*",
+          "arn:aws:s3:::examx-lambda-results/*",
+          "arn:aws:s3:::examx-document-storage/*"
+        ]
+      },
+      {
+        "Sid": "S3ListBuckets",
+        "Effect": "Allow",
+        "Action": [
+          "s3:ListBucket"
+        ],
+        "Resource": [
+          "arn:aws:s3:::examx-lambda-payloads",
+          "arn:aws:s3:::examx-lambda-results",
+          "arn:aws:s3:::examx-document-storage"
+        ]
+      },
+      {
+        "Sid": "SecretsManagerAccess",
+        "Effect": "Allow",
+        "Action": [
+          "secretsmanager:GetSecretValue"
+        ],
+        "Resource": [
+          "arn:aws:secretsmanager:ap-south-1:*:secret:examx/openai-api-key*",
+          "arn:aws:secretsmanager:ap-south-1:*:secret:examx/llamaparse-api-key*",
+          "arn:aws:secretsmanager:ap-south-1:*:secret:examx/api-tokens*"
+        ]
+      }
+    ]
+  },
+  "ExamXKubernetesLambdaInvokePolicy": {
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Sid": "LambdaInvokeAccess",
+        "Effect": "Allow",
+        "Action": [
+          "lambda:InvokeFunction",
+          "lambda:InvokeAsync"
+        ],
+        "Resource": [
+          "arn:aws:lambda:ap-south-1:*:function:examx-ai-question-generator",
+          "arn:aws:lambda:ap-south-1:*:function:examx-document-processor",
+          "arn:aws:lambda:ap-south-1:*:function:examx-question-enrichment",
+          "arn:aws:lambda:ap-south-1:*:function:examx-file-analyzer"
+        ]
+      },
+      {
+        "Sid": "S3PayloadAccess",
+        "Effect": "Allow",
+        "Action": [
+          "s3:GetObject",
+          "s3:PutObject",
+          "s3:DeleteObject"
+        ],
+        "Resource": [
+          "arn:aws:s3:::examx-lambda-payloads/*",
+          "arn:aws:s3:::examx-lambda-results/*"
+        ]
+      },
+      {
+        "Sid": "S3PayloadListAccess",
+        "Effect": "Allow",
+        "Action": [
+          "s3:ListBucket"
+        ],
+        "Resource": [
+          "arn:aws:s3:::examx-lambda-payloads",
+          "arn:aws:s3:::examx-lambda-results"
+        ]
+      }
+    ]
+  },
+  "ExamXServiceAccountPolicy": {
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Sid": "AssumeRoleForLambda",
+        "Effect": "Allow",
+        "Action": "sts:AssumeRole",
+        "Resource": "arn:aws:iam::*:role/ExamXKubernetesLambdaRole"
+      }
+    ]
+  }
+}
