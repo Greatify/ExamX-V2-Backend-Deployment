@@ -28,6 +28,7 @@ spec:
             readOnly: true
             volumeAttributes:
               secretProviderClass: examxv2-backend-secrets
+
         - name: nginx-config
           configMap:
             name: nginx-config
@@ -39,6 +40,9 @@ spec:
             items:
               - key: nginx.conf
                 path: nginx.conf
+        - name: lambda-config-volume
+          configMap:
+            name: lambda-config
         - name: examxv2-backend-storage
           persistentVolumeClaim:
             claimName: examxv2-backend-pvc
@@ -61,10 +65,52 @@ spec:
             #   value: "redis://redis-service:6379"
             - name: WORKERS
               value: "16"
+            # Lambda Configuration from ConfigMap
+            - name: LAMBDA_AI_QUESTION_GENERATOR
+              valueFrom:
+                configMapKeyRef:
+                  name: lambda-config
+                  key: LAMBDA_AI_QUESTION_GENERATOR
+            - name: LAMBDA_DOCUMENT_PROCESSOR
+              valueFrom:
+                configMapKeyRef:
+                  name: lambda-config
+                  key: LAMBDA_DOCUMENT_PROCESSOR
+            - name: AWS_DEFAULT_REGION
+              valueFrom:
+                configMapKeyRef:
+                  name: lambda-config
+                  key: AWS_DEFAULT_REGION
+            - name: AWS_LAMBDA_PAYLOAD_BUCKET
+              valueFrom:
+                configMapKeyRef:
+                  name: lambda-config
+                  key: AWS_LAMBDA_PAYLOAD_BUCKET
+            - name: AWS_LAMBDA_RESULT_BUCKET
+              valueFrom:
+                configMapKeyRef:
+                  name: lambda-config
+                  key: AWS_LAMBDA_RESULT_BUCKET
+            - name: LAMBDA_ENABLE_AI_GENERATION
+              valueFrom:
+                configMapKeyRef:
+                  name: lambda-config
+                  key: LAMBDA_ENABLE_AI_GENERATION
+            - name: LAMBDA_ENABLE_DOCUMENT_PROCESSING
+              valueFrom:
+                configMapKeyRef:
+                  name: lambda-config
+                  key: LAMBDA_ENABLE_DOCUMENT_PROCESSING
+            - name: LAMBDA_FALLBACK_TO_CELERY
+              valueFrom:
+                configMapKeyRef:
+                  name: lambda-config
+                  key: LAMBDA_FALLBACK_TO_CELERY
           volumeMounts:
             - name: examxv2-secrets-volume
               mountPath: /mnt/secret-store
               readOnly: true
+
             - name: config-volume
               mountPath: /etc/nginx/nginx.conf
               subPath: nginx.conf
@@ -73,6 +119,9 @@ spec:
               subPath: default.conf
             - name: nginx-cache
               mountPath: /var/cache/nginx
+            - name: lambda-config-volume
+              mountPath: /etc/lambda-config
+              readOnly: true
             - name: examxv2-backend-storage
               mountPath: /app/media
           lifecycle:

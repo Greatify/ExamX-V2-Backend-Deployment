@@ -1,0 +1,58 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: lambda-config
+  labels:
+    app: examxv2-backend
+    component: lambda-config
+data:
+  # Lambda Function Names
+  LAMBDA_AI_QUESTION_GENERATOR: "examx-v2-ai-question-generator-production"
+  LAMBDA_DOCUMENT_PROCESSOR: "examx-v2-document-processor-production"
+  LAMBDA_QUESTION_ENRICHMENT: "examx-v2-question-enrichment-production"
+  LAMBDA_FILE_ANALYZER: "examx-v2-file-analyzer-production"
+  
+  # AWS Configuration
+  AWS_DEFAULT_REGION: "ap-south-1"
+  
+  # S3 buckets removed - using database-only storage
+  
+  # Lambda Task Routing (Production defaults)
+  LAMBDA_ENABLE_AI_GENERATION: "true"
+  LAMBDA_ENABLE_DOCUMENT_PROCESSING: "true"
+  LAMBDA_ENABLE_QUESTION_ENRICHMENT: "false"  # Keep in Celery initially
+  LAMBDA_ENABLE_FILE_ANALYSIS: "true"
+  
+  # Performance Configuration
+  LAMBDA_TIMEOUT_SECONDS: "900"  # 15 minutes
+  LAMBDA_MEMORY_MB: "1024"
+  LAMBDA_MAX_PAYLOAD_SIZE: "6291456"  # 6MB
+  
+  # Circuit Breaker Configuration
+  LAMBDA_CIRCUIT_BREAKER_ENABLED: "true"
+  LAMBDA_CIRCUIT_BREAKER_FAILURE_THRESHOLD: "5"
+  LAMBDA_CIRCUIT_BREAKER_TIMEOUT_SECONDS: "300"  # 5 minutes
+  
+  # Cost Optimization
+  LAMBDA_COST_OPTIMIZATION_ENABLED: "true"
+  LAMBDA_MAX_DAILY_COST_USD: "100.0"
+  LAMBDA_COST_ALERT_THRESHOLD_USD: "80.0"
+  
+  # Monitoring and Logging
+  LAMBDA_MONITORING_ENABLED: "true"
+  LAMBDA_DETAILED_METRICS_ENABLED: "true"
+  LAMBDA_LOG_LEVEL: "INFO"
+  
+  # Fallback Configuration
+  LAMBDA_FALLBACK_TO_CELERY: "true"
+  LAMBDA_FALLBACK_TIMEOUT_SECONDS: "60"
+  
+  # Task Priorities
+  LAMBDA_PRIORITY_AI_GENERATION: "8"
+  LAMBDA_PRIORITY_DOCUMENT_PROCESSING: "7"
+  LAMBDA_PRIORITY_QUESTION_ENRICHMENT: "6"
+  LAMBDA_PRIORITY_FILE_ANALYSIS: "5"
+  
+  # API Integration
+  EXAMX_API_BASE_URL: "https://klockwork.ai"
+  EXAMX_INTERNAL_API_TIMEOUT: "30"
