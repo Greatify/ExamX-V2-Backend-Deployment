@@ -250,7 +250,7 @@ patches:
       spec:
         parameters:
           objects: |
-            - objectName: arn:aws:secretsmanager:ap-south-1:399600302704:secret:examxv2-backend-googlecredentials-stg-lc6rvm
+            - objectName: arn:aws:secretsmanager:ap-south-1:399600302704:secret:examxv2-backend-googlecredentials-stg-w86vvd
               objectAlias: "google-credentials.json"
               objectType: "secretsmanager"
     target:
