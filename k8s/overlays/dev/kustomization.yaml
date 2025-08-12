@@ -241,3 +241,18 @@ patches:
     target:
       kind: SecretProviderClass
       name: examxv2-backend-secrets
+
+  - patch: |-
+      apiVersion: secrets-store.csi.x-k8s.io/v1
+      kind: SecretProviderClass
+      metadata:
+        name: examxv2-google-credentials
+      spec:
+        parameters:
+          objects: |
+            - objectName: arn:aws:secretsmanager:ap-south-1:399600302704:secret:examxv2-backend-googlecredentials-dev-lc6rvm
+              objectAlias: "google-credentials.json"
+              objectType: "secretsmanager"
+    target:
+      kind: SecretProviderClass
+      name: examxv2-google-credentials

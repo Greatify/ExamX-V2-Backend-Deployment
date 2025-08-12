@@ -24,6 +24,7 @@ resources:
   # Configurations
   - configmap/nginx-config.yaml
   - secrets/examxv2-secrets.yaml
+  - secrets/examxv2-google-credentials.yaml
   
   # Autoscaling
   - autoscaling/backend-autoscaler.yaml

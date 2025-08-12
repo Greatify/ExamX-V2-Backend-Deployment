@@ -28,6 +28,12 @@ spec:
             readOnly: true
             volumeAttributes:
               secretProviderClass: "examxv2-backend-secrets"
+        - name: examxv2-google-credentials
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: examxv2-google-credentials
         - name: examxv2-backend-storage
           persistentVolumeClaim:
             claimName: examxv2-backend-pvc
@@ -61,6 +67,9 @@ spec:
               readOnly: true
             - name: examxv2-backend-storage
               mountPath: /app/media
+            - name: examxv2-google-credentials
+              mountPath: /app/google-credentials.json
+              subPath: google-credentials.json
           lifecycle:
             postStart:
               exec:
