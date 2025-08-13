@@ -39,7 +39,7 @@ spec:
             claimName: examxv2-backend-pvc
       containers:
         - name: flower
-          image: 399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-20250812-133656-c10ef11369893edaec48cc8226edfb6ba1e0dae0
+          image: 399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:Update_Dockerfile_to_use_pytho-20250813-071213-7685a1e
           imagePullPolicy: IfNotPresent
           resources:
             requests:
