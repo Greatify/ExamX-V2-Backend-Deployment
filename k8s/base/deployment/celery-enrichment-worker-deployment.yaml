@@ -39,7 +39,7 @@ spec:
             claimName: examxv2-backend-pvc
       containers:
         - name: celery-enrichment-worker
-          image: 399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:Update_Dockerfile_to_use_pytho-20250813-071213-7685a1e
+          image: 399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-20250813-072920-44b10eb68e36d3e396780164fc1b9b12d8916a30
           imagePullPolicy: IfNotPresent
           resources:
             requests:
