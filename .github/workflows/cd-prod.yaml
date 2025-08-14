@@ -16,6 +16,10 @@ on:
         description: 'Enter branch name to deploy'
         required: true
         type: string
+      staging_image_tag:
+        description: 'Staging image tag to retag for production (e.g., stg-20240101-123456-abc1234). Leave empty to build new image.'
+        required: false
+        type: string
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -66,6 +70,106 @@ jobs:
         run: |
           echo "::error::Authentication failed - Deployment blocked"
           exit 1
+
+  retag-staging-image-for-production:
+    needs: security-password-check
+    if: github.event.inputs.staging_image_tag != '' && github.event.inputs.staging_image_tag != null
+    runs-on: ubuntu-latest
+    environment: prod
+    steps:
+      - name: Configure AWS credentials for ECR
+        uses: aws-actions/configure-aws-credentials@v3
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Generate production image tag
+        id: generate-prod-tag
+        run: |
+          TIMESTAMP=$(date +'%Y%m%d-%H%M%S')
+          STAGING_TAG="${{ github.event.inputs.staging_image_tag }}"
+          # Extract commit ID from staging tag (assuming format: stg-...-commitid)
+          COMMIT_ID=$(echo "$STAGING_TAG" | grep -oE '[a-f0-9]{7}$' || echo "unknown")
+          PROD_TAG="prod-${TIMESTAMP}-${COMMIT_ID}"
+          
+          echo "PROD_TAG=$PROD_TAG" >> $GITHUB_OUTPUT
+          echo "STAGING_TAG=$STAGING_TAG" >> $GITHUB_OUTPUT
+          echo "Generated Production Tag: $PROD_TAG"
+
+      - name: Pull, retag and push staging image to production
+        run: |
+          STAGING_IMAGE="${{ steps.login-ecr.outputs.registry }}/examxv2-backend:${{ steps.generate-prod-tag.outputs.STAGING_TAG }}"
+          PROD_IMAGE="${{ steps.login-ecr.outputs.registry }}/examxv2-backend:${{ steps.generate-prod-tag.outputs.PROD_TAG }}"
+          
+          echo "Pulling staging image: $STAGING_IMAGE"
+          docker pull $STAGING_IMAGE
+          
+          echo "Retagging to production: $PROD_IMAGE"
+          docker tag $STAGING_IMAGE $PROD_IMAGE
+          
+          echo "Pushing production image: $PROD_IMAGE"
+          docker push $PROD_IMAGE
+          
+          echo "Successfully retagged and pushed production image"
+
+      - name: Save production image tag to file
+        run: |
+          echo "${{ steps.login-ecr.outputs.registry }}/examxv2-backend:${{ steps.generate-prod-tag.outputs.PROD_TAG }}" > backend_image_tag.txt
+
+      - name: Upload production image tag file
+        uses: actions/upload-artifact@v4
+        with:
+          name: backend-image-tag
+          path: backend_image_tag.txt
+          if-no-files-found: error
+
+      - name: Send image retag success notification
+        if: success()
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          author_name: Image Retag Success
+          mention: ${{ github.actor }}
+          if_mention: success
+          job_name: retag-staging-image-for-production
+          channel: examxv2-backend-alerts
+          username: ExamX-V2-CICD
+          text: |
+            :arrows_counterclockwise: *Staging image successfully retagged for production*
+            
+            *Retagged by:* @${{ github.actor }}
+            *Staging Tag:* `${{ steps.generate-prod-tag.outputs.STAGING_TAG }}`
+            *Production Tag:* `${{ steps.generate-prod-tag.outputs.PROD_TAG }}`
+            
+            Image is ready for production deployment.
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+      - name: Send image retag failure notification
+        if: failure()
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          author_name: Image Retag Failure ❌
+          mention: ${{ github.actor }}
+          if_mention: failure
+          job_name: retag-staging-image-for-production
+          channel: examxv2-backend-alerts
+          username: ExamX-V2-CICD
+          text: |
+            ❌ *Failed to retag staging image for production*
+            
+            *Attempted by:* @${{ github.actor }}
+            *Staging Tag:* `${{ github.event.inputs.staging_image_tag }}`
+            
+            Please check the staging image exists and try again.
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
   build-backend-production-image:
     needs: security-password-check
@@ -190,7 +294,8 @@ jobs:
     needs: 
       - security-password-check
       - build-backend-production-image
-    if: always() && (github.event.inputs.full_deployment == 'false' || needs.build-backend-production-image.result == 'success')
+      - retag-staging-image-for-production
+    if: always() && (github.event.inputs.full_deployment == 'false' || needs.build-backend-production-image.result == 'success' || needs.retag-staging-image-for-production.result == 'success')
     environment: prod
     steps:
       - name: Checkout deployment repository
@@ -201,30 +306,34 @@ jobs:
           fetch-depth: 0 
 
       - name: Download image tag files
-        if: github.event.inputs.full_deployment == 'true'
+        if: github.event.inputs.full_deployment == 'true' || github.event.inputs.staging_image_tag != ''
         uses: actions/download-artifact@v4
         with:
           name: backend-image-tag
           path: .
 
       - name: Set image tags as environment variables
-        if: github.event.inputs.full_deployment == 'true'
+        if: github.event.inputs.full_deployment == 'true' || github.event.inputs.staging_image_tag != ''
         run: |
           echo "BACKEND_IMAGE=$(cat backend_image_tag.txt)" >> $GITHUB_ENV
           
       - name: Update deployment image tags in production overlay
-        if: github.event.inputs.full_deployment == 'true'
+        if: github.event.inputs.full_deployment == 'true' || github.event.inputs.staging_image_tag != ''
         run: |
           # Update image tags in the production overlay kustomization file
           sed -i 's|image: "[^"]*"|image: "'"$BACKEND_IMAGE"'"|g' k8s/overlays/prod/kustomization.yaml
       
       - name: Commit and push changes
-        if: github.event.inputs.full_deployment == 'true'
+        if: github.event.inputs.full_deployment == 'true' || github.event.inputs.staging_image_tag != ''
         run: |
           git config --local user.email "hariharen@greatify.ai"
           git config --local user.name "Hariharen"
           git add k8s/overlays/prod/kustomization.yaml
-          git commit -m "Update image tags for production deployment"
+          if [ "${{ github.event.inputs.staging_image_tag }}" != "" ]; then
+            git commit -m "Update image tags for production deployment - Retagged from staging: ${{ github.event.inputs.staging_image_tag }}"
+          else
+            git commit -m "Update image tags for production deployment"
+          fi
           git push origin main
       
       # - name: Push to protected branch
