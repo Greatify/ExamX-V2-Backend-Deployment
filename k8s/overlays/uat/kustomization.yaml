@@ -36,6 +36,9 @@ patches:
         value:
           - name: WORKERS
             value: "2"
+      - op: replace
+        path: /spec/template/spec/containers/0/image
+        value: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:latest"
 
   # Update celery-worker configuration for UAT
   - target:
@@ -54,6 +57,9 @@ patches:
           limits:
             cpu: "2"
             memory: "8Gi"
+      - op: replace
+        path: /spec/template/spec/containers/0/image
+        value: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:latest"
 
   # Update celery-bulk-upload-worker configuration for UAT
   - target:
@@ -72,6 +78,9 @@ patches:
           limits:
             cpu: "2"
             memory: "8Gi"
+      - op: replace
+        path: /spec/template/spec/containers/0/image
+        value: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:latest"
 
   # Update celery-enrichment-worker configuration for UAT
   - target:
@@ -90,6 +99,9 @@ patches:
           limits:
             cpu: "2"
             memory: "8Gi"
+      - op: replace
+        path: /spec/template/spec/containers/0/image
+        value: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:latest"
 
   # Update celery-question-generator-ai-worker configuration for UAT
   - target:
@@ -108,6 +120,9 @@ patches:
           limits:
             cpu: "2"
             memory: "8Gi"
+      - op: replace
+        path: /spec/template/spec/containers/0/image
+        value: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:latest"
 
 
 
@@ -144,6 +159,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: flower
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:latest"
               resources:
                 requests:
                   cpu: "1"

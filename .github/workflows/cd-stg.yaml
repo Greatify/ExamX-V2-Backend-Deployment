@@ -44,7 +44,6 @@ jobs:
         uses: 8398a7/action-slack@v3
         with:
           status: ${{ job.status }}
-          fields: repo,message,commit,eventName,ref,workflow
           author_name: Deployment Security Alert 🚨
           mention: channel
           if_mention: always
@@ -163,7 +162,6 @@ jobs:
         uses: 8398a7/action-slack@v3
         with:
           status: ${{ job.status }}
-          fields: repo,ref,workflow,eventName
           author_name: Docker Build Failure 🐳
           mention: ${{ github.actor }}
           if_mention: always
@@ -213,27 +211,18 @@ jobs:
         run: |
           echo "BACKEND_IMAGE=$(cat backend_image_tag.txt)" >> $GITHUB_ENV
           
-      - name: Update deployment image tags
+      - name: Update deployment image tags in staging overlay
         if: github.event.inputs.full_deployment == 'true'
         run: |
-          yq -i '.spec.template.spec.containers[0].image = env(BACKEND_IMAGE)' k8s/base/deployment/backend-deployment.yaml
-          yq -i '.spec.template.spec.containers[0].image = env(BACKEND_IMAGE)' k8s/base/deployment/celery-worker-default-deployment.yaml
-          yq -i '.spec.template.spec.containers[0].image = env(BACKEND_IMAGE)' k8s/base/deployment/celery-enrichment-worker-deployment.yaml
-          yq -i '.spec.template.spec.containers[0].image = env(BACKEND_IMAGE)' k8s/base/deployment/celery-bulk-upload-worker-deployment.yaml
-          yq -i '.spec.template.spec.containers[0].image = env(BACKEND_IMAGE)' k8s/base/deployment/celery-question-generator-ai-worker-deployment.yaml
-          yq -i '.spec.template.spec.containers[0].image = env(BACKEND_IMAGE)' k8s/base/deployment/celery-flower-deployment.yaml
+          # Update image tags in the staging overlay kustomization file
+          sed -i 's|image: "[^"]*"|image: "'"$BACKEND_IMAGE"'"|g' k8s/overlays/stg/kustomization.yaml
       
       - name: Commit and push changes
         if: github.event.inputs.full_deployment == 'true'
         run: |
           git config --local user.email "hariharen@greatify.ai"
           git config --local user.name "Hariharen"
-          git add k8s/base/deployment/backend-deployment.yaml
-          git add k8s/base/deployment/celery-worker-default-deployment.yaml
-          git add k8s/base/deployment/celery-enrichment-worker-deployment.yaml
-          git add k8s/base/deployment/celery-bulk-upload-worker-deployment.yaml
-          git add k8s/base/deployment/celery-question-generator-ai-worker-deployment.yaml
-          git add k8s/base/deployment/celery-flower-deployment.yaml
+          git add k8s/overlays/stg/kustomization.yaml
           git commit -m "Update image tags for staging deployment"
           git push origin main
       
@@ -259,12 +248,33 @@ jobs:
         run: |
           kubectl apply -k k8s/overlays/stg
 
+      - name: Send deployment success notification
+        if: success()
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          author_name: Backend Deployment Success
+          mention: ${{ github.actor }}
+          if_mention: success
+          job_name: deploy-backend-staging
+          channel: examxv2-backend-alerts
+          username: ExamX-V2-CICD
+          text: |
+            :rocket: *Backend deployment to stg environment succeeded*
+            
+            *Deployment by:* @${{ github.actor }}
+            *Branch:* ${{ github.event.inputs.deploy_branch }}
+            *Full Deployment:* ${{ github.event.inputs.full_deployment }}
+            
+            @${{ github.actor }}, your changes have been deployed successfully to Staging.
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
       - name: Send deployment failure notification
         if: failure()
         uses: 8398a7/action-slack@v3
         with:
           status: ${{ job.status }}
-          fields: repo,message,commit,author,action,eventName,ref,workflow
           author_name: Deployment Failure ❌
           mention: ${{ github.actor }}
           if_mention: failure

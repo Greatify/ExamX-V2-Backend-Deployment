@@ -29,25 +29,16 @@ jobs:
       - name: Set docker image tag from workflow input
         run: echo "BACKEND_IMAGE=${{ github.event.inputs.image }}" >> $GITHUB_ENV
           
-      - name: Update deployment image tags
+      - name: Update deployment image tags in dev overlay
         run: |
-          yq -i '.spec.template.spec.containers[0].image = env(BACKEND_IMAGE)' k8s/base/deployment/backend-deployment.yaml
-          yq -i '.spec.template.spec.containers[0].image = env(BACKEND_IMAGE)' k8s/base/deployment/celery-worker-default-deployment.yaml
-          yq -i '.spec.template.spec.containers[0].image = env(BACKEND_IMAGE)' k8s/base/deployment/celery-enrichment-worker-deployment.yaml
-          yq -i '.spec.template.spec.containers[0].image = env(BACKEND_IMAGE)' k8s/base/deployment/celery-bulk-upload-worker-deployment.yaml
-          yq -i '.spec.template.spec.containers[0].image = env(BACKEND_IMAGE)' k8s/base/deployment/celery-question-generator-ai-worker-deployment.yaml
-          yq -i '.spec.template.spec.containers[0].image = env(BACKEND_IMAGE)' k8s/base/deployment/celery-flower-deployment.yaml
+          # Update image tags in the dev overlay kustomization file
+          sed -i 's|image: "[^"]*"|image: "'"$BACKEND_IMAGE"'"|g' k8s/overlays/dev/kustomization.yaml
           
       - name: Commit and push changes
         run: |
           git config --local user.email "hariharen@greatify.ai"
           git config --local user.name "Hariharen"
-          git add k8s/base/deployment/backend-deployment.yaml
-          git add k8s/base/deployment/celery-worker-default-deployment.yaml
-          git add k8s/base/deployment/celery-enrichment-worker-deployment.yaml
-          git add k8s/base/deployment/celery-bulk-upload-worker-deployment.yaml
-          git add k8s/base/deployment/celery-question-generator-ai-worker-deployment.yaml
-          git add k8s/base/deployment/celery-flower-deployment.yaml
+          git add k8s/overlays/dev/kustomization.yaml
           git commit -m "Update image tags for development deployment"
           git push origin main
           
@@ -75,9 +66,8 @@ jobs:
       - name: Send deployment success notification
         if: success()
         uses: 8398a7/action-slack@v3
-        with:
+                with:
           status: ${{ job.status }}
-          fields: repo,ref,workflow,eventName
           author_name: Backend Deployment Success
           mention: ${{ github.actor }}
           if_mention: success
@@ -85,13 +75,12 @@ jobs:
           channel: examxv2-backend-alerts
           username: ExamX-V2-CICD
           text: |
-            :rocket: *Deployment to dev environment succeeded*
+            :rocket: *Backend deployment to dev environment succeeded*
             
             *Deployment by:* @${{ github.actor }}
             *Commit:* ${{ github.sha }}
             *Commit message:* ${{ github.event.inputs.commit_message }}
             
             @${{ github.actor }}, your changes have been deployed successfully to Development.
-            Please verify the deployment and conduct necessary tests.
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
