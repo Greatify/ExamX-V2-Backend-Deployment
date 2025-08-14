@@ -39,7 +39,7 @@ spec:
             claimName: examxv2-backend-pvc
       containers:
         - name: flower
-          image: 399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:EXM_1337_Pass___Fail_Analysis_-20250814-050611-d3bb11e
+          image: 399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:EXM_1421_topic_list_based_on_m-20250814-054214-6bf80e3
           imagePullPolicy: IfNotPresent
           resources:
             requests:
