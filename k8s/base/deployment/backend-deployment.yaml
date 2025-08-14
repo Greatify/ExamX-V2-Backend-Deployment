@@ -50,7 +50,7 @@ spec:
             claimName: examxv2-backend-pvc
       containers:
         - name: examxv2-backend
-          image: 399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:EXM_1437_Report__Student_infor-20250814-113118-081e273
+          image: 399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:EXM_1122____Add_CO_Mapping_to_-20250814-113806-e21e2bf
           imagePullPolicy: IfNotPresent
           resources:
             requests:
