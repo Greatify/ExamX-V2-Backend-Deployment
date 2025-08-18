@@ -381,3 +381,25 @@ jobs:
             Please check the logs and fix the issues immediately.
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+      - name: Send deployment success notification
+        if: success()
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          author_name: Backend Deployment Success
+          mention: ${{ github.actor }}
+          if_mention: success
+          job_name: deploy-backend-staging
+          channel: examxv2-backend-alerts
+          username: ExamX-V2-CICD
+          text: |
+            :rocket: *Backend deployment to Production environment succeeded*
+            
+            *Deployment by:* @${{ github.actor }}
+            *Branch:* ${{ github.event.inputs.deploy_branch }}
+            *Full Deployment:* ${{ github.event.inputs.full_deployment }}
+            
+            @${{ github.actor }}, your changes have been deployed successfully to Production.
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
