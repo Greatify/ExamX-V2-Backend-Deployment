@@ -46,7 +46,7 @@ patches:
             value: "Stg"
       - op: replace
         path: /spec/template/spec/containers/0/image
-        value: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-20250820-131408-5dbd21e4ecf2e96799cba7245b341947b216e06f"
+        value: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-20250820-135334-020f850297856a36b7ba2c364062f667543cce1e"
 
   # Update celery-worker configuration for UAT
   - target:
@@ -78,7 +78,7 @@ patches:
             value: "Stg"
       - op: replace
         path: /spec/template/spec/containers/0/image
-        value: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-20250820-131408-5dbd21e4ecf2e96799cba7245b341947b216e06f"
+        value: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-20250820-135334-020f850297856a36b7ba2c364062f667543cce1e"
 
   # Update celery-bulk-upload-worker configuration for UAT
   - target:
@@ -110,7 +110,7 @@ patches:
             value: "Stg"
       - op: replace
         path: /spec/template/spec/containers/0/image
-        value: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-20250820-131408-5dbd21e4ecf2e96799cba7245b341947b216e06f"
+        value: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-20250820-135334-020f850297856a36b7ba2c364062f667543cce1e"
 
   # Update celery-enrichment-worker configuration for UAT
   - target:
@@ -142,7 +142,7 @@ patches:
             value: "Stg"
       - op: replace
         path: /spec/template/spec/containers/0/image
-        value: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-20250820-131408-5dbd21e4ecf2e96799cba7245b341947b216e06f"
+        value: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-20250820-135334-020f850297856a36b7ba2c364062f667543cce1e"
 
   # Update celery-question-generator-ai-worker configuration for UAT
   - target:
@@ -174,7 +174,7 @@ patches:
             value: "Stg"
       - op: replace
         path: /spec/template/spec/containers/0/image
-        value: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-20250820-131408-5dbd21e4ecf2e96799cba7245b341947b216e06f"
+        value: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-20250820-135334-020f850297856a36b7ba2c364062f667543cce1e"
 
 
 
@@ -211,7 +211,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-20250820-131408-5dbd21e4ecf2e96799cba7245b341947b216e06f"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-20250820-135334-020f850297856a36b7ba2c364062f667543cce1e"
               resources:
                 requests:
                   cpu: "1"
