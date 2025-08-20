@@ -36,9 +36,17 @@ patches:
         value:
           - name: WORKERS
             value: "2"
+          - name: OPIK_URL_OVERRIDE
+            value: "https://www.comet.com/opik/api"
+          - name: OPIK_API_KEY
+            value: "Y5T3WoqNxJ22ypw1M8qivydis"
+          - name: OPIK_WORKSPACE
+            value: "greatify-prod"
+          - name: OPIK_PROJECT
+            value: "Stg"
       - op: replace
         path: /spec/template/spec/containers/0/image
-        value: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-20250819-142136-1134891a571a9e076de2b850a8a7033f50788fb2"
+        value: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:latest"
 
   # Update celery-worker configuration for UAT
   - target:
@@ -58,8 +66,19 @@ patches:
             cpu: "2"
             memory: "8Gi"
       - op: replace
+        path: /spec/template/spec/containers/0/env
+        value:
+          - name: OPIK_URL_OVERRIDE
+            value: "https://www.comet.com/opik/api"
+          - name: OPIK_API_KEY
+            value: "Y5T3WoqNxJ22ypw1M8qivydis"
+          - name: OPIK_WORKSPACE
+            value: "greatify-prod"
+          - name: OPIK_PROJECT
+            value: "Stg"
+      - op: replace
         path: /spec/template/spec/containers/0/image
-        value: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-20250819-142136-1134891a571a9e076de2b850a8a7033f50788fb2"
+        value: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:latest"
 
   # Update celery-bulk-upload-worker configuration for UAT
   - target:
@@ -79,8 +98,19 @@ patches:
             cpu: "2"
             memory: "8Gi"
       - op: replace
+        path: /spec/template/spec/containers/0/env
+        value:
+          - name: OPIK_URL_OVERRIDE
+            value: "https://www.comet.com/opik/api"
+          - name: OPIK_API_KEY
+            value: "Y5T3WoqNxJ22ypw1M8qivydis"
+          - name: OPIK_WORKSPACE
+            value: "greatify-prod"
+          - name: OPIK_PROJECT
+            value: "Stg"
+      - op: replace
         path: /spec/template/spec/containers/0/image
-        value: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-20250819-142136-1134891a571a9e076de2b850a8a7033f50788fb2"
+        value: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:latest"
 
   # Update celery-enrichment-worker configuration for UAT
   - target:
@@ -100,8 +130,19 @@ patches:
             cpu: "2"
             memory: "8Gi"
       - op: replace
+        path: /spec/template/spec/containers/0/env
+        value:
+          - name: OPIK_URL_OVERRIDE
+            value: "https://www.comet.com/opik/api"
+          - name: OPIK_API_KEY
+            value: "Y5T3WoqNxJ22ypw1M8qivydis"
+          - name: OPIK_WORKSPACE
+            value: "greatify-prod"
+          - name: OPIK_PROJECT
+            value: "Stg"
+      - op: replace
         path: /spec/template/spec/containers/0/image
-        value: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-20250819-142136-1134891a571a9e076de2b850a8a7033f50788fb2"
+        value: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:latest"
 
   # Update celery-question-generator-ai-worker configuration for UAT
   - target:
@@ -121,8 +162,19 @@ patches:
             cpu: "2"
             memory: "8Gi"
       - op: replace
+        path: /spec/template/spec/containers/0/env
+        value:
+          - name: OPIK_URL_OVERRIDE
+            value: "https://www.comet.com/opik/api"
+          - name: OPIK_API_KEY
+            value: "Y5T3WoqNxJ22ypw1M8qivydis"
+          - name: OPIK_WORKSPACE
+            value: "greatify-prod"
+          - name: OPIK_PROJECT
+            value: "Stg"
+      - op: replace
         path: /spec/template/spec/containers/0/image
-        value: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-20250819-142136-1134891a571a9e076de2b850a8a7033f50788fb2"
+        value: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:latest"
 
 
 
@@ -159,7 +211,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-20250819-142136-1134891a571a9e076de2b850a8a7033f50788fb2"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:latest"
               resources:
                 requests:
                   cpu: "1"
@@ -186,19 +238,3 @@ patches:
     target:
       kind: SecretProviderClass
       name: examxv2-backend-secrets 
-
-
-  - patch: |-
-      apiVersion: secrets-store.csi.x-k8s.io/v1
-      kind: SecretProviderClass
-      metadata:
-        name: examxv2-google-credentials
-      spec:
-        parameters:
-          objects: |
-            - objectName: arn:aws:secretsmanager:ap-south-1:399600302704:secret:examxv2-backend-googlecredentials-dev-zQode4
-              objectAlias: "google-credentials.json"
-              objectType: "secretsmanager"
-    target:
-      kind: SecretProviderClass
-      name: examxv2-google-credentials
