@@ -45,7 +45,7 @@ patches:
                 value: "Y5T3WoqNxJ22ypw1M8qivydis"
               - name: OPIK_WORKSPACE
                 value: "greatify-prod"
-              - name: OPIK_PROJECT
+              - name: OPIK_PROJECT_NAME
                 value: "Prod"
     target:
       kind: Deployment
@@ -79,7 +79,7 @@ patches:
                 value: "Y5T3WoqNxJ22ypw1M8qivydis"
               - name: OPIK_WORKSPACE
                 value: "greatify-prod"
-              - name: OPIK_PROJECT
+              - name: OPIK_PROJECT_NAME
                 value: "Prod"
     target:
       kind: Deployment
@@ -113,7 +113,7 @@ patches:
                 value: "Y5T3WoqNxJ22ypw1M8qivydis"
               - name: OPIK_WORKSPACE
                 value: "greatify-prod"
-              - name: OPIK_PROJECT
+              - name: OPIK_PROJECT_NAME
                 value: "Prod"
     target:
       kind: Deployment
@@ -147,7 +147,7 @@ patches:
                 value: "Y5T3WoqNxJ22ypw1M8qivydis"
               - name: OPIK_WORKSPACE
                 value: "greatify-prod"
-              - name: OPIK_PROJECT
+              - name: OPIK_PROJECT_NAME
                 value: "Prod"
     target:
       kind: Deployment
@@ -181,7 +181,7 @@ patches:
                 value: "Y5T3WoqNxJ22ypw1M8qivydis"
               - name: OPIK_WORKSPACE
                 value: "greatify-prod"
-              - name: OPIK_PROJECT
+              - name: OPIK_PROJECT_NAME
                 value: "Prod"
     target:
       kind: Deployment
