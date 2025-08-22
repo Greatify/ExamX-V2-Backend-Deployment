@@ -10,7 +10,7 @@ spec:
     kind: Deployment
     name: examxv2-backend
   minReplicas: 1
-  maxReplicas: 20
+  maxReplicas: 2
   metrics:
     - type: Resource
       resource:
@@ -32,12 +32,12 @@ spec:
         value: 100
         periodSeconds: 15
     scaleUp:
-      stabilizationWindowSeconds: 60
+      stabilizationWindowSeconds: 0
       policies:
       - type: Percent
         value: 70
         periodSeconds: 15
       - type: Pods
-        value: 4
+        value: 2
         periodSeconds: 15
       selectPolicy: Max
