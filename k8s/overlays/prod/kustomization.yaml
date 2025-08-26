@@ -242,6 +242,7 @@ patches:
         name: examxv2-backend-pod-autoscaler
       spec:
         minReplicas: 2
+        maxReplicas: 20
     target:
       kind: HorizontalPodAutoscaler
       name: examxv2-backend-pod-autoscaler
@@ -253,6 +254,7 @@ patches:
       metadata:
         name: celery-worker-default-autoscaler
       spec:
+        maxReplicas: 20
         scaleTargetRef:
           apiVersion: apps/v1
           kind: Deployment
@@ -268,6 +270,7 @@ patches:
       metadata:
         name: celery-bulk-upload-worker-autoscaler
       spec:
+        maxReplicas: 20
         scaleTargetRef:
           apiVersion: apps/v1
           kind: Deployment
@@ -283,6 +286,7 @@ patches:
       metadata:
         name: celery-enrichment-worker-autoscaler
       spec:
+        maxReplicas: 20
         scaleTargetRef:
           apiVersion: apps/v1
           kind: Deployment
@@ -298,6 +302,7 @@ patches:
       metadata:
         name: celery-question-generator-ai-worker-autoscaler
       spec:
+        maxReplicas: 20
         scaleTargetRef:
           apiVersion: apps/v1
           kind: Deployment
