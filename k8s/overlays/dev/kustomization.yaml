@@ -29,7 +29,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:EXM_1720____Update_Sentry_SDK_-20250826-122637-27d849f"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:Update_environment_check_in_se-20250826-124320-102b5e0"
               resources:
                 requests:
                   cpu: "1"
@@ -65,7 +65,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:EXM_1720____Update_Sentry_SDK_-20250826-122637-27d849f"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:Update_environment_check_in_se-20250826-124320-102b5e0"
               resources:
                 requests:
                   cpu: "1"
@@ -98,7 +98,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:EXM_1720____Update_Sentry_SDK_-20250826-122637-27d849f"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:Update_environment_check_in_se-20250826-124320-102b5e0"
               resources:
                 requests:
                   cpu: "1"
@@ -132,7 +132,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:EXM_1720____Update_Sentry_SDK_-20250826-122637-27d849f"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:Update_environment_check_in_se-20250826-124320-102b5e0"
               resources:
                 requests:
                   cpu: "1"
@@ -166,7 +166,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:EXM_1720____Update_Sentry_SDK_-20250826-122637-27d849f"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:Update_environment_check_in_se-20250826-124320-102b5e0"
               resources:
                 requests:
                   cpu: "1"
@@ -200,7 +200,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:EXM_1720____Update_Sentry_SDK_-20250826-122637-27d849f"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:Update_environment_check_in_se-20250826-124320-102b5e0"
               resources:
                 requests:
                   cpu: "1"
