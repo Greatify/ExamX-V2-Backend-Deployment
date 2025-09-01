@@ -28,7 +28,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-20250901-210717-5f7050f8e0812031c92b45f18b18432bbf738d2a"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-20250901-220132-c97e119d40f3804433f04de4ce0e9edde848a664"
               resources:
                 requests:
                   cpu: "4"
@@ -64,7 +64,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-20250901-210717-5f7050f8e0812031c92b45f18b18432bbf738d2a"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-20250901-220132-c97e119d40f3804433f04de4ce0e9edde848a664"
               resources:
                 requests:
                   cpu: "2"
@@ -98,7 +98,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-20250901-210717-5f7050f8e0812031c92b45f18b18432bbf738d2a"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-20250901-220132-c97e119d40f3804433f04de4ce0e9edde848a664"
               resources:
                 requests:
                   cpu: "2"
@@ -132,7 +132,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-20250901-210717-5f7050f8e0812031c92b45f18b18432bbf738d2a"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-20250901-220132-c97e119d40f3804433f04de4ce0e9edde848a664"
               resources:
                 requests:
                   cpu: "2"
@@ -166,7 +166,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-20250901-210717-5f7050f8e0812031c92b45f18b18432bbf738d2a"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-20250901-220132-c97e119d40f3804433f04de4ce0e9edde848a664"
               resources:
                 requests:
                   cpu: "2"
@@ -223,7 +223,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-20250901-210717-5f7050f8e0812031c92b45f18b18432bbf738d2a"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-20250901-220132-c97e119d40f3804433f04de4ce0e9edde848a664"
               resources:
                 requests:
                   cpu: "1"
