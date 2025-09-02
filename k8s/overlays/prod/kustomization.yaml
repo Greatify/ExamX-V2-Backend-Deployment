@@ -31,11 +31,11 @@ patches:
               image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-20250901-220132-c97e119d40f3804433f04de4ce0e9edde848a664"
               resources:
                 requests:
-                  cpu: "4"
-                  memory: "10Gi"
+                  cpu: "2"
+                  memory: "8Gi"
                 limits:
-                  cpu: "6"
-                  memory: "20Gi"
+                  cpu: "3"
+                  memory: "12Gi"
               env:
               - name: WORKERS
                 value: "6"
@@ -68,10 +68,10 @@ patches:
               resources:
                 requests:
                   cpu: "2"
-                  memory: "10Gi"
+                  memory: "8Gi"
                 limits:
-                  cpu: "4"
-                  memory: "20Gi"
+                  cpu: "3"
+                  memory: "12Gi"
               env:
               - name: OPIK_URL_OVERRIDE
                 value: "https://www.comet.com/opik/api"
@@ -102,10 +102,10 @@ patches:
               resources:
                 requests:
                   cpu: "2"
-                  memory: "10Gi"
+                  memory: "8Gi"
                 limits:
-                  cpu: "4"
-                  memory: "20Gi"
+                  cpu: "3"
+                  memory: "12Gi"
               env:
               - name: OPIK_URL_OVERRIDE
                 value: "https://www.comet.com/opik/api"
@@ -136,10 +136,10 @@ patches:
               resources:
                 requests:
                   cpu: "2"
-                  memory: "10Gi"
+                  memory: "8Gi"
                 limits:
-                  cpu: "4"
-                  memory: "20Gi"
+                  cpu: "3"
+                  memory: "12Gi"
               env:
               - name: OPIK_URL_OVERRIDE
                 value: "https://www.comet.com/opik/api"
@@ -170,10 +170,10 @@ patches:
               resources:
                 requests:
                   cpu: "2"
-                  memory: "10Gi"
+                  memory: "8Gi"
                 limits:
-                  cpu: "4"
-                  memory: "20Gi"
+                  cpu: "3"
+                  memory: "12Gi"
               env:
               - name: OPIK_URL_OVERRIDE
                 value: "https://www.comet.com/opik/api"
@@ -226,11 +226,11 @@ patches:
               image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-20250901-220132-c97e119d40f3804433f04de4ce0e9edde848a664"
               resources:
                 requests:
-                  cpu: "1"
-                  memory: "4Gi"
+                  cpu: "250m"
+                  memory: "2Gi"
                 limits:
-                  cpu: "2"
-                  memory: "8Gi"
+                  cpu: "500m"
+                  memory: "4Gi"
     target:
       kind: Deployment
       name: celery-flower
