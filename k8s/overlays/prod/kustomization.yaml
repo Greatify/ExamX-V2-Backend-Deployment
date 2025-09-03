@@ -32,10 +32,10 @@ patches:
               resources:
                 requests:
                   cpu: "2"
-                  memory: "8Gi"
+                  memory: "10Gi"
                 limits:
                   cpu: "3"
-                  memory: "12Gi"
+                  memory: "14Gi"
               env:
               - name: WORKERS
                 value: "6"
@@ -68,10 +68,10 @@ patches:
               resources:
                 requests:
                   cpu: "2"
-                  memory: "8Gi"
+                  memory: "4Gi"
                 limits:
                   cpu: "3"
-                  memory: "12Gi"
+                  memory: "8Gi"
               env:
               - name: OPIK_URL_OVERRIDE
                 value: "https://www.comet.com/opik/api"
@@ -102,10 +102,10 @@ patches:
               resources:
                 requests:
                   cpu: "2"
-                  memory: "8Gi"
+                  memory: "4Gi"
                 limits:
                   cpu: "3"
-                  memory: "12Gi"
+                  memory: "6Gi"
               env:
               - name: OPIK_URL_OVERRIDE
                 value: "https://www.comet.com/opik/api"
@@ -136,10 +136,10 @@ patches:
               resources:
                 requests:
                   cpu: "2"
-                  memory: "8Gi"
+                  memory: "4Gi"
                 limits:
                   cpu: "3"
-                  memory: "12Gi"
+                  memory: "8Gi"
               env:
               - name: OPIK_URL_OVERRIDE
                 value: "https://www.comet.com/opik/api"
@@ -170,10 +170,10 @@ patches:
               resources:
                 requests:
                   cpu: "2"
-                  memory: "8Gi"
+                  memory: "4Gi"
                 limits:
                   cpu: "3"
-                  memory: "12Gi"
+                  memory: "6Gi"
               env:
               - name: OPIK_URL_OVERRIDE
                 value: "https://www.comet.com/opik/api"
