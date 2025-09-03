@@ -120,21 +120,24 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
         
-      - name: Generate staging image tag from commit message
+      - name: Generate staging image tag from checked-out source repo
         id: generate-tag
         run: |
-          COMMIT_ID=$(git rev-parse HEAD | cut -c1-7)
-          # Robust commit message handling
+          # Get commit ID from checked-out source repo (full commit ID)
+          SOURCE_COMMIT_ID=$(git rev-parse HEAD)
+          # Robust commit message handling from checked-out source repo
           COMMIT_MSG=$(git log -1 --pretty=%B | head -1 || echo "no-message")
+          
           # Remove newlines, tabs, and limit length
           CLEAN_MSG=$(echo "$COMMIT_MSG" | tr -d '\n\r\t' | head -c 60 | tr -s ' ' | xargs || echo "no-message")
           # Sanitize to safe characters only
           SAFE_MSG=$(echo "$CLEAN_MSG" | sed -e 's/[^a-zA-Z0-9 _-]//g' -e 's/[[:space:]]/-/g' -e 's/--*/-/g' -e 's/^-\+\|-\+$//g' | cut -c1-35 | sed 's/-$//' || echo "fallback")
           # Ensure we have a valid tag
           FINAL_MSG=$(echo "$SAFE_MSG" | grep -E '^[a-zA-Z0-9][a-zA-Z0-9_-]*$' || echo "commit-$(date +%s)")
-          IMAGE_TAG="stg-${FINAL_MSG}-${COMMIT_ID}"
+          IMAGE_TAG="stg-${FINAL_MSG}-${SOURCE_COMMIT_ID}"
           
           echo "IMAGE_TAG=$IMAGE_TAG" >> $GITHUB_OUTPUT
+          echo "SOURCE_COMMIT_ID=$SOURCE_COMMIT_ID" >> $GITHUB_OUTPUT
           echo "Generated Image Tag: $IMAGE_TAG"
 
       - name: Cache Docker layers
