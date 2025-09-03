@@ -27,7 +27,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-20250903-011755-01e975d4e436d56ace6fc9a262341919eadf54f9"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-1798-Export-Paper-MBBS-MCQ-Prin-8d0e03a"
               resources:
                 requests:
                   cpu: "500m"
@@ -63,7 +63,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-20250903-011755-01e975d4e436d56ace6fc9a262341919eadf54f9"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-1798-Export-Paper-MBBS-MCQ-Prin-8d0e03a"
               resources:
                 requests:
                   cpu: "300m"
@@ -98,7 +98,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-20250903-011755-01e975d4e436d56ace6fc9a262341919eadf54f9"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-1798-Export-Paper-MBBS-MCQ-Prin-8d0e03a"
               resources:
                 requests:
                   cpu: "300m"
@@ -132,7 +132,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-20250903-011755-01e975d4e436d56ace6fc9a262341919eadf54f9"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-1798-Export-Paper-MBBS-MCQ-Prin-8d0e03a"
               resources:
                 requests:
                   cpu: "300m"
@@ -166,7 +166,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-20250903-011755-01e975d4e436d56ace6fc9a262341919eadf54f9"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-1798-Export-Paper-MBBS-MCQ-Prin-8d0e03a"
               resources:
                 requests:
                   cpu: "300m"
@@ -200,7 +200,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-20250903-011755-01e975d4e436d56ace6fc9a262341919eadf54f9"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-1798-Export-Paper-MBBS-MCQ-Prin-8d0e03a"
               resources:
                 requests:
                   cpu: "200m"
