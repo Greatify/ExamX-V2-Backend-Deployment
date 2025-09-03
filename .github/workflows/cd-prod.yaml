@@ -88,14 +88,14 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
-      - name: Generate production image tag
+      - name: Generate production image tag from staging
         id: generate-prod-tag
         run: |
-          TIMESTAMP=$(date +'%Y%m%d-%H%M%S')
           STAGING_TAG="${{ github.event.inputs.staging_image_tag }}"
-          # Extract commit ID from staging tag (assuming format: stg-...-commitid)
+          # Extract commit message part and commit ID from staging tag
+          COMMIT_MSG_PART=$(echo "$STAGING_TAG" | sed 's/.*examxv2-backend://' | sed 's/-[a-f0-9]\{7\}$//')
           COMMIT_ID=$(echo "$STAGING_TAG" | grep -oE '[a-f0-9]{7}$' || echo "unknown")
-          PROD_TAG="prod-${TIMESTAMP}-${COMMIT_ID}"
+          PROD_TAG="prod-${COMMIT_MSG_PART}-${COMMIT_ID}"
           
           echo "PROD_TAG=$PROD_TAG" >> $GITHUB_OUTPUT
           echo "STAGING_TAG=$STAGING_TAG" >> $GITHUB_OUTPUT
@@ -225,12 +225,19 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
         
-      - name: Generate production image tag
+      - name: Generate production image tag from commit message
         id: generate-tag
         run: |
-          TIMESTAMP=$(date +'%Y%m%d-%H%M%S')
-          COMMIT_ID=$(git rev-parse HEAD)
-          IMAGE_TAG="prod-${TIMESTAMP}-${COMMIT_ID}"
+          COMMIT_ID=$(git rev-parse HEAD | cut -c1-7)
+          # Robust commit message handling
+          COMMIT_MSG=$(git log -1 --pretty=%B | head -1 || echo "no-message")
+          # Remove newlines, tabs, and limit length
+          CLEAN_MSG=$(echo "$COMMIT_MSG" | tr -d '\n\r\t' | head -c 60 | tr -s ' ' | xargs || echo "no-message")
+          # Sanitize to safe characters only
+          SAFE_MSG=$(echo "$CLEAN_MSG" | sed -e 's/[^a-zA-Z0-9 _-]//g' -e 's/[[:space:]]/-/g' -e 's/--*/-/g' -e 's/^-\+\|-\+$//g' | cut -c1-35 | sed 's/-$//' || echo "fallback")
+          # Ensure we have a valid tag
+          FINAL_MSG=$(echo "$SAFE_MSG" | grep -E '^[a-zA-Z0-9][a-zA-Z0-9_-]*$' || echo "commit-$(date +%s)")
+          IMAGE_TAG="prod-${FINAL_MSG}-${COMMIT_ID}"
               
           echo "IMAGE_TAG=$IMAGE_TAG" >> $GITHUB_OUTPUT
           echo "Generated Image Tag: $IMAGE_TAG"
