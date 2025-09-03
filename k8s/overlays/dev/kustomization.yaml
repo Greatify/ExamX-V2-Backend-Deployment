@@ -32,11 +32,11 @@ patches:
               image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:EXM_1801_Severity_level_not_wo-20250902-201712-2e81668"
               resources:
                 requests:
-                  cpu: "1"
-                  memory: "4Gi"
+                  cpu: "500m"
+                  memory: "3Gi"
                 limits:
-                  cpu: "2"
-                  memory: "8Gi"
+                  cpu: "1"
+                  memory: "6Gi"
               env:
               - name: WORKERS
                 value: "2"
@@ -68,11 +68,11 @@ patches:
               image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:EXM_1801_Severity_level_not_wo-20250902-201712-2e81668"
               resources:
                 requests:
-                  cpu: "1"
+                  cpu: "300m"
                   memory: "2Gi"
                 limits:
-                  cpu: "2"
-                  memory: "4Gi"
+                  cpu: "500m"
+                  memory: "3Gi"
               env:
               - name: OPIK_URL_OVERRIDE
                 value: "https://www.comet.com/opik/api"
@@ -101,11 +101,11 @@ patches:
               image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:EXM_1801_Severity_level_not_wo-20250902-201712-2e81668"
               resources:
                 requests:
-                  cpu: "1"
+                  cpu: "300m"
                   memory: "2Gi"
                 limits:
-                  cpu: "2"
-                  memory: "4Gi"
+                  cpu: "500m"
+                  memory: "3Gi"
               env:
               - name: OPIK_URL_OVERRIDE
                 value: "https://www.comet.com/opik/api"
@@ -135,11 +135,11 @@ patches:
               image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:EXM_1801_Severity_level_not_wo-20250902-201712-2e81668"
               resources:
                 requests:
-                  cpu: "1"
+                  cpu: "300m"
                   memory: "2Gi"
                 limits:
-                  cpu: "2"
-                  memory: "4Gi"
+                  cpu: "500m"
+                  memory: "3Gi"
               env:
               - name: OPIK_URL_OVERRIDE
                 value: "https://www.comet.com/opik/api"
@@ -169,11 +169,11 @@ patches:
               image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:EXM_1801_Severity_level_not_wo-20250902-201712-2e81668"
               resources:
                 requests:
-                  cpu: "1"
+                  cpu: "300m"
                   memory: "2Gi"
                 limits:
-                  cpu: "2"
-                  memory: "4Gi"
+                  cpu: "500m"
+                  memory: "3Gi"
               env:
               - name: OPIK_URL_OVERRIDE
                 value: "https://www.comet.com/opik/api"
@@ -203,11 +203,11 @@ patches:
               image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:EXM_1801_Severity_level_not_wo-20250902-201712-2e81668"
               resources:
                 requests:
-                  cpu: "250m"
-                  memory: "2Gi"
+                  cpu: "200m"
+                  memory: "1Gi"
                 limits:
-                  cpu: "500m"
-                  memory: "4Gi"
+                  cpu: "400m"
+                  memory: "2Gi"
     target:
       kind: Deployment
       name: celery-flower
