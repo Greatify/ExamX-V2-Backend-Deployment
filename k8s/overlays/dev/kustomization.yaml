@@ -29,7 +29,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-1833-Enhance-Question-Paper-Vie-dc1a50540c5543426fbebc3d2503e434b39b563c"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-1838-Implement-Interactive-CI-C-6a584c6f2cbe8d81b7aca17b1ea5fe77e110fc5e"
               resources:
                 requests:
                   cpu: "500m"
@@ -65,7 +65,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-1833-Enhance-Question-Paper-Vie-dc1a50540c5543426fbebc3d2503e434b39b563c"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-1838-Implement-Interactive-CI-C-6a584c6f2cbe8d81b7aca17b1ea5fe77e110fc5e"
               resources:
                 requests:
                   cpu: "300m"
@@ -98,7 +98,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-1833-Enhance-Question-Paper-Vie-dc1a50540c5543426fbebc3d2503e434b39b563c"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-1838-Implement-Interactive-CI-C-6a584c6f2cbe8d81b7aca17b1ea5fe77e110fc5e"
               resources:
                 requests:
                   cpu: "300m"
@@ -132,7 +132,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-1833-Enhance-Question-Paper-Vie-dc1a50540c5543426fbebc3d2503e434b39b563c"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-1838-Implement-Interactive-CI-C-6a584c6f2cbe8d81b7aca17b1ea5fe77e110fc5e"
               resources:
                 requests:
                   cpu: "300m"
@@ -166,7 +166,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-1833-Enhance-Question-Paper-Vie-dc1a50540c5543426fbebc3d2503e434b39b563c"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-1838-Implement-Interactive-CI-C-6a584c6f2cbe8d81b7aca17b1ea5fe77e110fc5e"
               resources:
                 requests:
                   cpu: "300m"
@@ -200,7 +200,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-1833-Enhance-Question-Paper-Vie-dc1a50540c5543426fbebc3d2503e434b39b563c"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-1838-Implement-Interactive-CI-C-6a584c6f2cbe8d81b7aca17b1ea5fe77e110fc5e"
               resources:
                 requests:
                   cpu: "200m"
