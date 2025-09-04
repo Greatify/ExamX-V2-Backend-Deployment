@@ -27,7 +27,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-1817-Fixing-Passage-question-ma-ea75e3cc64e8780d68126ba8ec241ed1562ba7e1"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-1832-Update-pass_marks-handling-830c01d5e6e34e9c44acf950a59376e53876ede5"
               resources:
                 requests:
                   cpu: "500m"
@@ -63,7 +63,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-1817-Fixing-Passage-question-ma-ea75e3cc64e8780d68126ba8ec241ed1562ba7e1"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-1832-Update-pass_marks-handling-830c01d5e6e34e9c44acf950a59376e53876ede5"
               resources:
                 requests:
                   cpu: "300m"
@@ -98,7 +98,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-1817-Fixing-Passage-question-ma-ea75e3cc64e8780d68126ba8ec241ed1562ba7e1"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-1832-Update-pass_marks-handling-830c01d5e6e34e9c44acf950a59376e53876ede5"
               resources:
                 requests:
                   cpu: "300m"
@@ -132,7 +132,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-1817-Fixing-Passage-question-ma-ea75e3cc64e8780d68126ba8ec241ed1562ba7e1"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-1832-Update-pass_marks-handling-830c01d5e6e34e9c44acf950a59376e53876ede5"
               resources:
                 requests:
                   cpu: "300m"
@@ -166,7 +166,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-1817-Fixing-Passage-question-ma-ea75e3cc64e8780d68126ba8ec241ed1562ba7e1"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-1832-Update-pass_marks-handling-830c01d5e6e34e9c44acf950a59376e53876ede5"
               resources:
                 requests:
                   cpu: "300m"
@@ -200,7 +200,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-1817-Fixing-Passage-question-ma-ea75e3cc64e8780d68126ba8ec241ed1562ba7e1"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-1832-Update-pass_marks-handling-830c01d5e6e34e9c44acf950a59376e53876ede5"
               resources:
                 requests:
                   cpu: "200m"
