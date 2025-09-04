@@ -34,7 +34,7 @@ patches:
                   cpu: "2"
                   memory: "8Gi"
                 limits:
-                  cpu: "3"
+                  cpu: "4"
                   memory: "16Gi"
               env:
               - name: WORKERS
