@@ -50,27 +50,29 @@ patches:
       kind: Deployment
       name: examxv2-backend
 
-  # Celery Worker patches
+  # ===== OPTIMIZED CELERY WORKERS (3-Queue Architecture) =====
+  
+  # CPU-Intensive Worker for AI tasks, bulk operations  
   - patch: |-
       apiVersion: apps/v1
       kind: Deployment
       metadata:
-        name: celery-worker-default
+        name: celery-cpu-worker
       spec:
-        replicas: 1
+        replicas: 2  # Higher replicas for staging testing
         template:
           spec:
             serviceAccountName: examxv2-stg-secret-service
             containers:
-            - name: celery-worker-default
+            - name: celery-cpu-worker
               image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-1809-Update-Authoring-Module-Re-ad2c938a641b85c2fc9d53c1894737f8ccb540c4"
               resources:
                 requests:
-                  cpu: "300m"
-                  memory: "2Gi"
+                  cpu: "2"        # 2 cores for staging (between dev and prod)
+                  memory: "8Gi"   # 8GB for staging
                 limits:
-                  cpu: "500m"
-                  memory: "3Gi"
+                  cpu: "3"        # 3 cores max for staging
+                  memory: "12Gi"  # 12GB max for staging
               env:
               - name: OPIK_URL_OVERRIDE
                 value: "https://www.comet.com/opik/api"
@@ -82,30 +84,29 @@ patches:
                 value: "Stg"
     target:
       kind: Deployment
-      name: celery-worker-default
+      name: celery-cpu-worker
 
-
-  # Celery Bulk Upload Worker patches
+  # I/O-Intensive Worker for email, external APIs
   - patch: |-
       apiVersion: apps/v1
       kind: Deployment
       metadata:
-        name: celery-bulk-upload-worker
+        name: celery-io-worker
       spec:
-        replicas: 1
+        replicas: 2  # Higher replicas for staging testing
         template:
           spec:
             serviceAccountName: examxv2-stg-secret-service
             containers:
-            - name: celery-bulk-upload-worker
+            - name: celery-io-worker
               image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-1809-Update-Authoring-Module-Re-ad2c938a641b85c2fc9d53c1894737f8ccb540c4"
               resources:
                 requests:
-                  cpu: "300m"
-                  memory: "2Gi"
+                  cpu: "750m"    # 0.75 cores for staging
+                  memory: "1.5Gi" # 1.5GB for staging
                 limits:
-                  cpu: "500m"
-                  memory: "3Gi"
+                  cpu: "1.5"     # 1.5 cores max for staging  
+                  memory: "3Gi"  # 3GB max for staging
               env:
               - name: OPIK_URL_OVERRIDE
                 value: "https://www.comet.com/opik/api"
@@ -117,29 +118,29 @@ patches:
                 value: "Stg"
     target:
       kind: Deployment
-      name: celery-bulk-upload-worker
+      name: celery-io-worker
 
-  # Celery Enrichment Worker patches
+  # Mixed Processing Worker for general tasks
   - patch: |-
       apiVersion: apps/v1
       kind: Deployment
       metadata:
-        name: celery-enrichment-worker
+        name: celery-mixed-worker
       spec:
-        replicas: 1
+        replicas: 2  # Higher replicas for staging testing
         template:
           spec:
             serviceAccountName: examxv2-stg-secret-service
             containers:
-            - name: celery-enrichment-worker
+            - name: celery-mixed-worker
               image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-1809-Update-Authoring-Module-Re-ad2c938a641b85c2fc9d53c1894737f8ccb540c4"
               resources:
                 requests:
-                  cpu: "300m"
-                  memory: "2Gi"
+                  cpu: "750m"    # 0.75 cores for staging
+                  memory: "3Gi"  # 3GB for staging
                 limits:
-                  cpu: "500m"
-                  memory: "3Gi"
+                  cpu: "1.5"     # 1.5 cores max for staging
+                  memory: "6Gi"  # 6GB max for staging
               env:
               - name: OPIK_URL_OVERRIDE
                 value: "https://www.comet.com/opik/api"
@@ -151,41 +152,13 @@ patches:
                 value: "Stg"
     target:
       kind: Deployment
-      name: celery-enrichment-worker
+      name: celery-mixed-worker
 
-  # Celery Question Generator AI Worker patches
-  - patch: |-
-      apiVersion: apps/v1
-      kind: Deployment
-      metadata:
-        name: celery-question-generator-ai-worker
-      spec:
-        replicas: 1
-        template:
-          spec:
-            serviceAccountName: examxv2-stg-secret-service
-            containers:
-            - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-1809-Update-Authoring-Module-Re-ad2c938a641b85c2fc9d53c1894737f8ccb540c4"
-              resources:
-                requests:
-                  cpu: "300m"
-                  memory: "2Gi"
-                limits:
-                  cpu: "500m"
-                  memory: "3Gi"
-              env:
-              - name: OPIK_URL_OVERRIDE
-                value: "https://www.comet.com/opik/api"
-              - name: OPIK_API_KEY
-                value: "Y5T3WoqNxJ22ypw1M8qivydis"
-              - name: OPIK_WORKSPACE
-                value: "greatify-prod"
-              - name: OPIK_PROJECT_NAME
-                value: "Stg"
-    target:
-      kind: Deployment
-      name: celery-question-generator-ai-worker
+  # ===== OLD WORKERS REPLACED BY OPTIMIZED ARCHITECTURE =====
+  # celery-worker-default → replaced by celery-mixed-worker
+  # celery-bulk-upload-worker → replaced by celery-cpu-worker  
+  # celery-enrichment-worker → replaced by celery-cpu-worker
+  # celery-question-generator-ai-worker → replaced by celery-cpu-worker
 
   # Celery Flower patches
   - patch: |-

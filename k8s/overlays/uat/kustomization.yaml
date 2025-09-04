@@ -43,16 +43,21 @@ patches:
           - name: OPIK_WORKSPACE
             value: "greatify-prod"
           - name: OPIK_PROJECT_NAME
-            value: "Stg"
+            value: "UAT"
       - op: replace
         path: /spec/template/spec/containers/0/image
         value: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-20250822-073958-e2126036359743e3dd813d53597ff049c304d30a"
 
-  # Update celery-worker configuration for UAT
+  # ===== OPTIMIZED CELERY WORKERS (3-Queue Architecture) =====
+  
+  # CPU-Intensive Worker for AI tasks, bulk operations
   - target:
       kind: Deployment
-      name: celery-worker-default
+      name: celery-cpu-worker
     patch: |-
+      - op: replace
+        path: /spec/replicas
+        value: 2
       - op: replace
         path: /spec/template/spec/serviceAccountName
         value: examxv2-stg-secret-service
@@ -60,11 +65,11 @@ patches:
         path: /spec/template/spec/containers/0/resources
         value:
           requests:
-            cpu: "1"
-            memory: "4Gi"
+            cpu: "2.5"      # 2.5 cores for UAT (close to production)
+            memory: "10Gi"  # 10GB for UAT
           limits:
-            cpu: "2"
-            memory: "8Gi"
+            cpu: "3.5"      # 3.5 cores max for UAT
+            memory: "14Gi"  # 14GB max for UAT
       - op: replace
         path: /spec/template/spec/containers/0/env
         value:
@@ -75,16 +80,19 @@ patches:
           - name: OPIK_WORKSPACE
             value: "greatify-prod"
           - name: OPIK_PROJECT_NAME
-            value: "Stg"
+            value: "UAT"
       - op: replace
         path: /spec/template/spec/containers/0/image
         value: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-20250822-073958-e2126036359743e3dd813d53597ff049c304d30a"
 
-  # Update celery-bulk-upload-worker configuration for UAT
+  # I/O-Intensive Worker for email, external APIs
   - target:
       kind: Deployment
-      name: celery-bulk-upload-worker
+      name: celery-io-worker
     patch: |-
+      - op: replace
+        path: /spec/replicas
+        value: 3
       - op: replace
         path: /spec/template/spec/serviceAccountName
         value: examxv2-stg-secret-service
@@ -92,11 +100,11 @@ patches:
         path: /spec/template/spec/containers/0/resources
         value:
           requests:
-            cpu: "1"
-            memory: "4Gi"
+            cpu: "900m"     # 0.9 cores for UAT
+            memory: "2.5Gi" # 2.5GB for UAT
           limits:
-            cpu: "2"
-            memory: "8Gi"
+            cpu: "1.5"      # 1.5 cores max for UAT
+            memory: "3.5Gi" # 3.5GB max for UAT
       - op: replace
         path: /spec/template/spec/containers/0/env
         value:
@@ -107,16 +115,19 @@ patches:
           - name: OPIK_WORKSPACE
             value: "greatify-prod"
           - name: OPIK_PROJECT_NAME
-            value: "Stg"
+            value: "UAT"
       - op: replace
         path: /spec/template/spec/containers/0/image
         value: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-20250822-073958-e2126036359743e3dd813d53597ff049c304d30a"
 
-  # Update celery-enrichment-worker configuration for UAT
+  # Mixed Processing Worker for general tasks
   - target:
       kind: Deployment
-      name: celery-enrichment-worker
+      name: celery-mixed-worker
     patch: |-
+      - op: replace
+        path: /spec/replicas
+        value: 2
       - op: replace
         path: /spec/template/spec/serviceAccountName
         value: examxv2-stg-secret-service
@@ -124,11 +135,11 @@ patches:
         path: /spec/template/spec/containers/0/resources
         value:
           requests:
-            cpu: "1"
-            memory: "4Gi"
+            cpu: "900m"     # 0.9 cores for UAT
+            memory: "5Gi"   # 5GB for UAT
           limits:
-            cpu: "2"
-            memory: "8Gi"
+            cpu: "1.5"      # 1.5 cores max for UAT
+            memory: "7Gi"   # 7GB max for UAT
       - op: replace
         path: /spec/template/spec/containers/0/env
         value:
@@ -139,117 +150,73 @@ patches:
           - name: OPIK_WORKSPACE
             value: "greatify-prod"
           - name: OPIK_PROJECT_NAME
-            value: "Stg"
+            value: "UAT"
       - op: replace
         path: /spec/template/spec/containers/0/image
         value: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-20250822-073958-e2126036359743e3dd813d53597ff049c304d30a"
 
-  # Update celery-question-generator-ai-worker configuration for UAT
+  # ===== OLD WORKERS REPLACED BY OPTIMIZED ARCHITECTURE =====
+  # celery-worker-default → replaced by celery-mixed-worker
+  # celery-bulk-upload-worker → replaced by celery-cpu-worker  
+  # celery-enrichment-worker → replaced by celery-cpu-worker
+  # celery-question-generator-ai-worker → replaced by celery-cpu-worker
+
+  # Update celery-flower configuration for UAT
   - target:
-      kind: Deployment
-      name: celery-question-generator-ai-worker
-    patch: |-
-      - op: replace
-        path: /spec/template/spec/serviceAccountName
-        value: examxv2-stg-secret-service
-      - op: replace
-        path: /spec/template/spec/containers/0/resources
-        value:
-          requests:
-            cpu: "1"
-            memory: "4Gi"
-          limits:
-            cpu: "2"
-            memory: "8Gi"
-      - op: replace
-        path: /spec/template/spec/containers/0/env
-        value:
-          - name: OPIK_URL_OVERRIDE
-            value: "https://www.comet.com/opik/api"
-          - name: OPIK_API_KEY
-            value: "Y5T3WoqNxJ22ypw1M8qivydis"
-          - name: OPIK_WORKSPACE
-            value: "greatify-prod"
-          - name: OPIK_PROJECT_NAME
-            value: "Stg"
-      - op: replace
-        path: /spec/template/spec/containers/0/image
-        value: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-20250822-073958-e2126036359743e3dd813d53597ff049c304d30a"
-
-
-
-  # Ingress patches - Using klockwork.ai domain
-  - patch: |-
-      apiVersion: networking.k8s.io/v1
-      kind: Ingress
-      metadata:
-        name: examxv2-ingress
-        annotations:
-          alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-south-1:399600302704:certificate/b1a2ebc1-bf6b-4a73-a7f9-69ad12e8c4c9
-          alb.ingress.kubernetes.io/auth-tls-verify-client: "optional"
-          alb.ingress.kubernetes.io/cors-allow-origin: >-
-            https://klockwork.ai,https://www.klockwork.ai,https://*.klockwork.ai
-      spec:
-        tls:
-          - hosts:
-              - klockwork.ai
-            secretName: tls-secret
-    target:
-      kind: Ingress
-      name: examxv2-ingress
-
-  # Celery Flower patches for UAT
-  - patch: |-
-      apiVersion: apps/v1
-      kind: Deployment
-      metadata:
-        name: celery-flower
-      spec:
-        replicas: 1
-        template:
-          spec:
-            serviceAccountName: examxv2-stg-secret-service
-            containers:
-            - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-20250822-073958-e2126036359743e3dd813d53597ff049c304d30a"
-              resources:
-                requests:
-                  cpu: "1"
-                  memory: "4Gi"
-                limits:
-                  cpu: "2"
-                  memory: "8Gi"
-    target:
       kind: Deployment
       name: celery-flower
+    patch: |-
+      - op: replace
+        path: /spec/template/spec/serviceAccountName
+        value: examxv2-stg-secret-service
+      - op: replace
+        path: /spec/template/spec/containers/0/resources
+        value:
+          requests:
+            cpu: "250m"
+            memory: "1Gi"
+          limits:
+            cpu: "500m"
+            memory: "2Gi"
+      - op: replace
+        path: /spec/template/spec/containers/0/image
+        value: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-20250822-073958-e2126036359743e3dd813d53597ff049c304d30a"
 
-  # Secrets patches - Using UAT secret ARN
-  - patch: |-
-      apiVersion: secrets-store.csi.x-k8s.io/v1
+  # Update ingress configuration for UAT
+  - target:
+      kind: Ingress
+      name: examxv2-ingress
+    patch: |-
+      - op: replace
+        path: /metadata/annotations
+        value:
+          kubernetes.io/ingress.class: alb
+          alb.ingress.kubernetes.io/scheme: internet-facing
+          alb.ingress.kubernetes.io/target-type: ip
+          alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-south-1:399600302704:certificate/3ac85857-f810-414f-903b-1ab46d8e1520
+          alb.ingress.kubernetes.io/auth-tls-verify-client: "optional"
+          alb.ingress.kubernetes.io/cors-allow-origin: >-
+            https://examx.co,https://www.examx.co,https://*.examx.co
+
+  # Update secrets for UAT  
+  - target:
       kind: SecretProviderClass
-      metadata:
-        name: examxv2-backend-secrets
-      spec:
-        parameters:
-          objects: |
-            - objectName: arn:aws:secretsmanager:ap-south-1:399600302704:secret:examxv2-backend-uat-9G4vRf
-              objectAlias: ".env"
-              objectType: "secretsmanager"
-    target:
-      kind: SecretProviderClass
-      name: examxv2-backend-secrets 
-      
-  - patch: |-
-      apiVersion: secrets-store.csi.x-k8s.io/v1
-      kind: SecretProviderClass
-      metadata:
-        name: examxv2-google-credentials
-      spec:
-        parameters:
-          objects: |
-            - objectName: arn:aws:secretsmanager:ap-south-1:399600302704:secret:examxv2-backend-googlecredentials-dev-zQode4
-              objectAlias: "google-credentials.json"
-              objectType: "secretsmanager"
-    target:
+      name: examxv2-backend-secrets
+    patch: |-
+      - op: replace
+        path: /spec/parameters/objects
+        value: |
+          - objectName: arn:aws:secretsmanager:ap-south-1:399600302704:secret:examxv2-stage-secrets-DKS1E3
+            objectAlias: ".env"
+            objectType: "secretsmanager"
+
+  - target:
       kind: SecretProviderClass
       name: examxv2-google-credentials
+    patch: |-
+      - op: replace
+        path: /spec/parameters/objects
+        value: |
+          - objectName: arn:aws:secretsmanager:ap-south-1:399600302704:secret:examxv2-backend-googlecredentials-stg-w86vvd
+            objectAlias: "google-credentials.json"
+            objectType: "secretsmanager"

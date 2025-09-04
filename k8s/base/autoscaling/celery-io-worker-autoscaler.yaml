@@ -1,0 +1,39 @@
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: celery-io-worker-hpa
+  labels:
+    app: celery-io-worker
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: celery-io-worker
+  minReplicas: 1
+  maxReplicas: 5  # Higher replicas for I/O-intensive tasks
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 50  # Scale at lower CPU for I/O workloads
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 70  # Scale when memory > 70%
+  behavior:
+    scaleUp:
+      stabilizationWindowSeconds: 180  # 3 minutes - faster scaling for I/O
+      policies:
+      - type: Pods
+        value: 2           # Scale up 2 pods at a time for I/O burst
+        periodSeconds: 180
+    scaleDown:
+      stabilizationWindowSeconds: 600  # 10 minutes before scaling down
+      policies:
+      - type: Pods
+        value: 1
+        periodSeconds: 300

@@ -5,18 +5,23 @@ kind: Kustomization
 resources:
   # Core deployments
   - deployment/backend-deployment.yaml
-  - deployment/celery-worker-default-deployment.yaml
-  # - deployment/celery-beat-deployment.yaml
-  - deployment/celery-bulk-upload-worker-deployment.yaml
-  - deployment/celery-enrichment-worker-deployment.yaml
-  - deployment/celery-question-generator-ai-worker-deployment.yaml
+  # - deployment/celery-worker-default-deployment.yaml # Replaced by optimized workers
+  - deployment/celery-beat-deployment.yaml
+  # - deployment/celery-bulk-upload-worker-deployment.yaml # Replaced by cpu-intensive worker
+  # - deployment/celery-enrichment-worker-deployment.yaml # Replaced by cpu-intensive worker  
+  # - deployment/celery-question-generator-ai-worker-deployment.yaml # Replaced by cpu-intensive worker
   - deployment/celery-flower-deployment.yaml
+  
+  # Optimized Celery Workers (3-Queue Architecture)
+  - deployment/celery-cpu-worker-deployment.yaml
+  - deployment/celery-io-worker-deployment.yaml  
+  - deployment/celery-mixed-worker-deployment.yaml
   # - deployment/redis-deployment.yaml
   
   # Services
   - services/examxv2-backend-service.yaml
   - services/celery-flower-service.yaml
-  # - services/redis-service.yaml
+  - services/redis-service.yaml
   
   #Network
   - ingress/ingress.yaml
@@ -28,11 +33,16 @@ resources:
   
   # Autoscaling
   - autoscaling/backend-autoscaler.yaml
-  - autoscaling/celery-worker-default-autoscaler.yaml
+  # - autoscaling/celery-worker-default-autoscaler.yaml # Replaced by optimized workers
   # - autoscaling/celery-beat-autoscaler.yaml
-  - autoscaling/celery-bulk-upload-worker-autoscaler.yaml
-  - autoscaling/celery-enrichment-worker-autoscaler.yaml
-  - autoscaling/celery-question-generator-ai-worker-autoscaler.yaml
+  # - autoscaling/celery-bulk-upload-worker-autoscaler.yaml # Replaced by cpu-intensive worker
+  # - autoscaling/celery-enrichment-worker-autoscaler.yaml # Replaced by cpu-intensive worker
+  # - autoscaling/celery-question-generator-ai-worker-autoscaler.yaml # Replaced by cpu-intensive worker
   - autoscaling/celery-flower-autoscaler.yaml
-  # - autoscaling/redis-autoscaler.yaml
+  
+  # Optimized Celery Worker Autoscalers
+  - autoscaling/celery-cpu-worker-autoscaler.yaml
+  - autoscaling/celery-io-worker-autoscaler.yaml
+  - autoscaling/celery-mixed-worker-autoscaler.yaml
+  - autoscaling/redis-autoscaler.yaml
  

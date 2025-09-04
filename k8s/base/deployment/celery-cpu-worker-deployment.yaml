@@ -1,0 +1,85 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: celery-cpu-worker
+  labels:
+    app: celery-cpu-worker
+spec:
+  replicas: 1 # Default value, will be overridden in overlays
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0 # Ensures zero downtime
+  selector:
+    matchLabels:
+      app: celery-cpu-worker
+  template:
+    metadata:
+      labels:
+        app: celery-cpu-worker
+    spec:
+      serviceAccountName: examxv2-sa # Placeholder, to be overridden
+      terminationGracePeriodSeconds: 30
+      volumes:
+        - name: examxv2-secrets-volume
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "examxv2-backend-secrets"
+        - name: examxv2-google-credentials
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: examxv2-google-credentials
+        - name: examxv2-backend-storage
+          persistentVolumeClaim:
+            claimName: examxv2-backend-pvc
+      containers:
+        - name: celery-cpu-worker
+          image: 399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-20250814-132223-859cae893d229663024ed2546db378875707496e
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              cpu: "3"      # Optimized for CPU-intensive tasks
+              memory: "12Gi" # Reduced from 32Gi
+            limits:
+              cpu: "4"      # Maximum CPU allocation  
+              memory: "16Gi" # 50% memory reduction
+          env:
+            - name: CELERY_WORKER_POOL
+              value: "prefork"
+            - name: CELERY_WORKER_CONCURRENCY
+              value: "4"
+            - name: CELERY_WORKER_MAX_TASKS_PER_CHILD
+              value: "50"
+            - name: CELERY_WORKER_MAX_MEMORY_PER_CHILD
+              value: "4000000"  # 4GB per process
+          command:
+            - celery
+            - -A
+            - examx
+            - worker
+            - --pool=prefork
+            - --concurrency=4
+            - --queues=cpu_intensive
+            - --hostname=cpu-worker@%h
+            - --max-tasks-per-child=50
+            - -l
+            - info
+            - -E
+          volumeMounts:
+            - name: examxv2-secrets-volume
+              mountPath: /mnt/secret-store
+              readOnly: true
+            - name: examxv2-backend-storage
+              mountPath: /app/media
+            - name: examxv2-google-credentials
+              mountPath: /app/google-credentials.json
+              subPath: google-credentials.json
+          lifecycle:
+            postStart:
+              exec:
+                command: ['cp', '-R', '/mnt/secret-store/.env', '/app/examx/.env']

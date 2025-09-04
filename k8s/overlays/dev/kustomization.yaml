@@ -52,27 +52,29 @@ patches:
       kind: Deployment
       name: examxv2-backend
 
-  # Celery Worker patches - only mutable fields
+  # ===== OPTIMIZED CELERY WORKERS (3-Queue Architecture) =====
+  
+  # CPU-Intensive Worker for AI tasks, bulk operations
   - patch: |-
       apiVersion: apps/v1
       kind: Deployment
       metadata:
-        name: celery-worker-default
+        name: celery-cpu-worker
       spec:
         replicas: 1
         template:
           spec:
             serviceAccountName: dev-examxv2-sa
             containers:
-            - name: celery-worker-default
+            - name: celery-cpu-worker
               image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-1825-Authoring-Screen-Section-B-13b6bfe9c9b0504d905f8a1832bd73ff3ede2d34"
               resources:
                 requests:
-                  cpu: "300m"
-                  memory: "2Gi"
+                  cpu: "1500m"  # 1.5 cores for dev (scaled down from prod)
+                  memory: "6Gi"  # 6GB for dev (scaled down from prod)
                 limits:
-                  cpu: "500m"
-                  memory: "3Gi"
+                  cpu: "2"      # 2 cores max for dev
+                  memory: "8Gi" # 8GB max for dev
               env:
               - name: OPIK_URL_OVERRIDE
                 value: "https://www.comet.com/opik/api"
@@ -84,62 +86,29 @@ patches:
                 value: "Dev"
     target:
       kind: Deployment
-      name: celery-worker-default
-  # Celery Bulk Upload Worker patches
-  - patch: |-
-      apiVersion: apps/v1
-      kind: Deployment
-      metadata:
-        name: celery-bulk-upload-worker
-      spec:
-        replicas: 1
-        template:
-          spec:
-            serviceAccountName: dev-examxv2-sa
-            containers:
-            - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-1825-Authoring-Screen-Section-B-13b6bfe9c9b0504d905f8a1832bd73ff3ede2d34"
-              resources:
-                requests:
-                  cpu: "300m"
-                  memory: "2Gi"
-                limits:
-                  cpu: "500m"
-                  memory: "3Gi"
-              env:
-              - name: OPIK_URL_OVERRIDE
-                value: "https://www.comet.com/opik/api"
-              - name: OPIK_API_KEY
-                value: "Y5T3WoqNxJ22ypw1M8qivydis"
-              - name: OPIK_WORKSPACE
-                value: "greatify-prod"
-              - name: OPIK_PROJECT_NAME
-                value: "Dev"
-    target:
-      kind: Deployment
-      name: celery-bulk-upload-worker
+      name: celery-cpu-worker
 
-  # Celery Enrichment Worker patches
+  # I/O-Intensive Worker for email, external APIs
   - patch: |-
       apiVersion: apps/v1
       kind: Deployment
       metadata:
-        name: celery-enrichment-worker
+        name: celery-io-worker
       spec:
         replicas: 1
         template:
           spec:
             serviceAccountName: dev-examxv2-sa
             containers:
-            - name: celery-enrichment-worker
+            - name: celery-io-worker
               image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-1825-Authoring-Screen-Section-B-13b6bfe9c9b0504d905f8a1832bd73ff3ede2d34"
               resources:
                 requests:
-                  cpu: "300m"
-                  memory: "2Gi"
+                  cpu: "500m"   # 0.5 cores for dev
+                  memory: "1Gi" # 1GB for dev (scaled down from prod)
                 limits:
-                  cpu: "500m"
-                  memory: "3Gi"
+                  cpu: "1"      # 1 core max for dev
+                  memory: "2Gi" # 2GB max for dev
               env:
               - name: OPIK_URL_OVERRIDE
                 value: "https://www.comet.com/opik/api"
@@ -151,29 +120,29 @@ patches:
                 value: "Dev"
     target:
       kind: Deployment
-      name: celery-enrichment-worker
+      name: celery-io-worker
 
-  # Celery Question Generator AI Worker patches
+  # Mixed Processing Worker for general tasks
   - patch: |-
       apiVersion: apps/v1
       kind: Deployment
       metadata:
-        name: celery-question-generator-ai-worker
+        name: celery-mixed-worker
       spec:
         replicas: 1
         template:
           spec:
             serviceAccountName: dev-examxv2-sa
             containers:
-            - name: celery-question-generator-ai-worker
+            - name: celery-mixed-worker
               image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-1825-Authoring-Screen-Section-B-13b6bfe9c9b0504d905f8a1832bd73ff3ede2d34"
               resources:
                 requests:
-                  cpu: "300m"
-                  memory: "2Gi"
+                  cpu: "500m"   # 0.5 cores for dev
+                  memory: "2Gi" # 2GB for dev (scaled down from prod)
                 limits:
-                  cpu: "500m"
-                  memory: "3Gi"
+                  cpu: "1"      # 1 core max for dev
+                  memory: "4Gi" # 4GB max for dev
               env:
               - name: OPIK_URL_OVERRIDE
                 value: "https://www.comet.com/opik/api"
@@ -185,7 +154,13 @@ patches:
                 value: "Dev"
     target:
       kind: Deployment
-      name: celery-question-generator-ai-worker
+      name: celery-mixed-worker
+
+  # ===== OLD WORKERS REPLACED BY OPTIMIZED ARCHITECTURE =====
+  # celery-worker-default → replaced by celery-mixed-worker
+  # celery-bulk-upload-worker → replaced by celery-cpu-worker  
+  # celery-enrichment-worker → replaced by celery-cpu-worker
+  # celery-question-generator-ai-worker → replaced by celery-cpu-worker
 
   # Celery Flower patches for dev
   - patch: |-
