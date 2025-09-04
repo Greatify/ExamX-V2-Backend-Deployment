@@ -38,7 +38,7 @@ patches:
                   memory: "16Gi"
               env:
               - name: WORKERS
-                value: "2"
+                value: "4"
               - name: OPIK_URL_OVERRIDE
                 value: "https://www.comet.com/opik/api"
               - name: OPIK_API_KEY
