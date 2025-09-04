@@ -26,14 +26,17 @@ spec:
         averageUtilization: 80  # Scale when memory > 80%
   behavior:
     scaleUp:
-      stabilizationWindowSeconds: 300  # 5 minutes before scaling up
+      stabilizationWindowSeconds: 120  # 2 minutes - faster for bulk upload spikes
       policies:
       - type: Pods
-        value: 1
-        periodSeconds: 300
+        value: 2           # Scale up 2 pods for CPU-intensive bursts
+        periodSeconds: 120 # Check every 2 minutes
+      - type: Percent
+        value: 50          # 50% increase for major spikes
+        periodSeconds: 180 # Alternative method after 3 minutes
     scaleDown:
-      stabilizationWindowSeconds: 600  # 10 minutes before scaling down
+      stabilizationWindowSeconds: 1200 # 20 minutes - CPU tasks take longer to complete
       policies:
       - type: Pods
-        value: 1
-        periodSeconds: 600
+        value: 1           # Conservative scale down for CPU workers
+        periodSeconds: 900 # Scale down 1 pod every 15 minutes

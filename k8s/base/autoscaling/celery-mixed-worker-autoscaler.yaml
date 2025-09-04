@@ -26,14 +26,17 @@ spec:
         averageUtilization: 75  # Scale when memory > 75%
   behavior:
     scaleUp:
-      stabilizationWindowSeconds: 240  # 4 minutes 
+      stabilizationWindowSeconds: 90   # 1.5 minutes - balanced scaling for mixed workloads
       policies:
       - type: Pods
-        value: 1
-        periodSeconds: 240
+        value: 2           # Scale up 2 pods for mixed task bursts
+        periodSeconds: 90  # Check every 1.5 minutes
+      - type: Percent
+        value: 75          # 75% increase for significant load
+        periodSeconds: 150 # Alternative scaling method
     scaleDown:
-      stabilizationWindowSeconds: 600  # 10 minutes before scaling down
+      stabilizationWindowSeconds: 720  # 12 minutes cooldown
       policies:
       - type: Pods
-        value: 1
-        periodSeconds: 600
+        value: 1           # Scale down 1 pod at a time
+        periodSeconds: 480 # Every 8 minutes

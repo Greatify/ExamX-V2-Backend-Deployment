@@ -26,14 +26,17 @@ spec:
         averageUtilization: 70  # Scale when memory > 70%
   behavior:
     scaleUp:
-      stabilizationWindowSeconds: 180  # 3 minutes - faster scaling for I/O
+      stabilizationWindowSeconds: 60   # 1 minute - AGGRESSIVE scaling for I/O spikes
       policies:
       - type: Pods
-        value: 2           # Scale up 2 pods at a time for I/O burst
-        periodSeconds: 180
+        value: 3           # Scale up 3 pods at a time for sudden bursts
+        periodSeconds: 60  # Check every 1 minute
+      - type: Percent
+        value: 100         # Double pods if needed for major spikes
+        periodSeconds: 120 # Alternative scaling method
     scaleDown:
-      stabilizationWindowSeconds: 600  # 10 minutes before scaling down
+      stabilizationWindowSeconds: 900  # 15 minutes - longer cooldown after spikes
       policies:
       - type: Pods
-        value: 1
-        periodSeconds: 300
+        value: 1           # Conservative scale down
+        periodSeconds: 600 # Scale down 1 pod every 10 minutes
