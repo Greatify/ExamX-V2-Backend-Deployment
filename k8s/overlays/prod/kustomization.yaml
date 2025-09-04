@@ -32,13 +32,13 @@ patches:
               resources:
                 requests:
                   cpu: "2"
-                  memory: "10Gi"
+                  memory: "8Gi"
                 limits:
                   cpu: "3"
-                  memory: "14Gi"
+                  memory: "16Gi"
               env:
               - name: WORKERS
-                value: "6"
+                value: "2"
               - name: OPIK_URL_OVERRIDE
                 value: "https://www.comet.com/opik/api"
               - name: OPIK_API_KEY
