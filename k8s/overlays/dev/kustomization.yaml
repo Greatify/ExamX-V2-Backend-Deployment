@@ -29,7 +29,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-1889-Issue-Incorrect-Display-of-d9b9488a9864dc110a35db3bf6b789f9a3105846"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-1852-Staff-Module-Unable-to-bul-d764adf9efb9700a91b5a3ab39bc533958322f42"
               resources:
                 requests:
                   cpu: "500m"
@@ -65,7 +65,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-1889-Issue-Incorrect-Display-of-d9b9488a9864dc110a35db3bf6b789f9a3105846"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-1852-Staff-Module-Unable-to-bul-d764adf9efb9700a91b5a3ab39bc533958322f42"
               resources:
                 requests:
                   cpu: "300m"
@@ -98,7 +98,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-1889-Issue-Incorrect-Display-of-d9b9488a9864dc110a35db3bf6b789f9a3105846"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-1852-Staff-Module-Unable-to-bul-d764adf9efb9700a91b5a3ab39bc533958322f42"
               resources:
                 requests:
                   cpu: "300m"
@@ -132,7 +132,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-1889-Issue-Incorrect-Display-of-d9b9488a9864dc110a35db3bf6b789f9a3105846"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-1852-Staff-Module-Unable-to-bul-d764adf9efb9700a91b5a3ab39bc533958322f42"
               resources:
                 requests:
                   cpu: "300m"
@@ -166,7 +166,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-1889-Issue-Incorrect-Display-of-d9b9488a9864dc110a35db3bf6b789f9a3105846"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-1852-Staff-Module-Unable-to-bul-d764adf9efb9700a91b5a3ab39bc533958322f42"
               resources:
                 requests:
                   cpu: "300m"
@@ -200,7 +200,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-1889-Issue-Incorrect-Display-of-d9b9488a9864dc110a35db3bf6b789f9a3105846"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-1852-Staff-Module-Unable-to-bul-d764adf9efb9700a91b5a3ab39bc533958322f42"
               resources:
                 requests:
                   cpu: "200m"
