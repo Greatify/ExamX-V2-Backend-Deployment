@@ -29,7 +29,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-1825-Authoring-Screen-Section-B-423ef9dd4b728224964a94cb491ab416d287331f"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-1321-Unanswered-question-questi-5517c889469a73c08a1249c84429829d435d7f18"
               resources:
                 requests:
                   cpu: "500m"
@@ -65,7 +65,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-1825-Authoring-Screen-Section-B-423ef9dd4b728224964a94cb491ab416d287331f"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-1321-Unanswered-question-questi-5517c889469a73c08a1249c84429829d435d7f18"
               resources:
                 requests:
                   cpu: "300m"
@@ -98,7 +98,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-1825-Authoring-Screen-Section-B-423ef9dd4b728224964a94cb491ab416d287331f"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-1321-Unanswered-question-questi-5517c889469a73c08a1249c84429829d435d7f18"
               resources:
                 requests:
                   cpu: "300m"
@@ -132,7 +132,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-1825-Authoring-Screen-Section-B-423ef9dd4b728224964a94cb491ab416d287331f"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-1321-Unanswered-question-questi-5517c889469a73c08a1249c84429829d435d7f18"
               resources:
                 requests:
                   cpu: "300m"
@@ -166,7 +166,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-1825-Authoring-Screen-Section-B-423ef9dd4b728224964a94cb491ab416d287331f"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-1321-Unanswered-question-questi-5517c889469a73c08a1249c84429829d435d7f18"
               resources:
                 requests:
                   cpu: "300m"
@@ -200,7 +200,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-1825-Authoring-Screen-Section-B-423ef9dd4b728224964a94cb491ab416d287331f"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-1321-Unanswered-question-questi-5517c889469a73c08a1249c84429829d435d7f18"
               resources:
                 requests:
                   cpu: "200m"
