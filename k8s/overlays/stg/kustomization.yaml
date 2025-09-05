@@ -27,7 +27,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-1853-Remove-display-name-in-stu-3e4530a30141cab0f358cd5e33e479379bf8dcaf"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-1858-Authoring-Bulk-Action-Expo-895abc66fc1fafc57071a85c7358fce8aac164f0"
               resources:
                 requests:
                   cpu: "500m"
@@ -63,7 +63,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-1853-Remove-display-name-in-stu-3e4530a30141cab0f358cd5e33e479379bf8dcaf"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-1858-Authoring-Bulk-Action-Expo-895abc66fc1fafc57071a85c7358fce8aac164f0"
               resources:
                 requests:
                   cpu: "300m"
@@ -98,7 +98,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-1853-Remove-display-name-in-stu-3e4530a30141cab0f358cd5e33e479379bf8dcaf"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-1858-Authoring-Bulk-Action-Expo-895abc66fc1fafc57071a85c7358fce8aac164f0"
               resources:
                 requests:
                   cpu: "300m"
@@ -132,7 +132,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-1853-Remove-display-name-in-stu-3e4530a30141cab0f358cd5e33e479379bf8dcaf"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-1858-Authoring-Bulk-Action-Expo-895abc66fc1fafc57071a85c7358fce8aac164f0"
               resources:
                 requests:
                   cpu: "300m"
@@ -166,7 +166,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-1853-Remove-display-name-in-stu-3e4530a30141cab0f358cd5e33e479379bf8dcaf"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-1858-Authoring-Bulk-Action-Expo-895abc66fc1fafc57071a85c7358fce8aac164f0"
               resources:
                 requests:
                   cpu: "300m"
@@ -200,7 +200,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-1853-Remove-display-name-in-stu-3e4530a30141cab0f358cd5e33e479379bf8dcaf"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-1858-Authoring-Bulk-Action-Expo-895abc66fc1fafc57071a85c7358fce8aac164f0"
               resources:
                 requests:
                   cpu: "200m"
