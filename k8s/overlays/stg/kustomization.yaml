@@ -27,7 +27,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-1889-Issue-Incorrect-Display-of-4e86289d8cfc7ea051bdaf46c9267076df9c7c30"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-1854-Fix-Exam-Data-Issues-in-St-092d732ad4e4285709b17e75a78dddeaa3c6e996"
               resources:
                 requests:
                   cpu: "500m"
@@ -63,7 +63,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-1889-Issue-Incorrect-Display-of-4e86289d8cfc7ea051bdaf46c9267076df9c7c30"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-1854-Fix-Exam-Data-Issues-in-St-092d732ad4e4285709b17e75a78dddeaa3c6e996"
               resources:
                 requests:
                   cpu: "300m"
@@ -98,7 +98,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-1889-Issue-Incorrect-Display-of-4e86289d8cfc7ea051bdaf46c9267076df9c7c30"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-1854-Fix-Exam-Data-Issues-in-St-092d732ad4e4285709b17e75a78dddeaa3c6e996"
               resources:
                 requests:
                   cpu: "300m"
@@ -132,7 +132,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-1889-Issue-Incorrect-Display-of-4e86289d8cfc7ea051bdaf46c9267076df9c7c30"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-1854-Fix-Exam-Data-Issues-in-St-092d732ad4e4285709b17e75a78dddeaa3c6e996"
               resources:
                 requests:
                   cpu: "300m"
@@ -166,7 +166,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-1889-Issue-Incorrect-Display-of-4e86289d8cfc7ea051bdaf46c9267076df9c7c30"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-1854-Fix-Exam-Data-Issues-in-St-092d732ad4e4285709b17e75a78dddeaa3c6e996"
               resources:
                 requests:
                   cpu: "300m"
@@ -200,7 +200,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-1889-Issue-Incorrect-Display-of-4e86289d8cfc7ea051bdaf46c9267076df9c7c30"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-1854-Fix-Exam-Data-Issues-in-St-092d732ad4e4285709b17e75a78dddeaa3c6e996"
               resources:
                 requests:
                   cpu: "200m"
