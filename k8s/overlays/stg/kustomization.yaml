@@ -27,7 +27,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-1919-Updated-Question-paper-lis-8d4a17e493696905e4a0f5fd40a6d48bef506922"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Exm-1932-Celery-dual-pool-support-a-c12c5c632b456fd247a3ffb1ab3021fe64aab00b"
               resources:
                 requests:
                   cpu: "500m"
@@ -63,7 +63,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-1919-Updated-Question-paper-lis-8d4a17e493696905e4a0f5fd40a6d48bef506922"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Exm-1932-Celery-dual-pool-support-a-c12c5c632b456fd247a3ffb1ab3021fe64aab00b"
               resources:
                 requests:
                   cpu: "250m"
@@ -112,7 +112,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-1919-Updated-Question-paper-lis-8d4a17e493696905e4a0f5fd40a6d48bef506922"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Exm-1932-Celery-dual-pool-support-a-c12c5c632b456fd247a3ffb1ab3021fe64aab00b"
               resources:
                 requests:
                   cpu: "300m"
@@ -160,7 +160,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-1919-Updated-Question-paper-lis-8d4a17e493696905e4a0f5fd40a6d48bef506922"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Exm-1932-Celery-dual-pool-support-a-c12c5c632b456fd247a3ffb1ab3021fe64aab00b"
               resources:
                 requests:
                   cpu: "300m"
@@ -208,7 +208,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-1919-Updated-Question-paper-lis-8d4a17e493696905e4a0f5fd40a6d48bef506922"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Exm-1932-Celery-dual-pool-support-a-c12c5c632b456fd247a3ffb1ab3021fe64aab00b"
               resources:
                 requests:
                   cpu: "300m"
@@ -256,7 +256,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-1919-Updated-Question-paper-lis-8d4a17e493696905e4a0f5fd40a6d48bef506922"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Exm-1932-Celery-dual-pool-support-a-c12c5c632b456fd247a3ffb1ab3021fe64aab00b"
               resources:
                 requests:
                   cpu: "200m"
