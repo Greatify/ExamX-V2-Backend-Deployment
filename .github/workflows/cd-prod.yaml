@@ -312,7 +312,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           repository: 'Greatify/ExamX-V2-Backend-Deployment'
-          ref: 'main'
+          ref: 'prod'
           fetch-depth: 0 
 
       - name: Download image tag files
@@ -344,7 +344,7 @@ jobs:
           else
             git commit -m "Update image tags for production deployment"
           fi
-          git push origin main
+          git push origin prod
       
       # - name: Push to protected branch
       #   if: github.event.inputs.full_deployment == 'true'
