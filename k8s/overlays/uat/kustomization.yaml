@@ -26,10 +26,10 @@ patches:
         path: /spec/template/spec/containers/0/resources
         value:
           requests:
-            cpu: "1"
-            memory: "4Gi"
+            cpu: "750m"
+            memory: "5Gi"
           limits:
-            cpu: "2"
+            cpu: "1500m"
             memory: "8Gi"
       - op: replace
         path: /spec/template/spec/containers/0/env
@@ -61,10 +61,26 @@ patches:
         value:
           requests:
             cpu: "1"
-            memory: "4Gi"
+            memory: "3Gi"
           limits:
             cpu: "2"
-            memory: "8Gi"
+            memory: "6Gi"
+      - op: replace
+        path: /spec/template/spec/containers/0/command
+        value:
+          - celery
+          - -A
+          - examx
+          - worker
+          - -P
+          - gevent
+          - -c
+          - "100"
+          - -Q
+          - default
+          - -l
+          - info
+          - -E
       - op: replace
         path: /spec/template/spec/containers/0/env
         value:
@@ -92,11 +108,27 @@ patches:
         path: /spec/template/spec/containers/0/resources
         value:
           requests:
-            cpu: "1"
-            memory: "4Gi"
+            cpu: "750m"
+            memory: "5Gi"
           limits:
-            cpu: "2"
+            cpu: "1500m"
             memory: "8Gi"
+      - op: replace
+        path: /spec/template/spec/containers/0/command
+        value:
+          - celery
+          - -A
+          - examx
+          - worker
+          - -P
+          - prefork
+          - -c
+          - "2"
+          - -Q
+          - bulk_upload
+          - -l
+          - info
+          - -E
       - op: replace
         path: /spec/template/spec/containers/0/env
         value:
@@ -124,11 +156,27 @@ patches:
         path: /spec/template/spec/containers/0/resources
         value:
           requests:
-            cpu: "1"
-            memory: "4Gi"
+            cpu: "750m"
+            memory: "5Gi"
           limits:
-            cpu: "2"
+            cpu: "1500m"
             memory: "8Gi"
+      - op: replace
+        path: /spec/template/spec/containers/0/command
+        value:
+          - celery
+          - -A
+          - examx
+          - worker
+          - -P
+          - gevent
+          - -c
+          - "100"
+          - -Q
+          - question_enrichment
+          - -l
+          - info
+          - -E
       - op: replace
         path: /spec/template/spec/containers/0/env
         value:
@@ -161,6 +209,22 @@ patches:
           limits:
             cpu: "2"
             memory: "8Gi"
+      - op: replace
+        path: /spec/template/spec/containers/0/command
+        value:
+          - celery
+          - -A
+          - examx
+          - worker
+          - -P
+          - gevent
+          - -c
+          - "100"
+          - -Q
+          - question_generator_ai
+          - -l
+          - info
+          - -E
       - op: replace
         path: /spec/template/spec/containers/0/env
         value:

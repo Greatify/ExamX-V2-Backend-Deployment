@@ -53,6 +53,10 @@ spec:
             - -A
             - examx
             - worker
+            - -P
+            - gevent
+            - -c
+            - "500"
             - -Q
             - question_generator_ai
             - -l

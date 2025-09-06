@@ -72,6 +72,20 @@ patches:
                 limits:
                   cpu: "3"
                   memory: "8Gi"
+              command:
+              - celery
+              - -A
+              - examx
+              - worker
+              - -P
+              - gevent
+              - -c
+              - "200"
+              - -Q
+              - default
+              - -l
+              - info
+              - -E
               env:
               - name: OPIK_URL_OVERRIDE
                 value: "https://www.comet.com/opik/api"
@@ -106,6 +120,20 @@ patches:
                 limits:
                   cpu: "3"
                   memory: "6Gi"
+              command:
+              - celery
+              - -A
+              - examx
+              - worker
+              - -P
+              - prefork
+              - -c
+              - "3"
+              - -Q
+              - bulk_upload
+              - -l
+              - info
+              - -E
               env:
               - name: OPIK_URL_OVERRIDE
                 value: "https://www.comet.com/opik/api"
@@ -140,6 +168,20 @@ patches:
                 limits:
                   cpu: "3"
                   memory: "8Gi"
+              command:
+              - celery
+              - -A
+              - examx
+              - worker
+              - -P
+              - gevent
+              - -c
+              - "300"
+              - -Q
+              - question_enrichment
+              - -l
+              - info
+              - -E
               env:
               - name: OPIK_URL_OVERRIDE
                 value: "https://www.comet.com/opik/api"
@@ -174,6 +216,20 @@ patches:
                 limits:
                   cpu: "3"
                   memory: "6Gi"
+              command:
+              - celery
+              - -A
+              - examx
+              - worker
+              - -P
+              - gevent
+              - -c
+              - "150"
+              - -Q
+              - question_generator_ai
+              - -l
+              - info
+              - -E
               env:
               - name: OPIK_URL_OVERRIDE
                 value: "https://www.comet.com/opik/api"

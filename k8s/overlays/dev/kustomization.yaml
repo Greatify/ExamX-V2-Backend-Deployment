@@ -68,11 +68,25 @@ patches:
               image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-1922-Scrutiny-Template-Set-as-a-e619c6928115f63daaec2baae2b6e83d7af89055"
               resources:
                 requests:
-                  cpu: "300m"
+                  cpu: "200m"
                   memory: "2Gi"
                 limits:
-                  cpu: "500m"
+                  cpu: "400m"
                   memory: "3Gi"
+              command:
+              - celery
+              - -A
+              - examx
+              - worker
+              - -P
+              - gevent
+              - -c
+              - "25"
+              - -Q
+              - default
+              - -l
+              - info
+              - -E
               env:
               - name: OPIK_URL_OVERRIDE
                 value: "https://www.comet.com/opik/api"
@@ -104,8 +118,22 @@ patches:
                   cpu: "300m"
                   memory: "2Gi"
                 limits:
-                  cpu: "500m"
+                  cpu: "400m"
                   memory: "3Gi"
+              command:
+              - celery
+              - -A
+              - examx
+              - worker
+              - -P
+              - prefork
+              - -c
+              - "1"
+              - -Q
+              - bulk_upload
+              - -l
+              - info
+              - -E
               env:
               - name: OPIK_URL_OVERRIDE
                 value: "https://www.comet.com/opik/api"
@@ -135,11 +163,25 @@ patches:
               image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-1922-Scrutiny-Template-Set-as-a-e619c6928115f63daaec2baae2b6e83d7af89055"
               resources:
                 requests:
-                  cpu: "300m"
+                  cpu: "200m"
                   memory: "2Gi"
                 limits:
-                  cpu: "500m"
+                  cpu: "400m"
                   memory: "3Gi"
+              command:
+              - celery
+              - -A
+              - examx
+              - worker
+              - -P
+              - gevent
+              - -c
+              - "25"
+              - -Q
+              - question_enrichment
+              - -l
+              - info
+              - -E
               env:
               - name: OPIK_URL_OVERRIDE
                 value: "https://www.comet.com/opik/api"
@@ -169,11 +211,25 @@ patches:
               image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-1922-Scrutiny-Template-Set-as-a-e619c6928115f63daaec2baae2b6e83d7af89055"
               resources:
                 requests:
-                  cpu: "300m"
+                  cpu: "200m"
                   memory: "2Gi"
                 limits:
-                  cpu: "500m"
+                  cpu: "400m"
                   memory: "3Gi"
+              command:
+              - celery
+              - -A
+              - examx
+              - worker
+              - -P
+              - gevent
+              - -c
+              - "25"
+              - -Q
+              - question_generator_ai
+              - -l
+              - info
+              - -E
               env:
               - name: OPIK_URL_OVERRIDE
                 value: "https://www.comet.com/opik/api"

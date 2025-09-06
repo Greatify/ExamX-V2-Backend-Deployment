@@ -53,6 +53,8 @@ spec:
             - -A
             - examx
             - worker
+            - -P
+            - prefork
             - -Q
             - bulk_upload
             - -l

@@ -60,6 +60,12 @@ spec:
             - -A
             - examx
             - worker
+            - -P
+            - gevent
+            - -c
+            - "500"
+            - -Q
+            - default
             - -l
             - debug
             - -E
