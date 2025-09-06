@@ -28,7 +28,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-1763-Enhancement-Download-Based-d0d67c7b1f4288e96096a74e55982ae3df923b3e"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-1919-Updated-Question-paper-lis-76d0cb937cd95f1e6e4161dbfbd4d81a223a59bf"
               resources:
                 requests:
                   cpu: "2"
@@ -64,7 +64,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-1763-Enhancement-Download-Based-d0d67c7b1f4288e96096a74e55982ae3df923b3e"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-1919-Updated-Question-paper-lis-76d0cb937cd95f1e6e4161dbfbd4d81a223a59bf"
               resources:
                 requests:
                   cpu: "2"
@@ -98,7 +98,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-1763-Enhancement-Download-Based-d0d67c7b1f4288e96096a74e55982ae3df923b3e"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-1919-Updated-Question-paper-lis-76d0cb937cd95f1e6e4161dbfbd4d81a223a59bf"
               resources:
                 requests:
                   cpu: "2"
@@ -132,7 +132,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-1763-Enhancement-Download-Based-d0d67c7b1f4288e96096a74e55982ae3df923b3e"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-1919-Updated-Question-paper-lis-76d0cb937cd95f1e6e4161dbfbd4d81a223a59bf"
               resources:
                 requests:
                   cpu: "2"
@@ -166,7 +166,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-1763-Enhancement-Download-Based-d0d67c7b1f4288e96096a74e55982ae3df923b3e"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-1919-Updated-Question-paper-lis-76d0cb937cd95f1e6e4161dbfbd4d81a223a59bf"
               resources:
                 requests:
                   cpu: "2"
@@ -223,7 +223,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-1763-Enhancement-Download-Based-d0d67c7b1f4288e96096a74e55982ae3df923b3e"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-1919-Updated-Question-paper-lis-76d0cb937cd95f1e6e4161dbfbd4d81a223a59bf"
               resources:
                 requests:
                   cpu: "250m"
