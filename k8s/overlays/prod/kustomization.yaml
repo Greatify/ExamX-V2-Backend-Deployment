@@ -28,7 +28,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-1947-Fix-Database-Connection-Po-d4a66b41f7f6e8d29d9f3be43a416b40e322a50f"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-1952-Remove-ratelimit-for-andro-01394e267893bb818e03a08e1d38387d697a4c07"
               resources:
                 requests:
                   cpu: "2"
@@ -64,7 +64,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-1947-Fix-Database-Connection-Po-d4a66b41f7f6e8d29d9f3be43a416b40e322a50f"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-1952-Remove-ratelimit-for-andro-01394e267893bb818e03a08e1d38387d697a4c07"
               resources:
                 requests:
                   cpu: "2"
@@ -112,7 +112,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-1947-Fix-Database-Connection-Po-d4a66b41f7f6e8d29d9f3be43a416b40e322a50f"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-1952-Remove-ratelimit-for-andro-01394e267893bb818e03a08e1d38387d697a4c07"
               resources:
                 requests:
                   cpu: "2"
@@ -160,7 +160,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-1947-Fix-Database-Connection-Po-d4a66b41f7f6e8d29d9f3be43a416b40e322a50f"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-1952-Remove-ratelimit-for-andro-01394e267893bb818e03a08e1d38387d697a4c07"
               resources:
                 requests:
                   cpu: "2"
@@ -208,7 +208,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-1947-Fix-Database-Connection-Po-d4a66b41f7f6e8d29d9f3be43a416b40e322a50f"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-1952-Remove-ratelimit-for-andro-01394e267893bb818e03a08e1d38387d697a4c07"
               resources:
                 requests:
                   cpu: "2"
@@ -279,7 +279,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-1947-Fix-Database-Connection-Po-d4a66b41f7f6e8d29d9f3be43a416b40e322a50f"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-1952-Remove-ratelimit-for-andro-01394e267893bb818e03a08e1d38387d697a4c07"
               resources:
                 requests:
                   cpu: "250m"
