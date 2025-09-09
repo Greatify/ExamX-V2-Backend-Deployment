@@ -29,7 +29,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Update-CI-workflow-to-trigger-on-de-e16f3f78a3603dcc3e0670d3e5e20b61fb6a8cdc"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-1986-Passage-type-question-and-4a8a96ab9f6e2ca734ad078def724ee9a2947235"
               resources:
                 requests:
                   cpu: "500m"
@@ -65,7 +65,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Update-CI-workflow-to-trigger-on-de-e16f3f78a3603dcc3e0670d3e5e20b61fb6a8cdc"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-1986-Passage-type-question-and-4a8a96ab9f6e2ca734ad078def724ee9a2947235"
               resources:
                 requests:
                   cpu: "200m"
@@ -112,7 +112,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Update-CI-workflow-to-trigger-on-de-e16f3f78a3603dcc3e0670d3e5e20b61fb6a8cdc"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-1986-Passage-type-question-and-4a8a96ab9f6e2ca734ad078def724ee9a2947235"
               resources:
                 requests:
                   cpu: "300m"
@@ -160,7 +160,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Update-CI-workflow-to-trigger-on-de-e16f3f78a3603dcc3e0670d3e5e20b61fb6a8cdc"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-1986-Passage-type-question-and-4a8a96ab9f6e2ca734ad078def724ee9a2947235"
               resources:
                 requests:
                   cpu: "200m"
@@ -208,7 +208,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Update-CI-workflow-to-trigger-on-de-e16f3f78a3603dcc3e0670d3e5e20b61fb6a8cdc"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-1986-Passage-type-question-and-4a8a96ab9f6e2ca734ad078def724ee9a2947235"
               resources:
                 requests:
                   cpu: "200m"
@@ -256,7 +256,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Update-CI-workflow-to-trigger-on-de-e16f3f78a3603dcc3e0670d3e5e20b61fb6a8cdc"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-1986-Passage-type-question-and-4a8a96ab9f6e2ca734ad078def724ee9a2947235"
               resources:
                 requests:
                   cpu: "200m"
