@@ -65,6 +65,7 @@ jobs:
           author_name: Backend Rollback Success
           channel: examxv2-backend-alerts
           username: ExamX-V2-CICD
+          webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
           job_name: rollback-backend-${{ github.event.inputs.rollback_environment }}
           text: |
             :rocket: *Backend rollback to ${{ github.event.inputs.rollback_environment }} environment succeeded*
