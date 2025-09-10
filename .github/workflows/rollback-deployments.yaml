@@ -39,7 +39,7 @@ jobs:
 
       - name: Set image tags as environment variables
         run: |
-          echo "BACKEND_IMAGE=$({{ github.event.inputs.image }})" >> $GITHUB_ENV
+          echo "BACKEND_IMAGE=${{ github.event.inputs.image }}" >> $GITHUB_ENV
           
       - name: Update deployment image tags in overlay
         run: |
