@@ -27,7 +27,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2037-Remove-Transaction-Timeout-58aba0b4a07568d07e6cc7571dbc6a27d27675e7"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2040-Update-JWT-Configuration-f-0c2ae3fb1131df0b13e4490c1835b5126203cc9c"
               resources:
                 requests:
                   cpu: "500m"
@@ -63,7 +63,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2037-Remove-Transaction-Timeout-58aba0b4a07568d07e6cc7571dbc6a27d27675e7"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2040-Update-JWT-Configuration-f-0c2ae3fb1131df0b13e4490c1835b5126203cc9c"
               resources:
                 requests:
                   cpu: "250m"
@@ -112,7 +112,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2037-Remove-Transaction-Timeout-58aba0b4a07568d07e6cc7571dbc6a27d27675e7"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2040-Update-JWT-Configuration-f-0c2ae3fb1131df0b13e4490c1835b5126203cc9c"
               resources:
                 requests:
                   cpu: "300m"
@@ -160,7 +160,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2037-Remove-Transaction-Timeout-58aba0b4a07568d07e6cc7571dbc6a27d27675e7"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2040-Update-JWT-Configuration-f-0c2ae3fb1131df0b13e4490c1835b5126203cc9c"
               resources:
                 requests:
                   cpu: "300m"
@@ -208,7 +208,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2037-Remove-Transaction-Timeout-58aba0b4a07568d07e6cc7571dbc6a27d27675e7"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2040-Update-JWT-Configuration-f-0c2ae3fb1131df0b13e4490c1835b5126203cc9c"
               resources:
                 requests:
                   cpu: "300m"
@@ -256,7 +256,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2037-Remove-Transaction-Timeout-58aba0b4a07568d07e6cc7571dbc6a27d27675e7"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2040-Update-JWT-Configuration-f-0c2ae3fb1131df0b13e4490c1835b5126203cc9c"
               resources:
                 requests:
                   cpu: "200m"
