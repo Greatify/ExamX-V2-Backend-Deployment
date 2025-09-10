@@ -29,7 +29,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2037-Remove-Transaction-Timeout-34348dca442d2e68274ff121d5643daa9c43cc0f"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-ci-update-CI-workflow-branch-from-d-523529e54b1a8226941ae23228eeeab4fdfc7aba"
               resources:
                 requests:
                   cpu: "500m"
@@ -65,7 +65,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2037-Remove-Transaction-Timeout-34348dca442d2e68274ff121d5643daa9c43cc0f"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-ci-update-CI-workflow-branch-from-d-523529e54b1a8226941ae23228eeeab4fdfc7aba"
               resources:
                 requests:
                   cpu: "200m"
@@ -112,7 +112,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2037-Remove-Transaction-Timeout-34348dca442d2e68274ff121d5643daa9c43cc0f"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-ci-update-CI-workflow-branch-from-d-523529e54b1a8226941ae23228eeeab4fdfc7aba"
               resources:
                 requests:
                   cpu: "300m"
@@ -160,7 +160,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2037-Remove-Transaction-Timeout-34348dca442d2e68274ff121d5643daa9c43cc0f"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-ci-update-CI-workflow-branch-from-d-523529e54b1a8226941ae23228eeeab4fdfc7aba"
               resources:
                 requests:
                   cpu: "200m"
@@ -208,7 +208,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2037-Remove-Transaction-Timeout-34348dca442d2e68274ff121d5643daa9c43cc0f"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-ci-update-CI-workflow-branch-from-d-523529e54b1a8226941ae23228eeeab4fdfc7aba"
               resources:
                 requests:
                   cpu: "200m"
@@ -256,7 +256,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2037-Remove-Transaction-Timeout-34348dca442d2e68274ff121d5643daa9c43cc0f"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-ci-update-CI-workflow-branch-from-d-523529e54b1a8226941ae23228eeeab4fdfc7aba"
               resources:
                 requests:
                   cpu: "200m"
