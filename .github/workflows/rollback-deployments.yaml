@@ -1,0 +1,70 @@
+name: Rollback Deployments
+
+on:
+  workflow_dispatch:
+    inputs:
+      image:  
+        description: "Docker image to Rollback"
+        required: true
+        type: string
+      rollback_environment:
+        description: 'Rollback environment'
+        required: true
+        type: string
+        default: "dev"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.inputs.rollback_environment }}
+  cancel-in-progress: true
+
+jobs:
+  rollback:
+    runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.rollback_environment }}
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+          
+      - name: Update Kubernetes configuration
+        run: aws eks update-kubeconfig --name ${{ secrets.AWS_EKS_CLUSTER_NAME }} --region ${{ secrets.AWS_REGION }}
+
+      - name: Set image tags as environment variables
+        run: |
+          echo "BACKEND_IMAGE=$({{ github.event.inputs.image }})" >> $GITHUB_ENV
+          
+      - name: Update deployment image tags in overlay
+        run: |
+          if [ "${{ github.event.inputs.rollback_environment }}" == "dev" ]; then
+            sed -i 's|image: "[^"]*"|image: "'"$BACKEND_IMAGE"'"|g' k8s/overlays/dev/kustomization.yaml
+          elif [ "${{ github.event.inputs.rollback_environment }}" == "stg" ]; then
+            sed -i 's|image: "[^"]*"|image: "'"$BACKEND_IMAGE"'"|g' k8s/overlays/stg/kustomization.yaml
+          elif [ "${{ github.event.inputs.rollback_environment }}" == "uat" ]; then
+            sed -i 's|image: "[^"]*"|image: "'"$BACKEND_IMAGE"'"|g' k8s/overlays/uat/kustomization.yaml
+          elif [ "${{ github.event.inputs.rollback_environment }}" == "prod" ]; then
+            sed -i 's|image: "[^"]*"|image: "'"$BACKEND_IMAGE"'"|g' k8s/overlays/prod/kustomization.yaml
+          fi
+
+      - name : Apply Rollback Changes
+        run: |
+          kubectl apply -k k8s/overlays/${{ github.event.inputs.rollback_environment }}
+
+      - name: Send deployment success notification
+        if: success()
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          author_name: Backend Rollback Success
+          channel: examxv2-backend-alerts
+          username: ExamX-V2-CICD
+          job_name: rollback-backend-${{ github.event.inputs.rollback_environment }}
+          text: |
+            :rocket: *Backend rollback to ${{ github.event.inputs.rollback_environment }} environment succeeded*
