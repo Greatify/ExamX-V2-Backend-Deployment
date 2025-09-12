@@ -147,50 +147,14 @@ patches:
       kind: Deployment
       name: celery-bulk-upload-worker
 
-  # Celery Enrichment Worker patches
+  # Celery Enrichment Worker patches - disabled in dev
   - patch: |-
       apiVersion: apps/v1
       kind: Deployment
       metadata:
         name: celery-enrichment-worker
       spec:
-        replicas: 1
-        template:
-          spec:
-            serviceAccountName: dev-examxv2-sa
-            containers:
-            - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2142-Handling-multiple-JSON-for-7ce43367ad038f5413c1e96e063ffb7d2e3e5f8c"
-              resources:
-                requests:
-                  cpu: "200m"
-                  memory: "2Gi"
-                limits:
-                  cpu: "400m"
-                  memory: "3Gi"
-              command:
-              - celery
-              - -A
-              - examx
-              - worker
-              - -P
-              - gevent
-              - -c
-              - "25"
-              - -Q
-              - question_enrichment
-              - -l
-              - info
-              - -E
-              env:
-              - name: OPIK_URL_OVERRIDE
-                value: "https://www.comet.com/opik/api"
-              - name: OPIK_API_KEY
-                value: "Y5T3WoqNxJ22ypw1M8qivydis"
-              - name: OPIK_WORKSPACE
-                value: "greatify-prod"
-              - name: OPIK_PROJECT_NAME
-                value: "Dev"
+        replicas: 0
     target:
       kind: Deployment
       name: celery-enrichment-worker
@@ -318,3 +282,21 @@ patches:
     target:
       kind: SecretProviderClass
       name: examxv2-google-credentials
+
+  # Disable celery-enrichment-worker-autoscaler in dev
+  - patch: |-
+      apiVersion: autoscaling/v2
+      kind: HorizontalPodAutoscaler
+      metadata:
+        name: celery-enrichment-worker-autoscaler
+      spec:
+        minReplicas: 1
+        maxReplicas: 1
+        scaleTargetRef:
+          apiVersion: apps/v1
+          kind: Deployment
+          name: celery-enrichment-worker
+    target:
+      kind: HorizontalPodAutoscaler
+      name: celery-enrichment-worker-autoscaler
+
