@@ -332,6 +332,7 @@ jobs:
         run: |
           # Update image tags in the production overlay kustomization file
           sed -i 's|image: "[^"]*"|image: "'"$BACKEND_IMAGE"'"|g' k8s/overlays/prod/kustomization.yaml
+          sed -i 's|kubernetes.io/change-cause:.*|kubernetes.io/change-cause: Updated to "'"$BACKEND_IMAGE"'"|g' k8s/overlays/stg/kustomization.yaml
       
       - name: Commit and push changes
         if: github.event.inputs.full_deployment == 'true' || github.event.inputs.staging_image_tag != ''

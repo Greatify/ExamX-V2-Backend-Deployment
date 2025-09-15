@@ -33,6 +33,7 @@ jobs:
         run: |
           # Update image tags in the dev overlay kustomization file
           sed -i 's|image: "[^"]*"|image: "'"$BACKEND_IMAGE"'"|g' k8s/overlays/dev/kustomization.yaml
+          sed -i 's|kubernetes.io/change-cause:.*|kubernetes.io/change-cause: Updated to "'"$BACKEND_IMAGE"'"|g' k8s/overlays/dev/kustomization.yaml
           
       - name: Commit and push changes
         run: |
