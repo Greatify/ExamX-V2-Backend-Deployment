@@ -30,10 +30,10 @@ patches:
               image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Featai_question_parser-4263-4264-1e4425e401268c5daa58dc8bb0fc73b85459bea1"
               resources:
                 requests:
-                  cpu: "500m"
+                  cpu: "1"
                   memory: "3Gi"
                 limits:
-                  cpu: "1"
+                  cpu: "2"
                   memory: "6Gi"
               env:
               - name: WORKERS
