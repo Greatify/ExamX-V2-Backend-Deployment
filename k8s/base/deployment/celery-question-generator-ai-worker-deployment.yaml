@@ -4,6 +4,8 @@ metadata:
   name: celery-question-generator-ai-worker
   labels:
     app: celery-question-generator-ai-worker
+  annotations:
+    change-cause: "Added change-cause annotation to deployment"
 spec:
   replicas: 1 # Default value, will be overridden in overlays
   strategy:

@@ -4,6 +4,8 @@ metadata:
   name: celery-beat
   labels:
     app: celery-beat
+  annotations:
+    kubernetes.io/change-cause: "Added change-cause annotation to deployment"
 spec:
   replicas: 1 # Default value, will be overridden in overlays
   strategy:

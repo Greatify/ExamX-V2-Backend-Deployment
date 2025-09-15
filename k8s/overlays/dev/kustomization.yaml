@@ -22,6 +22,8 @@ patches:
       kind: Deployment
       metadata:
         name: examxv2-backend
+        annotations:
+          kubernetes.io/change-cause: "Updated to 399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Increase-DB-CONN_MAX_AGE-0-to-300-5-8fb547e9317ac9c21132b235b44e29fdae388e44"
       spec:
         replicas: 1
         template:
@@ -58,6 +60,8 @@ patches:
       kind: Deployment
       metadata:
         name: celery-worker-default
+        annotations:
+          kubernetes.io/change-cause: "Updated to 399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Increase-DB-CONN_MAX_AGE-0-to-300-5-8fb547e9317ac9c21132b235b44e29fdae388e44"
       spec:
         replicas: 1
         template:
@@ -105,6 +109,8 @@ patches:
       kind: Deployment
       metadata:
         name: celery-bulk-upload-worker
+        annotations:
+          kubernetes.io/change-cause: "Updated to 399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Increase-DB-CONN_MAX_AGE-0-to-300-5-8fb547e9317ac9c21132b235b44e29fdae388e44"
       spec:
         replicas: 1
         template:
@@ -165,6 +171,8 @@ patches:
       kind: Deployment
       metadata:
         name: celery-question-generator-ai-worker
+        annotations:
+          kubernetes.io/change-cause: "Updated to 399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Increase-DB-CONN_MAX_AGE-0-to-300-5-8fb547e9317ac9c21132b235b44e29fdae388e44"
       spec:
         replicas: 1
         template:
@@ -213,6 +221,8 @@ patches:
       kind: Deployment
       metadata:
         name: celery-flower
+        annotations:
+          kubernetes.io/change-cause: "Updated to 399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Increase-DB-CONN_MAX_AGE-0-to-300-5-8fb547e9317ac9c21132b235b44e29fdae388e44"
       spec:
         replicas: 1
         template:
