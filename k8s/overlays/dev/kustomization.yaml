@@ -32,10 +32,10 @@ patches:
               image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Add-migration-files-with-timestamp-00b0b9728a4609067d7aff545e16bc5167c5e850"
               resources:
                 requests:
-                  cpu: "500m"
+                  cpu: "1"
                   memory: "3Gi"
                 limits:
-                  cpu: "1"
+                  cpu: "2"
                   memory: "6Gi"
               env:
               - name: WORKERS
