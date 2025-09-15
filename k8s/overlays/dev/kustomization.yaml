@@ -29,7 +29,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Featai_question_parser-4263Co-autho-0cc035152d3bac2c176432e2602ea74d4601c31e"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Add-migration-files-with-timestamp-00b0b9728a4609067d7aff545e16bc5167c5e850"
               resources:
                 requests:
                   cpu: "500m"
@@ -65,7 +65,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Featai_question_parser-4263Co-autho-0cc035152d3bac2c176432e2602ea74d4601c31e"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Add-migration-files-with-timestamp-00b0b9728a4609067d7aff545e16bc5167c5e850"
               resources:
                 requests:
                   cpu: "200m"
@@ -112,7 +112,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Featai_question_parser-4263Co-autho-0cc035152d3bac2c176432e2602ea74d4601c31e"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Add-migration-files-with-timestamp-00b0b9728a4609067d7aff545e16bc5167c5e850"
               resources:
                 requests:
                   cpu: "300m"
@@ -172,7 +172,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Featai_question_parser-4263Co-autho-0cc035152d3bac2c176432e2602ea74d4601c31e"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Add-migration-files-with-timestamp-00b0b9728a4609067d7aff545e16bc5167c5e850"
               resources:
                 requests:
                   cpu: "200m"
@@ -220,7 +220,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Featai_question_parser-4263Co-autho-0cc035152d3bac2c176432e2602ea74d4601c31e"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Add-migration-files-with-timestamp-00b0b9728a4609067d7aff545e16bc5167c5e850"
               resources:
                 requests:
                   cpu: "200m"
