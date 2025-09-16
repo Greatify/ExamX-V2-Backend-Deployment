@@ -23,7 +23,7 @@ patches:
       metadata:
         name: examxv2-backend
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Update-CI-workflow-to-trigger-on-fe-a3c6e2767d563689a0e0fa660931bc8defe6a4dc"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Enhance-DOCX-handling-and-AI-model-bf5ef7a3165e46e313a0c711e8569b61556868bd"
       spec:
         replicas: 1
         template:
@@ -31,7 +31,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Update-CI-workflow-to-trigger-on-fe-a3c6e2767d563689a0e0fa660931bc8defe6a4dc"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Enhance-DOCX-handling-and-AI-model-bf5ef7a3165e46e313a0c711e8569b61556868bd"
               resources:
                 requests:
                   cpu: "1"
@@ -61,7 +61,7 @@ patches:
       metadata:
         name: celery-worker-default
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Update-CI-workflow-to-trigger-on-fe-a3c6e2767d563689a0e0fa660931bc8defe6a4dc"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Enhance-DOCX-handling-and-AI-model-bf5ef7a3165e46e313a0c711e8569b61556868bd"
       spec:
         replicas: 1
         template:
@@ -69,7 +69,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Update-CI-workflow-to-trigger-on-fe-a3c6e2767d563689a0e0fa660931bc8defe6a4dc"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Enhance-DOCX-handling-and-AI-model-bf5ef7a3165e46e313a0c711e8569b61556868bd"
               resources:
                 requests:
                   cpu: "200m"
@@ -110,7 +110,7 @@ patches:
       metadata:
         name: celery-bulk-upload-worker
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Update-CI-workflow-to-trigger-on-fe-a3c6e2767d563689a0e0fa660931bc8defe6a4dc"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Enhance-DOCX-handling-and-AI-model-bf5ef7a3165e46e313a0c711e8569b61556868bd"
       spec:
         replicas: 1
         template:
@@ -118,7 +118,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Update-CI-workflow-to-trigger-on-fe-a3c6e2767d563689a0e0fa660931bc8defe6a4dc"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Enhance-DOCX-handling-and-AI-model-bf5ef7a3165e46e313a0c711e8569b61556868bd"
               resources:
                 requests:
                   cpu: "300m"
@@ -172,7 +172,7 @@ patches:
       metadata:
         name: celery-question-generator-ai-worker
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Update-CI-workflow-to-trigger-on-fe-a3c6e2767d563689a0e0fa660931bc8defe6a4dc"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Enhance-DOCX-handling-and-AI-model-bf5ef7a3165e46e313a0c711e8569b61556868bd"
       spec:
         replicas: 1
         template:
@@ -180,7 +180,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Update-CI-workflow-to-trigger-on-fe-a3c6e2767d563689a0e0fa660931bc8defe6a4dc"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Enhance-DOCX-handling-and-AI-model-bf5ef7a3165e46e313a0c711e8569b61556868bd"
               resources:
                 requests:
                   cpu: "200m"
@@ -222,7 +222,7 @@ patches:
       metadata:
         name: celery-flower
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Update-CI-workflow-to-trigger-on-fe-a3c6e2767d563689a0e0fa660931bc8defe6a4dc"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Enhance-DOCX-handling-and-AI-model-bf5ef7a3165e46e313a0c711e8569b61556868bd"
       spec:
         replicas: 1
         template:
@@ -230,7 +230,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Update-CI-workflow-to-trigger-on-fe-a3c6e2767d563689a0e0fa660931bc8defe6a4dc"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Enhance-DOCX-handling-and-AI-model-bf5ef7a3165e46e313a0c711e8569b61556868bd"
               resources:
                 requests:
                   cpu: "200m"
