@@ -27,7 +27,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2153-Section-wise-Question-Sele-1fff5f65aae8b9b6e7275dfcb88ac9b378c4a758"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Enhance-question-paper-parser-with-2d95e9d9214e63ca910a717c2fe9dd9d5043490b"
               resources:
                 requests:
                   cpu: "1"
@@ -63,7 +63,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2153-Section-wise-Question-Sele-1fff5f65aae8b9b6e7275dfcb88ac9b378c4a758"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Enhance-question-paper-parser-with-2d95e9d9214e63ca910a717c2fe9dd9d5043490b"
               resources:
                 requests:
                   cpu: "250m"
@@ -112,7 +112,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2153-Section-wise-Question-Sele-1fff5f65aae8b9b6e7275dfcb88ac9b378c4a758"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Enhance-question-paper-parser-with-2d95e9d9214e63ca910a717c2fe9dd9d5043490b"
               resources:
                 requests:
                   cpu: "300m"
@@ -160,7 +160,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2153-Section-wise-Question-Sele-1fff5f65aae8b9b6e7275dfcb88ac9b378c4a758"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Enhance-question-paper-parser-with-2d95e9d9214e63ca910a717c2fe9dd9d5043490b"
               resources:
                 requests:
                   cpu: "300m"
@@ -208,7 +208,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2153-Section-wise-Question-Sele-1fff5f65aae8b9b6e7275dfcb88ac9b378c4a758"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Enhance-question-paper-parser-with-2d95e9d9214e63ca910a717c2fe9dd9d5043490b"
               resources:
                 requests:
                   cpu: "300m"
@@ -256,7 +256,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2153-Section-wise-Question-Sele-1fff5f65aae8b9b6e7275dfcb88ac9b378c4a758"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Enhance-question-paper-parser-with-2d95e9d9214e63ca910a717c2fe9dd9d5043490b"
               resources:
                 requests:
                   cpu: "200m"
