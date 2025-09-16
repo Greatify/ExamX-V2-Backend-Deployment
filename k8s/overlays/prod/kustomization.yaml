@@ -28,7 +28,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Update-requirements-and-enhance-DOC-0f33d74f7c50b8c955d9c564b8199d979e51be79"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Optimize-async-helpers-by-removing-cbce7dc76a9df44c10debcb0102211ff81f7b76a"
               resources:
                 requests:
                   cpu: "2"
@@ -64,7 +64,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Update-requirements-and-enhance-DOC-0f33d74f7c50b8c955d9c564b8199d979e51be79"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Optimize-async-helpers-by-removing-cbce7dc76a9df44c10debcb0102211ff81f7b76a"
               resources:
                 requests:
                   cpu: "2"
@@ -112,7 +112,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Update-requirements-and-enhance-DOC-0f33d74f7c50b8c955d9c564b8199d979e51be79"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Optimize-async-helpers-by-removing-cbce7dc76a9df44c10debcb0102211ff81f7b76a"
               resources:
                 requests:
                   cpu: "2"
@@ -160,7 +160,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Update-requirements-and-enhance-DOC-0f33d74f7c50b8c955d9c564b8199d979e51be79"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Optimize-async-helpers-by-removing-cbce7dc76a9df44c10debcb0102211ff81f7b76a"
               resources:
                 requests:
                   cpu: "2"
@@ -208,7 +208,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Update-requirements-and-enhance-DOC-0f33d74f7c50b8c955d9c564b8199d979e51be79"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Optimize-async-helpers-by-removing-cbce7dc76a9df44c10debcb0102211ff81f7b76a"
               resources:
                 requests:
                   cpu: "2"
@@ -279,7 +279,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Update-requirements-and-enhance-DOC-0f33d74f7c50b8c955d9c564b8199d979e51be79"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Optimize-async-helpers-by-removing-cbce7dc76a9df44c10debcb0102211ff81f7b76a"
               resources:
                 requests:
                   cpu: "250m"
