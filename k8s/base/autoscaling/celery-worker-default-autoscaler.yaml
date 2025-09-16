@@ -18,13 +18,13 @@ spec:
         name: cpu
         target:
           type: Utilization
-          averageUtilization: 70
+          averageUtilization: 50  # Lower threshold for AI tasks
     - type: Resource
       resource:
         name: memory
         target:
           type: Utilization
-          averageUtilization: 70
+          averageUtilization: 50  # Lower threshold for AI tasks
   behavior:
     scaleDown:
       stabilizationWindowSeconds: 60
