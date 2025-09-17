@@ -28,7 +28,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-1925-Authoring-Add-from-Questio-ea8b35dd5068713cf2c6b8cfb56f698750b2769e"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2195-Passage-question-format-ne-18803417e7fb0661df450a76fef0f941ecad81e3"
               resources:
                 requests:
                   cpu: "2"
@@ -64,7 +64,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-1925-Authoring-Add-from-Questio-ea8b35dd5068713cf2c6b8cfb56f698750b2769e"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2195-Passage-question-format-ne-18803417e7fb0661df450a76fef0f941ecad81e3"
               resources:
                 requests:
                   cpu: "2"
@@ -112,7 +112,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-1925-Authoring-Add-from-Questio-ea8b35dd5068713cf2c6b8cfb56f698750b2769e"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2195-Passage-question-format-ne-18803417e7fb0661df450a76fef0f941ecad81e3"
               resources:
                 requests:
                   cpu: "2"
@@ -160,7 +160,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-1925-Authoring-Add-from-Questio-ea8b35dd5068713cf2c6b8cfb56f698750b2769e"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2195-Passage-question-format-ne-18803417e7fb0661df450a76fef0f941ecad81e3"
               resources:
                 requests:
                   cpu: "2"
@@ -208,7 +208,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-1925-Authoring-Add-from-Questio-ea8b35dd5068713cf2c6b8cfb56f698750b2769e"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2195-Passage-question-format-ne-18803417e7fb0661df450a76fef0f941ecad81e3"
               resources:
                 requests:
                   cpu: "2"
@@ -279,7 +279,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-1925-Authoring-Add-from-Questio-ea8b35dd5068713cf2c6b8cfb56f698750b2769e"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2195-Passage-question-format-ne-18803417e7fb0661df450a76fef0f941ecad81e3"
               resources:
                 requests:
                   cpu: "250m"
