@@ -27,7 +27,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Enhance-job-ID-generation-for-docum-3c7e2a72e73bd994498f777c940ddf94a14ea48f"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2130-Show-AI-mark-correct-evalu-4eb185b4514774c4a63c86e43d77bb230d1d1169"
               resources:
                 requests:
                   cpu: "1"
@@ -63,7 +63,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Enhance-job-ID-generation-for-docum-3c7e2a72e73bd994498f777c940ddf94a14ea48f"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2130-Show-AI-mark-correct-evalu-4eb185b4514774c4a63c86e43d77bb230d1d1169"
               resources:
                 requests:
                   cpu: "250m"
@@ -112,7 +112,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Enhance-job-ID-generation-for-docum-3c7e2a72e73bd994498f777c940ddf94a14ea48f"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2130-Show-AI-mark-correct-evalu-4eb185b4514774c4a63c86e43d77bb230d1d1169"
               resources:
                 requests:
                   cpu: "300m"
@@ -160,7 +160,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Enhance-job-ID-generation-for-docum-3c7e2a72e73bd994498f777c940ddf94a14ea48f"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2130-Show-AI-mark-correct-evalu-4eb185b4514774c4a63c86e43d77bb230d1d1169"
               resources:
                 requests:
                   cpu: "300m"
@@ -208,7 +208,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Enhance-job-ID-generation-for-docum-3c7e2a72e73bd994498f777c940ddf94a14ea48f"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2130-Show-AI-mark-correct-evalu-4eb185b4514774c4a63c86e43d77bb230d1d1169"
               resources:
                 requests:
                   cpu: "300m"
@@ -256,7 +256,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Enhance-job-ID-generation-for-docum-3c7e2a72e73bd994498f777c940ddf94a14ea48f"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2130-Show-AI-mark-correct-evalu-4eb185b4514774c4a63c86e43d77bb230d1d1169"
               resources:
                 requests:
                   cpu: "200m"
