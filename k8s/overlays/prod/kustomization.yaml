@@ -80,7 +80,7 @@ patches:
               - -P
               - gevent
               - -c
-              - "1000"
+              - "200"
               - -Q
               - default
               - -l
@@ -176,7 +176,7 @@ patches:
               - -P
               - gevent
               - -c
-              - "1000"
+              - "200"
               - -Q
               - question_enrichment
               - -l
@@ -224,7 +224,7 @@ patches:
               - -P
               - gevent
               - -c
-              - "1000"
+              - "200"
               - -Q
               - question_generator_ai
               - -l
