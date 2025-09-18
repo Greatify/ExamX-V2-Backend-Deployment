@@ -27,7 +27,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Fixing-AI_questoin_bank-generator-w-45c392ea09fbf30624446fb2963cc0b95382356e"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2218-Update-passage-child-quest-9208283bca220b2cf130f131c5e0bf13398dd72d"
               resources:
                 requests:
                   cpu: "1"
@@ -63,7 +63,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Fixing-AI_questoin_bank-generator-w-45c392ea09fbf30624446fb2963cc0b95382356e"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2218-Update-passage-child-quest-9208283bca220b2cf130f131c5e0bf13398dd72d"
               resources:
                 requests:
                   cpu: "250m"
@@ -112,7 +112,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Fixing-AI_questoin_bank-generator-w-45c392ea09fbf30624446fb2963cc0b95382356e"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2218-Update-passage-child-quest-9208283bca220b2cf130f131c5e0bf13398dd72d"
               resources:
                 requests:
                   cpu: "300m"
@@ -160,7 +160,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Fixing-AI_questoin_bank-generator-w-45c392ea09fbf30624446fb2963cc0b95382356e"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2218-Update-passage-child-quest-9208283bca220b2cf130f131c5e0bf13398dd72d"
               resources:
                 requests:
                   cpu: "300m"
@@ -208,7 +208,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Fixing-AI_questoin_bank-generator-w-45c392ea09fbf30624446fb2963cc0b95382356e"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2218-Update-passage-child-quest-9208283bca220b2cf130f131c5e0bf13398dd72d"
               resources:
                 requests:
                   cpu: "300m"
@@ -256,7 +256,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Fixing-AI_questoin_bank-generator-w-45c392ea09fbf30624446fb2963cc0b95382356e"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2218-Update-passage-child-quest-9208283bca220b2cf130f131c5e0bf13398dd72d"
               resources:
                 requests:
                   cpu: "200m"
