@@ -23,7 +23,7 @@ patches:
       metadata:
         name: examxv2-backend
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2247-Grouping-exam-for-staff-ha-cbf55826cf7aab5020770a6b18b6998156bd29e9"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Fixparser-lim-extraction-4426Co-aut-c2810a8e0336425332e7d398b7c72d3697f80c3c"
       spec:
         replicas: 1
         template:
@@ -31,7 +31,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2247-Grouping-exam-for-staff-ha-cbf55826cf7aab5020770a6b18b6998156bd29e9"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Fixparser-lim-extraction-4426Co-aut-c2810a8e0336425332e7d398b7c72d3697f80c3c"
               resources:
                 requests:
                   cpu: "1"
@@ -61,7 +61,7 @@ patches:
       metadata:
         name: celery-worker-default
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2247-Grouping-exam-for-staff-ha-cbf55826cf7aab5020770a6b18b6998156bd29e9"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Fixparser-lim-extraction-4426Co-aut-c2810a8e0336425332e7d398b7c72d3697f80c3c"
       spec:
         replicas: 1
         template:
@@ -69,7 +69,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2247-Grouping-exam-for-staff-ha-cbf55826cf7aab5020770a6b18b6998156bd29e9"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Fixparser-lim-extraction-4426Co-aut-c2810a8e0336425332e7d398b7c72d3697f80c3c"
               resources:
                 requests:
                   cpu: "200m"
@@ -110,7 +110,7 @@ patches:
       metadata:
         name: celery-bulk-upload-worker
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2247-Grouping-exam-for-staff-ha-cbf55826cf7aab5020770a6b18b6998156bd29e9"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Fixparser-lim-extraction-4426Co-aut-c2810a8e0336425332e7d398b7c72d3697f80c3c"
       spec:
         replicas: 1
         template:
@@ -118,7 +118,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2247-Grouping-exam-for-staff-ha-cbf55826cf7aab5020770a6b18b6998156bd29e9"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Fixparser-lim-extraction-4426Co-aut-c2810a8e0336425332e7d398b7c72d3697f80c3c"
               resources:
                 requests:
                   cpu: "300m"
@@ -172,7 +172,7 @@ patches:
       metadata:
         name: celery-question-generator-ai-worker
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2247-Grouping-exam-for-staff-ha-cbf55826cf7aab5020770a6b18b6998156bd29e9"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Fixparser-lim-extraction-4426Co-aut-c2810a8e0336425332e7d398b7c72d3697f80c3c"
       spec:
         replicas: 1
         template:
@@ -180,7 +180,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2247-Grouping-exam-for-staff-ha-cbf55826cf7aab5020770a6b18b6998156bd29e9"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Fixparser-lim-extraction-4426Co-aut-c2810a8e0336425332e7d398b7c72d3697f80c3c"
               resources:
                 requests:
                   cpu: "200m"
@@ -222,7 +222,7 @@ patches:
       metadata:
         name: celery-flower
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2247-Grouping-exam-for-staff-ha-cbf55826cf7aab5020770a6b18b6998156bd29e9"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Fixparser-lim-extraction-4426Co-aut-c2810a8e0336425332e7d398b7c72d3697f80c3c"
       spec:
         replicas: 1
         template:
@@ -230,7 +230,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2247-Grouping-exam-for-staff-ha-cbf55826cf7aab5020770a6b18b6998156bd29e9"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Fixparser-lim-extraction-4426Co-aut-c2810a8e0336425332e7d398b7c72d3697f80c3c"
               resources:
                 requests:
                   cpu: "200m"
