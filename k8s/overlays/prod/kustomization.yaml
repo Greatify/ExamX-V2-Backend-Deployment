@@ -310,7 +310,6 @@ patches:
       metadata:
         name: celery-worker-default-autoscaler
       spec:
-        minReplicas: 1
         maxReplicas: 20
         scaleTargetRef:
           apiVersion: apps/v1
@@ -343,7 +342,6 @@ patches:
       metadata:
         name: celery-enrichment-worker-autoscaler
       spec:
-        minReplicas: 3
         maxReplicas: 20
         scaleTargetRef:
           apiVersion: apps/v1
