@@ -28,13 +28,14 @@ patches:
             containers:
             - name: examxv2-backend
               image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-1913-Question-Bank-Count-Report-2c81ed86396ed9f2ab0355bce95f0e5914290bf4"
-              resources:
-                requests:
-                  cpu: "1"
-                  memory: "3Gi"
-                limits:
-                  cpu: "2"
-                  memory: "6Gi"
+              resources: null  # Commented out for staging environment
+              # Original resources:
+              # requests:
+              #   cpu: "1"
+              #   memory: "3Gi"
+              # limits:
+              #   cpu: "2"
+              #   memory: "6Gi"
               env:
               - name: WORKERS
                 value: "2"
@@ -64,13 +65,14 @@ patches:
             containers:
             - name: celery-worker-default
               image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-1913-Question-Bank-Count-Report-2c81ed86396ed9f2ab0355bce95f0e5914290bf4"
-              resources:
-                requests:
-                  cpu: "250m"
-                  memory: "2Gi"
-                limits:
-                  cpu: "750m"
-                  memory: "3Gi"
+              resources: null  # Commented out for staging environment
+              # Original resources:
+              # requests:
+              #   cpu: "250m"
+              #   memory: "2Gi"
+              # limits:
+              #   cpu: "750m"
+              #   memory: "3Gi"
               command:
               - celery
               - -A
@@ -113,13 +115,14 @@ patches:
             containers:
             - name: celery-bulk-upload-worker
               image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-1913-Question-Bank-Count-Report-2c81ed86396ed9f2ab0355bce95f0e5914290bf4"
-              resources:
-                requests:
-                  cpu: "300m"
-                  memory: "2Gi"
-                limits:
-                  cpu: "750m"
-                  memory: "3Gi"
+              resources: null  # Commented out for staging environment
+              # Original resources:
+              # requests:
+              #   cpu: "300m"
+              #   memory: "2Gi"
+              # limits:
+              #   cpu: "750m"
+              #   memory: "3Gi"
               command:
               - celery
               - -A
@@ -161,13 +164,14 @@ patches:
             containers:
             - name: celery-enrichment-worker
               image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-1913-Question-Bank-Count-Report-2c81ed86396ed9f2ab0355bce95f0e5914290bf4"
-              resources:
-                requests:
-                  cpu: "300m"
-                  memory: "2Gi"
-                limits:
-                  cpu: "500m"
-                  memory: "3Gi"             
+              resources: null  # Commented out for staging environment
+              # Original resources:
+              # requests:
+              #   cpu: "300m"
+              #   memory: "2Gi"
+              # limits:
+              #   cpu: "500m"
+              #   memory: "3Gi"             
               command:
               - celery
               - -A
@@ -209,13 +213,14 @@ patches:
             containers:
             - name: celery-question-generator-ai-worker
               image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-1913-Question-Bank-Count-Report-2c81ed86396ed9f2ab0355bce95f0e5914290bf4"
-              resources:
-                requests:
-                  cpu: "300m"
-                  memory: "2Gi"
-                limits:
-                  cpu: "500m"
-                  memory: "3Gi"
+              resources: null  # Commented out for staging environment
+              # Original resources:
+              # requests:
+              #   cpu: "300m"
+              #   memory: "2Gi"
+              # limits:
+              #   cpu: "500m"
+              #   memory: "3Gi"
               command:
               - celery
               - -A
@@ -257,13 +262,14 @@ patches:
             containers:
             - name: flower
               image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-1913-Question-Bank-Count-Report-2c81ed86396ed9f2ab0355bce95f0e5914290bf4"
-              resources:
-                requests:
-                  cpu: "200m"
-                  memory: "512Mi"
-                limits:
-                  cpu: "400m"
-                  memory: "1Gi"
+              resources: null  # Commented out for staging environment
+              # Original resources:
+              # requests:
+              #   cpu: "200m"
+              #   memory: "512Mi"
+              # limits:
+              #   cpu: "400m"
+              #   memory: "1Gi"
     target:
       kind: Deployment
       name: celery-flower

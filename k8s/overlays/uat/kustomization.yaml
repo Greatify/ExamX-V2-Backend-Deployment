@@ -24,13 +24,14 @@ patches:
         value: examxv2-stg-secret-service
       - op: replace
         path: /spec/template/spec/containers/0/resources
-        value:
-          requests:
-            cpu: "750m"
-            memory: "5Gi"
-          limits:
-            cpu: "1500m"
-            memory: "8Gi"
+        value: null  # Commented out for UAT environment
+        # Original resources:
+        # requests:
+        #   cpu: "750m"
+        #   memory: "5Gi"
+        # limits:
+        #   cpu: "1500m"
+        #   memory: "8Gi"
       - op: replace
         path: /spec/template/spec/containers/0/env
         value:
@@ -58,13 +59,14 @@ patches:
         value: examxv2-stg-secret-service
       - op: replace
         path: /spec/template/spec/containers/0/resources
-        value:
-          requests:
-            cpu: "1"
-            memory: "3Gi"
-          limits:
-            cpu: "2"
-            memory: "6Gi"
+        value: null  # Commented out for UAT environment
+        # Original resources:
+        # requests:
+        #   cpu: "1"
+        #   memory: "3Gi"
+        # limits:
+        #   cpu: "2"
+        #   memory: "6Gi"
       - op: replace
         path: /spec/template/spec/containers/0/command
         value:
@@ -106,13 +108,14 @@ patches:
         value: examxv2-stg-secret-service
       - op: replace
         path: /spec/template/spec/containers/0/resources
-        value:
-          requests:
-            cpu: "750m"
-            memory: "5Gi"
-          limits:
-            cpu: "1500m"
-            memory: "8Gi"
+        value: null  # Commented out for UAT environment
+        # Original resources:
+        # requests:
+        #   cpu: "750m"
+        #   memory: "5Gi"
+        # limits:
+        #   cpu: "1500m"
+        #   memory: "8Gi"
       - op: replace
         path: /spec/template/spec/containers/0/command
         value:
@@ -154,13 +157,14 @@ patches:
         value: examxv2-stg-secret-service
       - op: replace
         path: /spec/template/spec/containers/0/resources
-        value:
-          requests:
-            cpu: "750m"
-            memory: "5Gi"
-          limits:
-            cpu: "1500m"
-            memory: "8Gi"
+        value: null  # Commented out for UAT environment
+        # Original resources:
+        # requests:
+        #   cpu: "750m"
+        #   memory: "5Gi"
+        # limits:
+        #   cpu: "1500m"
+        #   memory: "8Gi"
       - op: replace
         path: /spec/template/spec/containers/0/command
         value:
@@ -202,13 +206,14 @@ patches:
         value: examxv2-stg-secret-service
       - op: replace
         path: /spec/template/spec/containers/0/resources
-        value:
-          requests:
-            cpu: "1"
-            memory: "4Gi"
-          limits:
-            cpu: "2"
-            memory: "8Gi"
+        value: null  # Commented out for UAT environment
+        # Original resources:
+        # requests:
+        #   cpu: "1"
+        #   memory: "4Gi"
+        # limits:
+        #   cpu: "2"
+        #   memory: "8Gi"
       - op: replace
         path: /spec/template/spec/containers/0/command
         value:
@@ -276,13 +281,14 @@ patches:
             containers:
             - name: flower
               image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-20250822-073958-e2126036359743e3dd813d53597ff049c304d30a"
-              resources:
-                requests:
-                  cpu: "1"
-                  memory: "4Gi"
-                limits:
-                  cpu: "2"
-                  memory: "8Gi"
+              resources: null  # Commented out for UAT environment
+              # Original resources:
+              # requests:
+              #   cpu: "1"
+              #   memory: "4Gi"
+              # limits:
+              #   cpu: "2"
+              #   memory: "8Gi"
     target:
       kind: Deployment
       name: celery-flower
