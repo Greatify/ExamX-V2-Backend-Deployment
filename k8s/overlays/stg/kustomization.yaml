@@ -27,7 +27,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2264-Question-Bank-Count-Report-8ba6607a0d3f1948442f9e7f6f39da4cf34e01c6"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2254-Need-to-export-the-student-4f0522b94dc93923b82e0c7e027395988b1cdfdc"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -64,7 +64,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2264-Question-Bank-Count-Report-8ba6607a0d3f1948442f9e7f6f39da4cf34e01c6"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2254-Need-to-export-the-student-4f0522b94dc93923b82e0c7e027395988b1cdfdc"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -114,7 +114,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2264-Question-Bank-Count-Report-8ba6607a0d3f1948442f9e7f6f39da4cf34e01c6"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2254-Need-to-export-the-student-4f0522b94dc93923b82e0c7e027395988b1cdfdc"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -163,7 +163,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2264-Question-Bank-Count-Report-8ba6607a0d3f1948442f9e7f6f39da4cf34e01c6"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2254-Need-to-export-the-student-4f0522b94dc93923b82e0c7e027395988b1cdfdc"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -212,7 +212,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2264-Question-Bank-Count-Report-8ba6607a0d3f1948442f9e7f6f39da4cf34e01c6"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2254-Need-to-export-the-student-4f0522b94dc93923b82e0c7e027395988b1cdfdc"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -261,7 +261,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2264-Question-Bank-Count-Report-8ba6607a0d3f1948442f9e7f6f39da4cf34e01c6"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2254-Need-to-export-the-student-4f0522b94dc93923b82e0c7e027395988b1cdfdc"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
