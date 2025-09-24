@@ -32,14 +32,14 @@ patches:
             containers:
             - name: examxv2-backend
               image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2257-Template-Module-Allowing-d-f91daf37885e68c998014bda51684db631a9a5fa"
-              resources: null  # Commented out for dev environment
-              # resources:
-              #   requests:
-              #     cpu: "1"
-              #     memory: "3Gi"
-              #   limits:
-              #     cpu: "2"
-              #     memory: "6Gi"
+              # resources: null  # Commented out for dev environment
+              resources:
+                requests:
+                  cpu: "1"
+                  memory: "3Gi"
+                limits:
+                  cpu: "2"
+                  memory: "6Gi"
               env:
               - name: WORKERS
                 value: "2"
