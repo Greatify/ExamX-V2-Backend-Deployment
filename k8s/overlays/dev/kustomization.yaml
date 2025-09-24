@@ -31,7 +31,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2277-Questions-api-Couchbase-Ap-27548dc1b0018c563e25bd70090e5292ded4a6b3"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2264-Question-Bank-Count-Report-01cc72ec11af4d292ebd05f6316e7c5d72140a32"
               resources: null  # Commented out for dev environment
               # resources:
               #   requests:
@@ -70,7 +70,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2277-Questions-api-Couchbase-Ap-27548dc1b0018c563e25bd70090e5292ded4a6b3"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2264-Question-Bank-Count-Report-01cc72ec11af4d292ebd05f6316e7c5d72140a32"
               resources: null  # Commented out for dev environment
               # resources:
               #   requests:
@@ -120,7 +120,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2277-Questions-api-Couchbase-Ap-27548dc1b0018c563e25bd70090e5292ded4a6b3"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2264-Question-Bank-Count-Report-01cc72ec11af4d292ebd05f6316e7c5d72140a32"
               resources: null  # Commented out for dev environment
               # resources:
               #   requests:
@@ -195,7 +195,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2277-Questions-api-Couchbase-Ap-27548dc1b0018c563e25bd70090e5292ded4a6b3"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2264-Question-Bank-Count-Report-01cc72ec11af4d292ebd05f6316e7c5d72140a32"
               resources: null  # Commented out for dev environment
               # resources:
               #   requests:
@@ -246,7 +246,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2277-Questions-api-Couchbase-Ap-27548dc1b0018c563e25bd70090e5292ded4a6b3"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2264-Question-Bank-Count-Report-01cc72ec11af4d292ebd05f6316e7c5d72140a32"
               resources: null  # Commented out for dev environment
               # resources:
               #   requests:
