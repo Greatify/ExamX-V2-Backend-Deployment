@@ -23,7 +23,7 @@ patches:
       metadata:
         name: examxv2-backend
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2325-org-setting-add-allow-mult-d5887545f3e44af4d28080f1698e2ce03f77c5b4"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2330-Enhance-PR-review-workflow-6548e6eee6ed1bd78557f5657e01762f208cc508"
       spec:
         replicas: 1
         template:
@@ -31,7 +31,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2325-org-setting-add-allow-mult-d5887545f3e44af4d28080f1698e2ce03f77c5b4"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2330-Enhance-PR-review-workflow-6548e6eee6ed1bd78557f5657e01762f208cc508"
               # resources: null  # Commented out for dev environment
               resources:
                 requests:
@@ -62,7 +62,7 @@ patches:
       metadata:
         name: celery-worker-default
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2325-org-setting-add-allow-mult-d5887545f3e44af4d28080f1698e2ce03f77c5b4"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2330-Enhance-PR-review-workflow-6548e6eee6ed1bd78557f5657e01762f208cc508"
       spec:
         replicas: 1
         template:
@@ -70,7 +70,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2325-org-setting-add-allow-mult-d5887545f3e44af4d28080f1698e2ce03f77c5b4"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2330-Enhance-PR-review-workflow-6548e6eee6ed1bd78557f5657e01762f208cc508"
               resources: null  # Commented out for dev environment
               # resources:
               #   requests:
@@ -112,7 +112,7 @@ patches:
       metadata:
         name: celery-bulk-upload-worker
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2325-org-setting-add-allow-mult-d5887545f3e44af4d28080f1698e2ce03f77c5b4"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2330-Enhance-PR-review-workflow-6548e6eee6ed1bd78557f5657e01762f208cc508"
       spec:
         replicas: 1
         template:
@@ -120,7 +120,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2325-org-setting-add-allow-mult-d5887545f3e44af4d28080f1698e2ce03f77c5b4"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2330-Enhance-PR-review-workflow-6548e6eee6ed1bd78557f5657e01762f208cc508"
               resources: null  # Commented out for dev environment
               # resources:
               #   requests:
@@ -187,7 +187,7 @@ patches:
       metadata:
         name: celery-question-generator-ai-worker
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2325-org-setting-add-allow-mult-d5887545f3e44af4d28080f1698e2ce03f77c5b4"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2330-Enhance-PR-review-workflow-6548e6eee6ed1bd78557f5657e01762f208cc508"
       spec:
         replicas: 1
         template:
@@ -195,7 +195,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2325-org-setting-add-allow-mult-d5887545f3e44af4d28080f1698e2ce03f77c5b4"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2330-Enhance-PR-review-workflow-6548e6eee6ed1bd78557f5657e01762f208cc508"
               resources: null  # Commented out for dev environment
               # resources:
               #   requests:
@@ -238,7 +238,7 @@ patches:
       metadata:
         name: celery-flower
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2325-org-setting-add-allow-mult-d5887545f3e44af4d28080f1698e2ce03f77c5b4"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2330-Enhance-PR-review-workflow-6548e6eee6ed1bd78557f5657e01762f208cc508"
       spec:
         replicas: 1
         template:
@@ -246,7 +246,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2325-org-setting-add-allow-mult-d5887545f3e44af4d28080f1698e2ce03f77c5b4"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2330-Enhance-PR-review-workflow-6548e6eee6ed1bd78557f5657e01762f208cc508"
               resources: null  # Commented out for dev environment
               # resources:
               #   requests:
