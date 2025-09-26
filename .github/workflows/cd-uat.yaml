@@ -121,14 +121,24 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
         
-      - name: Generate UAT image tag
+      - name: Generate UAT image tag from checked-out source repo
         id: generate-tag
         run: |
-          TIMESTAMP=$(date +'%Y%m%d-%H%M%S')
-          COMMIT_ID=$(git rev-parse HEAD)
-          IMAGE_TAG="uat-${TIMESTAMP}-${COMMIT_ID}"
+          # Get commit ID from checked-out source repo (full commit ID)
+          SOURCE_COMMIT_ID=$(git rev-parse HEAD)
+          # Robust commit message handling from checked-out source repo
+          COMMIT_MSG=$(git log -1 --pretty=%B | head -1 || echo "no-message")
+          
+          # Remove newlines, tabs, and limit length
+          CLEAN_MSG=$(echo "$COMMIT_MSG" | tr -d '\n\r\t' | head -c 60 | tr -s ' ' | xargs || echo "no-message")
+          # Sanitize to safe characters only
+          SAFE_MSG=$(echo "$CLEAN_MSG" | sed -e 's/[^a-zA-Z0-9 _-]//g' -e 's/[[:space:]]/-/g' -e 's/--*/-/g' -e 's/^-\+\|-\+$//g' | cut -c1-35 | sed 's/-$//' || echo "fallback")
+          # Ensure we have a valid tag
+          FINAL_MSG=$(echo "$SAFE_MSG" | grep -E '^[a-zA-Z0-9][a-zA-Z0-9_-]*$' || echo "commit-$(date +%s)")
+          IMAGE_TAG="uat-${FINAL_MSG}-${SOURCE_COMMIT_ID}"
           
           echo "IMAGE_TAG=$IMAGE_TAG" >> $GITHUB_OUTPUT
+          echo "SOURCE_COMMIT_ID=$SOURCE_COMMIT_ID" >> $GITHUB_OUTPUT
           echo "Generated Image Tag: $IMAGE_TAG"
 
       - name: Cache Docker layers
@@ -216,7 +226,8 @@ jobs:
         if: github.event.inputs.full_deployment == 'true'
         run: |
           # Update image tags in the UAT overlay kustomization file
-          sed -i 's|"399600302704\.dkr\.ecr\.ap-south-1\.amazonaws\.com/examxv2-backend:[^"]*"|"'"$BACKEND_IMAGE"'"|g' k8s/overlays/uat/kustomization.yaml
+          sed -i 's|image: "[^"]*"|image: "'"$BACKEND_IMAGE"'"|g' k8s/overlays/uat/kustomization.yaml
+          sed -i 's|kubernetes.io/change-cause:.*|kubernetes.io/change-cause: Updated to "'"$BACKEND_IMAGE"'"|g' k8s/overlays/uat/kustomization.yaml
       
       - name: Commit and push changes
         if: github.event.inputs.full_deployment == 'true'
@@ -241,15 +252,27 @@ jobs:
         run: |
           kubectl apply -k k8s/overlays/uat
 
-    #   - name: Verify deployment
-    #     run: |
-    #       echo "Waiting for deployments to be ready..."
-    #       kubectl wait --for=condition=available --timeout=300s deployment/examxv2-backend -n uat-examxv2
-    #       kubectl wait --for=condition=available --timeout=300s deployment/celery-worker-default -n uat-examxv2
-          
-    #       echo "Deployment status:"
-    #       kubectl get deployments -n uat-examxv2
-    #       kubectl get pods -n uat-examxv2
+      - name: Send deployment success notification
+        if: success()
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          author_name: Backend Deployment Success
+          mention: ${{ github.actor }}
+          if_mention: success
+          job_name: deploy-backend-uat
+          channel: examxv2-backend-alerts
+          username: ExamX-V2-CICD
+          text: |
+            :rocket: *Backend deployment to UAT environment succeeded*
+            
+            *Deployment by:* @${{ github.actor }}
+            *Branch:* ${{ github.event.inputs.deploy_branch }}
+            *Full Deployment:* ${{ github.event.inputs.full_deployment }}
+            
+            @${{ github.actor }}, your changes have been deployed successfully to UAT.
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
       - name: Send deployment failure notification
         if: failure()

@@ -14,260 +14,241 @@ labels:
     includeSelectors: false
 
 patches:
-  # Update backend configuration for UAT
-  - target:
+  # Backend Deployment patches
+  - patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: examxv2-backend
+      spec:
+        replicas: 1
+        template:
+          spec:
+            serviceAccountName: examxv2-stg-secret-service
+            containers:
+            - name: examxv2-backend
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-20250926-055257-be00ef3f13d8bce653a5c33be496b0dc92878b00"
+              resources: null  # Commented out for UAT environment
+              # Original resources:
+              # requests:
+              #   cpu: "750m"
+              #   memory: "5Gi"
+              # limits:
+              #   cpu: "1500m"
+              #   memory: "8Gi"
+              env:
+              - name: WORKERS
+                value: "2"
+              - name: OPIK_URL_OVERRIDE
+                value: "https://www.comet.com/opik/api"
+              - name: OPIK_API_KEY
+                value: "Y5T3WoqNxJ22ypw1M8qivydis"
+              - name: OPIK_WORKSPACE
+                value: "greatify-prod"
+              - name: OPIK_PROJECT_NAME
+                value: "UAT"
+    target:
       kind: Deployment
       name: examxv2-backend
-    patch: |-
-      - op: replace
-        path: /spec/template/spec/serviceAccountName
-        value: examxv2-stg-secret-service
-      - op: replace
-        path: /spec/template/spec/containers/0/resources
-        value: null  # Commented out for UAT environment
-        # Original resources:
-        # requests:
-        #   cpu: "750m"
-        #   memory: "5Gi"
-        # limits:
-        #   cpu: "1500m"
-        #   memory: "8Gi"
-      - op: replace
-        path: /spec/template/spec/containers/0/env
-        value:
-          - name: WORKERS
-            value: "2"
-          - name: OPIK_URL_OVERRIDE
-            value: "https://www.comet.com/opik/api"
-          - name: OPIK_API_KEY
-            value: "Y5T3WoqNxJ22ypw1M8qivydis"
-          - name: OPIK_WORKSPACE
-            value: "greatify-prod"
-          - name: OPIK_PROJECT_NAME
-            value: "Stg"
-      - op: replace
-        path: /spec/template/spec/containers/0/image
-        value: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-20250926-055257-be00ef3f13d8bce653a5c33be496b0dc92878b00"
 
-  # Update celery-worker configuration for UAT
-  - target:
+  # Celery Worker patches
+  - patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: celery-worker-default
+      spec:
+        replicas: 1
+        template:
+          spec:
+            serviceAccountName: examxv2-stg-secret-service
+            containers:
+            - name: celery-worker-default
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-20250926-055257-be00ef3f13d8bce653a5c33be496b0dc92878b00"
+              resources: null  # Commented out for UAT environment
+              # Original resources:
+              # requests:
+              #   cpu: "1"
+              #   memory: "3Gi"
+              # limits:
+              #   cpu: "2"
+              #   memory: "6Gi"
+              command:
+              - celery
+              - -A
+              - examx
+              - worker
+              - -P
+              - gevent
+              - -c
+              - "100"
+              - -Q
+              - default
+              - -l
+              - info
+              - -E
+              env:
+              - name: OPIK_URL_OVERRIDE
+                value: "https://www.comet.com/opik/api"
+              - name: OPIK_API_KEY
+                value: "Y5T3WoqNxJ22ypw1M8qivydis"
+              - name: OPIK_WORKSPACE
+                value: "greatify-prod"
+              - name: OPIK_PROJECT_NAME
+                value: "UAT"
+    target:
       kind: Deployment
       name: celery-worker-default
-    patch: |-
-      - op: replace
-        path: /spec/template/spec/serviceAccountName
-        value: examxv2-stg-secret-service
-      - op: replace
-        path: /spec/template/spec/containers/0/resources
-        value: null  # Commented out for UAT environment
-        # Original resources:
-        # requests:
-        #   cpu: "1"
-        #   memory: "3Gi"
-        # limits:
-        #   cpu: "2"
-        #   memory: "6Gi"
-      - op: replace
-        path: /spec/template/spec/containers/0/command
-        value:
-          - celery
-          - -A
-          - examx
-          - worker
-          - -P
-          - gevent
-          - -c
-          - "100"
-          - -Q
-          - default
-          - -l
-          - info
-          - -E
-      - op: replace
-        path: /spec/template/spec/containers/0/env
-        value:
-          - name: OPIK_URL_OVERRIDE
-            value: "https://www.comet.com/opik/api"
-          - name: OPIK_API_KEY
-            value: "Y5T3WoqNxJ22ypw1M8qivydis"
-          - name: OPIK_WORKSPACE
-            value: "greatify-prod"
-          - name: OPIK_PROJECT_NAME
-            value: "Stg"
-      - op: replace
-        path: /spec/template/spec/containers/0/image
-        value: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-20250926-055257-be00ef3f13d8bce653a5c33be496b0dc92878b00"
 
-  # Update celery-bulk-upload-worker configuration for UAT
-  - target:
+
+  # Celery Bulk Upload Worker patches
+  - patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: celery-bulk-upload-worker
+      spec:
+        replicas: 1
+        template:
+          spec:
+            serviceAccountName: examxv2-stg-secret-service
+            containers:
+            - name: celery-bulk-upload-worker
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-20250926-055257-be00ef3f13d8bce653a5c33be496b0dc92878b00"
+              resources: null  # Commented out for UAT environment
+              # Original resources:
+              # requests:
+              #   cpu: "750m"
+              #   memory: "5Gi"
+              # limits:
+              #   cpu: "1500m"
+              #   memory: "8Gi"
+              command:
+              - celery
+              - -A
+              - examx
+              - worker
+              - -P
+              - prefork
+              - -c
+              - "2"
+              - -Q
+              - bulk_upload
+              - -l
+              - info
+              - -E
+              env:
+              - name: OPIK_URL_OVERRIDE
+                value: "https://www.comet.com/opik/api"
+              - name: OPIK_API_KEY
+                value: "Y5T3WoqNxJ22ypw1M8qivydis"
+              - name: OPIK_WORKSPACE
+                value: "greatify-prod"
+              - name: OPIK_PROJECT_NAME
+                value: "UAT"
+    target:
       kind: Deployment
       name: celery-bulk-upload-worker
-    patch: |-
-      - op: replace
-        path: /spec/template/spec/serviceAccountName
-        value: examxv2-stg-secret-service
-      - op: replace
-        path: /spec/template/spec/containers/0/resources
-        value: null  # Commented out for UAT environment
-        # Original resources:
-        # requests:
-        #   cpu: "750m"
-        #   memory: "5Gi"
-        # limits:
-        #   cpu: "1500m"
-        #   memory: "8Gi"
-      - op: replace
-        path: /spec/template/spec/containers/0/command
-        value:
-          - celery
-          - -A
-          - examx
-          - worker
-          - -P
-          - prefork
-          - -c
-          - "2"
-          - -Q
-          - bulk_upload
-          - -l
-          - info
-          - -E
-      - op: replace
-        path: /spec/template/spec/containers/0/env
-        value:
-          - name: OPIK_URL_OVERRIDE
-            value: "https://www.comet.com/opik/api"
-          - name: OPIK_API_KEY
-            value: "Y5T3WoqNxJ22ypw1M8qivydis"
-          - name: OPIK_WORKSPACE
-            value: "greatify-prod"
-          - name: OPIK_PROJECT_NAME
-            value: "Stg"
-      - op: replace
-        path: /spec/template/spec/containers/0/image
-        value: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-20250926-055257-be00ef3f13d8bce653a5c33be496b0dc92878b00"
 
-  # Update celery-enrichment-worker configuration for UAT
-  - target:
+  # Celery Enrichment Worker patches
+  - patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: celery-enrichment-worker
+      spec:
+        replicas: 1
+        template:
+          spec:
+            serviceAccountName: examxv2-stg-secret-service
+            containers:
+            - name: celery-enrichment-worker
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-20250926-055257-be00ef3f13d8bce653a5c33be496b0dc92878b00"
+              resources: null  # Commented out for UAT environment
+              # Original resources:
+              # requests:
+              #   cpu: "750m"
+              #   memory: "5Gi"
+              # limits:
+              #   cpu: "1500m"
+              #   memory: "8Gi"             
+              command:
+              - celery
+              - -A
+              - examx
+              - worker
+              - -P
+              - gevent
+              - -c
+              - "100"
+              - -Q
+              - question_enrichment
+              - -l
+              - info
+              - -E
+              env:
+              - name: OPIK_URL_OVERRIDE
+                value: "https://www.comet.com/opik/api"
+              - name: OPIK_API_KEY
+                value: "Y5T3WoqNxJ22ypw1M8qivydis"
+              - name: OPIK_WORKSPACE
+                value: "greatify-prod"
+              - name: OPIK_PROJECT_NAME
+                value: "UAT"
+    target:
       kind: Deployment
       name: celery-enrichment-worker
-    patch: |-
-      - op: replace
-        path: /spec/template/spec/serviceAccountName
-        value: examxv2-stg-secret-service
-      - op: replace
-        path: /spec/template/spec/containers/0/resources
-        value: null  # Commented out for UAT environment
-        # Original resources:
-        # requests:
-        #   cpu: "750m"
-        #   memory: "5Gi"
-        # limits:
-        #   cpu: "1500m"
-        #   memory: "8Gi"
-      - op: replace
-        path: /spec/template/spec/containers/0/command
-        value:
-          - celery
-          - -A
-          - examx
-          - worker
-          - -P
-          - gevent
-          - -c
-          - "100"
-          - -Q
-          - question_enrichment
-          - -l
-          - info
-          - -E
-      - op: replace
-        path: /spec/template/spec/containers/0/env
-        value:
-          - name: OPIK_URL_OVERRIDE
-            value: "https://www.comet.com/opik/api"
-          - name: OPIK_API_KEY
-            value: "Y5T3WoqNxJ22ypw1M8qivydis"
-          - name: OPIK_WORKSPACE
-            value: "greatify-prod"
-          - name: OPIK_PROJECT_NAME
-            value: "Stg"
-      - op: replace
-        path: /spec/template/spec/containers/0/image
-        value: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-20250926-055257-be00ef3f13d8bce653a5c33be496b0dc92878b00"
 
-  # Update celery-question-generator-ai-worker configuration for UAT
-  - target:
+  # Celery Question Generator AI Worker patches
+  - patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: celery-question-generator-ai-worker
+      spec:
+        replicas: 1
+        template:
+          spec:
+            serviceAccountName: examxv2-stg-secret-service
+            containers:
+            - name: celery-question-generator-ai-worker
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-20250926-055257-be00ef3f13d8bce653a5c33be496b0dc92878b00"
+              resources: null  # Commented out for UAT environment
+              # Original resources:
+              # requests:
+              #   cpu: "1"
+              #   memory: "4Gi"
+              # limits:
+              #   cpu: "2"
+              #   memory: "8Gi"
+              command:
+              - celery
+              - -A
+              - examx
+              - worker
+              - -P
+              - gevent
+              - -c
+              - "100"
+              - -Q
+              - question_generator_ai
+              - -l
+              - info
+              - -E
+              env:
+              - name: OPIK_URL_OVERRIDE
+                value: "https://www.comet.com/opik/api"
+              - name: OPIK_API_KEY
+                value: "Y5T3WoqNxJ22ypw1M8qivydis"
+              - name: OPIK_WORKSPACE
+                value: "greatify-prod"
+              - name: OPIK_PROJECT_NAME
+                value: "UAT"
+    target:
       kind: Deployment
       name: celery-question-generator-ai-worker
-    patch: |-
-      - op: replace
-        path: /spec/template/spec/serviceAccountName
-        value: examxv2-stg-secret-service
-      - op: replace
-        path: /spec/template/spec/containers/0/resources
-        value: null  # Commented out for UAT environment
-        # Original resources:
-        # requests:
-        #   cpu: "1"
-        #   memory: "4Gi"
-        # limits:
-        #   cpu: "2"
-        #   memory: "8Gi"
-      - op: replace
-        path: /spec/template/spec/containers/0/command
-        value:
-          - celery
-          - -A
-          - examx
-          - worker
-          - -P
-          - gevent
-          - -c
-          - "100"
-          - -Q
-          - question_generator_ai
-          - -l
-          - info
-          - -E
-      - op: replace
-        path: /spec/template/spec/containers/0/env
-        value:
-          - name: OPIK_URL_OVERRIDE
-            value: "https://www.comet.com/opik/api"
-          - name: OPIK_API_KEY
-            value: "Y5T3WoqNxJ22ypw1M8qivydis"
-          - name: OPIK_WORKSPACE
-            value: "greatify-prod"
-          - name: OPIK_PROJECT_NAME
-            value: "Stg"
-      - op: replace
-        path: /spec/template/spec/containers/0/image
-        value: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-20250926-055257-be00ef3f13d8bce653a5c33be496b0dc92878b00"
 
-
-
-  # Ingress patches - Using klockwork.ai domain
-  - patch: |-
-      apiVersion: networking.k8s.io/v1
-      kind: Ingress
-      metadata:
-        name: examxv2-ingress
-        annotations:
-          alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-south-1:399600302704:certificate/b1a2ebc1-bf6b-4a73-a7f9-69ad12e8c4c9
-          alb.ingress.kubernetes.io/auth-tls-verify-client: "optional"
-          alb.ingress.kubernetes.io/cors-allow-origin: >-
-            https://klockwork.ai,https://www.klockwork.ai,https://*.klockwork.ai
-      spec:
-        tls:
-          - hosts:
-              - klockwork.ai
-            secretName: tls-secret
-    target:
-      kind: Ingress
-      name: examxv2-ingress
-
-  # Celery Flower patches for UAT
+  # Celery Flower patches
   - patch: |-
       apiVersion: apps/v1
       kind: Deployment
@@ -293,7 +274,27 @@ patches:
       kind: Deployment
       name: celery-flower
 
-  # Secrets patches - Using UAT secret ARN
+  # Ingress patches
+  - patch: |-
+      apiVersion: networking.k8s.io/v1
+      kind: Ingress
+      metadata:
+        name: examxv2-ingress
+        annotations:
+          alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-south-1:399600302704:certificate/b1a2ebc1-bf6b-4a73-a7f9-69ad12e8c4c9
+          alb.ingress.kubernetes.io/auth-tls-verify-client: "optional"
+          alb.ingress.kubernetes.io/cors-allow-origin: >-
+            https://klockwork.ai,https://www.klockwork.ai,https://*.klockwork.ai
+      spec:
+        tls:
+          - hosts:
+              - klockwork.ai
+            secretName: tls-secret
+    target:
+      kind: Ingress
+      name: examxv2-ingress
+
+  # Secrets patches
   - patch: |-
       apiVersion: secrets-store.csi.x-k8s.io/v1
       kind: SecretProviderClass
@@ -307,8 +308,8 @@ patches:
               objectType: "secretsmanager"
     target:
       kind: SecretProviderClass
-      name: examxv2-backend-secrets 
-      
+      name: examxv2-backend-secrets
+
   - patch: |-
       apiVersion: secrets-store.csi.x-k8s.io/v1
       kind: SecretProviderClass
