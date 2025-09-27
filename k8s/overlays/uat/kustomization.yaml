@@ -28,14 +28,15 @@ patches:
             containers:
             - name: examxv2-backend
               image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-EXM-2333-Updated-parent-child-relat-a366c47138ab27abbe170f6384ce0ed12d581857"
-              resources: null  # Commented out for UAT environment
+              # resources: null  # Commented out for UAT environment
               # Original resources:
-              # requests:
-              #   cpu: "750m"
-              #   memory: "5Gi"
-              # limits:
-              #   cpu: "1500m"
-              #   memory: "8Gi"
+              resources
+                requests:
+                  cpu: "750m"
+                  memory: "5Gi"
+                limits:
+                  cpu: "1500m"
+                  memory: "8Gi"
               env:
               - name: WORKERS
                 value: "2"
