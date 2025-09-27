@@ -27,7 +27,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-fixed-sorting-flow-in-question-pape-50da8f43e0fd1a44f49390d5269d8e1cc2879610"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-Merge-branch-dev-of-httpsgithubcomG-7662b2ef7a1910a42c54787c1883757802e1aa5b"
               resources: null  # Commented out for UAT environment
               # Original resources:
               # requests:
@@ -64,7 +64,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-fixed-sorting-flow-in-question-pape-50da8f43e0fd1a44f49390d5269d8e1cc2879610"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-Merge-branch-dev-of-httpsgithubcomG-7662b2ef7a1910a42c54787c1883757802e1aa5b"
               resources: null  # Commented out for UAT environment
               # Original resources:
               # requests:
@@ -114,7 +114,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-fixed-sorting-flow-in-question-pape-50da8f43e0fd1a44f49390d5269d8e1cc2879610"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-Merge-branch-dev-of-httpsgithubcomG-7662b2ef7a1910a42c54787c1883757802e1aa5b"
               resources: null  # Commented out for UAT environment
               # Original resources:
               # requests:
@@ -163,7 +163,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-fixed-sorting-flow-in-question-pape-50da8f43e0fd1a44f49390d5269d8e1cc2879610"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-Merge-branch-dev-of-httpsgithubcomG-7662b2ef7a1910a42c54787c1883757802e1aa5b"
               resources: null  # Commented out for UAT environment
               # Original resources:
               # requests:
@@ -212,7 +212,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-fixed-sorting-flow-in-question-pape-50da8f43e0fd1a44f49390d5269d8e1cc2879610"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-Merge-branch-dev-of-httpsgithubcomG-7662b2ef7a1910a42c54787c1883757802e1aa5b"
               resources: null  # Commented out for UAT environment
               # Original resources:
               # requests:
@@ -261,7 +261,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-fixed-sorting-flow-in-question-pape-50da8f43e0fd1a44f49390d5269d8e1cc2879610"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-Merge-branch-dev-of-httpsgithubcomG-7662b2ef7a1910a42c54787c1883757802e1aa5b"
               resources: null  # Commented out for UAT environment
               # Original resources:
               # requests:
