@@ -28,14 +28,12 @@ patches:
             containers:
             - name: examxv2-backend
               image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-EXM-2333-Updated-parent-child-relat-a366c47138ab27abbe170f6384ce0ed12d581857"
-              # resources: null  # Commented out for UAT environment
-              # Original resources:
-              resources
+              resources:
                 requests:
-                  cpu: "750m"
-                  memory: "5Gi"
+                  cpu: "2"
+                  memory: "4Gi"
                 limits:
-                  cpu: "1500m"
+                  cpu: "3"
                   memory: "8Gi"
               env:
               - name: WORKERS
@@ -66,14 +64,13 @@ patches:
             containers:
             - name: celery-worker-default
               image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-EXM-2333-Updated-parent-child-relat-a366c47138ab27abbe170f6384ce0ed12d581857"
-              resources: null  # Commented out for UAT environment
-              # Original resources:
-              # requests:
-              #   cpu: "1"
-              #   memory: "3Gi"
-              # limits:
-              #   cpu: "2"
-              #   memory: "6Gi"
+              resources:
+                requests:
+                  cpu: "1"
+                  memory: "2Gi"
+                limits:
+                  cpu: "1500m"
+                  memory: "4Gi"
               command:
               - celery
               - -A
@@ -116,14 +113,13 @@ patches:
             containers:
             - name: celery-bulk-upload-worker
               image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-EXM-2333-Updated-parent-child-relat-a366c47138ab27abbe170f6384ce0ed12d581857"
-              resources: null  # Commented out for UAT environment
-              # Original resources:
-              # requests:
-              #   cpu: "750m"
-              #   memory: "5Gi"
-              # limits:
-              #   cpu: "1500m"
-              #   memory: "8Gi"
+              resources:
+                requests:
+                  cpu: "1"
+                  memory: "2Gi"
+                limits:
+                  cpu: "1500m"
+                  memory: "3Gi"
               command:
               - celery
               - -A
@@ -165,14 +161,13 @@ patches:
             containers:
             - name: celery-enrichment-worker
               image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-EXM-2333-Updated-parent-child-relat-a366c47138ab27abbe170f6384ce0ed12d581857"
-              resources: null  # Commented out for UAT environment
-              # Original resources:
-              # requests:
-              #   cpu: "750m"
-              #   memory: "5Gi"
-              # limits:
-              #   cpu: "1500m"
-              #   memory: "8Gi"             
+              resources:
+                requests:
+                  cpu: "1"
+                  memory: "2Gi"
+                limits:
+                  cpu: "1500m"
+                  memory: "4Gi"             
               command:
               - celery
               - -A
@@ -214,14 +209,13 @@ patches:
             containers:
             - name: celery-question-generator-ai-worker
               image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-EXM-2333-Updated-parent-child-relat-a366c47138ab27abbe170f6384ce0ed12d581857"
-              resources: null  # Commented out for UAT environment
-              # Original resources:
-              # requests:
-              #   cpu: "1"
-              #   memory: "4Gi"
-              # limits:
-              #   cpu: "2"
-              #   memory: "8Gi"
+              resources:
+                requests:
+                  cpu: "1"
+                  memory: "2Gi"
+                limits:
+                  cpu: "1500m"
+                  memory: "3Gi"
               command:
               - celery
               - -A
@@ -263,14 +257,13 @@ patches:
             containers:
             - name: flower
               image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-EXM-2333-Updated-parent-child-relat-a366c47138ab27abbe170f6384ce0ed12d581857"
-              resources: null  # Commented out for UAT environment
-              # Original resources:
-              # requests:
-              #   cpu: "1"
-              #   memory: "4Gi"
-              # limits:
-              #   cpu: "2"
-              #   memory: "8Gi"
+              resources:
+                requests:
+                  cpu: "250m"
+                  memory: "1Gi"
+                limits:
+                  cpu: "500m"
+                  memory: "2Gi"
     target:
       kind: Deployment
       name: celery-flower
@@ -325,3 +318,95 @@ patches:
     target:
       kind: SecretProviderClass
       name: examxv2-google-credentials
+
+  # Autoscaling patches for UAT environment
+  # Backend Autoscaler patches (following production pattern)
+  - patch: |-
+      apiVersion: autoscaling/v2
+      kind: HorizontalPodAutoscaler
+      metadata:
+        name: examxv2-backend-pod-autoscaler
+      spec:
+        minReplicas: 1
+        maxReplicas: 4
+    target:
+      kind: HorizontalPodAutoscaler
+      name: examxv2-backend-pod-autoscaler
+
+  # Celery Worker Autoscaler patches (following production pattern)
+  - patch: |-
+      apiVersion: autoscaling/v2
+      kind: HorizontalPodAutoscaler
+      metadata:
+        name: celery-worker-default-autoscaler
+      spec:
+        minReplicas: 1
+        maxReplicas: 4
+        scaleTargetRef:
+          apiVersion: apps/v1
+          kind: Deployment
+          name: celery-worker-default
+    target:
+      kind: HorizontalPodAutoscaler
+      name: celery-worker-default-autoscaler
+
+  # Celery Bulk Upload Worker Autoscaler patches (following production pattern)
+  - patch: |-
+      apiVersion: autoscaling/v2
+      kind: HorizontalPodAutoscaler
+      metadata:
+        name: celery-bulk-upload-worker-autoscaler
+      spec:
+        maxReplicas: 4
+        scaleTargetRef:
+          apiVersion: apps/v1
+          kind: Deployment
+          name: celery-bulk-upload-worker
+    target:
+      kind: HorizontalPodAutoscaler
+      name: celery-bulk-upload-worker-autoscaler
+
+  # Celery Enrichment Worker Autoscaler patches (following production pattern)
+  - patch: |-
+      apiVersion: autoscaling/v2
+      kind: HorizontalPodAutoscaler
+      metadata:
+        name: celery-enrichment-worker-autoscaler
+      spec:
+        maxReplicas: 4
+        scaleTargetRef:
+          apiVersion: apps/v1
+          kind: Deployment
+          name: celery-enrichment-worker
+    target:
+      kind: HorizontalPodAutoscaler
+      name: celery-enrichment-worker-autoscaler
+
+  # Celery Question Generator AI Worker Autoscaler patches (following production pattern)
+  - patch: |-
+      apiVersion: autoscaling/v2
+      kind: HorizontalPodAutoscaler
+      metadata:
+        name: celery-question-generator-ai-worker-autoscaler
+      spec:
+        maxReplicas: 4
+        scaleTargetRef:
+          apiVersion: apps/v1
+          kind: Deployment
+          name: celery-question-generator-ai-worker
+    target:
+      kind: HorizontalPodAutoscaler
+      name: celery-question-generator-ai-worker-autoscaler
+
+  # Celery Flower Autoscaler patches (following production pattern)
+  - patch: |-
+      apiVersion: autoscaling/v2
+      kind: HorizontalPodAutoscaler
+      metadata:
+        name: celery-flower-autoscaler
+      spec:
+        minReplicas: 1
+        maxReplicas: 2
+    target:
+      kind: HorizontalPodAutoscaler
+      name: celery-flower-autoscaler
