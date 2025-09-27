@@ -28,7 +28,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-1913-Question-Bank-Count-Report-957c21ad5e8cbd0a6f860614a05138f952f69f31"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2367-mark-issue-random-apply-in-5c0c2bab7ea0027fabe1b8d7a6332336306b7417"
               resources:
                 requests:
                   cpu: "2"
@@ -64,7 +64,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-1913-Question-Bank-Count-Report-957c21ad5e8cbd0a6f860614a05138f952f69f31"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2367-mark-issue-random-apply-in-5c0c2bab7ea0027fabe1b8d7a6332336306b7417"
               resources:
                 requests:
                   cpu: "2"
@@ -112,7 +112,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-1913-Question-Bank-Count-Report-957c21ad5e8cbd0a6f860614a05138f952f69f31"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2367-mark-issue-random-apply-in-5c0c2bab7ea0027fabe1b8d7a6332336306b7417"
               resources:
                 requests:
                   cpu: "2"
@@ -160,7 +160,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-1913-Question-Bank-Count-Report-957c21ad5e8cbd0a6f860614a05138f952f69f31"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2367-mark-issue-random-apply-in-5c0c2bab7ea0027fabe1b8d7a6332336306b7417"
               resources:
                 requests:
                   cpu: "2"
@@ -208,7 +208,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-1913-Question-Bank-Count-Report-957c21ad5e8cbd0a6f860614a05138f952f69f31"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2367-mark-issue-random-apply-in-5c0c2bab7ea0027fabe1b8d7a6332336306b7417"
               resources:
                 requests:
                   cpu: "2"
@@ -279,7 +279,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-1913-Question-Bank-Count-Report-957c21ad5e8cbd0a6f860614a05138f952f69f31"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2367-mark-issue-random-apply-in-5c0c2bab7ea0027fabe1b8d7a6332336306b7417"
               resources:
                 requests:
                   cpu: "250m"
