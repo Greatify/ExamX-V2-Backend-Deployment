@@ -16,6 +16,11 @@ on:
         description: 'Enter branch name to deploy'
         required: true
         type: string
+      use_default_runner:
+        description: 'Run on default runner instead of self-hosted?'
+        required: true
+        type: boolean
+        default: false
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -23,7 +28,7 @@ concurrency:
 
 jobs:
   security-password-check:
-    runs-on: ubuntu-latest
+    runs-on: ${{ github.event.inputs.use_default_runner == 'true' && 'ubuntu-latest' || 'self-hosted' }}
     environment: stg
     steps:
       - name: Verify deployment password
@@ -69,7 +74,7 @@ jobs:
   build-backend-staging-image:
     needs: security-password-check
     if: github.event.inputs.full_deployment == 'true'
-    runs-on: ubuntu-latest
+    runs-on: ${{ github.event.inputs.use_default_runner == 'true' && 'ubuntu-latest' || 'self-hosted' }}
     environment: stg
     steps:
       - name: Checkout repository code
@@ -83,31 +88,13 @@ jobs:
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-        with:
-          version: v0.12.0
-          driver-opts: |
-            image=moby/buildkit:v0.12.0
-          buildkitd-flags: |
-            --debug
-            --allow-insecure-entitlement security.insecure
-            --allow-insecure-entitlement network.host
-          config-inline: |
-            [registry."docker.io"]
-              mirrors = ["mirror.gcr.io"]
-            [worker.oci]
-              max-parallelism = 12
-
-      - name: Free disk space
+      - name: Ensure Buildx is available
         run: |
-          sudo rm -rf /usr/share/dotnet
-          sudo rm -rf /opt/ghc
-          sudo rm -rf "/usr/local/share/boost"
-          sudo rm -rf "$AGENT_TOOLSDIRECTORY"
-          sudo apt-get clean
-          docker system prune -af
-          df -h
+          docker buildx use flamboyant_haslett || docker buildx create --name flamboyant_haslett --use
+          docker buildx inspect --bootstrap
+  
+      - name: Prune Docker
+        run: docker system prune -af 
 
       - name: Configure AWS credentials for ECR
         uses: aws-actions/configure-aws-credentials@v3
@@ -195,7 +182,7 @@ jobs:
           if-no-files-found: error
 
   deploy-backend-staging:
-    runs-on: ubuntu-latest
+    runs-on: ${{ github.event.inputs.use_default_runner == 'true' && 'ubuntu-latest' || 'self-hosted' }}
     needs: 
       - security-password-check
       - build-backend-staging-image
@@ -253,7 +240,7 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Update Kubernetes configuration
-        run: aws eks update-kubeconfig --name dev-stg-cluster --region ap-south-1
+        run: aws eks update-kubeconfig --name ${{ secrets.STG_CLUSTER_NAME }} --region ${{ secrets.AWS_REGION }}
 
       - name: Deploy to staging environment
         run: |
