@@ -14,7 +14,7 @@ on:
   
 jobs:
   deploy-backend-development:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     environment: dev
     steps:
       - name: Display Deployment Information
@@ -58,7 +58,7 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Update Kubernetes configuration
-        run: aws eks update-kubeconfig --name dev-stg-cluster --region ap-south-1
+        run: aws eks update-kubeconfig --name ${{ secrets.DEV_CLUSTER_NAME }} --region ap-south-1
 
       - name: Deploy to development environment
         run: |
