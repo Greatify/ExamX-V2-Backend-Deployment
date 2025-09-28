@@ -31,10 +31,10 @@ patches:
               resources:
                 requests:
                   cpu: "2"
-                  memory: "4Gi"
+                  memory: "10Gi"
                 limits:
-                  cpu: "3"
-                  memory: "8Gi"
+                  cpu: "4"
+                  memory: "20Gi"
               env:
               - name: WORKERS
                 value: "2"
