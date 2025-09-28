@@ -16,6 +16,11 @@ on:
         description: 'Enter branch name to deploy'
         required: true
         type: string
+      use_default_runner:
+        description: 'Run on default runner instead of self-hosted?'
+        required: true
+        type: boolean
+        default: false
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -70,7 +75,7 @@ jobs:
   build-backend-uat-image:
     # needs: security-password-check
     if: github.event.inputs.full_deployment == 'true'
-    runs-on: self-hosted
+    runs-on: ${{ github.event.inputs.use_default_runner == 'true' && 'ubuntu-latest' || 'self-hosted' }}
     environment: uat
     steps:
       - name: Checkout repository code
@@ -179,7 +184,7 @@ jobs:
           if-no-files-found: error
 
   deploy-backend-uat:
-    runs-on: self-hosted
+    runs-on: ${{ github.event.inputs.use_default_runner == 'true' && 'ubuntu-latest' || 'self-hosted' }}
     needs: 
       - build-backend-uat-image
     if: always() && (github.event.inputs.full_deployment == 'false' || needs.build-backend-uat-image.result == 'success')
