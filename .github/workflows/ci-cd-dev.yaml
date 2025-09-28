@@ -14,7 +14,7 @@ on:
   
 jobs:
   deploy-backend-development:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     environment: dev
     steps:
       - name: Display Deployment Information
