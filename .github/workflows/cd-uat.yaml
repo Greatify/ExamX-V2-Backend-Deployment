@@ -145,6 +145,8 @@ jobs:
           platforms: linux/arm64
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new
+          build-args: |
+            USE_BADPROXY=${{ vars.USE_BADPROXY }}
   
       - name: Move cache directory
         run: |
