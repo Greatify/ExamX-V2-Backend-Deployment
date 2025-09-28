@@ -215,8 +215,15 @@ jobs:
         if: github.event.inputs.full_deployment == 'true'
         run: |
           # Update image tags in the UAT overlay kustomization file
-          sed -i 's|image: "[^"]*"|image: "'"$BACKEND_IMAGE"'"|g' k8s/overlays/uat/kustomization.yaml
-          sed -i 's|kubernetes.io/change-cause:.*|kubernetes.io/change-cause: Updated to "'"$BACKEND_IMAGE"'"|g' k8s/overlays/uat/kustomization.yaml
+          if [[ "$RUNNER_OS" == "macOS" ]]; then
+            # macOS
+            sed -i '' 's|image: "[^"]*"|image: "'"$BACKEND_IMAGE"'"|g' k8s/overlays/uat/kustomization.yaml
+            sed -i '' 's|kubernetes.io/change-cause:.*|kubernetes.io/change-cause: Updated to "'"$BACKEND_IMAGE"'"|g' k8s/overlays/uat/kustomization.yaml
+          else
+            # Linux
+            sed -i 's|image: "[^"]*"|image: "'"$BACKEND_IMAGE"'"|g' k8s/overlays/uat/kustomization.yaml
+            sed -i 's|kubernetes.io/change-cause:.*|kubernetes.io/change-cause: Updated to "'"$BACKEND_IMAGE"'"|g' k8s/overlays/uat/kustomization.yaml
+          fi
       
       - name: Commit and push changes
         if: github.event.inputs.full_deployment == 'true'
