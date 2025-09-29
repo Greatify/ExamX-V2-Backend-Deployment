@@ -89,19 +89,31 @@ jobs:
       - name: Install Docker on macOS
         if: runner.os == 'macOS'
         run: |
-          # Install Docker using Homebrew
-          brew install --cask docker
+          # Install Docker and Colima using Homebrew (recommended for macOS runners)
+          echo "Installing Docker and Colima..."
+          brew install docker colima
           
-          # Start Docker Desktop
-          sudo /Applications/Docker.app/Contents/MacOS/Docker --unattended --install-privileged-components
-          open -a Docker
+          # Start Colima (lightweight Docker runtime for macOS)
+          echo "Starting Colima..."
+          colima start --arch arm64 --vm-type=vz --vz-rosetta
           
-          # Wait for Docker to start
-          echo "Waiting for Docker to start..."
-          while ! docker system info > /dev/null 2>&1; do
+          # Wait for Docker to be ready
+          echo "Waiting for Docker daemon to start..."
+          timeout=120  # 2 minutes timeout
+          elapsed=0
+          while ! docker info &>/dev/null; do
+            if [ $elapsed -ge $timeout ]; then
+              echo "Timeout waiting for Docker to start"
+              exit 1
+            fi
+            echo "Waiting... ($elapsed seconds elapsed)"
             sleep 5
+            elapsed=$((elapsed + 5))
           done
+          
           echo "Docker is ready!"
+          docker version
+          docker info
           
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
