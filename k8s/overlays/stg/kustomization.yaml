@@ -27,7 +27,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2233-Text-Styling-4556-55ce3a29f4c31039e7b56281b1dd69f1a0b7b430"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2383-exam-get-by-id-add-sample-41f365d9081911d3ab66079d8d4d93372b18f975"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -64,7 +64,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2233-Text-Styling-4556-55ce3a29f4c31039e7b56281b1dd69f1a0b7b430"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2383-exam-get-by-id-add-sample-41f365d9081911d3ab66079d8d4d93372b18f975"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -114,7 +114,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2233-Text-Styling-4556-55ce3a29f4c31039e7b56281b1dd69f1a0b7b430"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2383-exam-get-by-id-add-sample-41f365d9081911d3ab66079d8d4d93372b18f975"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -163,7 +163,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2233-Text-Styling-4556-55ce3a29f4c31039e7b56281b1dd69f1a0b7b430"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2383-exam-get-by-id-add-sample-41f365d9081911d3ab66079d8d4d93372b18f975"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -212,7 +212,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2233-Text-Styling-4556-55ce3a29f4c31039e7b56281b1dd69f1a0b7b430"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2383-exam-get-by-id-add-sample-41f365d9081911d3ab66079d8d4d93372b18f975"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -261,7 +261,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2233-Text-Styling-4556-55ce3a29f4c31039e7b56281b1dd69f1a0b7b430"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2383-exam-get-by-id-add-sample-41f365d9081911d3ab66079d8d4d93372b18f975"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
