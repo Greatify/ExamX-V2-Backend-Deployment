@@ -75,7 +75,8 @@ jobs:
   build-backend-uat-image:
     # needs: security-password-check
     if: github.event.inputs.full_deployment == 'true'
-    runs-on: ${{ github.event.inputs.use_default_runner == 'true' && 'ubuntu-24.04-arm' || 'macos-latest' }}
+    # runs-on: ${{ github.event.inputs.use_default_runner == 'true' && 'ubuntu-latest' || 'macos-latest' }}
+    runs-on: macos-latest
     environment: uat
     steps:
       - name: Checkout repository code
@@ -186,7 +187,8 @@ jobs:
           if-no-files-found: error
 
   deploy-backend-uat:
-    runs-on: ${{ github.event.inputs.use_default_runner == 'true' && 'ubuntu-24.04-arm' || 'macos-latest' }}
+    # runs-on: ${{ github.event.inputs.use_default_runner == 'true' && 'ubuntu-24.04-arm' || 'macos-latest' }}
+    runs-on: macos-latest
     needs: 
       - build-backend-uat-image
     if: always() && (github.event.inputs.full_deployment == 'false' || needs.build-backend-uat-image.result == 'success')
