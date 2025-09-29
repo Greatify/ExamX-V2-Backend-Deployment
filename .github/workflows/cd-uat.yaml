@@ -75,7 +75,7 @@ jobs:
   build-backend-uat-image:
     # needs: security-password-check
     if: github.event.inputs.full_deployment == 'true'
-    runs-on: ${{ github.event.inputs.use_default_runner == 'true' && 'macos-latest' || 'self-hosted' }}
+    runs-on: ${{ github.event.inputs.use_default_runner == 'true' && 'ubuntu-latest' || 'self-hosted' }}
     environment: uat
     steps:
       - name: Checkout repository code
@@ -85,35 +85,6 @@ jobs:
           ref: ${{ github.event.inputs.deploy_branch }}
           repository: 'Greatify/ExamX-V2-Backend'
           token: ${{ secrets.REPO_DISPATCH_TOKEN }}
-
-      - name: Install Docker on macOS
-        if: runner.os == 'macOS'
-        run: |
-          # Install Docker and Colima using Homebrew (recommended for macOS runners)
-          echo "Installing Docker and Colima..."
-          brew install docker colima
-          
-          # Start Colima (lightweight Docker runtime for macOS)
-          echo "Starting Colima..."
-          colima start --arch arm64 --vm-type=vz --vz-rosetta
-          
-          # Wait for Docker to be ready
-          echo "Waiting for Docker daemon to start..."
-          timeout=120  # 2 minutes timeout
-          elapsed=0
-          while ! docker info &>/dev/null; do
-            if [ $elapsed -ge $timeout ]; then
-              echo "Timeout waiting for Docker to start"
-              exit 1
-            fi
-            echo "Waiting... ($elapsed seconds elapsed)"
-            sleep 5
-            elapsed=$((elapsed + 5))
-          done
-          
-          echo "Docker is ready!"
-          docker version
-          docker info
           
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -156,7 +127,6 @@ jobs:
           echo "IMAGE_TAG=$IMAGE_TAG" >> $GITHUB_OUTPUT
           echo "SOURCE_COMMIT_ID=$SOURCE_COMMIT_ID" >> $GITHUB_OUTPUT
           echo "Generated Image Tag: $IMAGE_TAG"
-
       - name: Cache Docker layers
         uses: actions/cache@v3
         with:
@@ -181,11 +151,9 @@ jobs:
         run: |
           rm -rf /tmp/.buildx-cache
           mv /tmp/.buildx-cache-new /tmp/.buildx-cache
-
       - name: Save image tag to file
         run: |
           echo "${{ steps.login-ecr.outputs.registry }}/examxv2-backend:${{ steps.generate-tag.outputs.IMAGE_TAG }}" > backend_image_tag.txt
-
       - name: Send Docker build failure notification
         if: failure()
         uses: 8398a7/action-slack@v3
@@ -215,7 +183,7 @@ jobs:
           if-no-files-found: error
 
   deploy-backend-uat:
-    runs-on: ${{ github.event.inputs.use_default_runner == 'true' && 'macos-latest' || 'self-hosted' }}
+    runs-on: ${{ github.event.inputs.use_default_runner == 'true' && 'ubuntu-latest' || 'self-hosted' }}
     needs: 
       - build-backend-uat-image
     if: always() && (github.event.inputs.full_deployment == 'false' || needs.build-backend-uat-image.result == 'success')
@@ -262,7 +230,6 @@ jobs:
           git add k8s/overlays/uat/kustomization.yaml
           git commit -m "Update image tags for UAT deployment"
           git push origin main
-
       - name: Configure AWS credentials for deployment
         uses: aws-actions/configure-aws-credentials@v3
         with:
@@ -276,7 +243,6 @@ jobs:
       - name: Deploy to UAT environment
         run: |
           kubectl apply -k k8s/overlays/uat
-
       - name: Send deployment success notification
         if: success()
         uses: 8398a7/action-slack@v3
