@@ -75,8 +75,7 @@ jobs:
   build-backend-uat-image:
     # needs: security-password-check
     if: github.event.inputs.full_deployment == 'true'
-    # runs-on: ${{ github.event.inputs.use_default_runner == 'true' && 'ubuntu-latest' || 'macos-latest' }}
-    runs-on: macos-latest
+    runs-on: ${{ github.event.inputs.use_default_runner == 'true' && 'macos-latest' || 'self-hosted' }}
     environment: uat
     steps:
       - name: Checkout repository code
@@ -86,6 +85,23 @@ jobs:
           ref: ${{ github.event.inputs.deploy_branch }}
           repository: 'Greatify/ExamX-V2-Backend'
           token: ${{ secrets.REPO_DISPATCH_TOKEN }}
+
+      - name: Install Docker on macOS
+        if: runner.os == 'macOS'
+        run: |
+          # Install Docker using Homebrew
+          brew install --cask docker
+          
+          # Start Docker Desktop
+          sudo /Applications/Docker.app/Contents/MacOS/Docker --unattended --install-privileged-components
+          open -a Docker
+          
+          # Wait for Docker to start
+          echo "Waiting for Docker to start..."
+          while ! docker system info > /dev/null 2>&1; do
+            sleep 5
+          done
+          echo "Docker is ready!"
           
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -187,8 +203,7 @@ jobs:
           if-no-files-found: error
 
   deploy-backend-uat:
-    # runs-on: ${{ github.event.inputs.use_default_runner == 'true' && 'ubuntu-24.04-arm' || 'macos-latest' }}
-    runs-on: macos-latest
+    runs-on: ${{ github.event.inputs.use_default_runner == 'true' && 'macos-latest' || 'self-hosted' }}
     needs: 
       - build-backend-uat-image
     if: always() && (github.event.inputs.full_deployment == 'false' || needs.build-backend-uat-image.result == 'success')
