@@ -21,6 +21,11 @@ on:
         required: true
         type: boolean
         default: false
+      force_rebuild:
+        description: 'Force rebuild without cache (use for mirror sync issues)?'
+        required: false
+        type: boolean
+        default: false
 
 # concurrency:
 #   group: ${{ github.workflow }}-${{ github.ref }}
@@ -94,8 +99,22 @@ jobs:
           docker buildx use flamboyant_haslett || docker buildx create --name flamboyant_haslett --use
           docker buildx inspect --bootstrap
   
-      - name: Prune Docker
-        run: docker system prune -af 
+      - name: Optimize build environment for ARM64
+        run: |
+          # Clean up Docker to prevent conflicts
+          docker system prune -af --volumes
+          docker builder prune -af
+          
+          # Show system info for debugging
+          echo "=== System Information ==="
+          uname -a
+          docker version
+          docker buildx version
+          df -h
+          
+          # Configure buildx for ARM64 optimization
+          export DOCKER_BUILDKIT=1
+          export BUILDX_NO_DEFAULT_ATTESTATIONS=1 
 
       - name: Configure AWS credentials for ECR
         uses: aws-actions/configure-aws-credentials@v3
@@ -128,29 +147,42 @@ jobs:
           echo "SOURCE_COMMIT_ID=$SOURCE_COMMIT_ID" >> $GITHUB_OUTPUT
           echo "Generated Image Tag: $IMAGE_TAG"
       - name: Cache Docker layers
-        uses: actions/cache@v3
+        if: github.event.inputs.force_rebuild != 'true'
+        uses: actions/cache@v4
         with:
           path: /tmp/.buildx-cache
-          key: ${{ runner.os }}-buildx-${{ github.sha }}
+          key: ${{ runner.os }}-buildx-arm64-${{ hashFiles('requirements.txt', 'Dockerfile') }}
           restore-keys: |
+            ${{ runner.os }}-buildx-arm64-
             ${{ runner.os }}-buildx-
   
-      - name: Build and push Backend Docker image to ECR
-        uses: docker/build-push-action@v5
+      - name: Build and push Backend Docker image to ECR with ARM64 optimizations
+        uses: nick-fields/retry@v3
         with:
-          context: .
-          push: true
-          tags: ${{ steps.login-ecr.outputs.registry }}/examxv2-backend:${{ steps.generate-tag.outputs.IMAGE_TAG }}
-          platforms: linux/arm64
-          cache-from: type=local,src=/tmp/.buildx-cache
-          cache-to: type=local,dest=/tmp/.buildx-cache-new
-          build-args: |
-            USE_BADPROXY=${{ vars.USE_BADPROXY }}
+          timeout_minutes: 45
+          max_attempts: 3
+          retry_on: error
+          command: |
+            docker buildx build \
+              --platform linux/arm64 \
+              --push \
+              --tag ${{ steps.login-ecr.outputs.registry }}/examxv2-backend:${{ steps.generate-tag.outputs.IMAGE_TAG }} \
+              ${{ github.event.inputs.force_rebuild != 'true' && '--cache-from type=local,src=/tmp/.buildx-cache' || '' }} \
+              ${{ github.event.inputs.force_rebuild != 'true' && '--cache-to type=local,dest=/tmp/.buildx-cache-new,mode=min' || '' }} \
+              --build-arg USE_BADPROXY=${{ vars.USE_BADPROXY }} \
+              --build-arg BUILDKIT_INLINE_CACHE=1 \
+              --provenance=false \
+              --sbom=false \
+              --network=host \
+              .
   
       - name: Move cache directory
+        if: github.event.inputs.force_rebuild != 'true'
         run: |
-          rm -rf /tmp/.buildx-cache
-          mv /tmp/.buildx-cache-new /tmp/.buildx-cache
+          if [ -d "/tmp/.buildx-cache-new" ]; then
+            rm -rf /tmp/.buildx-cache
+            mv /tmp/.buildx-cache-new /tmp/.buildx-cache
+          fi
       - name: Save image tag to file
         run: |
           echo "${{ steps.login-ecr.outputs.registry }}/examxv2-backend:${{ steps.generate-tag.outputs.IMAGE_TAG }}" > backend_image_tag.txt
@@ -160,18 +192,28 @@ jobs:
         with:
           status: ${{ job.status }}
           fields: repo,ref,workflow,eventName
-          author_name: Docker Build Failure 🐳
+          author_name: ARM64 Docker Build Failure 🐳
           mention: ${{ github.actor }}
           if_mention: always
           job_name: build-backend-uat-image
           channel: examxv2-backend-alerts
           username: ExamX-V2-CICD
           text: |
-            ❌ *Docker build failed for UAT deployment* 🐳
+            ❌ *ARM64 Docker build failed for UAT deployment after 3 retry attempts* 🐳
             *Pusher:* @${{ github.actor }}
             *Commit:* ${{ github.sha }}
-            *Commit message:* ${{ github.event.head_commit.message }}
-            Please fix the Docker build issues.
+            *Architecture:* ARM64 (for t4g instances)
+            *Force Rebuild:* ${{ github.event.inputs.force_rebuild }}
+            
+            **Possible causes:**
+            • Debian mirror sync issues (most common)
+            • Network timeouts during package installation
+            • macOS ARM64 emulation issues
+            
+            **Solutions to try:**
+            1. Re-run with `force_rebuild: true` to skip cache
+            2. Try again in 15-30 minutes (mirror sync usually resolves)
+            3. Use GitHub hosted runner instead of self-hosted
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           
@@ -260,6 +302,9 @@ jobs:
             *Deployment by:* @${{ github.actor }}
             *Branch:* ${{ github.event.inputs.deploy_branch }}
             *Full Deployment:* ${{ github.event.inputs.full_deployment }}
+            *Architecture:* ARM64 (t4g optimized)
+            *Force Rebuild:* ${{ github.event.inputs.force_rebuild }}
+            *Runner:* ${{ github.event.inputs.use_default_runner == 'true' && 'GitHub Hosted' || 'Self-Hosted' }}
             
             @${{ github.actor }}, your changes have been deployed successfully to UAT.
         env:
