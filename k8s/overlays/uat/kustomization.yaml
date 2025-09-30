@@ -27,7 +27,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-OR-question-total-mark-and-evaluati-137d959f71a50820b138c02bd8cd2fc7ac374eca"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-Evaluation-quesitons-review-4599-67aaed0a29863e1bda3b4306ad3de01830c8e285"
               resources:
                 requests:
                   cpu: "2"
@@ -63,7 +63,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-OR-question-total-mark-and-evaluati-137d959f71a50820b138c02bd8cd2fc7ac374eca"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-Evaluation-quesitons-review-4599-67aaed0a29863e1bda3b4306ad3de01830c8e285"
               resources:
                 requests:
                   cpu: "2"
@@ -112,7 +112,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-OR-question-total-mark-and-evaluati-137d959f71a50820b138c02bd8cd2fc7ac374eca"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-Evaluation-quesitons-review-4599-67aaed0a29863e1bda3b4306ad3de01830c8e285"
               resources:
                 requests:
                   cpu: "2"
@@ -160,7 +160,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-OR-question-total-mark-and-evaluati-137d959f71a50820b138c02bd8cd2fc7ac374eca"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-Evaluation-quesitons-review-4599-67aaed0a29863e1bda3b4306ad3de01830c8e285"
               resources:
                 requests:
                   cpu: "2"
@@ -208,7 +208,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-OR-question-total-mark-and-evaluati-137d959f71a50820b138c02bd8cd2fc7ac374eca"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-Evaluation-quesitons-review-4599-67aaed0a29863e1bda3b4306ad3de01830c8e285"
               resources:
                 requests:
                   cpu: "2"
@@ -256,7 +256,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-OR-question-total-mark-and-evaluati-137d959f71a50820b138c02bd8cd2fc7ac374eca"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-Evaluation-quesitons-review-4599-67aaed0a29863e1bda3b4306ad3de01830c8e285"
               resources:
                 requests:
                   cpu: "250m"
