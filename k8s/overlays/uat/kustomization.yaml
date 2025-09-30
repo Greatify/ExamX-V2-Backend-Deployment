@@ -31,13 +31,13 @@ patches:
               resources:
                 requests:
                   cpu: "2"
-                  memory: "10Gi"
+                  memory: "8Gi"
                 limits:
                   cpu: "4"
-                  memory: "20Gi"
+                  memory: "16Gi"
               env:
               - name: WORKERS
-                value: "2"
+                value: "4"
               - name: OPIK_URL_OVERRIDE
                 value: "https://www.comet.com/opik/api"
               - name: OPIK_API_KEY
@@ -45,7 +45,7 @@ patches:
               - name: OPIK_WORKSPACE
                 value: "greatify-prod"
               - name: OPIK_PROJECT_NAME
-                value: "UAT"
+                value: "Prod"
     target:
       kind: Deployment
       name: examxv2-backend
@@ -66,11 +66,11 @@ patches:
               image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-split-and-passage-evaluation-questi-31322c2ed73a7dfd5d0e2b49795ee845676562c3"
               resources:
                 requests:
-                  cpu: "1"
-                  memory: "2Gi"
-                limits:
-                  cpu: "1500m"
+                  cpu: "2"
                   memory: "4Gi"
+                limits:
+                  cpu: "3"
+                  memory: "8Gi"
               command:
               - celery
               - -A
@@ -79,7 +79,7 @@ patches:
               - -P
               - gevent
               - -c
-              - "100"
+              - "200"
               - -Q
               - default
               - -l
@@ -93,7 +93,7 @@ patches:
               - name: OPIK_WORKSPACE
                 value: "greatify-prod"
               - name: OPIK_PROJECT_NAME
-                value: "UAT"
+                value: "Prod"
     target:
       kind: Deployment
       name: celery-worker-default
@@ -115,11 +115,11 @@ patches:
               image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-split-and-passage-evaluation-questi-31322c2ed73a7dfd5d0e2b49795ee845676562c3"
               resources:
                 requests:
-                  cpu: "1"
-                  memory: "2Gi"
+                  cpu: "2"
+                  memory: "4Gi"
                 limits:
-                  cpu: "1500m"
-                  memory: "3Gi"
+                  cpu: "3"
+                  memory: "6Gi"
               command:
               - celery
               - -A
@@ -128,7 +128,7 @@ patches:
               - -P
               - prefork
               - -c
-              - "2"
+              - "3"
               - -Q
               - bulk_upload
               - -l
@@ -142,7 +142,7 @@ patches:
               - name: OPIK_WORKSPACE
                 value: "greatify-prod"
               - name: OPIK_PROJECT_NAME
-                value: "UAT"
+                value: "Prod"
     target:
       kind: Deployment
       name: celery-bulk-upload-worker
@@ -163,11 +163,11 @@ patches:
               image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-split-and-passage-evaluation-questi-31322c2ed73a7dfd5d0e2b49795ee845676562c3"
               resources:
                 requests:
-                  cpu: "1"
-                  memory: "2Gi"
+                  cpu: "2"
+                  memory: "4Gi"
                 limits:
-                  cpu: "1500m"
-                  memory: "4Gi"             
+                  cpu: "3"
+                  memory: "8Gi"            
               command:
               - celery
               - -A
@@ -176,7 +176,7 @@ patches:
               - -P
               - gevent
               - -c
-              - "100"
+              - "200"
               - -Q
               - question_enrichment
               - -l
@@ -190,7 +190,7 @@ patches:
               - name: OPIK_WORKSPACE
                 value: "greatify-prod"
               - name: OPIK_PROJECT_NAME
-                value: "UAT"
+                value: "Prod"
     target:
       kind: Deployment
       name: celery-enrichment-worker
@@ -211,11 +211,11 @@ patches:
               image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-split-and-passage-evaluation-questi-31322c2ed73a7dfd5d0e2b49795ee845676562c3"
               resources:
                 requests:
-                  cpu: "1"
-                  memory: "2Gi"
+                  cpu: "2"
+                  memory: "4Gi"
                 limits:
-                  cpu: "1500m"
-                  memory: "3Gi"
+                  cpu: "3"
+                  memory: "6Gi"
               command:
               - celery
               - -A
@@ -224,7 +224,7 @@ patches:
               - -P
               - gevent
               - -c
-              - "100"
+              - "200"
               - -Q
               - question_generator_ai
               - -l
@@ -238,7 +238,7 @@ patches:
               - name: OPIK_WORKSPACE
                 value: "greatify-prod"
               - name: OPIK_PROJECT_NAME
-                value: "UAT"
+                value: "Prod"
     target:
       kind: Deployment
       name: celery-question-generator-ai-worker
@@ -260,10 +260,10 @@ patches:
               resources:
                 requests:
                   cpu: "250m"
-                  memory: "1Gi"
+                  memory: "2Gi"
                 limits:
                   cpu: "500m"
-                  memory: "2Gi"
+                  memory: "4Gi"
     target:
       kind: Deployment
       name: celery-flower
@@ -328,7 +328,7 @@ patches:
         name: examxv2-backend-pod-autoscaler
       spec:
         minReplicas: 1
-        maxReplicas: 2
+        maxReplicas: 10
     target:
       kind: HorizontalPodAutoscaler
       name: examxv2-backend-pod-autoscaler
@@ -341,7 +341,7 @@ patches:
         name: celery-worker-default-autoscaler
       spec:
         minReplicas: 1
-        maxReplicas: 2
+        maxReplicas: 10
         scaleTargetRef:
           apiVersion: apps/v1
           kind: Deployment
@@ -357,7 +357,7 @@ patches:
       metadata:
         name: celery-bulk-upload-worker-autoscaler
       spec:
-        maxReplicas: 2
+        maxReplicas: 10
         scaleTargetRef:
           apiVersion: apps/v1
           kind: Deployment
@@ -373,7 +373,7 @@ patches:
       metadata:
         name: celery-enrichment-worker-autoscaler
       spec:
-        maxReplicas: 2
+        maxReplicas: 10
         scaleTargetRef:
           apiVersion: apps/v1
           kind: Deployment
@@ -389,7 +389,7 @@ patches:
       metadata:
         name: celery-question-generator-ai-worker-autoscaler
       spec:
-        maxReplicas: 2
+        maxReplicas: 10
         scaleTargetRef:
           apiVersion: apps/v1
           kind: Deployment
