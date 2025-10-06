@@ -17,7 +17,7 @@ on:
         required: true
         type: string
       use_default_runner:
-        description: 'Run on default runner (ubuntu-22.04-arm64) instead of self-hosted?'
+        description: 'Run on default runner (ubuntu-24.04-arm) instead of self-hosted?'
         required: true
         type: boolean
         default: false
@@ -28,7 +28,7 @@ on:
 
 jobs:
   security-password-check:
-    runs-on: ${{ github.event.inputs.use_default_runner == 'true' && 'ubuntu-22.04-arm64' || 'self-hosted' }}
+    runs-on: ${{ github.event.inputs.use_default_runner == 'true' && 'ubuntu-24.04-arm' || 'self-hosted' }}
     environment: stg
     steps:
       - name: Verify deployment password
@@ -74,7 +74,7 @@ jobs:
   build-backend-staging-image:
     needs: security-password-check
     if: github.event.inputs.full_deployment == 'true'
-    runs-on: ${{ github.event.inputs.use_default_runner == 'true' && 'ubuntu-22.04-arm64' || 'self-hosted' }}
+    runs-on: ${{ github.event.inputs.use_default_runner == 'true' && 'ubuntu-24.04-arm' || 'self-hosted' }}
     environment: stg
     steps:
       - name: Checkout repository code
@@ -197,7 +197,7 @@ jobs:
           if-no-files-found: error
 
   deploy-backend-staging:
-    runs-on: ${{ github.event.inputs.use_default_runner == 'true' && 'ubuntu-22.04-arm64' || 'self-hosted' }}
+    runs-on: ${{ github.event.inputs.use_default_runner == 'true' && 'ubuntu-24.04-arm' || 'self-hosted' }}
     needs: 
       - security-password-check
       - build-backend-staging-image
