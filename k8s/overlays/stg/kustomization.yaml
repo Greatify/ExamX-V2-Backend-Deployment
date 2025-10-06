@@ -27,7 +27,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Increase-BULK_PDF_LIMIT-to-500-for-1292b83705be0a7932cdb791d9722383df0e240c"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2406-ai-question-generate-sever-f21a56fe6f5aa35cec70635da146f436e527434b"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -64,7 +64,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Increase-BULK_PDF_LIMIT-to-500-for-1292b83705be0a7932cdb791d9722383df0e240c"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2406-ai-question-generate-sever-f21a56fe6f5aa35cec70635da146f436e527434b"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -114,7 +114,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Increase-BULK_PDF_LIMIT-to-500-for-1292b83705be0a7932cdb791d9722383df0e240c"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2406-ai-question-generate-sever-f21a56fe6f5aa35cec70635da146f436e527434b"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -163,7 +163,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Increase-BULK_PDF_LIMIT-to-500-for-1292b83705be0a7932cdb791d9722383df0e240c"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2406-ai-question-generate-sever-f21a56fe6f5aa35cec70635da146f436e527434b"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -212,7 +212,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Increase-BULK_PDF_LIMIT-to-500-for-1292b83705be0a7932cdb791d9722383df0e240c"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2406-ai-question-generate-sever-f21a56fe6f5aa35cec70635da146f436e527434b"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -261,7 +261,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Increase-BULK_PDF_LIMIT-to-500-for-1292b83705be0a7932cdb791d9722383df0e240c"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2406-ai-question-generate-sever-f21a56fe6f5aa35cec70635da146f436e527434b"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
