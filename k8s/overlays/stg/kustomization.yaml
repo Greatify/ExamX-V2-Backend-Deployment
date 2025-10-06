@@ -27,7 +27,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-update-new-gemini-model-implmentati-3ce74720edcc8566e0db479d5ebb4f09d0b47bf2"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Updated-student-list-for-teacher-lo-f66a8df469c5c82a3428c413540842d6c887c2d8"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -64,7 +64,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-update-new-gemini-model-implmentati-3ce74720edcc8566e0db479d5ebb4f09d0b47bf2"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Updated-student-list-for-teacher-lo-f66a8df469c5c82a3428c413540842d6c887c2d8"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -114,7 +114,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-update-new-gemini-model-implmentati-3ce74720edcc8566e0db479d5ebb4f09d0b47bf2"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Updated-student-list-for-teacher-lo-f66a8df469c5c82a3428c413540842d6c887c2d8"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -163,7 +163,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-update-new-gemini-model-implmentati-3ce74720edcc8566e0db479d5ebb4f09d0b47bf2"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Updated-student-list-for-teacher-lo-f66a8df469c5c82a3428c413540842d6c887c2d8"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -212,7 +212,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-update-new-gemini-model-implmentati-3ce74720edcc8566e0db479d5ebb4f09d0b47bf2"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Updated-student-list-for-teacher-lo-f66a8df469c5c82a3428c413540842d6c887c2d8"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -261,7 +261,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-update-new-gemini-model-implmentati-3ce74720edcc8566e0db479d5ebb4f09d0b47bf2"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Updated-student-list-for-teacher-lo-f66a8df469c5c82a3428c413540842d6c887c2d8"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
