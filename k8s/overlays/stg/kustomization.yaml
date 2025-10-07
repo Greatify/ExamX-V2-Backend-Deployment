@@ -27,7 +27,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Enhance-PDF-generation-performance-22a0f77e69ddb1edce316e69dbc0a1210d6ff7cd"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Enhance-bulk-PDF-generation-with-ul-d1365e4d163990bab0a9260d501192aeefa973c2"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -64,7 +64,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Enhance-PDF-generation-performance-22a0f77e69ddb1edce316e69dbc0a1210d6ff7cd"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Enhance-bulk-PDF-generation-with-ul-d1365e4d163990bab0a9260d501192aeefa973c2"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -114,7 +114,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Enhance-PDF-generation-performance-22a0f77e69ddb1edce316e69dbc0a1210d6ff7cd"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Enhance-bulk-PDF-generation-with-ul-d1365e4d163990bab0a9260d501192aeefa973c2"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -163,7 +163,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Enhance-PDF-generation-performance-22a0f77e69ddb1edce316e69dbc0a1210d6ff7cd"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Enhance-bulk-PDF-generation-with-ul-d1365e4d163990bab0a9260d501192aeefa973c2"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -212,7 +212,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Enhance-PDF-generation-performance-22a0f77e69ddb1edce316e69dbc0a1210d6ff7cd"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Enhance-bulk-PDF-generation-with-ul-d1365e4d163990bab0a9260d501192aeefa973c2"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -261,7 +261,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Enhance-PDF-generation-performance-22a0f77e69ddb1edce316e69dbc0a1210d6ff7cd"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Enhance-bulk-PDF-generation-with-ul-d1365e4d163990bab0a9260d501192aeefa973c2"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
