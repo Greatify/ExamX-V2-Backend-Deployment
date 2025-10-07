@@ -27,7 +27,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2401-Filter-Not-Displaying-Corr-a2e21285f0f94e1c47053a65b835bd302144bc6b"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Enhance-PDF-generation-performance-22a0f77e69ddb1edce316e69dbc0a1210d6ff7cd"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -64,7 +64,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2401-Filter-Not-Displaying-Corr-a2e21285f0f94e1c47053a65b835bd302144bc6b"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Enhance-PDF-generation-performance-22a0f77e69ddb1edce316e69dbc0a1210d6ff7cd"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -114,7 +114,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2401-Filter-Not-Displaying-Corr-a2e21285f0f94e1c47053a65b835bd302144bc6b"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Enhance-PDF-generation-performance-22a0f77e69ddb1edce316e69dbc0a1210d6ff7cd"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -163,7 +163,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2401-Filter-Not-Displaying-Corr-a2e21285f0f94e1c47053a65b835bd302144bc6b"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Enhance-PDF-generation-performance-22a0f77e69ddb1edce316e69dbc0a1210d6ff7cd"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -212,7 +212,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2401-Filter-Not-Displaying-Corr-a2e21285f0f94e1c47053a65b835bd302144bc6b"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Enhance-PDF-generation-performance-22a0f77e69ddb1edce316e69dbc0a1210d6ff7cd"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -261,7 +261,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2401-Filter-Not-Displaying-Corr-a2e21285f0f94e1c47053a65b835bd302144bc6b"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Enhance-PDF-generation-performance-22a0f77e69ddb1edce316e69dbc0a1210d6ff7cd"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
