@@ -27,7 +27,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-Updated-evaluation-completed-in-463-689c1e533fed5f5b4377d9d79540b443082a5ea2"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-Updated-question-validation-logic-i-3768d9df09ef414376f9d2454728027d989eab09"
               resources:
                 requests:
                   cpu: "2"
@@ -63,7 +63,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-Updated-evaluation-completed-in-463-689c1e533fed5f5b4377d9d79540b443082a5ea2"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-Updated-question-validation-logic-i-3768d9df09ef414376f9d2454728027d989eab09"
               resources:
                 requests:
                   cpu: "2"
@@ -112,7 +112,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-Updated-evaluation-completed-in-463-689c1e533fed5f5b4377d9d79540b443082a5ea2"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-Updated-question-validation-logic-i-3768d9df09ef414376f9d2454728027d989eab09"
               resources:
                 requests:
                   cpu: "2"
@@ -160,7 +160,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-Updated-evaluation-completed-in-463-689c1e533fed5f5b4377d9d79540b443082a5ea2"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-Updated-question-validation-logic-i-3768d9df09ef414376f9d2454728027d989eab09"
               resources:
                 requests:
                   cpu: "2"
@@ -208,7 +208,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-Updated-evaluation-completed-in-463-689c1e533fed5f5b4377d9d79540b443082a5ea2"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-Updated-question-validation-logic-i-3768d9df09ef414376f9d2454728027d989eab09"
               resources:
                 requests:
                   cpu: "2"
@@ -256,7 +256,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-Updated-evaluation-completed-in-463-689c1e533fed5f5b4377d9d79540b443082a5ea2"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-Updated-question-validation-logic-i-3768d9df09ef414376f9d2454728027d989eab09"
               resources:
                 requests:
                   cpu: "250m"
