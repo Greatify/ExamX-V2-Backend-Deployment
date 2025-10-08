@@ -27,7 +27,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Added-mulitple-question-paper-4706-bc038c08948951cfb003376f40c1d3cd9ec80b6e"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2306-Each-Question-Paper-assign-e773bd4819b83f83cf1fef275a58704c90f89203"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -64,7 +64,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Added-mulitple-question-paper-4706-bc038c08948951cfb003376f40c1d3cd9ec80b6e"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2306-Each-Question-Paper-assign-e773bd4819b83f83cf1fef275a58704c90f89203"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -114,7 +114,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Added-mulitple-question-paper-4706-bc038c08948951cfb003376f40c1d3cd9ec80b6e"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2306-Each-Question-Paper-assign-e773bd4819b83f83cf1fef275a58704c90f89203"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -163,7 +163,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Added-mulitple-question-paper-4706-bc038c08948951cfb003376f40c1d3cd9ec80b6e"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2306-Each-Question-Paper-assign-e773bd4819b83f83cf1fef275a58704c90f89203"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -212,7 +212,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Added-mulitple-question-paper-4706-bc038c08948951cfb003376f40c1d3cd9ec80b6e"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2306-Each-Question-Paper-assign-e773bd4819b83f83cf1fef275a58704c90f89203"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -261,7 +261,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Added-mulitple-question-paper-4706-bc038c08948951cfb003376f40c1d3cd9ec80b6e"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2306-Each-Question-Paper-assign-e773bd4819b83f83cf1fef275a58704c90f89203"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
