@@ -28,7 +28,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-PDF-Report-download-added-for-evalu-7f9791449139d3b29dcd3841e59076d2c375e421"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-EXM-2440-adani-domain-question-upda-28ad9325da8ee0c9bdab7a3abb6642ef66aab521"
               resources:
                 requests:
                   cpu: "2"
@@ -64,7 +64,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-PDF-Report-download-added-for-evalu-7f9791449139d3b29dcd3841e59076d2c375e421"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-EXM-2440-adani-domain-question-upda-28ad9325da8ee0c9bdab7a3abb6642ef66aab521"
               resources:
                 requests:
                   cpu: "2"
@@ -113,7 +113,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-PDF-Report-download-added-for-evalu-7f9791449139d3b29dcd3841e59076d2c375e421"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-EXM-2440-adani-domain-question-upda-28ad9325da8ee0c9bdab7a3abb6642ef66aab521"
               resources:
                 requests:
                   cpu: "2"
@@ -161,7 +161,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-PDF-Report-download-added-for-evalu-7f9791449139d3b29dcd3841e59076d2c375e421"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-EXM-2440-adani-domain-question-upda-28ad9325da8ee0c9bdab7a3abb6642ef66aab521"
               resources:
                 requests:
                   cpu: "2"
@@ -209,7 +209,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-PDF-Report-download-added-for-evalu-7f9791449139d3b29dcd3841e59076d2c375e421"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-EXM-2440-adani-domain-question-upda-28ad9325da8ee0c9bdab7a3abb6642ef66aab521"
               resources:
                 requests:
                   cpu: "2"
@@ -257,7 +257,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-PDF-Report-download-added-for-evalu-7f9791449139d3b29dcd3841e59076d2c375e421"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-EXM-2440-adani-domain-question-upda-28ad9325da8ee0c9bdab7a3abb6642ef66aab521"
               resources:
                 requests:
                   cpu: "250m"
