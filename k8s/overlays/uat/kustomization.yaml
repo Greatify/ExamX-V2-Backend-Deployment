@@ -284,6 +284,17 @@ patches:
           - hosts:
               - klockwork.ai
             secretName: tls-secret
+        rules:
+          - host: klockwork.ai
+            http:
+              paths:
+                - path: /api
+                  pathType: Prefix
+                  backend:
+                    service:
+                      name: examxv2-backend-service
+                      port:
+                        number: 80
     target:
       kind: Ingress
       name: examxv2-ingress
