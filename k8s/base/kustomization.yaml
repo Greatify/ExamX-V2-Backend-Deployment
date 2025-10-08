@@ -35,4 +35,12 @@ resources:
   - autoscaling/celery-question-generator-ai-worker-autoscaler.yaml
   - autoscaling/celery-flower-autoscaler.yaml
   # - autoscaling/redis-autoscaler.yaml
+  
+  # Pod Disruption Budgets
+  - pdb/backend-pdb.yaml
+  # - pdb/celery-worker-default-pdb.yaml
+  # - pdb/celery-bulk-upload-worker-pdb.yaml
+  # - pdb/celery-enrichment-worker-pdb.yaml
+  # - pdb/celery-question-generator-ai-worker-pdb.yaml
+  # - pdb/celery-flower-pdb.yaml
  

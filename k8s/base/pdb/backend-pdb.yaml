@@ -1,0 +1,12 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: examxv2-backend-pdb
+  labels:
+    app: examxv2-backend
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: examxv2-backend
+
