@@ -27,7 +27,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2385-Update-Status-Option-in-Bu-fe0375cefaf96a3e5cdd0c0869acf412e9377d16"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2278-login-api-remove-threading-042aac083997a4eae9c63bdaa775965a6db962aa"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -64,7 +64,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2385-Update-Status-Option-in-Bu-fe0375cefaf96a3e5cdd0c0869acf412e9377d16"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2278-login-api-remove-threading-042aac083997a4eae9c63bdaa775965a6db962aa"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -114,7 +114,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2385-Update-Status-Option-in-Bu-fe0375cefaf96a3e5cdd0c0869acf412e9377d16"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2278-login-api-remove-threading-042aac083997a4eae9c63bdaa775965a6db962aa"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -163,7 +163,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2385-Update-Status-Option-in-Bu-fe0375cefaf96a3e5cdd0c0869acf412e9377d16"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2278-login-api-remove-threading-042aac083997a4eae9c63bdaa775965a6db962aa"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -212,7 +212,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2385-Update-Status-Option-in-Bu-fe0375cefaf96a3e5cdd0c0869acf412e9377d16"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2278-login-api-remove-threading-042aac083997a4eae9c63bdaa775965a6db962aa"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -261,7 +261,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2385-Update-Status-Option-in-Bu-fe0375cefaf96a3e5cdd0c0869acf412e9377d16"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2278-login-api-remove-threading-042aac083997a4eae9c63bdaa775965a6db962aa"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
