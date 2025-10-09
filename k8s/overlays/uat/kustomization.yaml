@@ -28,7 +28,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-Fixed-pdf-deletion-logic-4737-4f3f3d2d7d64bad2c79ccc8581ce863a8a6f00f9"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-submission-status-filter-for-eval-s-e1dce92ae9690dbde166c0bffb887357589c8c73"
               resources:
                 requests:
                   cpu: "2"
@@ -64,7 +64,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-Fixed-pdf-deletion-logic-4737-4f3f3d2d7d64bad2c79ccc8581ce863a8a6f00f9"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-submission-status-filter-for-eval-s-e1dce92ae9690dbde166c0bffb887357589c8c73"
               resources:
                 requests:
                   cpu: "2"
@@ -113,7 +113,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-Fixed-pdf-deletion-logic-4737-4f3f3d2d7d64bad2c79ccc8581ce863a8a6f00f9"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-submission-status-filter-for-eval-s-e1dce92ae9690dbde166c0bffb887357589c8c73"
               resources:
                 requests:
                   cpu: "2"
@@ -161,7 +161,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-Fixed-pdf-deletion-logic-4737-4f3f3d2d7d64bad2c79ccc8581ce863a8a6f00f9"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-submission-status-filter-for-eval-s-e1dce92ae9690dbde166c0bffb887357589c8c73"
               resources:
                 requests:
                   cpu: "2"
@@ -209,7 +209,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-Fixed-pdf-deletion-logic-4737-4f3f3d2d7d64bad2c79ccc8581ce863a8a6f00f9"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-submission-status-filter-for-eval-s-e1dce92ae9690dbde166c0bffb887357589c8c73"
               resources:
                 requests:
                   cpu: "2"
@@ -257,7 +257,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-Fixed-pdf-deletion-logic-4737-4f3f3d2d7d64bad2c79ccc8581ce863a8a6f00f9"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-submission-status-filter-for-eval-s-e1dce92ae9690dbde166c0bffb887357589c8c73"
               resources:
                 requests:
                   cpu: "250m"
