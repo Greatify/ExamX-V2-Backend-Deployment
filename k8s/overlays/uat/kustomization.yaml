@@ -28,7 +28,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-EXM-2444Multi-user-annotation-in-ev-7cdbd1438dc348562c045146ffc1da3d46c10ced"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-qp_question-count-migration-logic-4-ef87e321dc9fcb16d33067cb141609f33336a5ee"
               resources:
                 requests:
                   cpu: "2"
@@ -64,7 +64,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-EXM-2444Multi-user-annotation-in-ev-7cdbd1438dc348562c045146ffc1da3d46c10ced"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-qp_question-count-migration-logic-4-ef87e321dc9fcb16d33067cb141609f33336a5ee"
               resources:
                 requests:
                   cpu: "2"
@@ -113,7 +113,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-EXM-2444Multi-user-annotation-in-ev-7cdbd1438dc348562c045146ffc1da3d46c10ced"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-qp_question-count-migration-logic-4-ef87e321dc9fcb16d33067cb141609f33336a5ee"
               resources:
                 requests:
                   cpu: "2"
@@ -161,7 +161,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-EXM-2444Multi-user-annotation-in-ev-7cdbd1438dc348562c045146ffc1da3d46c10ced"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-qp_question-count-migration-logic-4-ef87e321dc9fcb16d33067cb141609f33336a5ee"
               resources:
                 requests:
                   cpu: "2"
@@ -209,7 +209,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-EXM-2444Multi-user-annotation-in-ev-7cdbd1438dc348562c045146ffc1da3d46c10ced"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-qp_question-count-migration-logic-4-ef87e321dc9fcb16d33067cb141609f33336a5ee"
               resources:
                 requests:
                   cpu: "2"
@@ -257,7 +257,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-EXM-2444Multi-user-annotation-in-ev-7cdbd1438dc348562c045146ffc1da3d46c10ced"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-qp_question-count-migration-logic-4-ef87e321dc9fcb16d33067cb141609f33336a5ee"
               resources:
                 requests:
                   cpu: "250m"
