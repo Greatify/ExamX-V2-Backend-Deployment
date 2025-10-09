@@ -17,7 +17,7 @@ on:
         required: true
         type: string
       use_self_hosted_runner:
-        description: 'Run on self-hosted runner instead of default runner (ubuntu-24.04-arm)?'
+        description: 'Run on self-hosted runner?'
         required: true
         type: boolean
         default: false
