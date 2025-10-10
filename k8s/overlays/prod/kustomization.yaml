@@ -28,7 +28,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2475-uuid-update-in-template-re-d2e85bf315a711a6f685d91826181e1df56e4e2e"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2483-Refactor-exam-template-sub-fce597d4a2993b678136b14ce52cac3d67bfc588"
               resources:
                 requests:
                   cpu: "2"
@@ -64,7 +64,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2475-uuid-update-in-template-re-d2e85bf315a711a6f685d91826181e1df56e4e2e"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2483-Refactor-exam-template-sub-fce597d4a2993b678136b14ce52cac3d67bfc588"
               resources:
                 requests:
                   cpu: "2"
@@ -112,7 +112,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2475-uuid-update-in-template-re-d2e85bf315a711a6f685d91826181e1df56e4e2e"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2483-Refactor-exam-template-sub-fce597d4a2993b678136b14ce52cac3d67bfc588"
               resources:
                 requests:
                   cpu: "2"
@@ -160,7 +160,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2475-uuid-update-in-template-re-d2e85bf315a711a6f685d91826181e1df56e4e2e"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2483-Refactor-exam-template-sub-fce597d4a2993b678136b14ce52cac3d67bfc588"
               resources:
                 requests:
                   cpu: "2"
@@ -208,7 +208,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2475-uuid-update-in-template-re-d2e85bf315a711a6f685d91826181e1df56e4e2e"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2483-Refactor-exam-template-sub-fce597d4a2993b678136b14ce52cac3d67bfc588"
               resources:
                 requests:
                   cpu: "2"
@@ -279,7 +279,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2475-uuid-update-in-template-re-d2e85bf315a711a6f685d91826181e1df56e4e2e"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2483-Refactor-exam-template-sub-fce597d4a2993b678136b14ce52cac3d67bfc588"
               resources:
                 requests:
                   cpu: "250m"
