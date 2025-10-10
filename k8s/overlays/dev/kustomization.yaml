@@ -23,7 +23,7 @@ patches:
       metadata:
         name: examxv2-backend
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Update-CI-workflow-to-deploy-from-c-7236d6418d2fdfca37dc2e1bac0887cef18bfac6"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Refactor-Celery-configuration-to-de-81608281057fd1f7726ce87f7f40a47e22d7d3d9"
       spec:
         replicas: 1
         template:
@@ -31,7 +31,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Update-CI-workflow-to-deploy-from-c-7236d6418d2fdfca37dc2e1bac0887cef18bfac6"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Refactor-Celery-configuration-to-de-81608281057fd1f7726ce87f7f40a47e22d7d3d9"
               resources: null  # Commented out for dev environment
               # resources:
               #   requests:
@@ -62,7 +62,7 @@ patches:
       metadata:
         name: celery-worker-default
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Update-CI-workflow-to-deploy-from-c-7236d6418d2fdfca37dc2e1bac0887cef18bfac6"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Refactor-Celery-configuration-to-de-81608281057fd1f7726ce87f7f40a47e22d7d3d9"
       spec:
         replicas: 1
         template:
@@ -70,7 +70,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Update-CI-workflow-to-deploy-from-c-7236d6418d2fdfca37dc2e1bac0887cef18bfac6"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Refactor-Celery-configuration-to-de-81608281057fd1f7726ce87f7f40a47e22d7d3d9"
               resources: null  # Commented out for dev environment
               # resources:
               #   requests:
@@ -112,7 +112,7 @@ patches:
       metadata:
         name: celery-bulk-upload-worker
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Update-CI-workflow-to-deploy-from-c-7236d6418d2fdfca37dc2e1bac0887cef18bfac6"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Refactor-Celery-configuration-to-de-81608281057fd1f7726ce87f7f40a47e22d7d3d9"
       spec:
         replicas: 1
         template:
@@ -120,7 +120,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Update-CI-workflow-to-deploy-from-c-7236d6418d2fdfca37dc2e1bac0887cef18bfac6"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Refactor-Celery-configuration-to-de-81608281057fd1f7726ce87f7f40a47e22d7d3d9"
               resources: null  # Commented out for dev environment
               # resources:
               #   requests:
@@ -187,7 +187,7 @@ patches:
       metadata:
         name: celery-question-generator-ai-worker
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Update-CI-workflow-to-deploy-from-c-7236d6418d2fdfca37dc2e1bac0887cef18bfac6"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Refactor-Celery-configuration-to-de-81608281057fd1f7726ce87f7f40a47e22d7d3d9"
       spec:
         replicas: 1
         template:
@@ -195,7 +195,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Update-CI-workflow-to-deploy-from-c-7236d6418d2fdfca37dc2e1bac0887cef18bfac6"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Refactor-Celery-configuration-to-de-81608281057fd1f7726ce87f7f40a47e22d7d3d9"
               resources: null  # Commented out for dev environment
               # resources:
               #   requests:
@@ -238,7 +238,7 @@ patches:
       metadata:
         name: celery-flower
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Update-CI-workflow-to-deploy-from-c-7236d6418d2fdfca37dc2e1bac0887cef18bfac6"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Refactor-Celery-configuration-to-de-81608281057fd1f7726ce87f7f40a47e22d7d3d9"
       spec:
         replicas: 1
         template:
@@ -246,7 +246,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Update-CI-workflow-to-deploy-from-c-7236d6418d2fdfca37dc2e1bac0887cef18bfac6"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Refactor-Celery-configuration-to-de-81608281057fd1f7726ce87f7f40a47e22d7d3d9"
               resources: null  # Commented out for dev environment
               # resources:
               #   requests:
