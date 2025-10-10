@@ -28,7 +28,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2423-Need-organisation-setting-5907f75f3fad869e378bfda81b33477de8e3be89"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Added-mulitple-question-paper-4706-28e57bc5b0502f5223040aaf767722d97df723b2"
               resources:
                 requests:
                   cpu: "2"
@@ -64,7 +64,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2423-Need-organisation-setting-5907f75f3fad869e378bfda81b33477de8e3be89"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Added-mulitple-question-paper-4706-28e57bc5b0502f5223040aaf767722d97df723b2"
               resources:
                 requests:
                   cpu: "2"
@@ -112,7 +112,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2423-Need-organisation-setting-5907f75f3fad869e378bfda81b33477de8e3be89"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Added-mulitple-question-paper-4706-28e57bc5b0502f5223040aaf767722d97df723b2"
               resources:
                 requests:
                   cpu: "2"
@@ -160,7 +160,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2423-Need-organisation-setting-5907f75f3fad869e378bfda81b33477de8e3be89"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Added-mulitple-question-paper-4706-28e57bc5b0502f5223040aaf767722d97df723b2"
               resources:
                 requests:
                   cpu: "2"
@@ -208,7 +208,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2423-Need-organisation-setting-5907f75f3fad869e378bfda81b33477de8e3be89"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Added-mulitple-question-paper-4706-28e57bc5b0502f5223040aaf767722d97df723b2"
               resources:
                 requests:
                   cpu: "2"
@@ -279,7 +279,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2423-Need-organisation-setting-5907f75f3fad869e378bfda81b33477de8e3be89"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Added-mulitple-question-paper-4706-28e57bc5b0502f5223040aaf767722d97df723b2"
               resources:
                 requests:
                   cpu: "250m"
