@@ -28,7 +28,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Missing-Migrations-Files-4766-1dd4a461a154511cb0638a0e07f320e119a0bf45"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Missing-url-prod-4768-e5220718e6f93561e0143274b5d8a1265901dd00"
               resources:
                 requests:
                   cpu: "2"
@@ -64,7 +64,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Missing-Migrations-Files-4766-1dd4a461a154511cb0638a0e07f320e119a0bf45"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Missing-url-prod-4768-e5220718e6f93561e0143274b5d8a1265901dd00"
               resources:
                 requests:
                   cpu: "2"
@@ -112,7 +112,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Missing-Migrations-Files-4766-1dd4a461a154511cb0638a0e07f320e119a0bf45"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Missing-url-prod-4768-e5220718e6f93561e0143274b5d8a1265901dd00"
               resources:
                 requests:
                   cpu: "2"
@@ -160,7 +160,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Missing-Migrations-Files-4766-1dd4a461a154511cb0638a0e07f320e119a0bf45"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Missing-url-prod-4768-e5220718e6f93561e0143274b5d8a1265901dd00"
               resources:
                 requests:
                   cpu: "2"
@@ -208,7 +208,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Missing-Migrations-Files-4766-1dd4a461a154511cb0638a0e07f320e119a0bf45"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Missing-url-prod-4768-e5220718e6f93561e0143274b5d8a1265901dd00"
               resources:
                 requests:
                   cpu: "2"
@@ -279,7 +279,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Missing-Migrations-Files-4766-1dd4a461a154511cb0638a0e07f320e119a0bf45"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Missing-url-prod-4768-e5220718e6f93561e0143274b5d8a1265901dd00"
               resources:
                 requests:
                   cpu: "250m"
