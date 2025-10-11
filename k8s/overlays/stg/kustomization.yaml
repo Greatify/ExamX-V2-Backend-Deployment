@@ -21,21 +21,21 @@ patches:
       metadata:
         name: examxv2-backend
       spec:
-        replicas: 1
+        replicas: 2
         template:
           spec:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: examxv2-backend
               image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2410-Difficulty-in-Uploading-An-29fbe3e7aa959a3d7bab98fd631e546ad6ec280e"
-              resources: null  # Commented out for staging environment
+              resources:    # Commented out for staging environment
               # Original resources:
-              # requests:
-              #   cpu: "1"
-              #   memory: "3Gi"
-              # limits:
-              #   cpu: "2"
-              #   memory: "6Gi"
+               requests:
+                 cpu: "1"
+                 memory: "3Gi"
+               limits:
+                 cpu: "2"
+                 memory: "6Gi"
               env:
               - name: WORKERS
                 value: "2"
