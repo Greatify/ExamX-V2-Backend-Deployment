@@ -23,7 +23,7 @@ patches:
       metadata:
         name: examxv2-backend
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2410-Difficulty-in-Uploading-An-9ad92b96a3329f1949a29f1d2e8cbbd896c226d8"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Single-Evaluation-workflow-to-dev-4-30a60296e5145c5a280b0bbcba0590dec21da73a"
       spec:
         replicas: 1
         template:
@@ -31,7 +31,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2410-Difficulty-in-Uploading-An-9ad92b96a3329f1949a29f1d2e8cbbd896c226d8"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Single-Evaluation-workflow-to-dev-4-30a60296e5145c5a280b0bbcba0590dec21da73a"
               resources: null  # Commented out for dev environment
               # resources:
               #   requests:
@@ -62,7 +62,7 @@ patches:
       metadata:
         name: celery-worker-default
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2410-Difficulty-in-Uploading-An-9ad92b96a3329f1949a29f1d2e8cbbd896c226d8"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Single-Evaluation-workflow-to-dev-4-30a60296e5145c5a280b0bbcba0590dec21da73a"
       spec:
         replicas: 1
         template:
@@ -70,7 +70,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2410-Difficulty-in-Uploading-An-9ad92b96a3329f1949a29f1d2e8cbbd896c226d8"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Single-Evaluation-workflow-to-dev-4-30a60296e5145c5a280b0bbcba0590dec21da73a"
               resources: null  # Commented out for dev environment
               # resources:
               #   requests:
@@ -112,7 +112,7 @@ patches:
       metadata:
         name: celery-bulk-upload-worker
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2410-Difficulty-in-Uploading-An-9ad92b96a3329f1949a29f1d2e8cbbd896c226d8"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Single-Evaluation-workflow-to-dev-4-30a60296e5145c5a280b0bbcba0590dec21da73a"
       spec:
         replicas: 1
         template:
@@ -120,7 +120,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2410-Difficulty-in-Uploading-An-9ad92b96a3329f1949a29f1d2e8cbbd896c226d8"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Single-Evaluation-workflow-to-dev-4-30a60296e5145c5a280b0bbcba0590dec21da73a"
               resources: null  # Commented out for dev environment
               # resources:
               #   requests:
@@ -187,7 +187,7 @@ patches:
       metadata:
         name: celery-question-generator-ai-worker
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2410-Difficulty-in-Uploading-An-9ad92b96a3329f1949a29f1d2e8cbbd896c226d8"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Single-Evaluation-workflow-to-dev-4-30a60296e5145c5a280b0bbcba0590dec21da73a"
       spec:
         replicas: 1
         template:
@@ -195,7 +195,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2410-Difficulty-in-Uploading-An-9ad92b96a3329f1949a29f1d2e8cbbd896c226d8"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Single-Evaluation-workflow-to-dev-4-30a60296e5145c5a280b0bbcba0590dec21da73a"
               resources: null  # Commented out for dev environment
               # resources:
               #   requests:
@@ -238,7 +238,7 @@ patches:
       metadata:
         name: celery-flower
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2410-Difficulty-in-Uploading-An-9ad92b96a3329f1949a29f1d2e8cbbd896c226d8"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Single-Evaluation-workflow-to-dev-4-30a60296e5145c5a280b0bbcba0590dec21da73a"
       spec:
         replicas: 1
         template:
@@ -246,7 +246,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2410-Difficulty-in-Uploading-An-9ad92b96a3329f1949a29f1d2e8cbbd896c226d8"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Single-Evaluation-workflow-to-dev-4-30a60296e5145c5a280b0bbcba0590dec21da73a"
               resources: null  # Commented out for dev environment
               # resources:
               #   requests:
