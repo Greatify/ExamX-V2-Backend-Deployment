@@ -27,7 +27,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2497-Question-bank-Single-Match-588339b5b4ba945f89ab1cbebd6b07b89b9e0420"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-1731-MCQ-need-duplicate-key-val-e3d8d96783d30ac2b63c41c9238cde0c693a1f97"
               resources:    # Commented out for staging environment
               # Original resources:
                requests:
@@ -64,7 +64,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2497-Question-bank-Single-Match-588339b5b4ba945f89ab1cbebd6b07b89b9e0420"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-1731-MCQ-need-duplicate-key-val-e3d8d96783d30ac2b63c41c9238cde0c693a1f97"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -114,7 +114,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2497-Question-bank-Single-Match-588339b5b4ba945f89ab1cbebd6b07b89b9e0420"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-1731-MCQ-need-duplicate-key-val-e3d8d96783d30ac2b63c41c9238cde0c693a1f97"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -163,7 +163,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2497-Question-bank-Single-Match-588339b5b4ba945f89ab1cbebd6b07b89b9e0420"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-1731-MCQ-need-duplicate-key-val-e3d8d96783d30ac2b63c41c9238cde0c693a1f97"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -212,7 +212,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2497-Question-bank-Single-Match-588339b5b4ba945f89ab1cbebd6b07b89b9e0420"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-1731-MCQ-need-duplicate-key-val-e3d8d96783d30ac2b63c41c9238cde0c693a1f97"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -261,7 +261,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2497-Question-bank-Single-Match-588339b5b4ba945f89ab1cbebd6b07b89b9e0420"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-1731-MCQ-need-duplicate-key-val-e3d8d96783d30ac2b63c41c9238cde0c693a1f97"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
