@@ -28,7 +28,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2559-Question-Bank-Add-enrichme-9f8639e59e8f27cd2cdf949c5fd2b50a50987fd9"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2564-filter-apply-in-question-b-a856cd350d6e567e5d917e990bf08a9e2cab310c"
               resources:
                 requests:
                   cpu: "2"
@@ -64,7 +64,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2559-Question-Bank-Add-enrichme-9f8639e59e8f27cd2cdf949c5fd2b50a50987fd9"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2564-filter-apply-in-question-b-a856cd350d6e567e5d917e990bf08a9e2cab310c"
               resources:
                 requests:
                   cpu: "2"
@@ -112,7 +112,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2559-Question-Bank-Add-enrichme-9f8639e59e8f27cd2cdf949c5fd2b50a50987fd9"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2564-filter-apply-in-question-b-a856cd350d6e567e5d917e990bf08a9e2cab310c"
               resources:
                 requests:
                   cpu: "2"
@@ -160,7 +160,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2559-Question-Bank-Add-enrichme-9f8639e59e8f27cd2cdf949c5fd2b50a50987fd9"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2564-filter-apply-in-question-b-a856cd350d6e567e5d917e990bf08a9e2cab310c"
               resources:
                 requests:
                   cpu: "2"
@@ -208,7 +208,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2559-Question-Bank-Add-enrichme-9f8639e59e8f27cd2cdf949c5fd2b50a50987fd9"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2564-filter-apply-in-question-b-a856cd350d6e567e5d917e990bf08a9e2cab310c"
               resources:
                 requests:
                   cpu: "2"
@@ -279,7 +279,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2559-Question-Bank-Add-enrichme-9f8639e59e8f27cd2cdf949c5fd2b50a50987fd9"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2564-filter-apply-in-question-b-a856cd350d6e567e5d917e990bf08a9e2cab310c"
               resources:
                 requests:
                   cpu: "250m"
