@@ -27,7 +27,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2563-Removed-unwanted-transacti-d08646216bf765a2d933190f62a1664880ff8a7a"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2526-Question-creation-Manually-615c9de0867868df37a3b6df6393ae176c0b4b18"
               resources:    # Commented out for staging environment
               # Original resources:
                requests:
@@ -64,7 +64,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2563-Removed-unwanted-transacti-d08646216bf765a2d933190f62a1664880ff8a7a"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2526-Question-creation-Manually-615c9de0867868df37a3b6df6393ae176c0b4b18"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -114,7 +114,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2563-Removed-unwanted-transacti-d08646216bf765a2d933190f62a1664880ff8a7a"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2526-Question-creation-Manually-615c9de0867868df37a3b6df6393ae176c0b4b18"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -163,7 +163,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2563-Removed-unwanted-transacti-d08646216bf765a2d933190f62a1664880ff8a7a"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2526-Question-creation-Manually-615c9de0867868df37a3b6df6393ae176c0b4b18"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -212,7 +212,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2563-Removed-unwanted-transacti-d08646216bf765a2d933190f62a1664880ff8a7a"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2526-Question-creation-Manually-615c9de0867868df37a3b6df6393ae176c0b4b18"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -261,7 +261,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2563-Removed-unwanted-transacti-d08646216bf765a2d933190f62a1664880ff8a7a"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2526-Question-creation-Manually-615c9de0867868df37a3b6df6393ae176c0b4b18"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
