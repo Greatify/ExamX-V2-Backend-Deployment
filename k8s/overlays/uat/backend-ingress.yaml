@@ -34,7 +34,8 @@ metadata:
     alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-south-1:399600302704:certificate/29c7b407-7f44-4060-ab94-602a60d331a5
     alb.ingress.kubernetes.io/backend-protocol: "HTTP"
 spec:
-  ingressClassName: alb
+  # ingressClassName: alb  # Old AWS Load Balancer Controller
+  ingressClassName: examxv2-alb  # EKS Auto Mode
   rules: 
     - host: api.examx.ai
       http:

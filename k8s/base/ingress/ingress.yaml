@@ -47,7 +47,8 @@ metadata:
       X-AMZN-TLS-Cipher-Suite:${tls.client_cipher}~
       X-AMZN-TLS-Version:${tls.client_protocol}
 spec:
-  ingressClassName: alb
+  # ingressClassName: alb  # Old AWS Load Balancer Controller
+  ingressClassName: examxv2-alb  # EKS Auto Mode
   rules: 
     - http:
         paths:

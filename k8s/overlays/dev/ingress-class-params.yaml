@@ -1,0 +1,7 @@
+apiVersion: eks.amazonaws.com/v1
+kind: IngressClassParams
+metadata:
+  name: dev-examxv2-alb-params
+spec:
+  scheme: internet-facing
+

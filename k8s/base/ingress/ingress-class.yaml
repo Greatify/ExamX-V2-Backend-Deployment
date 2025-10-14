@@ -1,0 +1,12 @@
+apiVersion: networking.k8s.io/v1
+kind: IngressClass
+metadata:
+  name: examxv2-alb
+spec:
+  # EKS Auto Mode controller
+  controller: eks.amazonaws.com/alb
+  parameters:
+    apiGroup: eks.amazonaws.com
+    kind: IngressClassParams
+    name: examxv2-alb-params
+

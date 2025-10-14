@@ -20,6 +20,7 @@ resources:
   
   #Network
   - ingress/ingress.yaml
+  - ingress/ingress-class.yaml
   
   # Configurations
   - configmap/nginx-config.yaml
@@ -38,9 +39,9 @@ resources:
   
   # Pod Disruption Budgets
   - pdb/backend-pdb.yaml
-  # - pdb/celery-worker-default-pdb.yaml
-  # - pdb/celery-bulk-upload-worker-pdb.yaml
-  # - pdb/celery-enrichment-worker-pdb.yaml
-  # - pdb/celery-question-generator-ai-worker-pdb.yaml
-  # - pdb/celery-flower-pdb.yaml
+  - pdb/celery-worker-default-pdb.yaml
+  - pdb/celery-bulk-upload-worker-pdb.yaml
+  - pdb/celery-enrichment-worker-pdb.yaml
+  - pdb/celery-question-generator-ai-worker-pdb.yaml
+  - pdb/celery-flower-pdb.yaml
  

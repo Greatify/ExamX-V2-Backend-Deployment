@@ -7,6 +7,7 @@ resources:
   - storage/pv.yaml
   - storage/pvc.yaml
   - storage/storage-class.yaml
+  - ingress-class-params.yaml
 
 labels:
   - pairs:
@@ -310,7 +311,7 @@ patches:
       metadata:
         name: celery-worker-default-autoscaler
       spec:
-        minReplicas: 3
+        minReplicas: 1
         maxReplicas: 20
         scaleTargetRef:
           apiVersion: apps/v1
@@ -343,6 +344,7 @@ patches:
       metadata:
         name: celery-enrichment-worker-autoscaler
       spec:
+        minReplicas: 2
         maxReplicas: 20
         scaleTargetRef:
           apiVersion: apps/v1
@@ -367,6 +369,19 @@ patches:
     target:
       kind: HorizontalPodAutoscaler
       name: celery-question-generator-ai-worker-autoscaler
+
+  # IngressClass patches for Auto Mode
+  - patch: |-
+      apiVersion: networking.k8s.io/v1
+      kind: IngressClass
+      metadata:
+        name: examxv2-alb
+      spec:
+        parameters:
+          name: prod-examxv2-alb-params
+    target:
+      kind: IngressClass
+      name: examxv2-alb
 
   # Ingress patches
   - patch: |-
