@@ -365,7 +365,7 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Update Kubernetes configuration
-        run: aws eks update-kubeconfig --name greatify-production-cluster --region ap-south-1
+        run: aws eks update-kubeconfig --name ${{ secrets.PROD_CLUSTER_NAME }} --region ${{ secrets.AWS_REGION }}
 
       - name: Deploy to production environment
         run: |
