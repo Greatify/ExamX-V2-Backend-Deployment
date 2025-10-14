@@ -8,7 +8,7 @@ spec:
   accessModes:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: efs-sc
+  storageClassName: standard
   csi:
     driver: efs.csi.aws.com
     volumeHandle: fs-0ed464d9fad155169

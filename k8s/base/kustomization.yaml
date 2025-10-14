@@ -20,7 +20,6 @@ resources:
   
   #Network
   - ingress/ingress.yaml
-  - ingress/ingress-class.yaml
   
   # Configurations
   - configmap/nginx-config.yaml

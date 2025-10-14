@@ -6,7 +6,6 @@ resources:
   - ../../base
   - storage/pv.yaml
   - storage/pvc.yaml
-  - ingress-class-params.yaml
 
 labels:
   - pairs:
@@ -274,19 +273,6 @@ patches:
     target:
       kind: Deployment
       name: celery-flower
-
-  # IngressClass patches for Auto Mode
-  - patch: |-
-      apiVersion: networking.k8s.io/v1
-      kind: IngressClass
-      metadata:
-        name: examxv2-alb
-      spec:
-        parameters:
-          name: stg-examxv2-alb-params
-    target:
-      kind: IngressClass
-      name: examxv2-alb
 
   # Ingress patches
   - patch: |-
