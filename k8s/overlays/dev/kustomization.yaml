@@ -24,7 +24,7 @@ patches:
       metadata:
         name: examxv2-backend
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2378-Preserve-original-case-of-245a6662d6f54fd0cfed2a3b5b255b0382f18788"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2547-SECTION-WISE-QUESTION-SELE-7a390b5d6cb15e5c4795afa71de7447187fd31c3"
       spec:
         replicas: 1
         template:
@@ -32,7 +32,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2378-Preserve-original-case-of-245a6662d6f54fd0cfed2a3b5b255b0382f18788"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2547-SECTION-WISE-QUESTION-SELE-7a390b5d6cb15e5c4795afa71de7447187fd31c3"
               resources: null  # Commented out for dev environment
               # resources:
               #   requests:
@@ -63,7 +63,7 @@ patches:
       metadata:
         name: celery-worker-default
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2378-Preserve-original-case-of-245a6662d6f54fd0cfed2a3b5b255b0382f18788"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2547-SECTION-WISE-QUESTION-SELE-7a390b5d6cb15e5c4795afa71de7447187fd31c3"
       spec:
         replicas: 1
         template:
@@ -71,7 +71,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2378-Preserve-original-case-of-245a6662d6f54fd0cfed2a3b5b255b0382f18788"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2547-SECTION-WISE-QUESTION-SELE-7a390b5d6cb15e5c4795afa71de7447187fd31c3"
               resources: null  # Commented out for dev environment
               # resources:
               #   requests:
@@ -113,7 +113,7 @@ patches:
       metadata:
         name: celery-bulk-upload-worker
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2378-Preserve-original-case-of-245a6662d6f54fd0cfed2a3b5b255b0382f18788"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2547-SECTION-WISE-QUESTION-SELE-7a390b5d6cb15e5c4795afa71de7447187fd31c3"
       spec:
         replicas: 1
         template:
@@ -121,7 +121,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2378-Preserve-original-case-of-245a6662d6f54fd0cfed2a3b5b255b0382f18788"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2547-SECTION-WISE-QUESTION-SELE-7a390b5d6cb15e5c4795afa71de7447187fd31c3"
               resources: null  # Commented out for dev environment
               # resources:
               #   requests:
@@ -188,7 +188,7 @@ patches:
       metadata:
         name: celery-question-generator-ai-worker
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2378-Preserve-original-case-of-245a6662d6f54fd0cfed2a3b5b255b0382f18788"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2547-SECTION-WISE-QUESTION-SELE-7a390b5d6cb15e5c4795afa71de7447187fd31c3"
       spec:
         replicas: 1
         template:
@@ -196,7 +196,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2378-Preserve-original-case-of-245a6662d6f54fd0cfed2a3b5b255b0382f18788"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2547-SECTION-WISE-QUESTION-SELE-7a390b5d6cb15e5c4795afa71de7447187fd31c3"
               resources: null  # Commented out for dev environment
               # resources:
               #   requests:
@@ -239,7 +239,7 @@ patches:
       metadata:
         name: celery-flower
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2378-Preserve-original-case-of-245a6662d6f54fd0cfed2a3b5b255b0382f18788"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2547-SECTION-WISE-QUESTION-SELE-7a390b5d6cb15e5c4795afa71de7447187fd31c3"
       spec:
         replicas: 1
         template:
@@ -247,7 +247,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2378-Preserve-original-case-of-245a6662d6f54fd0cfed2a3b5b255b0382f18788"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2547-SECTION-WISE-QUESTION-SELE-7a390b5d6cb15e5c4795afa71de7447187fd31c3"
               resources: null  # Commented out for dev environment
               # resources:
               #   requests:
