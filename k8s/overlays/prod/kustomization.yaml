@@ -27,7 +27,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2582-Question-Bank-PO-should-li-c6e2eec1dba061b2d919b65d4b9b418273a5a191"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2594-question-export-course-bas-5e403019c2d3145f108c35f36e756480aa6efba7"
               resources:
                 requests:
                   cpu: "2"
@@ -63,7 +63,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2582-Question-Bank-PO-should-li-c6e2eec1dba061b2d919b65d4b9b418273a5a191"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2594-question-export-course-bas-5e403019c2d3145f108c35f36e756480aa6efba7"
               resources:
                 requests:
                   cpu: "2"
@@ -111,7 +111,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2582-Question-Bank-PO-should-li-c6e2eec1dba061b2d919b65d4b9b418273a5a191"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2594-question-export-course-bas-5e403019c2d3145f108c35f36e756480aa6efba7"
               resources:
                 requests:
                   cpu: "2"
@@ -159,7 +159,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2582-Question-Bank-PO-should-li-c6e2eec1dba061b2d919b65d4b9b418273a5a191"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2594-question-export-course-bas-5e403019c2d3145f108c35f36e756480aa6efba7"
               resources:
                 requests:
                   cpu: "2"
@@ -207,7 +207,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2582-Question-Bank-PO-should-li-c6e2eec1dba061b2d919b65d4b9b418273a5a191"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2594-question-export-course-bas-5e403019c2d3145f108c35f36e756480aa6efba7"
               resources:
                 requests:
                   cpu: "2"
@@ -278,7 +278,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2582-Question-Bank-PO-should-li-c6e2eec1dba061b2d919b65d4b9b418273a5a191"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2594-question-export-course-bas-5e403019c2d3145f108c35f36e756480aa6efba7"
               resources:
                 requests:
                   cpu: "250m"
