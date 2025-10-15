@@ -27,7 +27,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2610-RagError-in-Question-Paper-64165203f4b9e2112eb3f3898b5e204d4e96c7da"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2606-Handle-CO-Distribution-in-97d18dc198450e3600c626aeb4a318d96f9b7493"
               resources:    # Commented out for staging environment
               # Original resources:
                requests:
@@ -64,7 +64,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2610-RagError-in-Question-Paper-64165203f4b9e2112eb3f3898b5e204d4e96c7da"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2606-Handle-CO-Distribution-in-97d18dc198450e3600c626aeb4a318d96f9b7493"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -114,7 +114,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2610-RagError-in-Question-Paper-64165203f4b9e2112eb3f3898b5e204d4e96c7da"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2606-Handle-CO-Distribution-in-97d18dc198450e3600c626aeb4a318d96f9b7493"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -163,7 +163,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2610-RagError-in-Question-Paper-64165203f4b9e2112eb3f3898b5e204d4e96c7da"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2606-Handle-CO-Distribution-in-97d18dc198450e3600c626aeb4a318d96f9b7493"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -212,7 +212,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2610-RagError-in-Question-Paper-64165203f4b9e2112eb3f3898b5e204d4e96c7da"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2606-Handle-CO-Distribution-in-97d18dc198450e3600c626aeb4a318d96f9b7493"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -261,7 +261,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2610-RagError-in-Question-Paper-64165203f4b9e2112eb3f3898b5e204d4e96c7da"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2606-Handle-CO-Distribution-in-97d18dc198450e3600c626aeb4a318d96f9b7493"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
