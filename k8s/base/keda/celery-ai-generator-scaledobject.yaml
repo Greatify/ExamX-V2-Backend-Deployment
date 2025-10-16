@@ -14,7 +14,7 @@ spec:
   triggers:
     - type: redis
       metadata:
-        addressFromEnv: REDIS_URL
+        address: "master.examxv2-dev.kti2un.aps1.cache.amazonaws.com:6379"
         listName: "question_generator_ai"
         listLength: "1"
         enableTLS: "true"
