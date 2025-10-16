@@ -47,7 +47,7 @@ patches:
               - name: OPIK_PROJECT_NAME
                 value: "Prod"
               - name: REDIS_URL
-                value: "master.examx-v2-prod.kti2un.aps1.cache.amazonaws.com:6379"
+                value: "redis://master.examx-v2-prod.kti2un.aps1.cache.amazonaws.com:6379"
     target:
       kind: Deployment
       name: examxv2-backend
@@ -97,7 +97,7 @@ patches:
               - name: OPIK_PROJECT_NAME
                 value: "Prod"
               - name: REDIS_URL
-                value: "master.examx-v2-prod.kti2un.aps1.cache.amazonaws.com:6379"
+                value: "redis://master.examx-v2-prod.kti2un.aps1.cache.amazonaws.com:6379"
     target:
       kind: Deployment
       name: celery-worker-default
@@ -147,7 +147,7 @@ patches:
               - name: OPIK_PROJECT_NAME
                 value: "Prod"
               - name: REDIS_URL
-                value: "master.examx-v2-prod.kti2un.aps1.cache.amazonaws.com:6379"
+                value: "redis://master.examx-v2-prod.kti2un.aps1.cache.amazonaws.com:6379"
     target:
       kind: Deployment
       name: celery-bulk-upload-worker
@@ -197,7 +197,7 @@ patches:
               - name: OPIK_PROJECT_NAME
                 value: "Prod"
               - name: REDIS_URL
-                value: "master.examx-v2-prod.kti2un.aps1.cache.amazonaws.com:6379"
+                value: "redis://master.examx-v2-prod.kti2un.aps1.cache.amazonaws.com:6379"
     target:
       kind: Deployment
       name: celery-enrichment-worker
@@ -247,7 +247,7 @@ patches:
               - name: OPIK_PROJECT_NAME
                 value: "Prod"
               - name: REDIS_URL
-                value: "master.examx-v2-prod.kti2un.aps1.cache.amazonaws.com:6379"
+                value: "redis://master.examx-v2-prod.kti2un.aps1.cache.amazonaws.com:6379"
     target:
       kind: Deployment
       name: celery-question-generator-ai-worker
@@ -464,7 +464,7 @@ patches:
         triggers:
         - type: redis
           metadata:
-            addressFromEnv: REDIS_URL
+            address: "master.examx-v2-prod.kti2un.aps1.cache.amazonaws.com:6379"
             listName: "default"
             listLength: "1"
             enableTLS: "true"
@@ -486,7 +486,7 @@ patches:
         triggers:
         - type: redis
           metadata:
-            addressFromEnv: REDIS_URL
+            address: "master.examx-v2-prod.kti2un.aps1.cache.amazonaws.com:6379"
             listName: "bulk_upload"
             listLength: "1"
             enableTLS: "true"
@@ -508,7 +508,7 @@ patches:
         triggers:
         - type: redis
           metadata:
-            addressFromEnv: REDIS_URL
+            address: "master.examx-v2-prod.kti2un.aps1.cache.amazonaws.com:6379"
             listName: "question_enrichment"
             listLength: "20" 
             enableTLS: "true"
@@ -530,7 +530,7 @@ patches:
         triggers:
         - type: redis
           metadata:
-            addressFromEnv: REDIS_URL
+            address: "master.examx-v2-prod.kti2un.aps1.cache.amazonaws.com:6379"
             listName: "question_generator_ai"
             listLength: "1"
             enableTLS: "true"
