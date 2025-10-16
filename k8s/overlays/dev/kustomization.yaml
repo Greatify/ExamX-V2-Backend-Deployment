@@ -51,6 +51,8 @@ patches:
                 value: "greatify-prod"
               - name: OPIK_PROJECT_NAME
                 value: "Dev"
+              - name: REDIS_URL
+                value: "master.examxv2-dev.kti2un.aps1.cache.amazonaws.com:6379"
     target:
       kind: Deployment
       name: examxv2-backend
@@ -102,6 +104,8 @@ patches:
                 value: "greatify-prod"
               - name: OPIK_PROJECT_NAME
                 value: "Dev"
+              - name: REDIS_URL
+                value: "master.examxv2-dev.kti2un.aps1.cache.amazonaws.com:6379"
     target:
       kind: Deployment
       name: celery-worker-default
@@ -150,8 +154,10 @@ patches:
                 value: "Y5T3WoqNxJ22ypw1M8qivydis"
               - name: OPIK_WORKSPACE
                 value: "greatify-prod"
-              - name: OPIK_PROJECT_NAME
+              - name: OPIK_PROJECT_NAME 
                 value: "Dev"
+              - name: REDIS_URL
+                value: "master.examxv2-dev.kti2un.aps1.cache.amazonaws.com:6379"
     target:
       kind: Deployment
       name: celery-bulk-upload-worker
@@ -227,6 +233,8 @@ patches:
                 value: "greatify-prod"
               - name: OPIK_PROJECT_NAME
                 value: "Dev"
+              - name: REDIS_URL
+                value: "master.examxv2-dev.kti2un.aps1.cache.amazonaws.com:6379"
     target:
       kind: Deployment
       name: celery-question-generator-ai-worker
@@ -311,19 +319,104 @@ patches:
       name: examxv2-google-credentials
 
   # Disable celery-enrichment-worker-autoscaler in dev
+  # - patch: |-
+  #     apiVersion: autoscaling/v2
+  #     kind: HorizontalPodAutoscaler
+  #     metadata:
+  #       name: celery-enrichment-worker-autoscaler
+  #     spec:
+  #       minReplicas: 0
+  #       maxReplicas: 1
+  #       scaleTargetRef:
+  #         apiVersion: apps/v1
+  #         kind: Deployment
+  #         name: celery-enrichment-worker
+  #   target:
+  #     kind: HorizontalPodAutoscaler
+  #     name: celery-enrichment-worker-autoscaler
+
+  # KEDA ScaledObject patches for dev environment
   - patch: |-
-      apiVersion: autoscaling/v2
-      kind: HorizontalPodAutoscaler
+      apiVersion: keda.sh/v1alpha1
+      kind: ScaledObject
       metadata:
-        name: celery-enrichment-worker-autoscaler
+        name: celery-worker-default-scaler
       spec:
-        minReplicas: 1
-        maxReplicas: 1
-        scaleTargetRef:
-          apiVersion: apps/v1
-          kind: Deployment
-          name: celery-enrichment-worker
+        minReplicaCount: 1
+        maxReplicaCount: 3 
+        cooldownPeriod: 30
+        triggers:
+        - type: redis
+          metadata:
+            addressFromEnv: REDIS_URL
+            listName: "default"
+            listLength: "1"  
+            enableTLS: "true"
+            unsafeSsl: "true"
     target:
-      kind: HorizontalPodAutoscaler
-      name: celery-enrichment-worker-autoscaler
+      kind: ScaledObject
+      name: celery-worker-default-scaler
+
+  - patch: |-
+      apiVersion: keda.sh/v1alpha1
+      kind: ScaledObject
+      metadata:
+        name: celery-bulk-upload-worker-scaler
+      spec:
+        minReplicaCount: 1
+        maxReplicaCount: 2 
+        cooldownPeriod: 30
+        triggers:
+        - type: redis
+          metadata:
+            addressFromEnv: REDIS_URL
+            listName: "bulk_upload"
+            listLength: "1"  
+            enableTLS: "true"
+            unsafeSsl: "true"
+    target:
+      kind: ScaledObject
+      name: celery-bulk-upload-worker-scaler
+
+  - patch: |-
+      apiVersion: keda.sh/v1alpha1
+      kind: ScaledObject
+      metadata:
+        name: celery-enrichment-worker-scaler
+      spec:
+        minReplicaCount: 0  
+        maxReplicaCount: 3 
+        cooldownPeriod: 30
+        triggers:
+        - type: redis
+          metadata:
+            addressFromEnv: REDIS_URL
+            listName: "question_enrichment"
+            listLength: "1"  
+            enableTLS: "true"
+            unsafeSsl: "true"
+    target:
+      kind: ScaledObject
+      name: celery-enrichment-worker-scaler
+
+  - patch: |-
+      apiVersion: keda.sh/v1alpha1
+      kind: ScaledObject
+      metadata:
+        name: celery-question-generator-ai-worker-scaler
+      spec:
+        minReplicaCount: 1 
+        maxReplicaCount: 2 
+        cooldownPeriod: 30
+        triggers:
+        - type: redis
+          metadata:
+            addressFromEnv: REDIS_URL
+            listName: "question_generator_ai"
+            listLength: "1"  
+            enableTLS: "true"
+            unsafeSsl: "true"
+    target:
+      kind: ScaledObject
+      name: celery-question-generator-ai-worker-scaler
 

@@ -2,6 +2,12 @@
 
 This repository contains Kubernetes configuration and CI/CD workflows for deploying the ExamX-V2 backend applications across multiple environments (development, staging, and production).
 
+## Documentation
+
+- **[KEDA_CONFIGURATION.md](KEDA_CONFIGURATION.md)** - Complete guide for KEDA installation, configuration, and troubleshooting
+- **[FEATURE_ENVIRONMENTS.md](FEATURE_ENVIRONMENTS.md)** - Feature-specific environment configurations
+- **[README.md](README.md)** - This file, containing deployment overview and CI/CD workflows
+
 ## Repository Structure
 
 ```
@@ -11,21 +17,27 @@ ExamX-V2-Backend-Deployment/
 │   ├── cd-stg.yaml               # Staging environment workflow
 │   └── cd-prod.yaml              # Production environment workflow
 │
-└── k8s/                          # Kubernetes configuration files
-    ├── base/                     # Base configurations shared across environments
-    │   ├── autoscaling/          # HorizontalPodAutoscaler configurations
-    │   ├── configmap/            # ConfigMap resources (nginx, etc.)
-    │   ├── deployment/           # Deployment resources for all services
-    │   ├── ingress/              # Ingress resources for network routing
-    │   ├── secret/               # Secret resources
-    │   ├── secrets/              # External secret configurations
-    │   ├── services/             # Service resources
-    │   └── kustomization.yaml    # Base kustomization file
-    │
-    └── overlays/                 # Environment-specific configurations
-        ├── dev/                  # Development environment
-        ├── stg/                  # Staging environment
-        └── prod/                 # Production environment
+├── k8s/                          # Kubernetes configuration files
+│   ├── base/                     # Base configurations shared across environments
+│   │   ├── autoscaling/          # HorizontalPodAutoscaler configurations
+│   │   ├── configmap/            # ConfigMap resources (nginx, etc.)
+│   │   ├── deployment/           # Deployment resources for all services
+│   │   ├── ingress/              # Ingress resources for network routing
+│   │   ├── keda/                 # KEDA ScaledObject configurations
+│   │   ├── pdb/                  # PodDisruptionBudget resources
+│   │   ├── secret/               # Secret resources
+│   │   ├── secrets/              # External secret configurations
+│   │   ├── services/             # Service resources
+│   │   └── kustomization.yaml    # Base kustomization file
+│   │
+│   └── overlays/                 # Environment-specific configurations
+│       ├── dev/                  # Development environment
+│       ├── stg/                  # Staging environment
+│       └── prod/                 # Production environment
+│
+├── KEDA_CONFIGURATION.md         # KEDA installation and configuration guide
+├── FEATURE_ENVIRONMENTS.md       # Feature environment setup guide
+└── README.md                     # This file
 ```
 
 ## Application Architecture
@@ -306,6 +318,17 @@ kubectl apply -k k8s/overlays/prod
 ```
 
 ## Monitoring and Scaling
+
+### KEDA (Kubernetes Event-Driven Autoscaling)
+
+ExamX-V2 uses KEDA for intelligent autoscaling of Celery workers based on Redis queue depth. This provides:
+
+- **Queue-Based Scaling**: Workers scale based on actual task queue depth, not just CPU/memory
+- **Cost Efficiency**: Scale down to minimum replicas when queues are empty
+- **Responsive Scaling**: Faster reaction time to queue changes
+- **Queue-Specific Scaling**: Each worker type (default, bulk upload, enrichment, AI generator) scales independently
+
+For detailed KEDA configuration, installation steps, and troubleshooting, see **[KEDA_CONFIGURATION.md](KEDA_CONFIGURATION.md)**.
 
 ### Horizontal Pod Autoscaling
 

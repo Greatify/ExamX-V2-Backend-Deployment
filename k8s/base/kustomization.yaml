@@ -26,13 +26,13 @@ resources:
   - secrets/examxv2-secrets.yaml
   - secrets/examxv2-google-credentials.yaml
   
-  # Autoscaling
+  # Autoscaling (Traditional HPA - will be replaced by KEDA)
   - autoscaling/backend-autoscaler.yaml
-  - autoscaling/celery-worker-default-autoscaler.yaml
+  # - autoscaling/celery-worker-default-autoscaler.yaml
   # - autoscaling/celery-beat-autoscaler.yaml
-  - autoscaling/celery-bulk-upload-worker-autoscaler.yaml
-  - autoscaling/celery-enrichment-worker-autoscaler.yaml
-  - autoscaling/celery-question-generator-ai-worker-autoscaler.yaml
+  # - autoscaling/celery-bulk-upload-worker-autoscaler.yaml
+  # - autoscaling/celery-enrichment-worker-autoscaler.yaml
+  # - autoscaling/celery-question-generator-ai-worker-autoscaler.yaml
   - autoscaling/celery-flower-autoscaler.yaml
   # - autoscaling/redis-autoscaler.yaml
   
@@ -43,4 +43,12 @@ resources:
   - pdb/celery-enrichment-worker-pdb.yaml
   - pdb/celery-question-generator-ai-worker-pdb.yaml
   - pdb/celery-flower-pdb.yaml
+
+  # KEDA Queue-based Autoscaling (ScaledObjects go in app namespaces, not keda namespace)
+  # Note: KEDA operator namespace is created during KEDA installation
+  # No authentication required for ElastiCache Valkey
+  - keda/celery-default-scaledobject.yaml
+  - keda/celery-bulk-upload-scaledobject.yaml
+  - keda/celery-enrichment-scaledobject.yaml
+  - keda/celery-ai-generator-scaledobject.yaml
  

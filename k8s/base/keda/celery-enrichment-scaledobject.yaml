@@ -1,0 +1,29 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: celery-enrichment-worker-scaler
+  labels:
+    app: celery-enrichment-worker
+spec:
+  scaleTargetRef:
+    name: celery-enrichment-worker
+  pollingInterval: 15  
+  cooldownPeriod: 60  
+  minReplicaCount: 1
+  maxReplicaCount: 5
+  triggers:
+    - type: redis
+      metadata:
+        addressFromEnv: REDIS_URL
+        listName: "question_enrichment"  
+        listLength: "5"
+        enableTLS: "true"
+        unsafeSsl: "true"
+    # - type: cpu
+    #   metadata:
+    #     type: Utilization
+    #     value: "50"
+    # - type: memory
+    #   metadata:
+    #     type: Utilization
+    #     value: "70"
