@@ -23,7 +23,7 @@ patches:
       metadata:
         name: examxv2-backend
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2201-Need-Section-Filter-and-Se-7eddf31b39e5eea20d137304f244102ee49d94a8"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2618-Offline-Exams-are-reflecti-283ebc6bda6e8ca4ce1f87b09339b087f05d68e2"
       spec:
         replicas: 1
         template:
@@ -31,7 +31,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2201-Need-Section-Filter-and-Se-7eddf31b39e5eea20d137304f244102ee49d94a8"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2618-Offline-Exams-are-reflecti-283ebc6bda6e8ca4ce1f87b09339b087f05d68e2"
               resources: null  # Commented out for dev environment
               # resources:
               #   requests:
@@ -62,7 +62,7 @@ patches:
       metadata:
         name: celery-worker-default
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2201-Need-Section-Filter-and-Se-7eddf31b39e5eea20d137304f244102ee49d94a8"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2618-Offline-Exams-are-reflecti-283ebc6bda6e8ca4ce1f87b09339b087f05d68e2"
       spec:
         replicas: 1
         template:
@@ -70,7 +70,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2201-Need-Section-Filter-and-Se-7eddf31b39e5eea20d137304f244102ee49d94a8"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2618-Offline-Exams-are-reflecti-283ebc6bda6e8ca4ce1f87b09339b087f05d68e2"
               resources: null  # Commented out for dev environment
               # resources:
               #   requests:
@@ -112,7 +112,7 @@ patches:
       metadata:
         name: celery-bulk-upload-worker
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2201-Need-Section-Filter-and-Se-7eddf31b39e5eea20d137304f244102ee49d94a8"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2618-Offline-Exams-are-reflecti-283ebc6bda6e8ca4ce1f87b09339b087f05d68e2"
       spec:
         replicas: 1
         template:
@@ -120,7 +120,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2201-Need-Section-Filter-and-Se-7eddf31b39e5eea20d137304f244102ee49d94a8"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2618-Offline-Exams-are-reflecti-283ebc6bda6e8ca4ce1f87b09339b087f05d68e2"
               resources: null  # Commented out for dev environment
               # resources:
               #   requests:
@@ -187,7 +187,7 @@ patches:
       metadata:
         name: celery-question-generator-ai-worker
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2201-Need-Section-Filter-and-Se-7eddf31b39e5eea20d137304f244102ee49d94a8"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2618-Offline-Exams-are-reflecti-283ebc6bda6e8ca4ce1f87b09339b087f05d68e2"
       spec:
         replicas: 1
         template:
@@ -195,7 +195,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2201-Need-Section-Filter-and-Se-7eddf31b39e5eea20d137304f244102ee49d94a8"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2618-Offline-Exams-are-reflecti-283ebc6bda6e8ca4ce1f87b09339b087f05d68e2"
               resources: null  # Commented out for dev environment
               # resources:
               #   requests:
@@ -238,7 +238,7 @@ patches:
       metadata:
         name: celery-flower
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2201-Need-Section-Filter-and-Se-7eddf31b39e5eea20d137304f244102ee49d94a8"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2618-Offline-Exams-are-reflecti-283ebc6bda6e8ca4ce1f87b09339b087f05d68e2"
       spec:
         replicas: 1
         template:
@@ -246,7 +246,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2201-Need-Section-Filter-and-Se-7eddf31b39e5eea20d137304f244102ee49d94a8"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2618-Offline-Exams-are-reflecti-283ebc6bda6e8ca4ce1f87b09339b087f05d68e2"
               resources: null  # Commented out for dev environment
               # resources:
               #   requests:
