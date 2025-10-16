@@ -21,6 +21,11 @@ on:
         required: true
         type: boolean
         default: false
+      deployment_repo_branch:
+        description: 'Deployment repository branch to checkout and push to'
+        required: false
+        type: string
+        default: 'deploy'
 
 # concurrency:
 #   group: ${{ github.workflow }}-${{ github.ref }}
@@ -209,7 +214,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           repository: 'Greatify/ExamX-V2-Backend-Deployment'
-          ref: 'main'
+          ref: ${{ github.event.inputs.deployment_repo_branch }}
           fetch-depth: 0
 
       - name: Download image tag files
@@ -245,7 +250,7 @@ jobs:
           git config --local user.name "Hariharen"
           git add k8s/overlays/stg/kustomization.yaml
           git commit -m "Update image tags for staging deployment"
-          git push origin main
+          git push origin ${{ github.event.inputs.deployment_repo_branch }}
       
       # - name: Push to protected branch
       #   if: github.event.inputs.full_deployment == 'true'
