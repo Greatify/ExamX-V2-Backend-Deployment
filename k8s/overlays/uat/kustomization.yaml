@@ -29,7 +29,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-Add-multi-exam-PDF-export-API-for-a-3acbb1317ccd3af784c5addb9d6de230c8dd19c2"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-EXM-2650-and-EXM-2652Add-exam-wise-8952548916c4d37975f4cbc53d0231c2b9ca33a1"
               resources:
                 requests:
                   cpu: "2"
@@ -65,7 +65,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-Add-multi-exam-PDF-export-API-for-a-3acbb1317ccd3af784c5addb9d6de230c8dd19c2"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-EXM-2650-and-EXM-2652Add-exam-wise-8952548916c4d37975f4cbc53d0231c2b9ca33a1"
               resources:
                 requests:
                   cpu: "2"
@@ -114,7 +114,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-Add-multi-exam-PDF-export-API-for-a-3acbb1317ccd3af784c5addb9d6de230c8dd19c2"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-EXM-2650-and-EXM-2652Add-exam-wise-8952548916c4d37975f4cbc53d0231c2b9ca33a1"
               resources:
                 requests:
                   cpu: "2"
@@ -162,7 +162,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-Add-multi-exam-PDF-export-API-for-a-3acbb1317ccd3af784c5addb9d6de230c8dd19c2"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-EXM-2650-and-EXM-2652Add-exam-wise-8952548916c4d37975f4cbc53d0231c2b9ca33a1"
               resources:
                 requests:
                   cpu: "2"
@@ -210,7 +210,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-Add-multi-exam-PDF-export-API-for-a-3acbb1317ccd3af784c5addb9d6de230c8dd19c2"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-EXM-2650-and-EXM-2652Add-exam-wise-8952548916c4d37975f4cbc53d0231c2b9ca33a1"
               resources:
                 requests:
                   cpu: "2"
@@ -258,7 +258,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-Add-multi-exam-PDF-export-API-for-a-3acbb1317ccd3af784c5addb9d6de230c8dd19c2"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-EXM-2650-and-EXM-2652Add-exam-wise-8952548916c4d37975f4cbc53d0231c2b9ca33a1"
               resources:
                 requests:
                   cpu: "250m"
