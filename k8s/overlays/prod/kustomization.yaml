@@ -27,7 +27,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2637-Add-AI-Question-Paper-Pars-b1f8f5c77a4cb15c91540f9402486360dfdf0e0b"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2657-question-paper-download-ui-daccf034d4b273f709fd58061850059cffec4690"
               resources:
                 requests:
                   cpu: "2"
@@ -63,7 +63,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2637-Add-AI-Question-Paper-Pars-b1f8f5c77a4cb15c91540f9402486360dfdf0e0b"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2657-question-paper-download-ui-daccf034d4b273f709fd58061850059cffec4690"
               resources:
                 requests:
                   cpu: "2"
@@ -111,7 +111,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2637-Add-AI-Question-Paper-Pars-b1f8f5c77a4cb15c91540f9402486360dfdf0e0b"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2657-question-paper-download-ui-daccf034d4b273f709fd58061850059cffec4690"
               resources:
                 requests:
                   cpu: "2"
@@ -159,7 +159,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2637-Add-AI-Question-Paper-Pars-b1f8f5c77a4cb15c91540f9402486360dfdf0e0b"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2657-question-paper-download-ui-daccf034d4b273f709fd58061850059cffec4690"
               resources:
                 requests:
                   cpu: "2"
@@ -207,7 +207,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2637-Add-AI-Question-Paper-Pars-b1f8f5c77a4cb15c91540f9402486360dfdf0e0b"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2657-question-paper-download-ui-daccf034d4b273f709fd58061850059cffec4690"
               resources:
                 requests:
                   cpu: "2"
@@ -278,7 +278,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2637-Add-AI-Question-Paper-Pars-b1f8f5c77a4cb15c91540f9402486360dfdf0e0b"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2657-question-paper-download-ui-daccf034d4b273f709fd58061850059cffec4690"
               resources:
                 requests:
                   cpu: "250m"
