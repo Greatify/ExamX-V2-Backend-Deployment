@@ -27,7 +27,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2108-Validate-invalid-course-co-5955f3a0acb91e166c70d380e3782f9852b6af98"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2660-When-user-updates-Degree-N-c44be5e15983f90723339676b00fb96f020914a2"
               resources:    # Commented out for staging environment
               # Original resources:
                requests:
@@ -64,7 +64,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2108-Validate-invalid-course-co-5955f3a0acb91e166c70d380e3782f9852b6af98"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2660-When-user-updates-Degree-N-c44be5e15983f90723339676b00fb96f020914a2"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -114,7 +114,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2108-Validate-invalid-course-co-5955f3a0acb91e166c70d380e3782f9852b6af98"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2660-When-user-updates-Degree-N-c44be5e15983f90723339676b00fb96f020914a2"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -163,7 +163,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2108-Validate-invalid-course-co-5955f3a0acb91e166c70d380e3782f9852b6af98"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2660-When-user-updates-Degree-N-c44be5e15983f90723339676b00fb96f020914a2"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -212,7 +212,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2108-Validate-invalid-course-co-5955f3a0acb91e166c70d380e3782f9852b6af98"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2660-When-user-updates-Degree-N-c44be5e15983f90723339676b00fb96f020914a2"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -261,7 +261,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2108-Validate-invalid-course-co-5955f3a0acb91e166c70d380e3782f9852b6af98"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2660-When-user-updates-Degree-N-c44be5e15983f90723339676b00fb96f020914a2"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
