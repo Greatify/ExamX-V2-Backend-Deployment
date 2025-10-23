@@ -27,7 +27,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2681-Bulk-question-task-with-bu-3feb20618f626ecc7139ffbd1113176b7897deff"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2662-Fix-AttributeError-for-num-d0d7b4ced4391548a95636ed8b909c794a23730b"
               resources:    # Commented out for staging environment
               # Original resources:
                requests:
@@ -64,7 +64,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2681-Bulk-question-task-with-bu-3feb20618f626ecc7139ffbd1113176b7897deff"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2662-Fix-AttributeError-for-num-d0d7b4ced4391548a95636ed8b909c794a23730b"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -114,7 +114,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2681-Bulk-question-task-with-bu-3feb20618f626ecc7139ffbd1113176b7897deff"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2662-Fix-AttributeError-for-num-d0d7b4ced4391548a95636ed8b909c794a23730b"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -163,7 +163,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2681-Bulk-question-task-with-bu-3feb20618f626ecc7139ffbd1113176b7897deff"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2662-Fix-AttributeError-for-num-d0d7b4ced4391548a95636ed8b909c794a23730b"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -212,7 +212,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2681-Bulk-question-task-with-bu-3feb20618f626ecc7139ffbd1113176b7897deff"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2662-Fix-AttributeError-for-num-d0d7b4ced4391548a95636ed8b909c794a23730b"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -261,7 +261,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2681-Bulk-question-task-with-bu-3feb20618f626ecc7139ffbd1113176b7897deff"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2662-Fix-AttributeError-for-num-d0d7b4ced4391548a95636ed8b909c794a23730b"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
