@@ -23,7 +23,7 @@ patches:
       metadata:
         name: examxv2-backend
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2463-Student-answers-export-ima-0706dec537afab14bc33b0ab4d7e5ff4dd68e2a6"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-refactor-Replace-apply_async-with-d-1b3740c92bfade22fbf858b3dd848666f1aed0a2"
       spec:
         replicas: 1
         template:
@@ -31,7 +31,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2463-Student-answers-export-ima-0706dec537afab14bc33b0ab4d7e5ff4dd68e2a6"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-refactor-Replace-apply_async-with-d-1b3740c92bfade22fbf858b3dd848666f1aed0a2"
               resources: null  # Commented out for dev environment
               # resources:
               #   requests:
@@ -64,7 +64,7 @@ patches:
       metadata:
         name: celery-worker-default
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2463-Student-answers-export-ima-0706dec537afab14bc33b0ab4d7e5ff4dd68e2a6"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-refactor-Replace-apply_async-with-d-1b3740c92bfade22fbf858b3dd848666f1aed0a2"
       spec:
         replicas: 1
         template:
@@ -72,7 +72,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2463-Student-answers-export-ima-0706dec537afab14bc33b0ab4d7e5ff4dd68e2a6"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-refactor-Replace-apply_async-with-d-1b3740c92bfade22fbf858b3dd848666f1aed0a2"
               resources: null  # Commented out for dev environment
               # resources:
               #   requests:
@@ -116,7 +116,7 @@ patches:
       metadata:
         name: celery-bulk-upload-worker
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2463-Student-answers-export-ima-0706dec537afab14bc33b0ab4d7e5ff4dd68e2a6"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-refactor-Replace-apply_async-with-d-1b3740c92bfade22fbf858b3dd848666f1aed0a2"
       spec:
         replicas: 1
         template:
@@ -124,7 +124,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2463-Student-answers-export-ima-0706dec537afab14bc33b0ab4d7e5ff4dd68e2a6"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-refactor-Replace-apply_async-with-d-1b3740c92bfade22fbf858b3dd848666f1aed0a2"
               resources: null  # Commented out for dev environment
               # resources:
               #   requests:
@@ -193,7 +193,7 @@ patches:
       metadata:
         name: celery-question-generator-ai-worker
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2463-Student-answers-export-ima-0706dec537afab14bc33b0ab4d7e5ff4dd68e2a6"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-refactor-Replace-apply_async-with-d-1b3740c92bfade22fbf858b3dd848666f1aed0a2"
       spec:
         replicas: 1
         template:
@@ -201,7 +201,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2463-Student-answers-export-ima-0706dec537afab14bc33b0ab4d7e5ff4dd68e2a6"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-refactor-Replace-apply_async-with-d-1b3740c92bfade22fbf858b3dd848666f1aed0a2"
               resources: null  # Commented out for dev environment
               # resources:
               #   requests:
@@ -246,7 +246,7 @@ patches:
       metadata:
         name: celery-flower
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2463-Student-answers-export-ima-0706dec537afab14bc33b0ab4d7e5ff4dd68e2a6"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-refactor-Replace-apply_async-with-d-1b3740c92bfade22fbf858b3dd848666f1aed0a2"
       spec:
         replicas: 1
         template:
@@ -254,7 +254,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2463-Student-answers-export-ima-0706dec537afab14bc33b0ab4d7e5ff4dd68e2a6"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-refactor-Replace-apply_async-with-d-1b3740c92bfade22fbf858b3dd848666f1aed0a2"
               resources: null  # Commented out for dev environment
               # resources:
               #   requests:
