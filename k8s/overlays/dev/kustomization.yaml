@@ -23,7 +23,7 @@ patches:
       metadata:
         name: examxv2-backend
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Enhance-Celery-task-tracking-with-i-b9c416dcdec45c7c8a2da15477685124516d48a5"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2706-Handling-login-force-close-3077a2e5355cfe9ef357d16820ce49caad6bf549"
       spec:
         replicas: 1
         template:
@@ -31,7 +31,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Enhance-Celery-task-tracking-with-i-b9c416dcdec45c7c8a2da15477685124516d48a5"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2706-Handling-login-force-close-3077a2e5355cfe9ef357d16820ce49caad6bf549"
               resources: null  # Commented out for dev environment
               # resources:
               #   requests:
@@ -64,7 +64,7 @@ patches:
       metadata:
         name: celery-worker-default
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Enhance-Celery-task-tracking-with-i-b9c416dcdec45c7c8a2da15477685124516d48a5"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2706-Handling-login-force-close-3077a2e5355cfe9ef357d16820ce49caad6bf549"
       spec:
         replicas: 1
         template:
@@ -72,7 +72,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Enhance-Celery-task-tracking-with-i-b9c416dcdec45c7c8a2da15477685124516d48a5"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2706-Handling-login-force-close-3077a2e5355cfe9ef357d16820ce49caad6bf549"
               resources: null  # Commented out for dev environment
               # resources:
               #   requests:
@@ -116,7 +116,7 @@ patches:
       metadata:
         name: celery-bulk-upload-worker
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Enhance-Celery-task-tracking-with-i-b9c416dcdec45c7c8a2da15477685124516d48a5"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2706-Handling-login-force-close-3077a2e5355cfe9ef357d16820ce49caad6bf549"
       spec:
         replicas: 1
         template:
@@ -124,7 +124,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Enhance-Celery-task-tracking-with-i-b9c416dcdec45c7c8a2da15477685124516d48a5"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2706-Handling-login-force-close-3077a2e5355cfe9ef357d16820ce49caad6bf549"
               resources: null  # Commented out for dev environment
               # resources:
               #   requests:
@@ -193,7 +193,7 @@ patches:
       metadata:
         name: celery-question-generator-ai-worker
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Enhance-Celery-task-tracking-with-i-b9c416dcdec45c7c8a2da15477685124516d48a5"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2706-Handling-login-force-close-3077a2e5355cfe9ef357d16820ce49caad6bf549"
       spec:
         replicas: 1
         template:
@@ -201,7 +201,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Enhance-Celery-task-tracking-with-i-b9c416dcdec45c7c8a2da15477685124516d48a5"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2706-Handling-login-force-close-3077a2e5355cfe9ef357d16820ce49caad6bf549"
               resources: null  # Commented out for dev environment
               # resources:
               #   requests:
@@ -246,7 +246,7 @@ patches:
       metadata:
         name: celery-flower
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Enhance-Celery-task-tracking-with-i-b9c416dcdec45c7c8a2da15477685124516d48a5"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2706-Handling-login-force-close-3077a2e5355cfe9ef357d16820ce49caad6bf549"
       spec:
         replicas: 1
         template:
@@ -254,7 +254,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Enhance-Celery-task-tracking-with-i-b9c416dcdec45c7c8a2da15477685124516d48a5"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2706-Handling-login-force-close-3077a2e5355cfe9ef357d16820ce49caad6bf549"
               resources: null  # Commented out for dev environment
               # resources:
               #   requests:
