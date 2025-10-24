@@ -27,7 +27,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Student-bulk-upload-optimize-prod-5-345a8d9afe5fdf1f3b670a0c089fb1d680046bbe"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Removed-firebase-entry-for-exam-cre-4794df1d5eb9b32711bc713ddc9ecfba0fd37a3e"
               resources:
                 requests:
                   cpu: "4"
@@ -63,7 +63,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Student-bulk-upload-optimize-prod-5-345a8d9afe5fdf1f3b670a0c089fb1d680046bbe"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Removed-firebase-entry-for-exam-cre-4794df1d5eb9b32711bc713ddc9ecfba0fd37a3e"
               resources:
                 requests:
                   cpu: "2"
@@ -111,7 +111,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Student-bulk-upload-optimize-prod-5-345a8d9afe5fdf1f3b670a0c089fb1d680046bbe"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Removed-firebase-entry-for-exam-cre-4794df1d5eb9b32711bc713ddc9ecfba0fd37a3e"
               resources:
                 requests:
                   cpu: "2"
@@ -159,7 +159,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Student-bulk-upload-optimize-prod-5-345a8d9afe5fdf1f3b670a0c089fb1d680046bbe"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Removed-firebase-entry-for-exam-cre-4794df1d5eb9b32711bc713ddc9ecfba0fd37a3e"
               resources:
                 requests:
                   cpu: "2"
@@ -207,7 +207,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Student-bulk-upload-optimize-prod-5-345a8d9afe5fdf1f3b670a0c089fb1d680046bbe"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Removed-firebase-entry-for-exam-cre-4794df1d5eb9b32711bc713ddc9ecfba0fd37a3e"
               resources:
                 requests:
                   cpu: "2"
@@ -278,7 +278,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Student-bulk-upload-optimize-prod-5-345a8d9afe5fdf1f3b670a0c089fb1d680046bbe"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Removed-firebase-entry-for-exam-cre-4794df1d5eb9b32711bc713ddc9ecfba0fd37a3e"
               resources:
                 requests:
                   cpu: "250m"
