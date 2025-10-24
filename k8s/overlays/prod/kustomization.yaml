@@ -30,14 +30,14 @@ patches:
               image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Student-bulk-upload-optimize-prod-5-345a8d9afe5fdf1f3b670a0c089fb1d680046bbe"
               resources:
                 requests:
-                  cpu: "2"
-                  memory: "8Gi"
-                limits:
                   cpu: "4"
                   memory: "16Gi"
+                limits:
+                  cpu: "8"
+                  memory: "32Gi"
               env:
               - name: WORKERS
-                value: "4"
+                value: "8"
               - name: OPIK_URL_OVERRIDE
                 value: "https://www.comet.com/opik/api"
               - name: OPIK_API_KEY
