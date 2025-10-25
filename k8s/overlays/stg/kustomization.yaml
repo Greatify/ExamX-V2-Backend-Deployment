@@ -324,3 +324,16 @@ patches:
     target:
       kind: SecretProviderClass
       name: examxv2-google-credentials
+      
+  # Backend Autoscaler patches
+  - patch: |-
+      apiVersion: autoscaling/v2
+      kind: HorizontalPodAutoscaler
+      metadata:
+        name: examxv2-backend-pod-autoscaler
+      spec:
+        minReplicas: 2
+        maxReplicas: 10
+    target:
+      kind: HorizontalPodAutoscaler
+      name: examxv2-backend-pod-autoscaler
