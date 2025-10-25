@@ -29,7 +29,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2648-Student-login-Active-exam-87f6240da77d425234c6f16a8eb3f4497374f957"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2724-Fix-course-creation-NoneTy-bf02822be95c54437ebabe552ae7b2c2cf092006"
               resources:    # Commented out for staging environment
               # Original resources:
                requests:
@@ -68,7 +68,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2648-Student-login-Active-exam-87f6240da77d425234c6f16a8eb3f4497374f957"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2724-Fix-course-creation-NoneTy-bf02822be95c54437ebabe552ae7b2c2cf092006"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -120,7 +120,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2648-Student-login-Active-exam-87f6240da77d425234c6f16a8eb3f4497374f957"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2724-Fix-course-creation-NoneTy-bf02822be95c54437ebabe552ae7b2c2cf092006"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -171,7 +171,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2648-Student-login-Active-exam-87f6240da77d425234c6f16a8eb3f4497374f957"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2724-Fix-course-creation-NoneTy-bf02822be95c54437ebabe552ae7b2c2cf092006"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -222,7 +222,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2648-Student-login-Active-exam-87f6240da77d425234c6f16a8eb3f4497374f957"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2724-Fix-course-creation-NoneTy-bf02822be95c54437ebabe552ae7b2c2cf092006"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -273,7 +273,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2648-Student-login-Active-exam-87f6240da77d425234c6f16a8eb3f4497374f957"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2724-Fix-course-creation-NoneTy-bf02822be95c54437ebabe552ae7b2c2cf092006"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
