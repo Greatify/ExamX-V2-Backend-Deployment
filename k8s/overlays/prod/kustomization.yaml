@@ -27,7 +27,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2636-Fetch-passage-based-child-f7119e2e815cc75909f68a93cc2447486fe0176f"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Srm-mpharm-cherrypick-main-5089-511-ebc340183c8ff9c93a8fa2a4f629ac1d81d1b2db"
               resources:
                 requests:
                   cpu: "4"
@@ -63,7 +63,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2636-Fetch-passage-based-child-f7119e2e815cc75909f68a93cc2447486fe0176f"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Srm-mpharm-cherrypick-main-5089-511-ebc340183c8ff9c93a8fa2a4f629ac1d81d1b2db"
               resources:
                 requests:
                   cpu: "2"
@@ -111,7 +111,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2636-Fetch-passage-based-child-f7119e2e815cc75909f68a93cc2447486fe0176f"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Srm-mpharm-cherrypick-main-5089-511-ebc340183c8ff9c93a8fa2a4f629ac1d81d1b2db"
               resources:
                 requests:
                   cpu: "2"
@@ -159,7 +159,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2636-Fetch-passage-based-child-f7119e2e815cc75909f68a93cc2447486fe0176f"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Srm-mpharm-cherrypick-main-5089-511-ebc340183c8ff9c93a8fa2a4f629ac1d81d1b2db"
               resources:
                 requests:
                   cpu: "2"
@@ -207,7 +207,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2636-Fetch-passage-based-child-f7119e2e815cc75909f68a93cc2447486fe0176f"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Srm-mpharm-cherrypick-main-5089-511-ebc340183c8ff9c93a8fa2a4f629ac1d81d1b2db"
               resources:
                 requests:
                   cpu: "2"
@@ -278,7 +278,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2636-Fetch-passage-based-child-f7119e2e815cc75909f68a93cc2447486fe0176f"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Srm-mpharm-cherrypick-main-5089-511-ebc340183c8ff9c93a8fa2a4f629ac1d81d1b2db"
               resources:
                 requests:
                   cpu: "250m"
