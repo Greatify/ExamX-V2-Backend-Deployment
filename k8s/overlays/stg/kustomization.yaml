@@ -27,7 +27,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2795-Bio-metric-Bulk-upload-Ena-58f1adeda75183f3126612a6efa26bd5c79a2c5f"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2713-Admin-Exam-Creation-Genera-553e4933f8c316438343e7305dc6c2714d7259f9"
               resources:    # Commented out for staging environment
               # Original resources:
                requests:
@@ -64,7 +64,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2795-Bio-metric-Bulk-upload-Ena-58f1adeda75183f3126612a6efa26bd5c79a2c5f"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2713-Admin-Exam-Creation-Genera-553e4933f8c316438343e7305dc6c2714d7259f9"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -114,7 +114,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2795-Bio-metric-Bulk-upload-Ena-58f1adeda75183f3126612a6efa26bd5c79a2c5f"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2713-Admin-Exam-Creation-Genera-553e4933f8c316438343e7305dc6c2714d7259f9"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -163,7 +163,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2795-Bio-metric-Bulk-upload-Ena-58f1adeda75183f3126612a6efa26bd5c79a2c5f"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2713-Admin-Exam-Creation-Genera-553e4933f8c316438343e7305dc6c2714d7259f9"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -212,7 +212,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2795-Bio-metric-Bulk-upload-Ena-58f1adeda75183f3126612a6efa26bd5c79a2c5f"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2713-Admin-Exam-Creation-Genera-553e4933f8c316438343e7305dc6c2714d7259f9"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -261,7 +261,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2795-Bio-metric-Bulk-upload-Ena-58f1adeda75183f3126612a6efa26bd5c79a2c5f"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2713-Admin-Exam-Creation-Genera-553e4933f8c316438343e7305dc6c2714d7259f9"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
