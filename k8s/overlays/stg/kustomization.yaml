@@ -31,14 +31,14 @@ patches:
               resources:    # Commented out for staging environment
               # Original resources:
                requests:
-                 cpu: "2"
-                 memory: "8Gi"
-               limits:
                  cpu: "4"
                  memory: "16Gi"
+               limits:
+                 cpu: "8"
+                 memory: "32Gi"
               env:
               - name: WORKERS
-                value: "9"
+                value: "17"
               - name: OPIK_URL_OVERRIDE
                 value: "https://www.comet.com/opik/api"
               - name: OPIK_API_KEY
