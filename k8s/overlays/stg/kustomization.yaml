@@ -27,7 +27,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Removed-firebase-entry-for-exam-cre-d7952f71ea16ab31e038f6d8d7f0b0616ded64d2"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2798-login-bypass-override-enab-9b9402dfa260ed6f6dc5869a63be0004231ab42d"
               resources:    # Commented out for staging environment
               # Original resources:
                requests:
@@ -64,7 +64,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Removed-firebase-entry-for-exam-cre-d7952f71ea16ab31e038f6d8d7f0b0616ded64d2"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2798-login-bypass-override-enab-9b9402dfa260ed6f6dc5869a63be0004231ab42d"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -114,7 +114,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Removed-firebase-entry-for-exam-cre-d7952f71ea16ab31e038f6d8d7f0b0616ded64d2"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2798-login-bypass-override-enab-9b9402dfa260ed6f6dc5869a63be0004231ab42d"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -163,7 +163,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Removed-firebase-entry-for-exam-cre-d7952f71ea16ab31e038f6d8d7f0b0616ded64d2"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2798-login-bypass-override-enab-9b9402dfa260ed6f6dc5869a63be0004231ab42d"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -212,7 +212,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Removed-firebase-entry-for-exam-cre-d7952f71ea16ab31e038f6d8d7f0b0616ded64d2"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2798-login-bypass-override-enab-9b9402dfa260ed6f6dc5869a63be0004231ab42d"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -261,7 +261,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Removed-firebase-entry-for-exam-cre-d7952f71ea16ab31e038f6d8d7f0b0616ded64d2"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2798-login-bypass-override-enab-9b9402dfa260ed6f6dc5869a63be0004231ab42d"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
