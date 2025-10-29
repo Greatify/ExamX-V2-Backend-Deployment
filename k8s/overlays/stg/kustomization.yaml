@@ -27,7 +27,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2837-last-answer-sheet-backgrou-f26100ecdb646fb0285fe9d4e658b442e44ce950"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2835-Exam-update-In-Question-pa-ac2a4b508059a20c2d236c3f9fc8c8c8ca32e583"
               resources:    # Commented out for staging environment
               # Original resources:
                requests:
@@ -64,7 +64,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2837-last-answer-sheet-backgrou-f26100ecdb646fb0285fe9d4e658b442e44ce950"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2835-Exam-update-In-Question-pa-ac2a4b508059a20c2d236c3f9fc8c8c8ca32e583"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -114,7 +114,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2837-last-answer-sheet-backgrou-f26100ecdb646fb0285fe9d4e658b442e44ce950"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2835-Exam-update-In-Question-pa-ac2a4b508059a20c2d236c3f9fc8c8c8ca32e583"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -163,7 +163,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2837-last-answer-sheet-backgrou-f26100ecdb646fb0285fe9d4e658b442e44ce950"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2835-Exam-update-In-Question-pa-ac2a4b508059a20c2d236c3f9fc8c8c8ca32e583"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -212,7 +212,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2837-last-answer-sheet-backgrou-f26100ecdb646fb0285fe9d4e658b442e44ce950"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2835-Exam-update-In-Question-pa-ac2a4b508059a20c2d236c3f9fc8c8c8ca32e583"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -261,7 +261,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2837-last-answer-sheet-backgrou-f26100ecdb646fb0285fe9d4e658b442e44ce950"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2835-Exam-update-In-Question-pa-ac2a4b508059a20c2d236c3f9fc8c8c8ca32e583"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
