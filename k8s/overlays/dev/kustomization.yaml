@@ -2,10 +2,47 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: dev-examxv2
 
+# Exclude base PDB resources and include only what's needed for dev
 resources:
-  - ../../base
+  # Core deployments
+  - ../../base/deployment/backend-deployment.yaml
+  - ../../base/deployment/celery-worker-default-deployment.yaml
+  - ../../base/deployment/celery-bulk-upload-worker-deployment.yaml
+  - ../../base/deployment/celery-enrichment-worker-deployment.yaml
+  - ../../base/deployment/celery-question-generator-ai-worker-deployment.yaml
+  - ../../base/deployment/celery-flower-deployment.yaml
+  
+  # Services
+  - ../../base/services/examxv2-backend-service.yaml
+  - ../../base/services/celery-flower-service.yaml
+  
+  # Network
+  - ../../base/ingress/ingress.yaml
+  
+  # Configurations
+  - ../../base/configmap/nginx-config.yaml
+  - ../../base/secrets/examxv2-secrets.yaml
+  - ../../base/secrets/examxv2-google-credentials.yaml
+  
+  # Autoscaling (traditional HPA - will be overridden by KEDA ScaledObjects)
+  - ../../base/autoscaling/backend-autoscaler.yaml
+  - ../../base/autoscaling/celery-worker-default-autoscaler.yaml
+  - ../../base/autoscaling/celery-bulk-upload-worker-autoscaler.yaml
+  - ../../base/autoscaling/celery-enrichment-worker-autoscaler.yaml
+  - ../../base/autoscaling/celery-question-generator-ai-worker-autoscaler.yaml
+  - ../../base/autoscaling/celery-flower-autoscaler.yaml
+  
+  # Dev-specific resources
   - storage/pv.yaml
   - storage/pvc.yaml
+  
+  # NOTE: PDB resources are excluded for dev environment
+  # Excluded: ../../base/pdb/backend-pdb.yaml
+  # Excluded: ../../base/pdb/celery-worker-default-pdb.yaml
+  # Excluded: ../../base/pdb/celery-bulk-upload-worker-pdb.yaml
+  # Excluded: ../../base/pdb/celery-enrichment-worker-pdb.yaml
+  # Excluded: ../../base/pdb/celery-question-generator-ai-worker-pdb.yaml
+  # Excluded: ../../base/pdb/celery-flower-pdb.yaml
 
 # Using labels instead of deprecated commonLabels
 labels:
