@@ -27,7 +27,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2843-optimization-of-student-bi-03b6af1da508514649a1f362fc85f3fbb0d7200b"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2867-Authoring-Screen-Filters-S-4297a1d09ff676b38961e2e8438cf630542ca3a2"
               resources:
                 requests:
                   cpu: "4"
@@ -63,7 +63,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2843-optimization-of-student-bi-03b6af1da508514649a1f362fc85f3fbb0d7200b"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2867-Authoring-Screen-Filters-S-4297a1d09ff676b38961e2e8438cf630542ca3a2"
               resources:
                 requests:
                   cpu: "2"
@@ -111,7 +111,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2843-optimization-of-student-bi-03b6af1da508514649a1f362fc85f3fbb0d7200b"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2867-Authoring-Screen-Filters-S-4297a1d09ff676b38961e2e8438cf630542ca3a2"
               resources:
                 requests:
                   cpu: "2"
@@ -159,7 +159,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2843-optimization-of-student-bi-03b6af1da508514649a1f362fc85f3fbb0d7200b"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2867-Authoring-Screen-Filters-S-4297a1d09ff676b38961e2e8438cf630542ca3a2"
               resources:
                 requests:
                   cpu: "2"
@@ -207,7 +207,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2843-optimization-of-student-bi-03b6af1da508514649a1f362fc85f3fbb0d7200b"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2867-Authoring-Screen-Filters-S-4297a1d09ff676b38961e2e8438cf630542ca3a2"
               resources:
                 requests:
                   cpu: "2"
@@ -278,7 +278,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2843-optimization-of-student-bi-03b6af1da508514649a1f362fc85f3fbb0d7200b"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2867-Authoring-Screen-Filters-S-4297a1d09ff676b38961e2e8438cf630542ca3a2"
               resources:
                 requests:
                   cpu: "250m"
