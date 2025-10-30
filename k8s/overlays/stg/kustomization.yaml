@@ -27,7 +27,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2852EXM-2866-EXM-2847-hall-uplo-cddaa44f5505e9d68cb770f397410bee8548fb74"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2873-api-optimize-hall-upload-5-cf5ba017ca594057c5c5841289a51ef034c784ce"
               resources:    # Commented out for staging environment
               # Original resources:
                requests:
@@ -64,7 +64,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2852EXM-2866-EXM-2847-hall-uplo-cddaa44f5505e9d68cb770f397410bee8548fb74"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2873-api-optimize-hall-upload-5-cf5ba017ca594057c5c5841289a51ef034c784ce"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -114,7 +114,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2852EXM-2866-EXM-2847-hall-uplo-cddaa44f5505e9d68cb770f397410bee8548fb74"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2873-api-optimize-hall-upload-5-cf5ba017ca594057c5c5841289a51ef034c784ce"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -163,7 +163,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2852EXM-2866-EXM-2847-hall-uplo-cddaa44f5505e9d68cb770f397410bee8548fb74"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2873-api-optimize-hall-upload-5-cf5ba017ca594057c5c5841289a51ef034c784ce"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -212,7 +212,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2852EXM-2866-EXM-2847-hall-uplo-cddaa44f5505e9d68cb770f397410bee8548fb74"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2873-api-optimize-hall-upload-5-cf5ba017ca594057c5c5841289a51ef034c784ce"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -261,7 +261,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2852EXM-2866-EXM-2847-hall-uplo-cddaa44f5505e9d68cb770f397410bee8548fb74"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2873-api-optimize-hall-upload-5-cf5ba017ca594057c5c5841289a51ef034c784ce"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
