@@ -37,12 +37,12 @@ resources:
   # - autoscaling/redis-autoscaler.yaml
   
   # Pod Disruption Budgets
-  - pdb/backend-pdb.yaml
-  - pdb/celery-worker-default-pdb.yaml
-  - pdb/celery-bulk-upload-worker-pdb.yaml
-  - pdb/celery-enrichment-worker-pdb.yaml
-  - pdb/celery-question-generator-ai-worker-pdb.yaml
-  - pdb/celery-flower-pdb.yaml
+  # - pdb/backend-pdb.yaml
+  # - pdb/celery-worker-default-pdb.yaml
+  # - pdb/celery-bulk-upload-worker-pdb.yaml
+  # - pdb/celery-enrichment-worker-pdb.yaml
+  # - pdb/celery-question-generator-ai-worker-pdb.yaml
+  # - pdb/celery-flower-pdb.yaml
 
   # Monitoring
   # - monitoring/examxv2-backend-servicemonitor.yaml
