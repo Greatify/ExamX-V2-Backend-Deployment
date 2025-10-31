@@ -310,7 +310,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-exam-submission-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2874-exam-status-function-call-5c5c6cb274b81411d58c611a83d70a07da2a1790"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2891-Couchbase-final-submit-to-f2990a61fda26ecdf2c0bd8b0374102bd498a78e"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
