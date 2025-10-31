@@ -193,6 +193,59 @@ patches:
       kind: Deployment
       name: celery-enrichment-worker
 
+  # Celery Exam Submission Worker patches
+  - patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: celery-exam-submission-worker
+        annotations:
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2887-Validating-that-section-ma-50704922c4b230e24f79ed27c6a737f20be06e48"
+      spec:
+        replicas: 1
+        template:
+          spec:
+            serviceAccountName: dev-examxv2-sa
+            containers:
+            - name: celery-exam-submission-worker
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2887-Validating-that-section-ma-50704922c4b230e24f79ed27c6a737f20be06e48"
+              resources: null  # Commented out for dev environment
+              # resources:
+              #   requests:
+              #     cpu: "300m"
+              #     memory: "2Gi"
+              #   limits:
+              #     cpu: "500m"
+              #     memory: "3Gi"
+              command:
+              - celery
+              - -A
+              - examx
+              - worker
+              - -P
+              - gevent
+              - -c
+              - "25"
+              - -Q
+              - exam_submissions
+              - -l
+              - info
+              - -E
+              env:
+              - name: OPIK_URL_OVERRIDE
+                value: "https://www.comet.com/opik/api"
+              - name: OPIK_API_KEY
+                value: "Y5T3WoqNxJ22ypw1M8qivydis"
+              - name: OPIK_WORKSPACE
+                value: "greatify-prod"
+              - name: OPIK_PROJECT_NAME
+                value: "Dev"
+              - name: REDIS_URL
+                value: "rediss://master.examxv2-dev.kti2un.aps1.cache.amazonaws.com:6379"
+    target:
+      kind: Deployment
+      name: celery-exam-submission-worker
+
   # Celery Question Generator AI Worker patches
   - patch: |-
       apiVersion: apps/v1
@@ -405,6 +458,27 @@ patches:
     target:
       kind: ScaledObject
       name: celery-enrichment-worker-scaler
+
+  - patch: |-
+      apiVersion: keda.sh/v1alpha1
+      kind: ScaledObject
+      metadata:
+        name: celery-exam-submission-worker-scaler
+      spec:
+        minReplicaCount: 0
+        maxReplicaCount: 3 
+        cooldownPeriod: 30
+        triggers:
+        - type: prometheus
+          metadata:
+            serverAddress: "http://prometheus-kube-prometheus-prometheus.monitoring.svc.cluster.local:9090"
+            metricName: "celery_exam_submission_queue_backlog"
+            threshold: "1"
+            query: |
+              sum(examx_celery_queue_pending{queue="exam_submissions"} + examx_celery_queue_active{queue="exam_submissions"})
+    target:
+      kind: ScaledObject
+      name: celery-exam-submission-worker-scaler
 
   - patch: |-
       apiVersion: keda.sh/v1alpha1

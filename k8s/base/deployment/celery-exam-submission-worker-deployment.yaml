@@ -1,0 +1,80 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: celery-exam-submission-worker
+  labels:
+    app: celery-exam-submission-worker
+  annotations:
+    kubernetes.io/change-cause: "Added change-cause annotation to deployment"
+spec:
+  replicas: 1 # Default value, will be overridden in overlays
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0 # Ensures zero downtime by not allowing any unavailable pods
+  selector:
+    matchLabels:
+      app: celery-exam-submission-worker
+  template:
+    metadata:
+      labels:
+        app: celery-exam-submission-worker
+    spec:
+      serviceAccountName: examxv2-sa # Placeholder, to be overridden
+      terminationGracePeriodSeconds: 30
+      volumes:
+        - name: examxv2-secrets-volume
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "examxv2-backend-secrets"
+        - name: examxv2-google-credentials
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: examxv2-google-credentials
+        - name: examxv2-backend-storage
+          persistentVolumeClaim:
+            claimName: examxv2-backend-pvc
+      containers:
+        - name: celery-exam-submission-worker
+          image: 399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-20250814-132223-859cae893d229663024ed2546db378875707496e
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              cpu: "1"
+              memory: "16Gi"
+            limits:
+              cpu: "2"
+              memory: "32Gi"
+          command:
+            - celery
+            - -A
+            - examx
+            - worker
+            - -P
+            - gevent
+            - -c
+            - "500"
+            - -Q
+            - exam_submissions
+            - -l
+            - debug
+            - -E
+          volumeMounts:
+            - name: examxv2-secrets-volume
+              mountPath: /mnt/secret-store
+              readOnly: true
+            - name: examxv2-backend-storage
+              mountPath: /app/media
+            - name: examxv2-google-credentials
+              mountPath: /app/google-credentials.json
+              subPath: google-credentials.json
+          lifecycle:
+            postStart:
+              exec:
+                command: ['cp', '-R', '/mnt/secret-store/.env', '/app/examx/.env']
+

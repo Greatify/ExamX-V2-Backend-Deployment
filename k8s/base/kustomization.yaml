@@ -9,6 +9,7 @@ resources:
   # - deployment/celery-beat-deployment.yaml
   - deployment/celery-bulk-upload-worker-deployment.yaml
   - deployment/celery-enrichment-worker-deployment.yaml
+  - deployment/celery-exam-submission-worker-deployment.yaml
   - deployment/celery-question-generator-ai-worker-deployment.yaml
   - deployment/celery-flower-deployment.yaml
   # - deployment/redis-deployment.yaml
@@ -53,5 +54,6 @@ resources:
   - keda/celery-default-scaledobject.yaml
   - keda/celery-bulk-upload-scaledobject.yaml
   - keda/celery-enrichment-scaledobject.yaml
+  - keda/celery-exam-submission-scaledobject.yaml
   - keda/celery-ai-generator-scaledobject.yaml
  

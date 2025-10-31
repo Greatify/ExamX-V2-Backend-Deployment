@@ -1,0 +1,30 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: celery-exam-submission-worker-scaler
+  labels:
+    app: celery-exam-submission-worker
+spec:
+  scaleTargetRef:
+    name: celery-exam-submission-worker
+  pollingInterval: 10  
+  cooldownPeriod: 60  
+  minReplicaCount: 0
+  maxReplicaCount: 10
+  triggers:
+    - type: prometheus
+      metadata:
+        serverAddress: "http://prometheus-kube-prometheus-prometheus.monitoring.svc.cluster.local:9090"
+        metricName: "celery_exam_submission_queue_backlog"
+        threshold: "1"
+        query: |
+          sum(examx_celery_queue_pending{queue="exam_submissions"} + examx_celery_queue_active{queue="exam_submissions"})
+    # - type: cpu
+    #   metadata:
+    #     type: Utilization
+    #     value: "50"
+    # - type: memory
+    #   metadata:
+    #     type: Utilization
+    #     value: "70"
+
