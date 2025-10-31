@@ -60,7 +60,7 @@ patches:
       metadata:
         name: examxv2-backend
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2873-api-optimize-hall-upload-5-efaf88154d29f664ec6e5b1efd19c879e12e5bd2"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2874-exam-status-function-call-82b1c63788fb24a5cf5396e6252d84eacf160468"
       spec:
         replicas: 1
         template:
@@ -68,7 +68,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2873-api-optimize-hall-upload-5-efaf88154d29f664ec6e5b1efd19c879e12e5bd2"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2874-exam-status-function-call-82b1c63788fb24a5cf5396e6252d84eacf160468"
               resources: null  # Commented out for dev environment
               # resources:
               #   requests:
@@ -101,7 +101,7 @@ patches:
       metadata:
         name: celery-worker-default
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2873-api-optimize-hall-upload-5-efaf88154d29f664ec6e5b1efd19c879e12e5bd2"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2874-exam-status-function-call-82b1c63788fb24a5cf5396e6252d84eacf160468"
       spec:
         replicas: 1
         template:
@@ -109,7 +109,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2873-api-optimize-hall-upload-5-efaf88154d29f664ec6e5b1efd19c879e12e5bd2"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2874-exam-status-function-call-82b1c63788fb24a5cf5396e6252d84eacf160468"
               resources: null  # Commented out for dev environment
               # resources:
               #   requests:
@@ -153,7 +153,7 @@ patches:
       metadata:
         name: celery-bulk-upload-worker
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2873-api-optimize-hall-upload-5-efaf88154d29f664ec6e5b1efd19c879e12e5bd2"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2874-exam-status-function-call-82b1c63788fb24a5cf5396e6252d84eacf160468"
       spec:
         replicas: 1
         template:
@@ -161,7 +161,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2873-api-optimize-hall-upload-5-efaf88154d29f664ec6e5b1efd19c879e12e5bd2"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2874-exam-status-function-call-82b1c63788fb24a5cf5396e6252d84eacf160468"
               resources: null  # Commented out for dev environment
               # resources:
               #   requests:
@@ -230,7 +230,7 @@ patches:
       metadata:
         name: celery-question-generator-ai-worker
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2873-api-optimize-hall-upload-5-efaf88154d29f664ec6e5b1efd19c879e12e5bd2"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2874-exam-status-function-call-82b1c63788fb24a5cf5396e6252d84eacf160468"
       spec:
         replicas: 1
         template:
@@ -238,7 +238,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2873-api-optimize-hall-upload-5-efaf88154d29f664ec6e5b1efd19c879e12e5bd2"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2874-exam-status-function-call-82b1c63788fb24a5cf5396e6252d84eacf160468"
               resources: null  # Commented out for dev environment
               # resources:
               #   requests:
@@ -283,7 +283,7 @@ patches:
       metadata:
         name: celery-flower
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2873-api-optimize-hall-upload-5-efaf88154d29f664ec6e5b1efd19c879e12e5bd2"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2874-exam-status-function-call-82b1c63788fb24a5cf5396e6252d84eacf160468"
       spec:
         replicas: 1
         template:
@@ -291,7 +291,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2873-api-optimize-hall-upload-5-efaf88154d29f664ec6e5b1efd19c879e12e5bd2"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2874-exam-status-function-call-82b1c63788fb24a5cf5396e6252d84eacf160468"
               resources: null  # Commented out for dev environment
               # resources:
               #   requests:
