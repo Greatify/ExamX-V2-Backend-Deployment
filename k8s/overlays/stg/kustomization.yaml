@@ -199,6 +199,55 @@ patches:
       kind: Deployment
       name: celery-enrichment-worker
 
+  # Celery Exam Submission Worker patches
+  - patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: celery-exam-submission-worker
+      spec:
+        replicas: 1
+        template:
+          spec:
+            serviceAccountName: examxv2-stg-secret-service
+            containers:
+            - name: celery-exam-submission-worker
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Migration-changes-for-dev-5234-5240-2d333e3c2a176d9e959dde132f2d76a285d7c936"
+              resources: null  # Commented out for staging environment
+              # Original resources:
+              # requests:
+              #   cpu: "300m"
+              #   memory: "2Gi"
+              # limits:
+              #   cpu: "500m"
+              #   memory: "3Gi"
+              command:
+              - celery
+              - -A
+              - examx
+              - worker
+              - -P
+              - gevent
+              - -c
+              - "50"
+              - -Q
+              - exam_submissions
+              - -l
+              - info
+              - -E
+              env:
+              - name: OPIK_URL_OVERRIDE
+                value: "https://www.comet.com/opik/api"
+              - name: OPIK_API_KEY
+                value: "Y5T3WoqNxJ22ypw1M8qivydis"
+              - name: OPIK_WORKSPACE
+                value: "greatify-prod"
+              - name: OPIK_PROJECT_NAME
+                value: "Stg"
+    target:
+      kind: Deployment
+      name: celery-exam-submission-worker
+
   # Celery Question Generator AI Worker patches
   - patch: |-
       apiVersion: apps/v1
