@@ -44,6 +44,9 @@ resources:
   - pdb/celery-question-generator-ai-worker-pdb.yaml
   - pdb/celery-flower-pdb.yaml
 
+  # Monitoring
+  # - monitoring/examxv2-backend-servicemonitor.yaml
+
   # KEDA Queue-based Autoscaling (ScaledObjects go in app namespaces, not keda namespace)
   # Note: KEDA operator namespace is created during KEDA installation
   # No authentication required for ElastiCache Valkey

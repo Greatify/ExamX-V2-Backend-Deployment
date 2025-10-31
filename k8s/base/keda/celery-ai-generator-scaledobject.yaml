@@ -9,16 +9,16 @@ spec:
     name: celery-question-generator-ai-worker
   pollingInterval: 10
   cooldownPeriod: 60
-  minReplicaCount: 1
+  minReplicaCount: 0
   maxReplicaCount: 5
   triggers:
-    - type: redis
+    - type: prometheus
       metadata:
-        address: "master.examxv2-dev.kti2un.aps1.cache.amazonaws.com:6379"
-        listName: "question_generator_ai"
-        listLength: "1"
-        enableTLS: "true"
-        unsafeSsl: "true"
+        serverAddress: "http://prometheus-kube-prometheus-prometheus.monitoring.svc.cluster.local:9090"
+        metricName: "celery_question_generator_ai_backlog"
+        threshold: "1"
+        query: |
+          sum(examx_celery_queue_pending{queue="question_generator_ai"} + examx_celery_queue_active{queue="question_generator_ai"})
     # - type: cpu
     #   metadata:
     #     type: Utilization

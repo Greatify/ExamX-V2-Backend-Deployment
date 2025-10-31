@@ -9,16 +9,16 @@ spec:
     name: celery-worker-default
   pollingInterval: 15  
   cooldownPeriod: 60  
-  minReplicaCount: 1
+  minReplicaCount: 0
   maxReplicaCount: 10
   triggers:
-    - type: redis
+    - type: prometheus
       metadata:
-        address: "master.examxv2-dev.kti2un.aps1.cache.amazonaws.com:6379"
-        listName: "default"  
-        listLength: "1"
-        enableTLS: "true"
-        unsafeSsl: "true"
+        serverAddress: "http://prometheus-kube-prometheus-prometheus.monitoring.svc.cluster.local:9090"
+        metricName: "celery_default_queue_backlog"
+        threshold: "1"
+        query: |
+          sum(examx_celery_queue_pending{queue="default"} + examx_celery_queue_active{queue="default"})
     # - type: cpu
     #   metadata:
     #     type: Utilization

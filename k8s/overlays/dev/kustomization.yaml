@@ -89,7 +89,7 @@ patches:
               - name: OPIK_PROJECT_NAME
                 value: "Dev"
               - name: REDIS_URL
-                value: "redis://master.examxv2-dev.kti2un.aps1.cache.amazonaws.com:6379"
+                value: "rediss://master.examxv2-dev.kti2un.aps1.cache.amazonaws.com:6379"
     target:
       kind: Deployment
       name: examxv2-backend
@@ -142,7 +142,7 @@ patches:
               - name: OPIK_PROJECT_NAME
                 value: "Dev"
               - name: REDIS_URL
-                value: "redis://master.examxv2-dev.kti2un.aps1.cache.amazonaws.com:6379"
+                value: "rediss://master.examxv2-dev.kti2un.aps1.cache.amazonaws.com:6379"
     target:
       kind: Deployment
       name: celery-worker-default
@@ -194,7 +194,7 @@ patches:
               - name: OPIK_PROJECT_NAME 
                 value: "Dev"
               - name: REDIS_URL
-                value: "redis://master.examxv2-dev.kti2un.aps1.cache.amazonaws.com:6379"
+                value: "rediss://master.examxv2-dev.kti2un.aps1.cache.amazonaws.com:6379"
     target:
       kind: Deployment
       name: celery-bulk-upload-worker
@@ -271,7 +271,7 @@ patches:
               - name: OPIK_PROJECT_NAME
                 value: "Dev"
               - name: REDIS_URL
-                value: "redis://master.examxv2-dev.kti2un.aps1.cache.amazonaws.com:6379"
+                value: "rediss://master.examxv2-dev.kti2un.aps1.cache.amazonaws.com:6379"
     target:
       kind: Deployment
       name: celery-question-generator-ai-worker
@@ -379,17 +379,17 @@ patches:
       metadata:
         name: celery-worker-default-scaler
       spec:
-        minReplicaCount: 1
+        minReplicaCount: 0
         maxReplicaCount: 3 
         cooldownPeriod: 30
         triggers:
-        - type: redis
+        - type: prometheus
           metadata:
-            address: "master.examxv2-dev.kti2un.aps1.cache.amazonaws.com:6379"
-            listName: "default"
-            listLength: "1"  
-            enableTLS: "true"
-            unsafeSsl: "true"
+            serverAddress: "http://prometheus-kube-prometheus-prometheus.monitoring.svc.cluster.local:9090"
+            metricName: "celery_default_queue_backlog"
+            threshold: "1"
+            query: |
+              sum(examx_celery_queue_pending{queue="default"} + examx_celery_queue_active{queue="default"})
     target:
       kind: ScaledObject
       name: celery-worker-default-scaler
@@ -400,17 +400,17 @@ patches:
       metadata:
         name: celery-bulk-upload-worker-scaler
       spec:
-        minReplicaCount: 1
+        minReplicaCount: 0
         maxReplicaCount: 2 
         cooldownPeriod: 30
         triggers:
-        - type: redis
+        - type: prometheus
           metadata:
-            address: "master.examxv2-dev.kti2un.aps1.cache.amazonaws.com:6379"
-            listName: "bulk_upload"
-            listLength: "1"  
-            enableTLS: "true"
-            unsafeSsl: "true"
+            serverAddress: "http://prometheus-kube-prometheus-prometheus.monitoring.svc.cluster.local:9090"
+            metricName: "celery_bulk_upload_queue_backlog"
+            threshold: "1"
+            query: |
+              sum(examx_celery_queue_pending{queue="bulk_upload"} + examx_celery_queue_active{queue="bulk_upload"})
     target:
       kind: ScaledObject
       name: celery-bulk-upload-worker-scaler
@@ -425,13 +425,13 @@ patches:
         maxReplicaCount: 3 
         cooldownPeriod: 30
         triggers:
-        - type: redis
+        - type: prometheus
           metadata:
-            address: "master.examxv2-dev.kti2un.aps1.cache.amazonaws.com:6379"
-            listName: "question_enrichment"
-            listLength: "1"  
-            enableTLS: "true"
-            unsafeSsl: "true"
+            serverAddress: "http://prometheus-kube-prometheus-prometheus.monitoring.svc.cluster.local:9090"
+            metricName: "celery_enrichment_queue_backlog"
+            threshold: "1"
+            query: |
+              sum(examx_celery_queue_pending{queue="question_enrichment"} + examx_celery_queue_active{queue="question_enrichment"})
     target:
       kind: ScaledObject
       name: celery-enrichment-worker-scaler
@@ -442,17 +442,17 @@ patches:
       metadata:
         name: celery-question-generator-ai-worker-scaler
       spec:
-        minReplicaCount: 1 
+        minReplicaCount: 0
         maxReplicaCount: 2 
         cooldownPeriod: 30
         triggers:
-        - type: redis
+        - type: prometheus
           metadata:
-            address: "master.examxv2-dev.kti2un.aps1.cache.amazonaws.com:6379"
-            listName: "question_generator_ai"
-            listLength: "1"  
-            enableTLS: "true"
-            unsafeSsl: "true"
+            serverAddress: "http://prometheus-kube-prometheus-prometheus.monitoring.svc.cluster.local:9090"
+            metricName: "celery_question_generator_ai_backlog"
+            threshold: "1"
+            query: |
+              sum(examx_celery_queue_pending{queue="question_generator_ai"} + examx_celery_queue_active{queue="question_generator_ai"})
     target:
       kind: ScaledObject
       name: celery-question-generator-ai-worker-scaler
