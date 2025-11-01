@@ -218,20 +218,19 @@ patches:
                 limits:
                   cpu: "8"
                   memory: "32Gi"
-              command:
-              - celery
-              - -A
-              - examx
-              - worker
-              - -P
-              - gevent
-              - -c
-              - "2000"
-              - -Q
-              - exam_submissions
-              - -l
-              - info
-              - -E
+               command:
+                 - celery
+                 - -A
+                 - examx
+                 - worker
+                 - --pool=prefork
+                 - --concurrency=16
+                 - --queues=exam_submissions
+                 - --hostname=exam_worker@%h
+                 - --max-tasks-per-child=50
+                 - --time-limit=120
+                 - --loglevel=info
+                 - -E
               env:
               - name: OPIK_URL_OVERRIDE
                 value: "https://www.comet.com/opik/api"
@@ -307,26 +306,6 @@ patches:
             containers:
             - name: celery-exam-submission-worker
               image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Exm-2668-Implement-a-Feedback-Syste-1f400897d34e4e76794152673c9ea2fae2aa637b"
-              resources:
-                requests:
-                  cpu: "4"
-                  memory: "16Gi"
-                limits:
-                  cpu: "8"
-                  memory: "32Gi"
-              command:
-              - celery
-              - -A
-              - examx
-              - worker
-              - --pool=gevent
-              - --concurrency=500
-              - --queues=exam_submissions
-              - --hostname=exam_worker@%h
-              - --max-tasks-per-child=50
-              - --time-limit=120
-              - --loglevel=info
-              - -E
               env:
               - name: OPIK_URL_OVERRIDE
                 value: "https://www.comet.com/opik/api"
