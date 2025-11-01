@@ -229,7 +229,7 @@ patches:
               - -P
               - gevent
               - -c
-              - "50"
+              - "500"
               - -Q
               - exam_submissions
               - -l
