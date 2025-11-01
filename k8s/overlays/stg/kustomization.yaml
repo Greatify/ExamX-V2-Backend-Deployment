@@ -210,27 +210,26 @@ patches:
             containers:
             - name: celery-exam-submission-worker
               image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Optimize-exam-submission-API-for-10-fa9bc7b7c6dcafe0f73a779a02e1c8a42d8d2a04"
-              resources:   # Commented out for staging environment
-              # Original resources:
+              resources:
                 requests:
                   cpu: "4"
                   memory: "16Gi"
                 limits:
                   cpu: "8"
                   memory: "32Gi"
-               command:
-                 - celery
-                 - -A
-                 - examx
-                 - worker
-                 - --pool=prefork
-                 - --concurrency=16
-                 - --queues=exam_submissions
-                 - --hostname=exam_worker@%h
-                 - --max-tasks-per-child=50
-                 - --time-limit=120
-                 - --loglevel=info
-                 - -E
+              command:
+                - celery
+                - -A
+                - examx
+                - worker
+                - --pool=prefork
+                - --concurrency=16
+                - --queues=exam_submissions
+                - --hostname=exam_worker@%h
+                - --max-tasks-per-child=50
+                - --time-limit=120
+                - --loglevel=info
+                - -E
               env:
               - name: OPIK_URL_OVERRIDE
                 value: "https://www.comet.com/opik/api"
