@@ -27,7 +27,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2902-FInal-submit-error-handlin-cfb0561a4410656b6c81662f4f28839d25a7d81d"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Exm-2668-Implement-a-Feedback-Syste-1f400897d34e4e76794152673c9ea2fae2aa637b"
               resources:    # Commented out for staging environment
               # Original resources:
                requests:
@@ -64,7 +64,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2902-FInal-submit-error-handlin-cfb0561a4410656b6c81662f4f28839d25a7d81d"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Exm-2668-Implement-a-Feedback-Syste-1f400897d34e4e76794152673c9ea2fae2aa637b"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -114,7 +114,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2902-FInal-submit-error-handlin-cfb0561a4410656b6c81662f4f28839d25a7d81d"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Exm-2668-Implement-a-Feedback-Syste-1f400897d34e4e76794152673c9ea2fae2aa637b"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -163,7 +163,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2902-FInal-submit-error-handlin-cfb0561a4410656b6c81662f4f28839d25a7d81d"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Exm-2668-Implement-a-Feedback-Syste-1f400897d34e4e76794152673c9ea2fae2aa637b"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -212,7 +212,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-exam-submission-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2902-FInal-submit-error-handlin-cfb0561a4410656b6c81662f4f28839d25a7d81d"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Exm-2668-Implement-a-Feedback-Syste-1f400897d34e4e76794152673c9ea2fae2aa637b"
               resources:   # Commented out for staging environment
               # Original resources:
                 requests:
@@ -261,7 +261,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2902-FInal-submit-error-handlin-cfb0561a4410656b6c81662f4f28839d25a7d81d"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Exm-2668-Implement-a-Feedback-Syste-1f400897d34e4e76794152673c9ea2fae2aa637b"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -310,7 +310,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-exam-submission-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2902-FInal-submit-error-handlin-cfb0561a4410656b6c81662f4f28839d25a7d81d"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Exm-2668-Implement-a-Feedback-Syste-1f400897d34e4e76794152673c9ea2fae2aa637b"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -359,7 +359,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2902-FInal-submit-error-handlin-cfb0561a4410656b6c81662f4f28839d25a7d81d"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Exm-2668-Implement-a-Feedback-Syste-1f400897d34e4e76794152673c9ea2fae2aa637b"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
