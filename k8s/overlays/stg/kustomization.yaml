@@ -213,14 +213,14 @@ patches:
             containers:
             - name: celery-exam-submission-worker
               image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2900-Remove-program-code-valida-0785fd52e588604da929f450b991fb2b538b3885"
-              resources: null  # Commented out for staging environment
+              resources:   # Commented out for staging environment
               # Original resources:
-              # requests:
-              #   cpu: "300m"
-              #   memory: "2Gi"
-              # limits:
-              #   cpu: "500m"
-              #   memory: "3Gi"
+                requests:
+                  cpu: "4"
+                  memory: "16Gi"
+                limits:
+                  cpu: "8"
+                  memory: "32Gi"
               command:
               - celery
               - -A
