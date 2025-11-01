@@ -51,19 +51,18 @@ spec:
               cpu: "2"
               memory: "32Gi"
           command:
-            - celery
-            - -A
-            - examx
-            - worker
-            - -P
-            - gevent
-            - -c
-            - "500"
-            - -Q
-            - exam_submissions
-            - -l
-            - debug
-            - -E
+                - celery
+                - -A
+                - examx
+                - worker
+                - --pool=prefork
+                - --concurrency=16
+                - --queues=exam_submissions
+                - --hostname=exam_worker@%h
+                - --max-tasks-per-child=50
+                - --time-limit=120
+                - --loglevel=info
+                - -E
           volumeMounts:
             - name: examxv2-secrets-volume
               mountPath: /mnt/secret-store
