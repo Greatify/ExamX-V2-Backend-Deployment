@@ -27,7 +27,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2900-Remove-program-code-valida-0785fd52e588604da929f450b991fb2b538b3885"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2891-Couchbase-final-submit-to-0e2ab8a8f98b04f6b052a19a64fd2e92726e65e0"
               resources:    # Commented out for staging environment
               # Original resources:
                requests:
@@ -64,7 +64,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2900-Remove-program-code-valida-0785fd52e588604da929f450b991fb2b538b3885"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2891-Couchbase-final-submit-to-0e2ab8a8f98b04f6b052a19a64fd2e92726e65e0"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -114,7 +114,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2900-Remove-program-code-valida-0785fd52e588604da929f450b991fb2b538b3885"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2891-Couchbase-final-submit-to-0e2ab8a8f98b04f6b052a19a64fd2e92726e65e0"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -163,7 +163,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2900-Remove-program-code-valida-0785fd52e588604da929f450b991fb2b538b3885"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2891-Couchbase-final-submit-to-0e2ab8a8f98b04f6b052a19a64fd2e92726e65e0"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -212,7 +212,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-exam-submission-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2900-Remove-program-code-valida-0785fd52e588604da929f450b991fb2b538b3885"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2891-Couchbase-final-submit-to-0e2ab8a8f98b04f6b052a19a64fd2e92726e65e0"
               resources:   # Commented out for staging environment
               # Original resources:
                 requests:
@@ -261,7 +261,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2900-Remove-program-code-valida-0785fd52e588604da929f450b991fb2b538b3885"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2891-Couchbase-final-submit-to-0e2ab8a8f98b04f6b052a19a64fd2e92726e65e0"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -310,7 +310,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-exam-submission-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2900-Remove-program-code-valida-0785fd52e588604da929f450b991fb2b538b3885"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2891-Couchbase-final-submit-to-0e2ab8a8f98b04f6b052a19a64fd2e92726e65e0"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -359,7 +359,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2900-Remove-program-code-valida-0785fd52e588604da929f450b991fb2b538b3885"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2891-Couchbase-final-submit-to-0e2ab8a8f98b04f6b052a19a64fd2e92726e65e0"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
