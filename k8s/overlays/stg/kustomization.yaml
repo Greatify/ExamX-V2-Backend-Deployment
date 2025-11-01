@@ -27,7 +27,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Optimize-exam-submission-API-for-10-fa9bc7b7c6dcafe0f73a779a02e1c8a42d8d2a04"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Implement-critical-fix-for-foreign-6f352bd57c858a50826512c94d1477bb72871113"
               resources:    # Commented out for staging environment
               # Original resources:
                requests:
@@ -64,7 +64,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Optimize-exam-submission-API-for-10-fa9bc7b7c6dcafe0f73a779a02e1c8a42d8d2a04"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Implement-critical-fix-for-foreign-6f352bd57c858a50826512c94d1477bb72871113"
               resources:
                 requests:
                   cpu: "250m"
@@ -113,7 +113,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Optimize-exam-submission-API-for-10-fa9bc7b7c6dcafe0f73a779a02e1c8a42d8d2a04"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Implement-critical-fix-for-foreign-6f352bd57c858a50826512c94d1477bb72871113"
               resources:
                 requests:
                   cpu: "300m"
@@ -161,7 +161,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Optimize-exam-submission-API-for-10-fa9bc7b7c6dcafe0f73a779a02e1c8a42d8d2a04"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Implement-critical-fix-for-foreign-6f352bd57c858a50826512c94d1477bb72871113"
               resources:
                 requests:
                   cpu: "300m"
@@ -209,7 +209,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-exam-submission-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Optimize-exam-submission-API-for-10-fa9bc7b7c6dcafe0f73a779a02e1c8a42d8d2a04"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Implement-critical-fix-for-foreign-6f352bd57c858a50826512c94d1477bb72871113"
               resources:
                 requests:
                   cpu: "4"
@@ -256,7 +256,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Optimize-exam-submission-API-for-10-fa9bc7b7c6dcafe0f73a779a02e1c8a42d8d2a04"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Implement-critical-fix-for-foreign-6f352bd57c858a50826512c94d1477bb72871113"
               resources:
                 requests:
                   cpu: "300m"
@@ -304,7 +304,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-exam-submission-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Optimize-exam-submission-API-for-10-fa9bc7b7c6dcafe0f73a779a02e1c8a42d8d2a04"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Implement-critical-fix-for-foreign-6f352bd57c858a50826512c94d1477bb72871113"
               env:
               - name: OPIK_URL_OVERRIDE
                 value: "https://www.comet.com/opik/api"
@@ -331,7 +331,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Optimize-exam-submission-API-for-10-fa9bc7b7c6dcafe0f73a779a02e1c8a42d8d2a04"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Implement-critical-fix-for-foreign-6f352bd57c858a50826512c94d1477bb72871113"
               resources:
                 requests:
                   cpu: "200m"
