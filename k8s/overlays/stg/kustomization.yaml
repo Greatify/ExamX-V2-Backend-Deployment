@@ -65,14 +65,13 @@ patches:
             containers:
             - name: celery-worker-default
               image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Exm-2668-Implement-a-Feedback-Syste-1f400897d34e4e76794152673c9ea2fae2aa637b"
-              resources: null  # Commented out for staging environment
-              # Original resources:
-              # requests:
-              #   cpu: "250m"
-              #   memory: "2Gi"
-              # limits:
-              #   cpu: "750m"
-              #   memory: "3Gi"
+              resources:
+                requests:
+                  cpu: "250m"
+                  memory: "2Gi"
+                limits:
+                  cpu: "750m"
+                  memory: "3Gi"
               command:
               - celery
               - -A
@@ -115,14 +114,13 @@ patches:
             containers:
             - name: celery-bulk-upload-worker
               image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Exm-2668-Implement-a-Feedback-Syste-1f400897d34e4e76794152673c9ea2fae2aa637b"
-              resources: null  # Commented out for staging environment
-              # Original resources:
-              # requests:
-              #   cpu: "300m"
-              #   memory: "2Gi"
-              # limits:
-              #   cpu: "750m"
-              #   memory: "3Gi"
+              resources:
+                requests:
+                  cpu: "300m"
+                  memory: "2Gi"
+                limits:
+                  cpu: "750m"
+                  memory: "3Gi"
               command:
               - celery
               - -A
@@ -164,14 +162,13 @@ patches:
             containers:
             - name: celery-enrichment-worker
               image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Exm-2668-Implement-a-Feedback-Syste-1f400897d34e4e76794152673c9ea2fae2aa637b"
-              resources: null  # Commented out for staging environment
-              # Original resources:
-              # requests:
-              #   cpu: "300m"
-              #   memory: "2Gi"
-              # limits:
-              #   cpu: "500m"
-              #   memory: "3Gi"             
+              resources:
+                requests:
+                  cpu: "300m"
+                  memory: "2Gi"
+                limits:
+                  cpu: "500m"
+                  memory: "3Gi"             
               command:
               - celery
               - -A
@@ -229,7 +226,7 @@ patches:
               - -P
               - gevent
               - -c
-              - "500"
+              - "2000"
               - -Q
               - exam_submissions
               - -l
@@ -262,14 +259,13 @@ patches:
             containers:
             - name: celery-question-generator-ai-worker
               image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Exm-2668-Implement-a-Feedback-Syste-1f400897d34e4e76794152673c9ea2fae2aa637b"
-              resources: null  # Commented out for staging environment
-              # Original resources:
-              # requests:
-              #   cpu: "300m"
-              #   memory: "2Gi"
-              # limits:
-              #   cpu: "500m"
-              #   memory: "3Gi"
+              resources:
+                requests:
+                  cpu: "300m"
+                  memory: "2Gi"
+                limits:
+                  cpu: "500m"
+                  memory: "3Gi"
               command:
               - celery
               - -A
@@ -311,27 +307,25 @@ patches:
             containers:
             - name: celery-exam-submission-worker
               image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Exm-2668-Implement-a-Feedback-Syste-1f400897d34e4e76794152673c9ea2fae2aa637b"
-              resources: null  # Commented out for staging environment
-              # Original resources:
-              # requests:
-              #   cpu: "1"
-              #   memory: "16Gi"
-              # limits:
-              #   cpu: "2"
-              #   memory: "32Gi"
+              resources:
+                requests:
+                  cpu: "4"
+                  memory: "16Gi"
+                limits:
+                  cpu: "8"
+                  memory: "32Gi"
               command:
               - celery
               - -A
               - examx
               - worker
-              - -P
-              - gevent
-              - -c
-              - "500"
-              - -Q
-              - exam_submissions
-              - -l
-              - debug
+              - --pool=gevent
+              - --concurrency=500
+              - --queues=exam_submissions
+              - --hostname=exam_worker@%h
+              - --max-tasks-per-child=50
+              - --time-limit=120
+              - --loglevel=info
               - -E
               env:
               - name: OPIK_URL_OVERRIDE
@@ -360,14 +354,13 @@ patches:
             containers:
             - name: flower
               image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Exm-2668-Implement-a-Feedback-Syste-1f400897d34e4e76794152673c9ea2fae2aa637b"
-              resources: null  # Commented out for staging environment
-              # Original resources:
-              # requests:
-              #   cpu: "200m"
-              #   memory: "512Mi"
-              # limits:
-              #   cpu: "400m"
-              #   memory: "1Gi"
+              resources:
+                requests:
+                  cpu: "200m"
+                  memory: "512Mi"
+                limits:
+                  cpu: "400m"
+                  memory: "1Gi"
     target:
       kind: Deployment
       name: celery-flower
