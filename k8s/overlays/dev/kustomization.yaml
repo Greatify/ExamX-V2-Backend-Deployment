@@ -218,19 +218,18 @@ patches:
               #     cpu: "500m"
               #     memory: "3Gi"
               command:
-              - celery
-              - -A
-              - examx
-              - worker
-              - -P
-              - gevent
-              - -c
-              - "25"
-              - -Q
-              - exam_submissions
-              - -l
-              - info
-              - -E
+                - celery
+                - -A
+                - examx
+                - worker
+                - --pool=prefork
+                - --concurrency=16
+                - --queues=exam_submissions
+                - --hostname=exam_worker@%h
+                - --max-tasks-per-child=50
+                - --time-limit=120
+                - --loglevel=info
+                - -E
               env:
               - name: OPIK_URL_OVERRIDE
                 value: "https://www.comet.com/opik/api"
