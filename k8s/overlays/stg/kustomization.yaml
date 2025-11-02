@@ -31,14 +31,14 @@ patches:
               resources:    # Commented out for staging environment
               # Original resources:
                requests:
-                 cpu: "16"
-                 memory: "32Gi"
+                 cpu: "4"
+                 memory: "8Gi"
                limits:
-                 cpu: "16"
-                 memory: "32Gi"
+                 cpu: "8"
+                 memory: "16Gi"
               env:
               - name: WORKERS
-                value: "16"
+                value: "8"
               - name: OPIK_URL_OVERRIDE
                 value: "https://www.comet.com/opik/api"
               - name: OPIK_API_KEY
@@ -212,18 +212,18 @@ patches:
               image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2904-add-profile-pic-response-i-383ca5c6dbc087ae640dc66525ccaeed431aa9cf"
               resources:
                 requests:
-                  cpu: "4"
-                  memory: "16Gi"
+                  cpu: "2"
+                  memory: "4Gi"
                 limits:
-                  cpu: "8"
-                  memory: "32Gi"
+                  cpu: "4"
+                  memory: "8Gi"
               command:
                 - celery
                 - -A
                 - examx
                 - worker
                 - --pool=prefork
-                - --concurrency=16
+                - --concurrency=8
                 - --queues=exam_submissions
                 - --hostname=exam_worker@%h
                 - --max-tasks-per-child=50
