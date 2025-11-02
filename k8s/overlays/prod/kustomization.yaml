@@ -50,6 +50,53 @@ patches:
       kind: Deployment
       name: examxv2-backend
 
+  # Celery Exam Submission Worker patches
+  - patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: celery-exam-submission-worker
+      spec:
+        replicas: 1
+        template:
+          spec:
+            serviceAccountName: examxv2-production-sa
+            containers:
+            - name: celery-exam-submission-worker
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2895-student-add-edit-fix-5287-fd4c0f92c39769365e57c5abca1e4d445a0255bc"
+              resources:
+                requests:
+                  cpu: "4"
+                  memory: "16Gi"
+                limits:
+                  cpu: "8"
+                  memory: "32Gi"
+              command:
+                - celery
+                - -A
+                - examx
+                - worker
+                - --pool=prefork
+                - --concurrency=16
+                - --queues=exam_submissions
+                - --hostname=exam_worker@%h
+                - --max-tasks-per-child=50
+                - --time-limit=120
+                - --loglevel=info
+                - -E
+              env:
+              - name: OPIK_URL_OVERRIDE
+                value: "https://www.comet.com/opik/api"
+              - name: OPIK_API_KEY
+                value: "Y5T3WoqNxJ22ypw1M8qivydis"
+              - name: OPIK_WORKSPACE
+                value: "greatify-prod"
+              - name: OPIK_PROJECT_NAME
+                value: "Prod"
+    target:
+      kind: Deployment
+      name: celery-exam-submission-worker
+
   # Celery Worker patches
   - patch: |-
       apiVersion: apps/v1
