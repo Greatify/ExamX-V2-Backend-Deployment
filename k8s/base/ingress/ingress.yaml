@@ -15,6 +15,7 @@ metadata:
     alb.ingress.kubernetes.io/unhealthy-threshold-count: "3"
     alb.ingress.kubernetes.io/success-codes: '200'
     alb.ingress.kubernetes.io/load-balancer-attributes: |
+      idle_timeout.timeout_seconds=600,
       deletion_protection.enabled=true,
       routing.http2.enabled=true,
       routing.http.drop_invalid_header_fields.enabled=true
