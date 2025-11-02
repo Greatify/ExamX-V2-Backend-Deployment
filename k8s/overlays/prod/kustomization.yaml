@@ -30,14 +30,14 @@ patches:
               image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2904-add-profile-pic-response-i-04470bccdce1aab0cfc72a186079ea82b0031027"
               resources:
                 requests:
-                  cpu: "16"
-                  memory: "32Gi"
+                  cpu: "4"
+                  memory: "16Gi"
                 limits:
-                  cpu: "16"
+                  cpu: "8"
                   memory: "32Gi"
               env:
               - name: WORKERS
-                value: "16"
+                value: "8"
               - name: OPIK_URL_OVERRIDE
                 value: "https://www.comet.com/opik/api"
               - name: OPIK_API_KEY
