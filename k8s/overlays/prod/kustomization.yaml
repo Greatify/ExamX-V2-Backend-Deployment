@@ -27,7 +27,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-LNX-20-final-submit-data-add-logger-977d6fa8fee2079c7461ea5fd1fabd190a62dd73"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-update-exam_status-in-sync-api-5320-4168107ad94f8e1a72c84c0a5cb5758215659e7b"
               resources:
                 requests:
                   cpu: "4"
@@ -63,7 +63,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-exam-submission-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-LNX-20-final-submit-data-add-logger-977d6fa8fee2079c7461ea5fd1fabd190a62dd73"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-update-exam_status-in-sync-api-5320-4168107ad94f8e1a72c84c0a5cb5758215659e7b"
               resources:
                 requests:
                   cpu: "4"
@@ -110,7 +110,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-LNX-20-final-submit-data-add-logger-977d6fa8fee2079c7461ea5fd1fabd190a62dd73"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-update-exam_status-in-sync-api-5320-4168107ad94f8e1a72c84c0a5cb5758215659e7b"
               resources:
                 requests:
                   cpu: "2"
@@ -158,7 +158,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-LNX-20-final-submit-data-add-logger-977d6fa8fee2079c7461ea5fd1fabd190a62dd73"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-update-exam_status-in-sync-api-5320-4168107ad94f8e1a72c84c0a5cb5758215659e7b"
               resources:
                 requests:
                   cpu: "2"
@@ -206,7 +206,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-LNX-20-final-submit-data-add-logger-977d6fa8fee2079c7461ea5fd1fabd190a62dd73"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-update-exam_status-in-sync-api-5320-4168107ad94f8e1a72c84c0a5cb5758215659e7b"
               resources:
                 requests:
                   cpu: "2"
@@ -254,7 +254,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-LNX-20-final-submit-data-add-logger-977d6fa8fee2079c7461ea5fd1fabd190a62dd73"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-update-exam_status-in-sync-api-5320-4168107ad94f8e1a72c84c0a5cb5758215659e7b"
               resources:
                 requests:
                   cpu: "2"
@@ -325,7 +325,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-LNX-20-final-submit-data-add-logger-977d6fa8fee2079c7461ea5fd1fabd190a62dd73"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-update-exam_status-in-sync-api-5320-4168107ad94f8e1a72c84c0a5cb5758215659e7b"
               resources:
                 requests:
                   cpu: "250m"
