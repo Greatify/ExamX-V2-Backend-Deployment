@@ -30,7 +30,7 @@ patches:
       metadata:
         name: examxv2-backend
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2913-Exam-Attendance-Report-534-2c19c58470a54b8bc9b41dce51e41ebf04236bfc"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2917-attendance-filter-issue-fi-fcb7831950b0ac9baa5472a8f11224000a0d33ce"
       spec:
         replicas: 1
         template:
@@ -38,7 +38,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2913-Exam-Attendance-Report-534-2c19c58470a54b8bc9b41dce51e41ebf04236bfc"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2917-attendance-filter-issue-fi-fcb7831950b0ac9baa5472a8f11224000a0d33ce"
               resources: null  # Commented out for dev environment
               # resources:
               #   requests:
@@ -71,7 +71,7 @@ patches:
       metadata:
         name: celery-worker-default
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2913-Exam-Attendance-Report-534-2c19c58470a54b8bc9b41dce51e41ebf04236bfc"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2917-attendance-filter-issue-fi-fcb7831950b0ac9baa5472a8f11224000a0d33ce"
       spec:
         replicas: 1
         template:
@@ -79,7 +79,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2913-Exam-Attendance-Report-534-2c19c58470a54b8bc9b41dce51e41ebf04236bfc"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2917-attendance-filter-issue-fi-fcb7831950b0ac9baa5472a8f11224000a0d33ce"
               resources: null  # Commented out for dev environment
               # resources:
               #   requests:
@@ -123,7 +123,7 @@ patches:
       metadata:
         name: celery-bulk-upload-worker
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2913-Exam-Attendance-Report-534-2c19c58470a54b8bc9b41dce51e41ebf04236bfc"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2917-attendance-filter-issue-fi-fcb7831950b0ac9baa5472a8f11224000a0d33ce"
       spec:
         replicas: 1
         template:
@@ -131,7 +131,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2913-Exam-Attendance-Report-534-2c19c58470a54b8bc9b41dce51e41ebf04236bfc"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2917-attendance-filter-issue-fi-fcb7831950b0ac9baa5472a8f11224000a0d33ce"
               resources: null  # Commented out for dev environment
               # resources:
               #   requests:
@@ -200,7 +200,7 @@ patches:
       metadata:
         name: celery-exam-submission-worker
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2913-Exam-Attendance-Report-534-2c19c58470a54b8bc9b41dce51e41ebf04236bfc"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2917-attendance-filter-issue-fi-fcb7831950b0ac9baa5472a8f11224000a0d33ce"
       spec:
         replicas: 1
         template:
@@ -208,7 +208,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-exam-submission-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2913-Exam-Attendance-Report-534-2c19c58470a54b8bc9b41dce51e41ebf04236bfc"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2917-attendance-filter-issue-fi-fcb7831950b0ac9baa5472a8f11224000a0d33ce"
               resources: null  # Commented out for dev environment
               # resources:
               #   requests:
@@ -252,7 +252,7 @@ patches:
       metadata:
         name: celery-question-generator-ai-worker
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2913-Exam-Attendance-Report-534-2c19c58470a54b8bc9b41dce51e41ebf04236bfc"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2917-attendance-filter-issue-fi-fcb7831950b0ac9baa5472a8f11224000a0d33ce"
       spec:
         replicas: 1
         template:
@@ -260,7 +260,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2913-Exam-Attendance-Report-534-2c19c58470a54b8bc9b41dce51e41ebf04236bfc"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2917-attendance-filter-issue-fi-fcb7831950b0ac9baa5472a8f11224000a0d33ce"
               resources: null  # Commented out for dev environment
               # resources:
               #   requests:
@@ -305,7 +305,7 @@ patches:
       metadata:
         name: celery-flower
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2913-Exam-Attendance-Report-534-2c19c58470a54b8bc9b41dce51e41ebf04236bfc"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2917-attendance-filter-issue-fi-fcb7831950b0ac9baa5472a8f11224000a0d33ce"
       spec:
         replicas: 1
         template:
@@ -313,7 +313,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2913-Exam-Attendance-Report-534-2c19c58470a54b8bc9b41dce51e41ebf04236bfc"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2917-attendance-filter-issue-fi-fcb7831950b0ac9baa5472a8f11224000a0d33ce"
               resources: null  # Commented out for dev environment
               # resources:
               #   requests:
