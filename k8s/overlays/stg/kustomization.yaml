@@ -27,7 +27,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2898-Student-Biometric-Log-repo-7d3652634f350ed5d519008009fb932208226ea4"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2898-Student-Biometric-Log-repo-8a1afcf12694c1a95eb0314bffa0a3f394d4576c"
               resources:    # Commented out for staging environment
               # Original resources:
                requests:
@@ -64,7 +64,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2898-Student-Biometric-Log-repo-7d3652634f350ed5d519008009fb932208226ea4"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2898-Student-Biometric-Log-repo-8a1afcf12694c1a95eb0314bffa0a3f394d4576c"
               resources:
                 requests:
                   cpu: "250m"
@@ -113,7 +113,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2898-Student-Biometric-Log-repo-7d3652634f350ed5d519008009fb932208226ea4"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2898-Student-Biometric-Log-repo-8a1afcf12694c1a95eb0314bffa0a3f394d4576c"
               resources:
                 requests:
                   cpu: "300m"
@@ -161,7 +161,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2898-Student-Biometric-Log-repo-7d3652634f350ed5d519008009fb932208226ea4"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2898-Student-Biometric-Log-repo-8a1afcf12694c1a95eb0314bffa0a3f394d4576c"
               resources:
                 requests:
                   cpu: "300m"
@@ -209,7 +209,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-exam-submission-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2898-Student-Biometric-Log-repo-7d3652634f350ed5d519008009fb932208226ea4"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2898-Student-Biometric-Log-repo-8a1afcf12694c1a95eb0314bffa0a3f394d4576c"
               resources:
                 requests:
                   cpu: "2"
@@ -256,7 +256,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2898-Student-Biometric-Log-repo-7d3652634f350ed5d519008009fb932208226ea4"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2898-Student-Biometric-Log-repo-8a1afcf12694c1a95eb0314bffa0a3f394d4576c"
               resources:
                 requests:
                   cpu: "300m"
@@ -304,7 +304,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-exam-submission-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2898-Student-Biometric-Log-repo-7d3652634f350ed5d519008009fb932208226ea4"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2898-Student-Biometric-Log-repo-8a1afcf12694c1a95eb0314bffa0a3f394d4576c"
               env:
               - name: OPIK_URL_OVERRIDE
                 value: "https://www.comet.com/opik/api"
@@ -331,7 +331,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2898-Student-Biometric-Log-repo-7d3652634f350ed5d519008009fb932208226ea4"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2898-Student-Biometric-Log-repo-8a1afcf12694c1a95eb0314bffa0a3f394d4576c"
               resources:
                 requests:
                   cpu: "200m"
