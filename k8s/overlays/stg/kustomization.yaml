@@ -27,7 +27,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2925-Time-is-displayed-in-UTC-i-7a6fdbfc8971c088c3ff54da6f8eb022ca664deb"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Exm-2935-Main-5370-5372-10a6594f9f72a951b3273ff8e6d4175b1d493ff6"
               resources:    # Commented out for staging environment
               # Original resources:
                requests:
@@ -64,7 +64,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2925-Time-is-displayed-in-UTC-i-7a6fdbfc8971c088c3ff54da6f8eb022ca664deb"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Exm-2935-Main-5370-5372-10a6594f9f72a951b3273ff8e6d4175b1d493ff6"
               resources:
                 requests:
                   cpu: "250m"
@@ -113,7 +113,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2925-Time-is-displayed-in-UTC-i-7a6fdbfc8971c088c3ff54da6f8eb022ca664deb"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Exm-2935-Main-5370-5372-10a6594f9f72a951b3273ff8e6d4175b1d493ff6"
               resources:
                 requests:
                   cpu: "300m"
@@ -161,7 +161,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2925-Time-is-displayed-in-UTC-i-7a6fdbfc8971c088c3ff54da6f8eb022ca664deb"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Exm-2935-Main-5370-5372-10a6594f9f72a951b3273ff8e6d4175b1d493ff6"
               resources:
                 requests:
                   cpu: "300m"
@@ -209,7 +209,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-exam-submission-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2925-Time-is-displayed-in-UTC-i-7a6fdbfc8971c088c3ff54da6f8eb022ca664deb"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Exm-2935-Main-5370-5372-10a6594f9f72a951b3273ff8e6d4175b1d493ff6"
               resources:
                 requests:
                   cpu: "2"
@@ -256,7 +256,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2925-Time-is-displayed-in-UTC-i-7a6fdbfc8971c088c3ff54da6f8eb022ca664deb"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Exm-2935-Main-5370-5372-10a6594f9f72a951b3273ff8e6d4175b1d493ff6"
               resources:
                 requests:
                   cpu: "300m"
@@ -304,7 +304,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-exam-submission-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2925-Time-is-displayed-in-UTC-i-7a6fdbfc8971c088c3ff54da6f8eb022ca664deb"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Exm-2935-Main-5370-5372-10a6594f9f72a951b3273ff8e6d4175b1d493ff6"
               env:
               - name: OPIK_URL_OVERRIDE
                 value: "https://www.comet.com/opik/api"
@@ -331,7 +331,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2925-Time-is-displayed-in-UTC-i-7a6fdbfc8971c088c3ff54da6f8eb022ca664deb"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-Exm-2935-Main-5370-5372-10a6594f9f72a951b3273ff8e6d4175b1d493ff6"
               resources:
                 requests:
                   cpu: "200m"
