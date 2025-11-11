@@ -27,7 +27,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2408-issues-in-unique-question-10a99261fad7b404ecb66ae7055b70d1394a11f8"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2953-Scheduler-configuration-in-2940a087e0180f0c43a1d9e95cb9903d6f8d51c4"
               resources:
                 requests:
                   cpu: "4"
@@ -63,7 +63,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-exam-submission-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2408-issues-in-unique-question-10a99261fad7b404ecb66ae7055b70d1394a11f8"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2953-Scheduler-configuration-in-2940a087e0180f0c43a1d9e95cb9903d6f8d51c4"
               resources:
                 requests:
                   cpu: "4"
@@ -110,7 +110,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2408-issues-in-unique-question-10a99261fad7b404ecb66ae7055b70d1394a11f8"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2953-Scheduler-configuration-in-2940a087e0180f0c43a1d9e95cb9903d6f8d51c4"
               resources:
                 requests:
                   cpu: "2"
@@ -158,7 +158,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2408-issues-in-unique-question-10a99261fad7b404ecb66ae7055b70d1394a11f8"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2953-Scheduler-configuration-in-2940a087e0180f0c43a1d9e95cb9903d6f8d51c4"
               resources:
                 requests:
                   cpu: "2"
@@ -206,7 +206,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2408-issues-in-unique-question-10a99261fad7b404ecb66ae7055b70d1394a11f8"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2953-Scheduler-configuration-in-2940a087e0180f0c43a1d9e95cb9903d6f8d51c4"
               resources:
                 requests:
                   cpu: "2"
@@ -254,7 +254,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2408-issues-in-unique-question-10a99261fad7b404ecb66ae7055b70d1394a11f8"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2953-Scheduler-configuration-in-2940a087e0180f0c43a1d9e95cb9903d6f8d51c4"
               resources:
                 requests:
                   cpu: "2"
@@ -325,7 +325,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2408-issues-in-unique-question-10a99261fad7b404ecb66ae7055b70d1394a11f8"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2953-Scheduler-configuration-in-2940a087e0180f0c43a1d9e95cb9903d6f8d51c4"
               resources:
                 requests:
                   cpu: "250m"
