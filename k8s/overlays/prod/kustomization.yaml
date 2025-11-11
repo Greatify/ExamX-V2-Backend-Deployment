@@ -27,7 +27,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Evaluation-report-question-mark-fix-be59d5d86e0220c22a73e264e567b59cb8c19e6a"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2948-Update-Exam-Add-dummy-numb-8d769ce520972816211043533c5fd60ed2a79c7b"
               resources:
                 requests:
                   cpu: "4"
@@ -63,7 +63,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-exam-submission-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Evaluation-report-question-mark-fix-be59d5d86e0220c22a73e264e567b59cb8c19e6a"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2948-Update-Exam-Add-dummy-numb-8d769ce520972816211043533c5fd60ed2a79c7b"
               resources:
                 requests:
                   cpu: "4"
@@ -110,7 +110,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Evaluation-report-question-mark-fix-be59d5d86e0220c22a73e264e567b59cb8c19e6a"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2948-Update-Exam-Add-dummy-numb-8d769ce520972816211043533c5fd60ed2a79c7b"
               resources:
                 requests:
                   cpu: "2"
@@ -158,7 +158,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Evaluation-report-question-mark-fix-be59d5d86e0220c22a73e264e567b59cb8c19e6a"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2948-Update-Exam-Add-dummy-numb-8d769ce520972816211043533c5fd60ed2a79c7b"
               resources:
                 requests:
                   cpu: "2"
@@ -206,7 +206,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Evaluation-report-question-mark-fix-be59d5d86e0220c22a73e264e567b59cb8c19e6a"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2948-Update-Exam-Add-dummy-numb-8d769ce520972816211043533c5fd60ed2a79c7b"
               resources:
                 requests:
                   cpu: "2"
@@ -254,7 +254,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Evaluation-report-question-mark-fix-be59d5d86e0220c22a73e264e567b59cb8c19e6a"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2948-Update-Exam-Add-dummy-numb-8d769ce520972816211043533c5fd60ed2a79c7b"
               resources:
                 requests:
                   cpu: "2"
@@ -325,7 +325,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Evaluation-report-question-mark-fix-be59d5d86e0220c22a73e264e567b59cb8c19e6a"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2948-Update-Exam-Add-dummy-numb-8d769ce520972816211043533c5fd60ed2a79c7b"
               resources:
                 requests:
                   cpu: "250m"
