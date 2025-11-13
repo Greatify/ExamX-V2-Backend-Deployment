@@ -11,7 +11,7 @@ resources:
   - deployment/celery-enrichment-worker-deployment.yaml
   - deployment/celery-exam-submission-worker-deployment.yaml
   - deployment/celery-question-generator-ai-worker-deployment.yaml
-  - deployment/celery-flower-deployment.yaml
+  # - deployment/celery-flower-deployment.yaml
   # - deployment/redis-deployment.yaml
   
   # Services
