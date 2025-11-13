@@ -34,8 +34,8 @@ patches:
                  cpu: "4"
                  memory: "8Gi"
                limits:
-                 cpu: "8"
-                 memory: "16Gi"
+                 cpu: "4"
+                 memory: "8Gi"
               env:
               - name: WORKERS
                 value: "8"
@@ -406,8 +406,8 @@ patches:
       metadata:
         name: examxv2-backend-pod-autoscaler
       spec:
-        minReplicas: 2
-        maxReplicas: 10
+        minReplicas: 1
+        maxReplicas: 2
     target:
       kind: HorizontalPodAutoscaler
       name: examxv2-backend-pod-autoscaler
