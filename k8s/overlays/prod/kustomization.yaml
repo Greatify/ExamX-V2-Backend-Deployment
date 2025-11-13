@@ -50,52 +50,52 @@ patches:
       kind: Deployment
       name: examxv2-backend
 
-  # Celery Exam Submission Worker patches
-  - patch: |-
-      apiVersion: apps/v1
-      kind: Deployment
-      metadata:
-        name: celery-exam-submission-worker
-      spec:
-        replicas: 1
-        template:
-          spec:
-            serviceAccountName: examxv2-production-sa
-            containers:
-            - name: celery-exam-submission-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Export-student-answers-with-cover-i-f357fa053a4237471cd08e8a7780c7df81eabac8"
-              resources:
-                requests:
-                  cpu: "4"
-                  memory: "16Gi"
-                limits:
-                  cpu: "8"
-                  memory: "32Gi"
-              command:
-                - celery
-                - -A
-                - examx
-                - worker
-                - --pool=prefork
-                - --concurrency=16
-                - --queues=exam_submissions
-                - --hostname=exam_worker@%h
-                - --max-tasks-per-child=50
-                - --time-limit=120
-                - --loglevel=info
-                - -E
-              env:
-              - name: OPIK_URL_OVERRIDE
-                value: "https://www.comet.com/opik/api"
-              - name: OPIK_API_KEY
-                value: "Y5T3WoqNxJ22ypw1M8qivydis"
-              - name: OPIK_WORKSPACE
-                value: "greatify-prod"
-              - name: OPIK_PROJECT_NAME
-                value: "Prod"
-    target:
-      kind: Deployment
-      name: celery-exam-submission-worker
+  # # Celery Exam Submission Worker patches
+  # - patch: |-
+  #     apiVersion: apps/v1
+  #     kind: Deployment
+  #     metadata:
+  #       name: celery-exam-submission-worker
+  #     spec:
+  #       replicas: 1
+  #       template:
+  #         spec:
+  #           serviceAccountName: examxv2-production-sa
+  #           containers:
+  #           - name: celery-exam-submission-worker
+  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Export-student-answers-with-cover-i-f357fa053a4237471cd08e8a7780c7df81eabac8"
+  #             resources:
+  #               requests:
+  #                 cpu: "4"
+  #                 memory: "16Gi"
+  #               limits:
+  #                 cpu: "8"
+  #                 memory: "32Gi"
+  #             command:
+  #               - celery
+  #               - -A
+  #               - examx
+  #               - worker
+  #               - --pool=prefork
+  #               - --concurrency=16
+  #               - --queues=exam_submissions
+  #               - --hostname=exam_worker@%h
+  #               - --max-tasks-per-child=50
+  #               - --time-limit=120
+  #               - --loglevel=info
+  #               - -E
+  #             env:
+  #             - name: OPIK_URL_OVERRIDE
+  #               value: "https://www.comet.com/opik/api"
+  #             - name: OPIK_API_KEY
+  #               value: "Y5T3WoqNxJ22ypw1M8qivydis"
+  #             - name: OPIK_WORKSPACE
+  #               value: "greatify-prod"
+  #             - name: OPIK_PROJECT_NAME
+  #               value: "Prod"
+  #   target:
+  #     kind: Deployment
+  #     name: celery-exam-submission-worker
 
   # Celery Worker patches
   - patch: |-
@@ -312,30 +312,30 @@ patches:
   #     kind: Deployment
   #     name: celery-beat
 
-  # Celery Flower patches
-  - patch: |-
-      apiVersion: apps/v1
-      kind: Deployment
-      metadata:
-        name: celery-flower
-      spec:
-        replicas: 1
-        template:
-          spec:
-            serviceAccountName: examxv2-production-sa
-            containers:
-            - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Export-student-answers-with-cover-i-f357fa053a4237471cd08e8a7780c7df81eabac8"
-              resources:
-                requests:
-                  cpu: "250m"
-                  memory: "2Gi"
-                limits:
-                  cpu: "500m"
-                  memory: "4Gi"
-    target:
-      kind: Deployment
-      name: celery-flower
+  # # Celery Flower patches
+  # - patch: |-
+  #     apiVersion: apps/v1
+  #     kind: Deployment
+  #     metadata:
+  #       name: celery-flower
+  #     spec:
+  #       replicas: 1
+  #       template:
+  #         spec:
+  #           serviceAccountName: examxv2-production-sa
+  #           containers:
+  #           - name: flower
+  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Export-student-answers-with-cover-i-f357fa053a4237471cd08e8a7780c7df81eabac8"
+  #             resources:
+  #               requests:
+  #                 cpu: "250m"
+  #                 memory: "2Gi"
+  #               limits:
+  #                 cpu: "500m"
+  #                 memory: "4Gi"
+  #   target:
+  #     kind: Deployment
+  #     name: celery-flower
   # Backend Autoscaler patches
   - patch: |-
       apiVersion: autoscaling/v2
