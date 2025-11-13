@@ -196,52 +196,52 @@ patches:
       kind: Deployment
       name: celery-enrichment-worker
 
-  # Celery Exam Submission Worker patches
-  - patch: |-
-      apiVersion: apps/v1
-      kind: Deployment
-      metadata:
-        name: celery-exam-submission-worker
-      spec:
-        replicas: 1
-        template:
-          spec:
-            serviceAccountName: examxv2-stg-secret-service
-            containers:
-            - name: celery-exam-submission-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2959-cover-instruction-pages-ad-12a94a1d910afb3cf0bf782928346f71e8f745b4"
-              resources:
-                requests:
-                  cpu: "2"
-                  memory: "4Gi"
-                limits:
-                  cpu: "4"
-                  memory: "8Gi"
-              command:
-                - celery
-                - -A
-                - examx
-                - worker
-                - --pool=prefork
-                - --concurrency=8
-                - --queues=exam_submissions
-                - --hostname=exam_worker@%h
-                - --max-tasks-per-child=50
-                - --time-limit=120
-                - --loglevel=info
-                - -E
-              env:
-              - name: OPIK_URL_OVERRIDE
-                value: "https://www.comet.com/opik/api"
-              - name: OPIK_API_KEY
-                value: "Y5T3WoqNxJ22ypw1M8qivydis"
-              - name: OPIK_WORKSPACE
-                value: "greatify-prod"
-              - name: OPIK_PROJECT_NAME
-                value: "Stg"
-    target:
-      kind: Deployment
-      name: celery-exam-submission-worker
+  # # Celery Exam Submission Worker patches
+  # - patch: |-
+  #     apiVersion: apps/v1
+  #     kind: Deployment
+  #     metadata:
+  #       name: celery-exam-submission-worker
+  #     spec:
+  #       replicas: 1
+  #       template:
+  #         spec:
+  #           serviceAccountName: examxv2-stg-secret-service
+  #           containers:
+  #           - name: celery-exam-submission-worker
+  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2959-cover-instruction-pages-ad-12a94a1d910afb3cf0bf782928346f71e8f745b4"
+  #             resources:
+  #               requests:
+  #                 cpu: "2"
+  #                 memory: "4Gi"
+  #               limits:
+  #                 cpu: "4"
+  #                 memory: "8Gi"
+  #             command:
+  #               - celery
+  #               - -A
+  #               - examx
+  #               - worker
+  #               - --pool=prefork
+  #               - --concurrency=8
+  #               - --queues=exam_submissions
+  #               - --hostname=exam_worker@%h
+  #               - --max-tasks-per-child=50
+  #               - --time-limit=120
+  #               - --loglevel=info
+  #               - -E
+  #             env:
+  #             - name: OPIK_URL_OVERRIDE
+  #               value: "https://www.comet.com/opik/api"
+  #             - name: OPIK_API_KEY
+  #               value: "Y5T3WoqNxJ22ypw1M8qivydis"
+  #             - name: OPIK_WORKSPACE
+  #               value: "greatify-prod"
+  #             - name: OPIK_PROJECT_NAME
+  #               value: "Stg"
+  #   target:
+  #     kind: Deployment
+  #     name: celery-exam-submission-worker
 
   # Celery Question Generator AI Worker patches
   - patch: |-
@@ -292,56 +292,56 @@ patches:
       name: celery-question-generator-ai-worker
 
   # Celery Exam Submission Worker patches
-  - patch: |-
-      apiVersion: apps/v1
-      kind: Deployment
-      metadata:
-        name: celery-exam-submission-worker
-      spec:
-        replicas: 1
-        template:
-          spec:
-            serviceAccountName: examxv2-stg-secret-service
-            containers:
-            - name: celery-exam-submission-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2959-cover-instruction-pages-ad-12a94a1d910afb3cf0bf782928346f71e8f745b4"
-              env:
-              - name: OPIK_URL_OVERRIDE
-                value: "https://www.comet.com/opik/api"
-              - name: OPIK_API_KEY
-                value: "Y5T3WoqNxJ22ypw1M8qivydis"
-              - name: OPIK_WORKSPACE
-                value: "greatify-prod"
-              - name: OPIK_PROJECT_NAME
-                value: "Stg"
-    target:
-      kind: Deployment
-      name: celery-exam-submission-worker
+  # - patch: |-
+  #     apiVersion: apps/v1
+  #     kind: Deployment
+  #     metadata:
+  #       name: celery-exam-submission-worker
+  #     spec:
+  #       replicas: 1
+  #       template:
+  #         spec:
+  #           serviceAccountName: examxv2-stg-secret-service
+  #           containers:
+  #           - name: celery-exam-submission-worker
+  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2959-cover-instruction-pages-ad-12a94a1d910afb3cf0bf782928346f71e8f745b4"
+  #             env:
+  #             - name: OPIK_URL_OVERRIDE
+  #               value: "https://www.comet.com/opik/api"
+  #             - name: OPIK_API_KEY
+  #               value: "Y5T3WoqNxJ22ypw1M8qivydis"
+  #             - name: OPIK_WORKSPACE
+  #               value: "greatify-prod"
+  #             - name: OPIK_PROJECT_NAME
+  #               value: "Stg"
+  #   target:
+  #     kind: Deployment
+  #     name: celery-exam-submission-worker
 
   # Celery Flower patches
-  - patch: |-
-      apiVersion: apps/v1
-      kind: Deployment
-      metadata:
-        name: celery-flower
-      spec:
-        replicas: 1
-        template:
-          spec:
-            serviceAccountName: examxv2-stg-secret-service
-            containers:
-            - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2959-cover-instruction-pages-ad-12a94a1d910afb3cf0bf782928346f71e8f745b4"
-              resources:
-                requests:
-                  cpu: "200m"
-                  memory: "512Mi"
-                limits:
-                  cpu: "400m"
-                  memory: "1Gi"
-    target:
-      kind: Deployment
-      name: celery-flower
+  # - patch: |-
+  #     apiVersion: apps/v1
+  #     kind: Deployment
+  #     metadata:
+  #       name: celery-flower
+  #     spec:
+  #       replicas: 1
+  #       template:
+  #         spec:
+  #           serviceAccountName: examxv2-stg-secret-service
+  #           containers:
+  #           - name: flower
+  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2959-cover-instruction-pages-ad-12a94a1d910afb3cf0bf782928346f71e8f745b4"
+  #             resources:
+  #               requests:
+  #                 cpu: "200m"
+  #                 memory: "512Mi"
+  #               limits:
+  #                 cpu: "400m"
+  #                 memory: "1Gi"
+  #   target:
+  #     kind: Deployment
+  #     name: celery-flower
 
   # Ingress patches
   - patch: |-
