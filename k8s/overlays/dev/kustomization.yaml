@@ -193,57 +193,57 @@ patches:
       kind: Deployment
       name: celery-enrichment-worker
 
-  # Celery Exam Submission Worker patches
-  - patch: |-
-      apiVersion: apps/v1
-      kind: Deployment
-      metadata:
-        name: celery-exam-submission-worker
-        annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2959-time-zone-and-format-chang-fadb09522d86645879b8dd89d052d8840629c45f"
-      spec:
-        replicas: 1
-        template:
-          spec:
-            serviceAccountName: dev-examxv2-sa
-            containers:
-            - name: celery-exam-submission-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2959-time-zone-and-format-chang-fadb09522d86645879b8dd89d052d8840629c45f"
-              resources: null  # Commented out for dev environment
-              # resources:
-              #   requests:
-              #     cpu: "300m"
-              #     memory: "2Gi"
-              #   limits:
-              #     cpu: "500m"
-              #     memory: "3Gi"
-              command:
-                - celery
-                - -A
-                - examx
-                - worker
-                - --pool=prefork
-                - --concurrency=16
-                - --queues=exam_submissions
-                - --hostname=exam_worker@%h
-                - --max-tasks-per-child=50
-                - --time-limit=120
-                - --loglevel=info
-                - -E
-              env:
-              - name: OPIK_URL_OVERRIDE
-                value: "https://www.comet.com/opik/api"
-              - name: OPIK_API_KEY
-                value: "Y5T3WoqNxJ22ypw1M8qivydis"
-              - name: OPIK_WORKSPACE
-                value: "greatify-prod"
-              - name: OPIK_PROJECT_NAME
-                value: "Dev"
-              - name: REDIS_URL
-                value: "rediss://master.examxv2-dev.kti2un.aps1.cache.amazonaws.com:6379"
-    target:
-      kind: Deployment
-      name: celery-exam-submission-worker
+  # # Celery Exam Submission Worker patches
+  # - patch: |-
+  #     apiVersion: apps/v1
+  #     kind: Deployment
+  #     metadata:
+  #       name: celery-exam-submission-worker
+  #       annotations:
+  #         kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2959-time-zone-and-format-chang-fadb09522d86645879b8dd89d052d8840629c45f"
+  #     spec:
+  #       replicas: 1
+  #       template:
+  #         spec:
+  #           serviceAccountName: dev-examxv2-sa
+  #           containers:
+  #           - name: celery-exam-submission-worker
+  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2959-time-zone-and-format-chang-fadb09522d86645879b8dd89d052d8840629c45f"
+  #             resources: null  # Commented out for dev environment
+  #             # resources:
+  #             #   requests:
+  #             #     cpu: "300m"
+  #             #     memory: "2Gi"
+  #             #   limits:
+  #             #     cpu: "500m"
+  #             #     memory: "3Gi"
+  #             command:
+  #               - celery
+  #               - -A
+  #               - examx
+  #               - worker
+  #               - --pool=prefork
+  #               - --concurrency=16
+  #               - --queues=exam_submissions
+  #               - --hostname=exam_worker@%h
+  #               - --max-tasks-per-child=50
+  #               - --time-limit=120
+  #               - --loglevel=info
+  #               - -E
+  #             env:
+  #             - name: OPIK_URL_OVERRIDE
+  #               value: "https://www.comet.com/opik/api"
+  #             - name: OPIK_API_KEY
+  #               value: "Y5T3WoqNxJ22ypw1M8qivydis"
+  #             - name: OPIK_WORKSPACE
+  #               value: "greatify-prod"
+  #             - name: OPIK_PROJECT_NAME
+  #               value: "Dev"
+  #             - name: REDIS_URL
+  #               value: "rediss://master.examxv2-dev.kti2un.aps1.cache.amazonaws.com:6379"
+  #   target:
+  #     kind: Deployment
+  #     name: celery-exam-submission-worker
 
   # Celery Question Generator AI Worker patches
   - patch: |-
@@ -298,33 +298,33 @@ patches:
       kind: Deployment
       name: celery-question-generator-ai-worker
 
-  # Celery Flower patches for dev
-  - patch: |-
-      apiVersion: apps/v1
-      kind: Deployment
-      metadata:
-        name: celery-flower
-        annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2959-time-zone-and-format-chang-fadb09522d86645879b8dd89d052d8840629c45f"
-      spec:
-        replicas: 1
-        template:
-          spec:
-            serviceAccountName: dev-examxv2-sa
-            containers:
-            - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2959-time-zone-and-format-chang-fadb09522d86645879b8dd89d052d8840629c45f"
-              resources: null  # Commented out for dev environment
-              # resources:
-              #   requests:
-              #     cpu: "200m"
-              #     memory: "1Gi"
-              #   limits:
-              #     cpu: "400m"
-              #     memory: "2Gi"
-    target:
-      kind: Deployment
-      name: celery-flower
+  # # Celery Flower patches for dev
+  # - patch: |-
+  #     apiVersion: apps/v1
+  #     kind: Deployment
+  #     metadata:
+  #       name: celery-flower
+  #       annotations:
+  #         kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2959-time-zone-and-format-chang-fadb09522d86645879b8dd89d052d8840629c45f"
+  #     spec:
+  #       replicas: 1
+  #       template:
+  #         spec:
+  #           serviceAccountName: dev-examxv2-sa
+  #           containers:
+  #           - name: flower
+  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2959-time-zone-and-format-chang-fadb09522d86645879b8dd89d052d8840629c45f"
+  #             resources: null  # Commented out for dev environment
+  #             # resources:
+  #             #   requests:
+  #             #     cpu: "200m"
+  #             #     memory: "1Gi"
+  #             #   limits:
+  #             #     cpu: "400m"
+  #             #     memory: "2Gi"
+  #   target:
+  #     kind: Deployment
+  #     name: celery-flower
 
   # Ingress patches
   - patch: |-
