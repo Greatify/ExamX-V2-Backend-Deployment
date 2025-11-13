@@ -245,30 +245,30 @@ patches:
       kind: Deployment
       name: celery-question-generator-ai-worker
 
-  # Celery Flower patches
-  - patch: |-
-      apiVersion: apps/v1
-      kind: Deployment
-      metadata:
-        name: celery-flower
-      spec:
-        replicas: 1
-        template:
-          spec:
-            serviceAccountName: examxv2-stg-secret-service
-            containers:
-            - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-EXM-2703-added-overall-evalution-pa-ed0b898c89e4d79099c6965424fb6600303f36d2"
-              resources:
-                requests:
-                  cpu: "250m"
-                  memory: "2Gi"
-                limits:
-                  cpu: "500m"
-                  memory: "4Gi"
-    target:
-      kind: Deployment
-      name: celery-flower
+  # # Celery Flower patches
+  # - patch: |-
+  #     apiVersion: apps/v1
+  #     kind: Deployment
+  #     metadata:
+  #       name: celery-flower
+  #     spec:
+  #       replicas: 1
+  #       template:
+  #         spec:
+  #           serviceAccountName: examxv2-stg-secret-service
+  #           containers:
+  #           - name: flower
+  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-EXM-2703-added-overall-evalution-pa-ed0b898c89e4d79099c6965424fb6600303f36d2"
+  #             resources:
+  #               requests:
+  #                 cpu: "250m"
+  #                 memory: "2Gi"
+  #               limits:
+  #                 cpu: "500m"
+  #                 memory: "4Gi"
+  #   target:
+  #     kind: Deployment
+  #     name: celery-flower
 
   # Secrets patches
   - patch: |-
@@ -380,15 +380,15 @@ patches:
       kind: HorizontalPodAutoscaler
       name: celery-question-generator-ai-worker-autoscaler
 
-  # Celery Flower Autoscaler patches (following production pattern)
-  - patch: |-
-      apiVersion: autoscaling/v2
-      kind: HorizontalPodAutoscaler
-      metadata:
-        name: celery-flower-autoscaler
-      spec:
-        minReplicas: 1
-        maxReplicas: 2
-    target:
-      kind: HorizontalPodAutoscaler
-      name: celery-flower-autoscaler
+  # # Celery Flower Autoscaler patches (following production pattern)
+  # - patch: |-
+  #     apiVersion: autoscaling/v2
+  #     kind: HorizontalPodAutoscaler
+  #     metadata:
+  #       name: celery-flower-autoscaler
+  #     spec:
+  #       minReplicas: 1
+  #       maxReplicas: 2
+  #   target:
+  #     kind: HorizontalPodAutoscaler
+  #     name: celery-flower-autoscaler
