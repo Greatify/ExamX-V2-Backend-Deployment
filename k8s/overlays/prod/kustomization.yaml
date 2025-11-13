@@ -30,8 +30,8 @@ patches:
               image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Evaluation-question-mark-response-u-559af651f7eb21f0911c13c8aadf28c974e01054"
               resources:
                 requests:
-                  cpu: "4"
-                  memory: "16Gi"
+                  cpu: "8"
+                  memory: "32Gi"
                 limits:
                   cpu: "8"
                   memory: "32Gi"
