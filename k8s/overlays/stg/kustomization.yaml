@@ -27,7 +27,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2969-email-prevent-created-user-1c451e2bb19ba9f40a1c974c017991780793a77e"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2974-exam-list-api-issue-fix-54-bf0183fc84ae050c03ed0f79a4757cdb468e927b"
               resources: null  # Commented out for staging environment
               # Original resources:
                # requests:
@@ -64,7 +64,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2969-email-prevent-created-user-1c451e2bb19ba9f40a1c974c017991780793a77e"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2974-exam-list-api-issue-fix-54-bf0183fc84ae050c03ed0f79a4757cdb468e927b"
               resources:
                 requests:
                   cpu: "250m"
@@ -113,7 +113,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2969-email-prevent-created-user-1c451e2bb19ba9f40a1c974c017991780793a77e"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2974-exam-list-api-issue-fix-54-bf0183fc84ae050c03ed0f79a4757cdb468e927b"
               resources:
                 requests:
                   cpu: "300m"
@@ -161,7 +161,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2969-email-prevent-created-user-1c451e2bb19ba9f40a1c974c017991780793a77e"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2974-exam-list-api-issue-fix-54-bf0183fc84ae050c03ed0f79a4757cdb468e927b"
               resources:
                 requests:
                   cpu: "300m"
@@ -209,7 +209,7 @@ patches:
   #           serviceAccountName: examxv2-stg-secret-service
   #           containers:
   #           - name: celery-exam-submission-worker
-  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2969-email-prevent-created-user-1c451e2bb19ba9f40a1c974c017991780793a77e"
+  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2974-exam-list-api-issue-fix-54-bf0183fc84ae050c03ed0f79a4757cdb468e927b"
   #             resources:
   #               requests:
   #                 cpu: "2"
@@ -256,7 +256,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2969-email-prevent-created-user-1c451e2bb19ba9f40a1c974c017991780793a77e"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2974-exam-list-api-issue-fix-54-bf0183fc84ae050c03ed0f79a4757cdb468e927b"
               resources:
                 requests:
                   cpu: "300m"
@@ -304,7 +304,7 @@ patches:
   #           serviceAccountName: examxv2-stg-secret-service
   #           containers:
   #           - name: celery-exam-submission-worker
-  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2969-email-prevent-created-user-1c451e2bb19ba9f40a1c974c017991780793a77e"
+  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2974-exam-list-api-issue-fix-54-bf0183fc84ae050c03ed0f79a4757cdb468e927b"
   #             env:
   #             - name: OPIK_URL_OVERRIDE
   #               value: "https://www.comet.com/opik/api"
@@ -331,7 +331,7 @@ patches:
   #           serviceAccountName: examxv2-stg-secret-service
   #           containers:
   #           - name: flower
-  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2969-email-prevent-created-user-1c451e2bb19ba9f40a1c974c017991780793a77e"
+  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2974-exam-list-api-issue-fix-54-bf0183fc84ae050c03ed0f79a4757cdb468e927b"
   #             resources:
   #               requests:
   #                 cpu: "200m"
