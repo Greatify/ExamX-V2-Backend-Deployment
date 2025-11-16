@@ -27,7 +27,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2925-Time-is-displayed-in-UTC-i-08e65c34f940a98030a9cee34d12d1d524e35030"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Fixing-unordered-question-calculati-3efaca550ab129faf4fb1db55efea5b1e65db563"
               resources:
                 requests:
                   cpu: "2"
@@ -65,7 +65,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2925-Time-is-displayed-in-UTC-i-08e65c34f940a98030a9cee34d12d1d524e35030"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Fixing-unordered-question-calculati-3efaca550ab129faf4fb1db55efea5b1e65db563"
               resources:
                 requests:
                   cpu: "2"
@@ -115,7 +115,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2925-Time-is-displayed-in-UTC-i-08e65c34f940a98030a9cee34d12d1d524e35030"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Fixing-unordered-question-calculati-3efaca550ab129faf4fb1db55efea5b1e65db563"
               resources:
                 requests:
                   cpu: "2"
@@ -165,7 +165,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2925-Time-is-displayed-in-UTC-i-08e65c34f940a98030a9cee34d12d1d524e35030"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Fixing-unordered-question-calculati-3efaca550ab129faf4fb1db55efea5b1e65db563"
               resources:
                 requests:
                   cpu: "2"
@@ -215,7 +215,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2925-Time-is-displayed-in-UTC-i-08e65c34f940a98030a9cee34d12d1d524e35030"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Fixing-unordered-question-calculati-3efaca550ab129faf4fb1db55efea5b1e65db563"
               resources:
                 requests:
                   cpu: "2"
@@ -288,7 +288,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2925-Time-is-displayed-in-UTC-i-08e65c34f940a98030a9cee34d12d1d524e35030"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Fixing-unordered-question-calculati-3efaca550ab129faf4fb1db55efea5b1e65db563"
               resources:
                 requests:
                   cpu: "250m"
