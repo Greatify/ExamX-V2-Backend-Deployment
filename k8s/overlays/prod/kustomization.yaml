@@ -27,7 +27,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-MD5-Status-code-mismatch-fix-5498-30e240caff01bcdd5405d8c4f4d2e20ccf19cb75"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2978-Need-to-handle-both-jpg-an-239a7a4909ed83167b2cd2c7075193f8dd4f2d08"
               resources:
                 requests:
                   cpu: "8"
@@ -63,7 +63,7 @@ patches:
   #           serviceAccountName: examxv2-production-sa
   #           containers:
   #           - name: celery-exam-submission-worker
-  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-MD5-Status-code-mismatch-fix-5498-30e240caff01bcdd5405d8c4f4d2e20ccf19cb75"
+  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2978-Need-to-handle-both-jpg-an-239a7a4909ed83167b2cd2c7075193f8dd4f2d08"
   #             resources:
   #               requests:
   #                 cpu: "4"
@@ -110,7 +110,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-MD5-Status-code-mismatch-fix-5498-30e240caff01bcdd5405d8c4f4d2e20ccf19cb75"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2978-Need-to-handle-both-jpg-an-239a7a4909ed83167b2cd2c7075193f8dd4f2d08"
               resources:
                 requests:
                   cpu: "2"
@@ -158,7 +158,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-MD5-Status-code-mismatch-fix-5498-30e240caff01bcdd5405d8c4f4d2e20ccf19cb75"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2978-Need-to-handle-both-jpg-an-239a7a4909ed83167b2cd2c7075193f8dd4f2d08"
               resources:
                 requests:
                   cpu: "2"
@@ -206,7 +206,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-MD5-Status-code-mismatch-fix-5498-30e240caff01bcdd5405d8c4f4d2e20ccf19cb75"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2978-Need-to-handle-both-jpg-an-239a7a4909ed83167b2cd2c7075193f8dd4f2d08"
               resources:
                 requests:
                   cpu: "2"
@@ -254,7 +254,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-MD5-Status-code-mismatch-fix-5498-30e240caff01bcdd5405d8c4f4d2e20ccf19cb75"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2978-Need-to-handle-both-jpg-an-239a7a4909ed83167b2cd2c7075193f8dd4f2d08"
               resources:
                 requests:
                   cpu: "2"
@@ -325,7 +325,7 @@ patches:
   #           serviceAccountName: examxv2-production-sa
   #           containers:
   #           - name: flower
-  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-MD5-Status-code-mismatch-fix-5498-30e240caff01bcdd5405d8c4f4d2e20ccf19cb75"
+  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-2978-Need-to-handle-both-jpg-an-239a7a4909ed83167b2cd2c7075193f8dd4f2d08"
   #             resources:
   #               requests:
   #                 cpu: "250m"
