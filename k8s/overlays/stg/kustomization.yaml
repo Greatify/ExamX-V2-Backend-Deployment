@@ -27,7 +27,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2979-Exam-Update-students-dummy-d87dae9a525672b8068125812b5ff468f14ad042"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2694-FCM-implement-both-super-a-111d3294276036f933691205493027e4c74c7c1b"
               resources: null  # Commented out for staging environment
               # Original resources:
                # requests:
@@ -64,7 +64,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2979-Exam-Update-students-dummy-d87dae9a525672b8068125812b5ff468f14ad042"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2694-FCM-implement-both-super-a-111d3294276036f933691205493027e4c74c7c1b"
               resources:
                 requests:
                   cpu: "250m"
@@ -113,7 +113,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2979-Exam-Update-students-dummy-d87dae9a525672b8068125812b5ff468f14ad042"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2694-FCM-implement-both-super-a-111d3294276036f933691205493027e4c74c7c1b"
               resources:
                 requests:
                   cpu: "300m"
@@ -161,7 +161,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2979-Exam-Update-students-dummy-d87dae9a525672b8068125812b5ff468f14ad042"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2694-FCM-implement-both-super-a-111d3294276036f933691205493027e4c74c7c1b"
               resources:
                 requests:
                   cpu: "300m"
@@ -209,7 +209,7 @@ patches:
   #           serviceAccountName: examxv2-stg-secret-service
   #           containers:
   #           - name: celery-exam-submission-worker
-  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2979-Exam-Update-students-dummy-d87dae9a525672b8068125812b5ff468f14ad042"
+  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2694-FCM-implement-both-super-a-111d3294276036f933691205493027e4c74c7c1b"
   #             resources:
   #               requests:
   #                 cpu: "2"
@@ -256,7 +256,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2979-Exam-Update-students-dummy-d87dae9a525672b8068125812b5ff468f14ad042"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2694-FCM-implement-both-super-a-111d3294276036f933691205493027e4c74c7c1b"
               resources:
                 requests:
                   cpu: "300m"
@@ -304,7 +304,7 @@ patches:
   #           serviceAccountName: examxv2-stg-secret-service
   #           containers:
   #           - name: celery-exam-submission-worker
-  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2979-Exam-Update-students-dummy-d87dae9a525672b8068125812b5ff468f14ad042"
+  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2694-FCM-implement-both-super-a-111d3294276036f933691205493027e4c74c7c1b"
   #             env:
   #             - name: OPIK_URL_OVERRIDE
   #               value: "https://www.comet.com/opik/api"
@@ -331,7 +331,7 @@ patches:
   #           serviceAccountName: examxv2-stg-secret-service
   #           containers:
   #           - name: flower
-  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2979-Exam-Update-students-dummy-d87dae9a525672b8068125812b5ff468f14ad042"
+  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2694-FCM-implement-both-super-a-111d3294276036f933691205493027e4c74c7c1b"
   #             resources:
   #               requests:
   #                 cpu: "200m"
