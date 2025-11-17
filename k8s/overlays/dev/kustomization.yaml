@@ -30,7 +30,7 @@ patches:
       metadata:
         name: examxv2-backend
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2980-Implement-cloudfront-URL-a-2409357ca58c8ce259e3b98b55d0ceaf1035ec90"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2978-Need-to-handle-both-jpg-an-ef5c4c9e69748ab98fcf7699d357e014d628e682"
       spec:
         replicas: 1
         template:
@@ -38,7 +38,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2980-Implement-cloudfront-URL-a-2409357ca58c8ce259e3b98b55d0ceaf1035ec90"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2978-Need-to-handle-both-jpg-an-ef5c4c9e69748ab98fcf7699d357e014d628e682"
               resources: null  # Commented out for dev environment
               # resources:
               #   requests:
@@ -71,7 +71,7 @@ patches:
       metadata:
         name: celery-worker-default
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2980-Implement-cloudfront-URL-a-2409357ca58c8ce259e3b98b55d0ceaf1035ec90"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2978-Need-to-handle-both-jpg-an-ef5c4c9e69748ab98fcf7699d357e014d628e682"
       spec:
         replicas: 1
         template:
@@ -79,7 +79,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2980-Implement-cloudfront-URL-a-2409357ca58c8ce259e3b98b55d0ceaf1035ec90"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2978-Need-to-handle-both-jpg-an-ef5c4c9e69748ab98fcf7699d357e014d628e682"
               resources: null  # Commented out for dev environment
               # resources:
               #   requests:
@@ -123,7 +123,7 @@ patches:
       metadata:
         name: celery-bulk-upload-worker
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2980-Implement-cloudfront-URL-a-2409357ca58c8ce259e3b98b55d0ceaf1035ec90"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2978-Need-to-handle-both-jpg-an-ef5c4c9e69748ab98fcf7699d357e014d628e682"
       spec:
         replicas: 1
         template:
@@ -131,7 +131,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2980-Implement-cloudfront-URL-a-2409357ca58c8ce259e3b98b55d0ceaf1035ec90"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2978-Need-to-handle-both-jpg-an-ef5c4c9e69748ab98fcf7699d357e014d628e682"
               resources: null  # Commented out for dev environment
               # resources:
               #   requests:
@@ -200,7 +200,7 @@ patches:
   #     metadata:
   #       name: celery-exam-submission-worker
   #       annotations:
-  #         kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2980-Implement-cloudfront-URL-a-2409357ca58c8ce259e3b98b55d0ceaf1035ec90"
+  #         kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2978-Need-to-handle-both-jpg-an-ef5c4c9e69748ab98fcf7699d357e014d628e682"
   #     spec:
   #       replicas: 1
   #       template:
@@ -208,7 +208,7 @@ patches:
   #           serviceAccountName: dev-examxv2-sa
   #           containers:
   #           - name: celery-exam-submission-worker
-  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2980-Implement-cloudfront-URL-a-2409357ca58c8ce259e3b98b55d0ceaf1035ec90"
+  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2978-Need-to-handle-both-jpg-an-ef5c4c9e69748ab98fcf7699d357e014d628e682"
   #             resources: null  # Commented out for dev environment
   #             # resources:
   #             #   requests:
@@ -252,7 +252,7 @@ patches:
       metadata:
         name: celery-question-generator-ai-worker
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2980-Implement-cloudfront-URL-a-2409357ca58c8ce259e3b98b55d0ceaf1035ec90"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2978-Need-to-handle-both-jpg-an-ef5c4c9e69748ab98fcf7699d357e014d628e682"
       spec:
         replicas: 1
         template:
@@ -260,7 +260,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2980-Implement-cloudfront-URL-a-2409357ca58c8ce259e3b98b55d0ceaf1035ec90"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2978-Need-to-handle-both-jpg-an-ef5c4c9e69748ab98fcf7699d357e014d628e682"
               resources: null  # Commented out for dev environment
               # resources:
               #   requests:
@@ -305,7 +305,7 @@ patches:
   #     metadata:
   #       name: celery-flower
   #       annotations:
-  #         kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2980-Implement-cloudfront-URL-a-2409357ca58c8ce259e3b98b55d0ceaf1035ec90"
+  #         kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2978-Need-to-handle-both-jpg-an-ef5c4c9e69748ab98fcf7699d357e014d628e682"
   #     spec:
   #       replicas: 1
   #       template:
@@ -313,7 +313,7 @@ patches:
   #           serviceAccountName: dev-examxv2-sa
   #           containers:
   #           - name: flower
-  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2980-Implement-cloudfront-URL-a-2409357ca58c8ce259e3b98b55d0ceaf1035ec90"
+  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-2978-Need-to-handle-both-jpg-an-ef5c4c9e69748ab98fcf7699d357e014d628e682"
   #             resources: null  # Commented out for dev environment
   #             # resources:
   #             #   requests:
