@@ -163,11 +163,11 @@ patches:
               image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3028-Question-Paper-Report-Show-af2446818917dbe977f60ea6cb1fc190ad7fc8b8"
               resources:
                 requests:
-                  cpu: "1"
-                  memory: "8Gi"
-                limits:
                   cpu: "2"
                   memory: "12Gi"
+                limits:
+                  cpu: "3"
+                  memory: "16Gi"
               command:
               - celery
               - -A
@@ -176,13 +176,13 @@ patches:
               - -P
               - gevent
               - -c
-              - "2"
+              - "30"
               - -Q
               - bulk_export
               - -l
               - info
-              - --max-tasks-per-child=50
-              - --max-memory-per-child=10000000
+              - --max-tasks-per-child=100
+              - --max-memory-per-child=12000000
               - -E
               env:
               - name: OPIK_URL_OVERRIDE
