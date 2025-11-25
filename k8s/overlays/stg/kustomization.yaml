@@ -148,6 +148,56 @@ patches:
       kind: Deployment
       name: celery-bulk-upload-worker
 
+  # Celery Bulk Export Worker patches
+  - patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: celery-bulk-export-worker
+      spec:
+        replicas: 1
+        template:
+          spec:
+            serviceAccountName: examxv2-stg-secret-service
+            containers:
+            - name: celery-bulk-export-worker
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3024-new-report-for-exam-questi-bb4f5b90e15acbed709217ba575a16f4403bd84b"
+              resources:
+                requests:
+                  cpu: "1"
+                  memory: "8Gi"
+                limits:
+                  cpu: "2"
+                  memory: "12Gi"
+              command:
+              - celery
+              - -A
+              - examx
+              - worker
+              - -P
+              - gevent
+              - -c
+              - "2"
+              - -Q
+              - bulk_export
+              - -l
+              - info
+              - --max-tasks-per-child=50
+              - --max-memory-per-child=10000000
+              - -E
+              env:
+              - name: OPIK_URL_OVERRIDE
+                value: "https://www.comet.com/opik/api"
+              - name: OPIK_API_KEY
+                value: "Y5T3WoqNxJ22ypw1M8qivydis"
+              - name: OPIK_WORKSPACE
+                value: "greatify-prod"
+              - name: OPIK_PROJECT_NAME
+                value: "Stg"
+    target:
+      kind: Deployment
+      name: celery-bulk-export-worker
+
   # Celery Enrichment Worker patches
   - patch: |-
       apiVersion: apps/v1
@@ -411,3 +461,20 @@ patches:
     target:
       kind: HorizontalPodAutoscaler
       name: examxv2-backend-pod-autoscaler
+
+  # Celery Bulk Export Worker Autoscaler patches
+  - patch: |-
+      apiVersion: autoscaling/v2
+      kind: HorizontalPodAutoscaler
+      metadata:
+        name: celery-bulk-export-worker-autoscaler
+      spec:
+        minReplicas: 1
+        maxReplicas: 6
+        scaleTargetRef:
+          apiVersion: apps/v1
+          kind: Deployment
+          name: celery-bulk-export-worker
+    target:
+      kind: HorizontalPodAutoscaler
+      name: celery-bulk-export-worker-autoscaler
