@@ -178,7 +178,7 @@ patches:
         annotations:
           kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Update-CI-workflow-to-deploy-from-f-01ac0b4d1d507cb7b98825491a8aa7a20535a968"
       spec:
-        replicas: 1
+        # replicas removed - let KEDA control scaling from 0 to maxReplicaCount
         template:
           spec:
             serviceAccountName: dev-examxv2-sa
