@@ -505,7 +505,7 @@ patches:
           metadata:
             serverAddress: "http://prometheus-kube-prometheus-prometheus.monitoring.svc.cluster.local:9090"
             metricName: "celery_bulk_export_queue_backlog"
-            threshold: "2"
+            threshold: "1"
             query: |
               sum(examx_celery_queue_pending{queue="bulk_export"} + examx_celery_queue_active{queue="bulk_export"})
     target:
