@@ -39,7 +39,6 @@ patches:
             containers:
             - name: examxv2-backend
               image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-3028-Question-Paper-Report-Show-26518e21cd21ffbf3f96b3b35fe2bce37807e6b6"
-              resources: null  # Commented out for dev environment
               resources:
                 requests:
                   cpu: "2"
