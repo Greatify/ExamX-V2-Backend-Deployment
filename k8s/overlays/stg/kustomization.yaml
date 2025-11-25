@@ -28,14 +28,13 @@ patches:
             containers:
             - name: examxv2-backend
               image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3024-new-report-for-exam-questi-bb4f5b90e15acbed709217ba575a16f4403bd84b"
-              resources: null  # Commented out for staging environment
-              # Original resources:
-               # requests:
-               #   cpu: "4"
-               #   memory: "8Gi"
-               # limits:
-               #   cpu: "4"
-               #   memory: "8Gi"
+              resources:
+               requests:
+                 cpu: "4"
+                 memory: "8Gi"
+               limits:
+                 cpu: "4"
+                 memory: "8Gi"
               env:
               - name: WORKERS
                 value: "8"
