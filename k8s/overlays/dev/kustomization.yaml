@@ -30,7 +30,7 @@ patches:
       metadata:
         name: examxv2-backend
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Implement-chunked-export-processing-7cd99092842308f0a13d8801ed544a3444ea54b4"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-3036-Question-paper-report-list-ed1d2ad65ab0c890090fab5ed2f99425987a9823"
       spec:
         replicas: 1
         template:
@@ -38,7 +38,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Implement-chunked-export-processing-7cd99092842308f0a13d8801ed544a3444ea54b4"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-3036-Question-paper-report-list-ed1d2ad65ab0c890090fab5ed2f99425987a9823"
               resources:
                 requests:
                   cpu: "2"
@@ -70,7 +70,7 @@ patches:
       metadata:
         name: celery-worker-default
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Implement-chunked-export-processing-7cd99092842308f0a13d8801ed544a3444ea54b4"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-3036-Question-paper-report-list-ed1d2ad65ab0c890090fab5ed2f99425987a9823"
       spec:
         replicas: 1
         template:
@@ -78,7 +78,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Implement-chunked-export-processing-7cd99092842308f0a13d8801ed544a3444ea54b4"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-3036-Question-paper-report-list-ed1d2ad65ab0c890090fab5ed2f99425987a9823"
               resources: null  # Commented out for dev environment
               # resources:
               #   requests:
@@ -122,7 +122,7 @@ patches:
       metadata:
         name: celery-bulk-upload-worker
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Implement-chunked-export-processing-7cd99092842308f0a13d8801ed544a3444ea54b4"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-3036-Question-paper-report-list-ed1d2ad65ab0c890090fab5ed2f99425987a9823"
       spec:
         replicas: 1
         template:
@@ -130,7 +130,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Implement-chunked-export-processing-7cd99092842308f0a13d8801ed544a3444ea54b4"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-3036-Question-paper-report-list-ed1d2ad65ab0c890090fab5ed2f99425987a9823"
               resources: null  # Commented out for dev environment
               # resources:
               #   requests:
@@ -175,7 +175,7 @@ patches:
       metadata:
         name: celery-bulk-export-worker
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Implement-chunked-export-processing-7cd99092842308f0a13d8801ed544a3444ea54b4"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-3036-Question-paper-report-list-ed1d2ad65ab0c890090fab5ed2f99425987a9823"
       spec:
         replicas: 1
         template:
@@ -183,7 +183,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-bulk-export-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Implement-chunked-export-processing-7cd99092842308f0a13d8801ed544a3444ea54b4"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-3036-Question-paper-report-list-ed1d2ad65ab0c890090fab5ed2f99425987a9823"
               resources: null  # Commented out for dev environment
               # resources:
               #   requests:
@@ -253,7 +253,7 @@ patches:
   #     metadata:
   #       name: celery-exam-submission-worker
   #       annotations:
-  #         kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Implement-chunked-export-processing-7cd99092842308f0a13d8801ed544a3444ea54b4"
+  #         kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-3036-Question-paper-report-list-ed1d2ad65ab0c890090fab5ed2f99425987a9823"
   #     spec:
   #       replicas: 1
   #       template:
@@ -261,7 +261,7 @@ patches:
   #           serviceAccountName: dev-examxv2-sa
   #           containers:
   #           - name: celery-exam-submission-worker
-  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Implement-chunked-export-processing-7cd99092842308f0a13d8801ed544a3444ea54b4"
+  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-3036-Question-paper-report-list-ed1d2ad65ab0c890090fab5ed2f99425987a9823"
   #             resources: null  # Commented out for dev environment
   #             # resources:
   #             #   requests:
@@ -305,7 +305,7 @@ patches:
       metadata:
         name: celery-question-generator-ai-worker
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Implement-chunked-export-processing-7cd99092842308f0a13d8801ed544a3444ea54b4"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-3036-Question-paper-report-list-ed1d2ad65ab0c890090fab5ed2f99425987a9823"
       spec:
         replicas: 1
         template:
@@ -313,7 +313,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Implement-chunked-export-processing-7cd99092842308f0a13d8801ed544a3444ea54b4"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-3036-Question-paper-report-list-ed1d2ad65ab0c890090fab5ed2f99425987a9823"
               resources: null  # Commented out for dev environment
               # resources:
               #   requests:
@@ -358,7 +358,7 @@ patches:
   #     metadata:
   #       name: celery-flower
   #       annotations:
-  #         kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Implement-chunked-export-processing-7cd99092842308f0a13d8801ed544a3444ea54b4"
+  #         kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-3036-Question-paper-report-list-ed1d2ad65ab0c890090fab5ed2f99425987a9823"
   #     spec:
   #       replicas: 1
   #       template:
@@ -366,7 +366,7 @@ patches:
   #           serviceAccountName: dev-examxv2-sa
   #           containers:
   #           - name: flower
-  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Implement-chunked-export-processing-7cd99092842308f0a13d8801ed544a3444ea54b4"
+  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-3036-Question-paper-report-list-ed1d2ad65ab0c890090fab5ed2f99425987a9823"
   #             resources: null  # Commented out for dev environment
   #             # resources:
   #             #   requests:
