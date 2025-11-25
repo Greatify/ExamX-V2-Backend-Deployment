@@ -496,7 +496,7 @@ patches:
       metadata:
         name: celery-bulk-export-worker-scaler
       spec:
-        minReplicaCount: 0
+        minReplicaCount: 1
         maxReplicaCount: 6 
         cooldownPeriod: 30
         pollingInterval: 5
