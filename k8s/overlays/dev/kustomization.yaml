@@ -30,7 +30,7 @@ patches:
       metadata:
         name: examxv2-backend
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-3027-Fixed-Manual-Evaluation-an-34b1a94c8aee564dcca1b96f841484c1fae756f8"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Update-CI-workflow-to-deploy-from-f-01ac0b4d1d507cb7b98825491a8aa7a20535a968"
       spec:
         replicas: 1
         template:
@@ -38,7 +38,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-3027-Fixed-Manual-Evaluation-an-34b1a94c8aee564dcca1b96f841484c1fae756f8"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Update-CI-workflow-to-deploy-from-f-01ac0b4d1d507cb7b98825491a8aa7a20535a968"
               resources: null  # Commented out for dev environment
               # resources:
               #   requests:
@@ -71,7 +71,7 @@ patches:
       metadata:
         name: celery-worker-default
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-3027-Fixed-Manual-Evaluation-an-34b1a94c8aee564dcca1b96f841484c1fae756f8"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Update-CI-workflow-to-deploy-from-f-01ac0b4d1d507cb7b98825491a8aa7a20535a968"
       spec:
         replicas: 1
         template:
@@ -79,7 +79,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-3027-Fixed-Manual-Evaluation-an-34b1a94c8aee564dcca1b96f841484c1fae756f8"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Update-CI-workflow-to-deploy-from-f-01ac0b4d1d507cb7b98825491a8aa7a20535a968"
               resources: null  # Commented out for dev environment
               # resources:
               #   requests:
@@ -123,7 +123,7 @@ patches:
       metadata:
         name: celery-bulk-upload-worker
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-3027-Fixed-Manual-Evaluation-an-34b1a94c8aee564dcca1b96f841484c1fae756f8"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Update-CI-workflow-to-deploy-from-f-01ac0b4d1d507cb7b98825491a8aa7a20535a968"
       spec:
         replicas: 1
         template:
@@ -131,7 +131,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-3027-Fixed-Manual-Evaluation-an-34b1a94c8aee564dcca1b96f841484c1fae756f8"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Update-CI-workflow-to-deploy-from-f-01ac0b4d1d507cb7b98825491a8aa7a20535a968"
               resources: null  # Commented out for dev environment
               # resources:
               #   requests:
@@ -176,7 +176,7 @@ patches:
       metadata:
         name: celery-bulk-export-worker
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-3026-Create-new-celery-queue-fo-116598d816892fa0075a2eeb2ebf9001fb9d0f2e"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Update-CI-workflow-to-deploy-from-f-01ac0b4d1d507cb7b98825491a8aa7a20535a968"
       spec:
         replicas: 1
         template:
@@ -184,7 +184,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-bulk-export-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-3026-Create-new-celery-queue-fo-116598d816892fa0075a2eeb2ebf9001fb9d0f2e"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Update-CI-workflow-to-deploy-from-f-01ac0b4d1d507cb7b98825491a8aa7a20535a968"
               resources: null  # Commented out for dev environment
               # resources:
               #   requests:
@@ -254,7 +254,7 @@ patches:
   #     metadata:
   #       name: celery-exam-submission-worker
   #       annotations:
-  #         kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-3027-Fixed-Manual-Evaluation-an-34b1a94c8aee564dcca1b96f841484c1fae756f8"
+  #         kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Update-CI-workflow-to-deploy-from-f-01ac0b4d1d507cb7b98825491a8aa7a20535a968"
   #     spec:
   #       replicas: 1
   #       template:
@@ -262,7 +262,7 @@ patches:
   #           serviceAccountName: dev-examxv2-sa
   #           containers:
   #           - name: celery-exam-submission-worker
-  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-3027-Fixed-Manual-Evaluation-an-34b1a94c8aee564dcca1b96f841484c1fae756f8"
+  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Update-CI-workflow-to-deploy-from-f-01ac0b4d1d507cb7b98825491a8aa7a20535a968"
   #             resources: null  # Commented out for dev environment
   #             # resources:
   #             #   requests:
@@ -306,7 +306,7 @@ patches:
       metadata:
         name: celery-question-generator-ai-worker
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-3027-Fixed-Manual-Evaluation-an-34b1a94c8aee564dcca1b96f841484c1fae756f8"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Update-CI-workflow-to-deploy-from-f-01ac0b4d1d507cb7b98825491a8aa7a20535a968"
       spec:
         replicas: 1
         template:
@@ -314,7 +314,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-3027-Fixed-Manual-Evaluation-an-34b1a94c8aee564dcca1b96f841484c1fae756f8"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Update-CI-workflow-to-deploy-from-f-01ac0b4d1d507cb7b98825491a8aa7a20535a968"
               resources: null  # Commented out for dev environment
               # resources:
               #   requests:
@@ -359,7 +359,7 @@ patches:
   #     metadata:
   #       name: celery-flower
   #       annotations:
-  #         kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-3027-Fixed-Manual-Evaluation-an-34b1a94c8aee564dcca1b96f841484c1fae756f8"
+  #         kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Update-CI-workflow-to-deploy-from-f-01ac0b4d1d507cb7b98825491a8aa7a20535a968"
   #     spec:
   #       replicas: 1
   #       template:
@@ -367,7 +367,7 @@ patches:
   #           serviceAccountName: dev-examxv2-sa
   #           containers:
   #           - name: flower
-  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-3027-Fixed-Manual-Evaluation-an-34b1a94c8aee564dcca1b96f841484c1fae756f8"
+  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Update-CI-workflow-to-deploy-from-f-01ac0b4d1d507cb7b98825491a8aa7a20535a968"
   #             resources: null  # Commented out for dev environment
   #             # resources:
   #             #   requests:
