@@ -27,7 +27,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3027-Fixed-Manual-Evaluation-an-9ca9e60802b7cbed0f16e66f03e66ba6e2c8fcd5"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3028-Question-Paper-Report-Show-af2446818917dbe977f60ea6cb1fc190ad7fc8b8"
               resources:
                requests:
                  cpu: "4"
@@ -63,7 +63,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3027-Fixed-Manual-Evaluation-an-9ca9e60802b7cbed0f16e66f03e66ba6e2c8fcd5"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3028-Question-Paper-Report-Show-af2446818917dbe977f60ea6cb1fc190ad7fc8b8"
               resources:
                 requests:
                   cpu: "250m"
@@ -112,7 +112,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3027-Fixed-Manual-Evaluation-an-9ca9e60802b7cbed0f16e66f03e66ba6e2c8fcd5"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3028-Question-Paper-Report-Show-af2446818917dbe977f60ea6cb1fc190ad7fc8b8"
               resources:
                 requests:
                   cpu: "300m"
@@ -160,7 +160,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-bulk-export-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3027-Fixed-Manual-Evaluation-an-9ca9e60802b7cbed0f16e66f03e66ba6e2c8fcd5"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3028-Question-Paper-Report-Show-af2446818917dbe977f60ea6cb1fc190ad7fc8b8"
               resources:
                 requests:
                   cpu: "1"
@@ -210,7 +210,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3027-Fixed-Manual-Evaluation-an-9ca9e60802b7cbed0f16e66f03e66ba6e2c8fcd5"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3028-Question-Paper-Report-Show-af2446818917dbe977f60ea6cb1fc190ad7fc8b8"
               resources:
                 requests:
                   cpu: "300m"
@@ -258,7 +258,7 @@ patches:
   #           serviceAccountName: examxv2-stg-secret-service
   #           containers:
   #           - name: celery-exam-submission-worker
-  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3027-Fixed-Manual-Evaluation-an-9ca9e60802b7cbed0f16e66f03e66ba6e2c8fcd5"
+  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3028-Question-Paper-Report-Show-af2446818917dbe977f60ea6cb1fc190ad7fc8b8"
   #             resources:
   #               requests:
   #                 cpu: "2"
@@ -305,7 +305,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3027-Fixed-Manual-Evaluation-an-9ca9e60802b7cbed0f16e66f03e66ba6e2c8fcd5"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3028-Question-Paper-Report-Show-af2446818917dbe977f60ea6cb1fc190ad7fc8b8"
               resources:
                 requests:
                   cpu: "300m"
@@ -353,7 +353,7 @@ patches:
   #           serviceAccountName: examxv2-stg-secret-service
   #           containers:
   #           - name: celery-exam-submission-worker
-  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3027-Fixed-Manual-Evaluation-an-9ca9e60802b7cbed0f16e66f03e66ba6e2c8fcd5"
+  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3028-Question-Paper-Report-Show-af2446818917dbe977f60ea6cb1fc190ad7fc8b8"
   #             env:
   #             - name: OPIK_URL_OVERRIDE
   #               value: "https://www.comet.com/opik/api"
@@ -380,7 +380,7 @@ patches:
   #           serviceAccountName: examxv2-stg-secret-service
   #           containers:
   #           - name: flower
-  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3027-Fixed-Manual-Evaluation-an-9ca9e60802b7cbed0f16e66f03e66ba6e2c8fcd5"
+  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3028-Question-Paper-Report-Show-af2446818917dbe977f60ea6cb1fc190ad7fc8b8"
   #             resources:
   #               requests:
   #                 cpu: "200m"
