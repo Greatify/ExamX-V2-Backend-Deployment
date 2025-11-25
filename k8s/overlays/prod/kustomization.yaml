@@ -220,15 +220,13 @@ patches:
               - examx
               - worker
               - -P
-              - gevent
+              - prefork
               - -c
-              - "30"
+              - "3"
               - -Q
               - bulk_export
               - -l
               - info
-              - --max-tasks-per-child=100
-              - --max-memory-per-child=15000000
               - -E
               env:
               - name: OPIK_URL_OVERRIDE
