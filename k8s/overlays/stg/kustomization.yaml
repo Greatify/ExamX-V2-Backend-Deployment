@@ -29,7 +29,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2951-reduce-exporting-duration-a3c6f2cbba1d45a6f564eab85cbf9c5ee70eed6b"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3036-Question-paper-report-list-ae537be62de544cc822c3e7132d3586e58aa3b92"
               resources:    # Commented out for staging environment
               # Original resources:
                requests:
@@ -68,7 +68,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2951-reduce-exporting-duration-a3c6f2cbba1d45a6f564eab85cbf9c5ee70eed6b"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3036-Question-paper-report-list-ae537be62de544cc822c3e7132d3586e58aa3b92"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -120,7 +120,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2951-reduce-exporting-duration-a3c6f2cbba1d45a6f564eab85cbf9c5ee70eed6b"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3036-Question-paper-report-list-ae537be62de544cc822c3e7132d3586e58aa3b92"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -171,7 +171,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2951-reduce-exporting-duration-a3c6f2cbba1d45a6f564eab85cbf9c5ee70eed6b"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3036-Question-paper-report-list-ae537be62de544cc822c3e7132d3586e58aa3b92"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -222,7 +222,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2951-reduce-exporting-duration-a3c6f2cbba1d45a6f564eab85cbf9c5ee70eed6b"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3036-Question-paper-report-list-ae537be62de544cc822c3e7132d3586e58aa3b92"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
@@ -273,7 +273,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-2951-reduce-exporting-duration-a3c6f2cbba1d45a6f564eab85cbf9c5ee70eed6b"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3036-Question-paper-report-list-ae537be62de544cc822c3e7132d3586e58aa3b92"
               resources: null  # Commented out for staging environment
               # Original resources:
               # requests:
