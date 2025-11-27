@@ -27,7 +27,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Revert-optimization-of-exam-sync-an-cf3bd7f55da2476fd1bbaee0311d5aeaaa2979d2"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-3054-Exam-master-data-remove-ab-1e99c404abd88e6bd15f457257b3327962379141"
               resources:
                 requests:
                   cpu: "8"
@@ -63,7 +63,7 @@ patches:
   #           serviceAccountName: examxv2-production-sa
   #           containers:
   #           - name: celery-exam-submission-worker
-  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Revert-optimization-of-exam-sync-an-cf3bd7f55da2476fd1bbaee0311d5aeaaa2979d2"
+  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-3054-Exam-master-data-remove-ab-1e99c404abd88e6bd15f457257b3327962379141"
   #             resources:
   #               requests:
   #                 cpu: "4"
@@ -110,7 +110,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Revert-optimization-of-exam-sync-an-cf3bd7f55da2476fd1bbaee0311d5aeaaa2979d2"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-3054-Exam-master-data-remove-ab-1e99c404abd88e6bd15f457257b3327962379141"
               resources:
                 requests:
                   cpu: "2"
@@ -158,7 +158,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Revert-optimization-of-exam-sync-an-cf3bd7f55da2476fd1bbaee0311d5aeaaa2979d2"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-3054-Exam-master-data-remove-ab-1e99c404abd88e6bd15f457257b3327962379141"
               resources:
                 requests:
                   cpu: "2"
@@ -206,7 +206,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-bulk-export-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Revert-optimization-of-exam-sync-an-cf3bd7f55da2476fd1bbaee0311d5aeaaa2979d2"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-3054-Exam-master-data-remove-ab-1e99c404abd88e6bd15f457257b3327962379141"
               resources:
                 requests:
                   cpu: "3"
@@ -254,7 +254,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Revert-optimization-of-exam-sync-an-cf3bd7f55da2476fd1bbaee0311d5aeaaa2979d2"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-3054-Exam-master-data-remove-ab-1e99c404abd88e6bd15f457257b3327962379141"
               resources:
                 requests:
                   cpu: "2"
@@ -302,7 +302,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Revert-optimization-of-exam-sync-an-cf3bd7f55da2476fd1bbaee0311d5aeaaa2979d2"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-3054-Exam-master-data-remove-ab-1e99c404abd88e6bd15f457257b3327962379141"
               resources:
                 requests:
                   cpu: "2"
@@ -373,7 +373,7 @@ patches:
   #           serviceAccountName: examxv2-production-sa
   #           containers:
   #           - name: flower
-  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Revert-optimization-of-exam-sync-an-cf3bd7f55da2476fd1bbaee0311d5aeaaa2979d2"
+  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-3054-Exam-master-data-remove-ab-1e99c404abd88e6bd15f457257b3327962379141"
   #             resources:
   #               requests:
   #                 cpu: "250m"
