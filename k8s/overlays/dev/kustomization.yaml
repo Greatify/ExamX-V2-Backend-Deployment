@@ -198,14 +198,13 @@ patches:
               - examx
               - worker
               - -P
-              - gevent
+              - prefork
               - -c
-              - "10"
+              - "1"
               - -Q
               - bulk_export
-              - --loglevel=debug
-              - --max-tasks-per-child=50
-              - --max-memory-per-child=10000000
+              - -l
+              - info
               - -E
               env:
               - name: OPIK_URL_OVERRIDE
@@ -496,7 +495,7 @@ patches:
       metadata:
         name: celery-bulk-export-worker-scaler
       spec:
-        minReplicaCount: 1
+        minReplicaCount: 0
         maxReplicaCount: 6 
         cooldownPeriod: 30
         pollingInterval: 5
