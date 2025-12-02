@@ -32,8 +32,8 @@ patches:
               image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-EXM-2860-added-dummy-number-and-eva-d4c5159251e0b68974f49687632b25fde3bd376d"
               resources:
                 requests:
-                  cpu: "2"
-                  memory: "8Gi"
+                  cpu: "4"
+                  memory: "16Gi"
                 limits:
                   cpu: "4"
                   memory: "16Gi"
