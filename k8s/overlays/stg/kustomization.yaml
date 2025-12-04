@@ -27,7 +27,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3068-Cutoff-time-and-freeze-tim-3bc73d2d8ba7962885ac588c264a64b696185dcb"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3070-Exam-student-question-wise-8f9aa41e8ee49e35257369ebf9ae35e607568e71"
               resources:
                requests:
                  cpu: "4"
@@ -63,7 +63,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3068-Cutoff-time-and-freeze-tim-3bc73d2d8ba7962885ac588c264a64b696185dcb"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3070-Exam-student-question-wise-8f9aa41e8ee49e35257369ebf9ae35e607568e71"
               resources:
                 requests:
                   cpu: "250m"
@@ -112,7 +112,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3068-Cutoff-time-and-freeze-tim-3bc73d2d8ba7962885ac588c264a64b696185dcb"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3070-Exam-student-question-wise-8f9aa41e8ee49e35257369ebf9ae35e607568e71"
               resources:
                 requests:
                   cpu: "300m"
@@ -160,7 +160,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-bulk-export-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3068-Cutoff-time-and-freeze-tim-3bc73d2d8ba7962885ac588c264a64b696185dcb"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3070-Exam-student-question-wise-8f9aa41e8ee49e35257369ebf9ae35e607568e71"
               resources:
                 requests:
                   cpu: "2"
@@ -208,7 +208,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3068-Cutoff-time-and-freeze-tim-3bc73d2d8ba7962885ac588c264a64b696185dcb"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3070-Exam-student-question-wise-8f9aa41e8ee49e35257369ebf9ae35e607568e71"
               resources:
                 requests:
                   cpu: "300m"
@@ -256,7 +256,7 @@ patches:
   #           serviceAccountName: examxv2-stg-secret-service
   #           containers:
   #           - name: celery-exam-submission-worker
-  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3068-Cutoff-time-and-freeze-tim-3bc73d2d8ba7962885ac588c264a64b696185dcb"
+  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3070-Exam-student-question-wise-8f9aa41e8ee49e35257369ebf9ae35e607568e71"
   #             resources:
   #               requests:
   #                 cpu: "2"
@@ -303,7 +303,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3068-Cutoff-time-and-freeze-tim-3bc73d2d8ba7962885ac588c264a64b696185dcb"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3070-Exam-student-question-wise-8f9aa41e8ee49e35257369ebf9ae35e607568e71"
               resources:
                 requests:
                   cpu: "300m"
@@ -351,7 +351,7 @@ patches:
   #           serviceAccountName: examxv2-stg-secret-service
   #           containers:
   #           - name: celery-exam-submission-worker
-  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3068-Cutoff-time-and-freeze-tim-3bc73d2d8ba7962885ac588c264a64b696185dcb"
+  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3070-Exam-student-question-wise-8f9aa41e8ee49e35257369ebf9ae35e607568e71"
   #             env:
   #             - name: OPIK_URL_OVERRIDE
   #               value: "https://www.comet.com/opik/api"
@@ -378,7 +378,7 @@ patches:
   #           serviceAccountName: examxv2-stg-secret-service
   #           containers:
   #           - name: flower
-  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3068-Cutoff-time-and-freeze-tim-3bc73d2d8ba7962885ac588c264a64b696185dcb"
+  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3070-Exam-student-question-wise-8f9aa41e8ee49e35257369ebf9ae35e607568e71"
   #             resources:
   #               requests:
   #                 cpu: "200m"
