@@ -22,7 +22,7 @@ spec:
         app: examxv2-backend
     spec:
       serviceAccountName: examxv2-sa # Placeholder, overridden in overlays
-      terminationGracePeriodSeconds: 30
+      terminationGracePeriodSeconds: 45  # 10s preStop + 35s for graceful shutdown
       volumes:
         - name: examxv2-secrets-volume
           csi:
@@ -90,6 +90,10 @@ spec:
             postStart:
               exec:
                 command: ["cp", "-R", "/mnt/secret-store/.env", "/app/examx/.env"]
+            preStop:
+              exec:
+                # Wait for load balancer/ingress to stop routing traffic to this pod
+                command: ["/bin/sh", "-c", "sleep 10"]
           livenessProbe:
             httpGet:
               path: /api/health/
