@@ -30,7 +30,7 @@ patches:
       metadata:
         name: examxv2-backend
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Update-invigilator-and-chief-invigi-ed556be2f209640edd0993c1e31e7b2307160619"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-3129-S3-submission-api-for-andr-b5e505e18dffe15a910059103365c107a95c65db"
       spec:
         replicas: 1
         template:
@@ -38,7 +38,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Update-invigilator-and-chief-invigi-ed556be2f209640edd0993c1e31e7b2307160619"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-3129-S3-submission-api-for-andr-b5e505e18dffe15a910059103365c107a95c65db"
               resources:
                 requests:
                   cpu: "2"
@@ -70,7 +70,7 @@ patches:
       metadata:
         name: celery-worker-default
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Update-invigilator-and-chief-invigi-ed556be2f209640edd0993c1e31e7b2307160619"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-3129-S3-submission-api-for-andr-b5e505e18dffe15a910059103365c107a95c65db"
       spec:
         replicas: 1
         template:
@@ -78,7 +78,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Update-invigilator-and-chief-invigi-ed556be2f209640edd0993c1e31e7b2307160619"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-3129-S3-submission-api-for-andr-b5e505e18dffe15a910059103365c107a95c65db"
               resources: null  # Commented out for dev environment
               # resources:
               #   requests:
@@ -122,7 +122,7 @@ patches:
       metadata:
         name: celery-bulk-upload-worker
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Update-invigilator-and-chief-invigi-ed556be2f209640edd0993c1e31e7b2307160619"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-3129-S3-submission-api-for-andr-b5e505e18dffe15a910059103365c107a95c65db"
       spec:
         replicas: 1
         template:
@@ -130,7 +130,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Update-invigilator-and-chief-invigi-ed556be2f209640edd0993c1e31e7b2307160619"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-3129-S3-submission-api-for-andr-b5e505e18dffe15a910059103365c107a95c65db"
               resources: null  # Commented out for dev environment
               # resources:
               #   requests:
@@ -175,7 +175,7 @@ patches:
       metadata:
         name: celery-bulk-export-worker
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Update-invigilator-and-chief-invigi-ed556be2f209640edd0993c1e31e7b2307160619"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-3129-S3-submission-api-for-andr-b5e505e18dffe15a910059103365c107a95c65db"
       spec:
         replicas: 1
         template:
@@ -183,7 +183,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-bulk-export-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Update-invigilator-and-chief-invigi-ed556be2f209640edd0993c1e31e7b2307160619"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-3129-S3-submission-api-for-andr-b5e505e18dffe15a910059103365c107a95c65db"
               resources: null  # Commented out for dev environment
               # resources:
               #   requests:
@@ -252,7 +252,7 @@ patches:
   #     metadata:
   #       name: celery-exam-submission-worker
   #       annotations:
-  #         kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Update-invigilator-and-chief-invigi-ed556be2f209640edd0993c1e31e7b2307160619"
+  #         kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-3129-S3-submission-api-for-andr-b5e505e18dffe15a910059103365c107a95c65db"
   #     spec:
   #       replicas: 1
   #       template:
@@ -260,7 +260,7 @@ patches:
   #           serviceAccountName: dev-examxv2-sa
   #           containers:
   #           - name: celery-exam-submission-worker
-  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Update-invigilator-and-chief-invigi-ed556be2f209640edd0993c1e31e7b2307160619"
+  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-3129-S3-submission-api-for-andr-b5e505e18dffe15a910059103365c107a95c65db"
   #             resources: null  # Commented out for dev environment
   #             # resources:
   #             #   requests:
@@ -304,7 +304,7 @@ patches:
       metadata:
         name: celery-question-generator-ai-worker
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Update-invigilator-and-chief-invigi-ed556be2f209640edd0993c1e31e7b2307160619"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-3129-S3-submission-api-for-andr-b5e505e18dffe15a910059103365c107a95c65db"
       spec:
         replicas: 1
         template:
@@ -312,7 +312,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Update-invigilator-and-chief-invigi-ed556be2f209640edd0993c1e31e7b2307160619"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-3129-S3-submission-api-for-andr-b5e505e18dffe15a910059103365c107a95c65db"
               resources: null  # Commented out for dev environment
               # resources:
               #   requests:
@@ -357,7 +357,7 @@ patches:
   #     metadata:
   #       name: celery-flower
   #       annotations:
-  #         kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Update-invigilator-and-chief-invigi-ed556be2f209640edd0993c1e31e7b2307160619"
+  #         kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-3129-S3-submission-api-for-andr-b5e505e18dffe15a910059103365c107a95c65db"
   #     spec:
   #       replicas: 1
   #       template:
@@ -365,7 +365,7 @@ patches:
   #           serviceAccountName: dev-examxv2-sa
   #           containers:
   #           - name: flower
-  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-Update-invigilator-and-chief-invigi-ed556be2f209640edd0993c1e31e7b2307160619"
+  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-3129-S3-submission-api-for-andr-b5e505e18dffe15a910059103365c107a95c65db"
   #             resources: null  # Commented out for dev environment
   #             # resources:
   #             #   requests:
