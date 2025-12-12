@@ -27,7 +27,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Optimizing-exam_question_paper_list-45eae2bef633fb4f3b98a416e3ab81f2f044b953"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-AI-evaluation-fix-5854-41cef79104597e1249e70bc7afc928fb69302405"
               resources:
                 requests:
                   cpu: "8"
@@ -63,7 +63,7 @@ patches:
   #           serviceAccountName: examxv2-production-sa
   #           containers:
   #           - name: celery-exam-submission-worker
-  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Optimizing-exam_question_paper_list-45eae2bef633fb4f3b98a416e3ab81f2f044b953"
+  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-AI-evaluation-fix-5854-41cef79104597e1249e70bc7afc928fb69302405"
   #             resources:
   #               requests:
   #                 cpu: "4"
@@ -110,7 +110,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Optimizing-exam_question_paper_list-45eae2bef633fb4f3b98a416e3ab81f2f044b953"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-AI-evaluation-fix-5854-41cef79104597e1249e70bc7afc928fb69302405"
               resources:
                 requests:
                   cpu: "2"
@@ -158,7 +158,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Optimizing-exam_question_paper_list-45eae2bef633fb4f3b98a416e3ab81f2f044b953"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-AI-evaluation-fix-5854-41cef79104597e1249e70bc7afc928fb69302405"
               resources:
                 requests:
                   cpu: "2"
@@ -206,7 +206,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-bulk-export-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Optimizing-exam_question_paper_list-45eae2bef633fb4f3b98a416e3ab81f2f044b953"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-AI-evaluation-fix-5854-41cef79104597e1249e70bc7afc928fb69302405"
               resources:
                 requests:
                   cpu: "3"
@@ -254,7 +254,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Optimizing-exam_question_paper_list-45eae2bef633fb4f3b98a416e3ab81f2f044b953"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-AI-evaluation-fix-5854-41cef79104597e1249e70bc7afc928fb69302405"
               resources:
                 requests:
                   cpu: "2"
@@ -302,7 +302,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Optimizing-exam_question_paper_list-45eae2bef633fb4f3b98a416e3ab81f2f044b953"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-AI-evaluation-fix-5854-41cef79104597e1249e70bc7afc928fb69302405"
               resources:
                 requests:
                   cpu: "2"
@@ -373,7 +373,7 @@ patches:
   #           serviceAccountName: examxv2-production-sa
   #           containers:
   #           - name: flower
-  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Optimizing-exam_question_paper_list-45eae2bef633fb4f3b98a416e3ab81f2f044b953"
+  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-AI-evaluation-fix-5854-41cef79104597e1249e70bc7afc928fb69302405"
   #             resources:
   #               requests:
   #                 cpu: "250m"
