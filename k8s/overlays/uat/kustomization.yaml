@@ -29,7 +29,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-EXM-3173-Final-submit-workflow-enha-540a7762cc34cb6092ac40ad1cd9eb1d7768b01c"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-EXM-3188-cut-off-update-notificatio-c543745eb1eae04980acfab60b73b7aa3d8ac543"
               resources:
                 requests:
                   cpu: "4"
@@ -65,7 +65,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-EXM-3173-Final-submit-workflow-enha-540a7762cc34cb6092ac40ad1cd9eb1d7768b01c"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-EXM-3188-cut-off-update-notificatio-c543745eb1eae04980acfab60b73b7aa3d8ac543"
               resources:
                 requests:
                   cpu: "2"
@@ -114,7 +114,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-EXM-3173-Final-submit-workflow-enha-540a7762cc34cb6092ac40ad1cd9eb1d7768b01c"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-EXM-3188-cut-off-update-notificatio-c543745eb1eae04980acfab60b73b7aa3d8ac543"
               resources:
                 requests:
                   cpu: "2"
@@ -162,7 +162,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-EXM-3173-Final-submit-workflow-enha-540a7762cc34cb6092ac40ad1cd9eb1d7768b01c"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-EXM-3188-cut-off-update-notificatio-c543745eb1eae04980acfab60b73b7aa3d8ac543"
               resources:
                 requests:
                   cpu: "2"
@@ -210,7 +210,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-EXM-3173-Final-submit-workflow-enha-540a7762cc34cb6092ac40ad1cd9eb1d7768b01c"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-EXM-3188-cut-off-update-notificatio-c543745eb1eae04980acfab60b73b7aa3d8ac543"
               resources:
                 requests:
                   cpu: "2"
@@ -258,7 +258,7 @@ patches:
   #           serviceAccountName: examxv2-stg-secret-service
   #           containers:
   #           - name: flower
-  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-EXM-3173-Final-submit-workflow-enha-540a7762cc34cb6092ac40ad1cd9eb1d7768b01c"
+  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-EXM-3188-cut-off-update-notificatio-c543745eb1eae04980acfab60b73b7aa3d8ac543"
   #             resources:
   #               requests:
   #                 cpu: "250m"
