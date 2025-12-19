@@ -1,0 +1,82 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: celery-heavy-tasks-worker
+  labels:
+    app: celery-heavy-tasks-worker
+    component: celery
+    tier: worker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: celery-heavy-tasks-worker
+  template:
+    metadata:
+      labels:
+        app: celery-heavy-tasks-worker
+        component: celery
+        tier: worker
+    spec:
+      containers:
+        - name: celery-heavy-tasks-worker
+          image: IMAGE_PLACEHOLDER
+          imagePullPolicy: Always
+          command:
+            - celery
+            - -A
+            - examx
+            - worker
+            - -Q
+            - heavy_tasks
+            - -l
+            - info
+            - --pool=prefork
+            - --concurrency=2
+            - --max-tasks-per-child=50
+          envFrom:
+            - secretRef:
+                name: examxv2-secrets
+          env:
+            - name: CELERY_BROKER_URL
+              value: "redis://redis:6379/0"
+            - name: CELERY_RESULT_BACKEND
+              value: "redis://redis:6379/0"
+            - name: C_FORCE_ROOT
+              value: "true"
+            - name: WORKER_TYPE
+              value: "heavy_tasks"
+          resources:
+            requests:
+              cpu: "500m"
+              memory: "2Gi"
+            limits:
+              cpu: "2000m"
+              memory: "8Gi"
+          volumeMounts:
+            - name: google-credentials
+              mountPath: /app/firebase-service-account.json
+              subPath: firebase-service-account.json
+              readOnly: true
+      volumes:
+        - name: google-credentials
+          secret:
+            secretName: examxv2-google-credentials
+      restartPolicy: Always
+---
+# Heavy Tasks Worker Autoscaler (KEDA)
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: celery-heavy-tasks-scaledobject
+spec:
+  scaleTargetRef:
+    name: celery-heavy-tasks-worker
+  minReplicaCount: 1
+  maxReplicaCount: 3
+  triggers:
+    - type: redis
+      metadata:
+        address: redis:6379
+        listName: heavy_tasks
+        listLength: "5"
