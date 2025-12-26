@@ -27,7 +27,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-3211-EXM-3216-EXM-3197-and-EXM-da665ed79e3ed324797bd5528f553df784dedcb3"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-3235-Unattempted-vanished-after-3208c007b8627b125a6c27b7812569a8eba10eff"
               resources:
                 requests:
                   cpu: "4"
@@ -63,7 +63,7 @@ patches:
   #           serviceAccountName: examxv2-production-sa
   #           containers:
   #           - name: celery-exam-submission-worker
-  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-3211-EXM-3216-EXM-3197-and-EXM-da665ed79e3ed324797bd5528f553df784dedcb3"
+  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-3235-Unattempted-vanished-after-3208c007b8627b125a6c27b7812569a8eba10eff"
   #             resources:
   #               requests:
   #                 cpu: "4"
@@ -110,7 +110,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-3211-EXM-3216-EXM-3197-and-EXM-da665ed79e3ed324797bd5528f553df784dedcb3"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-3235-Unattempted-vanished-after-3208c007b8627b125a6c27b7812569a8eba10eff"
               resources:
                 requests:
                   cpu: "2"
@@ -158,7 +158,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-3211-EXM-3216-EXM-3197-and-EXM-da665ed79e3ed324797bd5528f553df784dedcb3"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-3235-Unattempted-vanished-after-3208c007b8627b125a6c27b7812569a8eba10eff"
               resources:
                 requests:
                   cpu: "2"
@@ -206,7 +206,7 @@ patches:
   #           serviceAccountName: examxv2-production-sa
   #           containers:
   #           - name: celery-bulk-export-worker
-  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-3211-EXM-3216-EXM-3197-and-EXM-da665ed79e3ed324797bd5528f553df784dedcb3"
+  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-3235-Unattempted-vanished-after-3208c007b8627b125a6c27b7812569a8eba10eff"
   #             resources:
   #               requests:
   #                 cpu: "2"
@@ -254,7 +254,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-3211-EXM-3216-EXM-3197-and-EXM-da665ed79e3ed324797bd5528f553df784dedcb3"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-3235-Unattempted-vanished-after-3208c007b8627b125a6c27b7812569a8eba10eff"
               resources:
                 requests:
                   cpu: "2"
@@ -302,7 +302,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-3211-EXM-3216-EXM-3197-and-EXM-da665ed79e3ed324797bd5528f553df784dedcb3"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-3235-Unattempted-vanished-after-3208c007b8627b125a6c27b7812569a8eba10eff"
               resources:
                 requests:
                   cpu: "2"
@@ -373,7 +373,7 @@ patches:
   #           serviceAccountName: examxv2-production-sa
   #           containers:
   #           - name: flower
-  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-3211-EXM-3216-EXM-3197-and-EXM-da665ed79e3ed324797bd5528f553df784dedcb3"
+  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-3235-Unattempted-vanished-after-3208c007b8627b125a6c27b7812569a8eba10eff"
   #             resources:
   #               requests:
   #                 cpu: "250m"
