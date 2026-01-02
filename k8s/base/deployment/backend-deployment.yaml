@@ -69,6 +69,21 @@ spec:
             #   value: "redis://redis-service:6379"
             - name: WORKERS
               value: "16"
+            
+            # OpenTelemetry Configuration
+            - name: OTEL_SERVICE_NAME
+              value: "examx-backend"
+            
+            # K8s metadata for OpenTelemetry (auto-detected)
+            - name: NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            
+            - name: HOSTNAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
           volumeMounts:
             - name: examxv2-secrets-volume
               mountPath: /mnt/secret-store

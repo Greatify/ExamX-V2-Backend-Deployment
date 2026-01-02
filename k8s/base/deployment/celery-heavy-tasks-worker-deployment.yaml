@@ -46,6 +46,21 @@ spec:
               value: "true"
             - name: WORKER_TYPE
               value: "heavy_tasks"
+            
+            # OpenTelemetry - Service name specific to this worker
+            - name: OTEL_SERVICE_NAME
+              value: "examx-celery-heavy-tasks"
+            
+            # K8s metadata (same for all)
+            - name: NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            
+            - name: HOSTNAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
           resources:
             requests:
               cpu: "500m"

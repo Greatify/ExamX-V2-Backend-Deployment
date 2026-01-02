@@ -48,13 +48,21 @@ spec:
             limits:
               cpu: "2"
               memory: "32Gi"
-          # env:
-          #   - name: CELERY_WORKER_CONCURRENCY
-          #     value: "4"
-          #   - name: CELERY_WORKER_MAX_TASKS_PER_CHILD
-          #     value: "25"
-          #   - name: CELERY_WORKER_PREFETCH_MULTIPLIER
-          #     value: "1"
+          env:
+            # OpenTelemetry - Service name specific to this worker
+            - name: OTEL_SERVICE_NAME
+              value: "examx-celery-default"
+            
+            # K8s metadata (same for all)
+            - name: NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            
+            - name: HOSTNAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
           command:
             - celery
             - -A

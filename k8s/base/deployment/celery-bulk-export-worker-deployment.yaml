@@ -65,6 +65,21 @@ spec:
             - --max-tasks-per-child=50
             - --max-memory-per-child=10000000
             - -E
+          env:
+            # OpenTelemetry - Service name specific to this worker
+            - name: OTEL_SERVICE_NAME
+              value: "examx-celery-bulk-export"
+            
+            # K8s metadata (same for all)
+            - name: NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            
+            - name: HOSTNAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
           volumeMounts:
             - name: examxv2-secrets-volume
               mountPath: /mnt/secret-store
