@@ -15,13 +15,13 @@ spec:
       - dev-examxv2
       - stg-examxv2
   endpoints:
-    # Celery metrics endpoint
-    - port: http
-      path: /celery-metrics
-      interval: 15s
-      scheme: http
-    # Django metrics endpoint  
+    # Django Prometheus metrics endpoint (configured in admin routes)
     - port: http
       path: /metrics
+      interval: 15s
+      scheme: http
+    # Celery metrics endpoint (custom implementation)
+    - port: http
+      path: /celery-metrics
       interval: 15s
       scheme: http
