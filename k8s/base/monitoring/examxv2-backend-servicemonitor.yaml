@@ -15,7 +15,13 @@ spec:
       - dev-examxv2
       - stg-examxv2
   endpoints:
+    # Celery metrics endpoint
     - port: http
       path: /celery-metrics
+      interval: 15s
+      scheme: http
+    # Django metrics endpoint  
+    - port: http
+      path: /metrics
       interval: 15s
       scheme: http

@@ -14,7 +14,7 @@ spec:
   triggers:
     - type: prometheus
       metadata:
-        serverAddress: "http://prometheus-kube-prometheus-prometheus.monitoring.svc.cluster.local:9090"
+        serverAddress: "http://prometheus-prometheus.monitoring.svc.cluster.local:9090"
         metricName: "celery_exam_submission_queue_backlog"
         threshold: "1"
         query: |
