@@ -71,8 +71,14 @@ spec:
               value: "16"
             
             # OpenTelemetry Configuration
+            - name: ENABLE_OTEL
+              value: "true"
+            
             - name: OTEL_SERVICE_NAME
               value: "examx-backend"
+            
+            - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              value: "http://otel-collector-gateway-opentelemetry-collector.monitoring.svc.cluster.local:4317"
             
             # K8s metadata for OpenTelemetry (auto-detected)
             - name: NAMESPACE
