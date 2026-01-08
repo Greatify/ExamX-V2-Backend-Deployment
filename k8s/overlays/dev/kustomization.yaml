@@ -30,7 +30,7 @@ patches:
       metadata:
         name: examxv2-backend
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-3448-feat-Add-OpenTelemetry-tra-6a609d8d23fe692077673a472a0170b9dfb21aa2"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-3451-fix-Add-OpenTelemetryLogFi-e85f0be07a17c99ab6cc838c12a8d42922a5ce49"
       spec:
         replicas: 1
         template:
@@ -38,7 +38,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-3448-feat-Add-OpenTelemetry-tra-6a609d8d23fe692077673a472a0170b9dfb21aa2"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-3451-fix-Add-OpenTelemetryLogFi-e85f0be07a17c99ab6cc838c12a8d42922a5ce49"
               resources:
                 requests:
                   cpu: "2"
@@ -70,7 +70,7 @@ patches:
       metadata:
         name: celery-worker-default
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-3448-feat-Add-OpenTelemetry-tra-6a609d8d23fe692077673a472a0170b9dfb21aa2"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-3451-fix-Add-OpenTelemetryLogFi-e85f0be07a17c99ab6cc838c12a8d42922a5ce49"
       spec:
         replicas: 1
         template:
@@ -78,7 +78,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-3448-feat-Add-OpenTelemetry-tra-6a609d8d23fe692077673a472a0170b9dfb21aa2"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-3451-fix-Add-OpenTelemetryLogFi-e85f0be07a17c99ab6cc838c12a8d42922a5ce49"
               resources: null  # Commented out for dev environment
               # resources:
               #   requests:
@@ -122,7 +122,7 @@ patches:
       metadata:
         name: celery-bulk-upload-worker
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-3448-feat-Add-OpenTelemetry-tra-6a609d8d23fe692077673a472a0170b9dfb21aa2"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-3451-fix-Add-OpenTelemetryLogFi-e85f0be07a17c99ab6cc838c12a8d42922a5ce49"
       spec:
         replicas: 1
         template:
@@ -130,7 +130,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-3448-feat-Add-OpenTelemetry-tra-6a609d8d23fe692077673a472a0170b9dfb21aa2"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-3451-fix-Add-OpenTelemetryLogFi-e85f0be07a17c99ab6cc838c12a8d42922a5ce49"
               resources: null  # Commented out for dev environment
               # resources:
               #   requests:
@@ -175,7 +175,7 @@ patches:
   #     metadata:
   #       name: celery-bulk-export-worker
   #       annotations:
-  #         kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-3448-feat-Add-OpenTelemetry-tra-6a609d8d23fe692077673a472a0170b9dfb21aa2"
+  #         kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-3451-fix-Add-OpenTelemetryLogFi-e85f0be07a17c99ab6cc838c12a8d42922a5ce49"
   #     spec:
   #       replicas: 1
   #       template:
@@ -183,7 +183,7 @@ patches:
   #           serviceAccountName: dev-examxv2-sa
   #           containers:
   #           - name: celery-bulk-export-worker
-  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-3448-feat-Add-OpenTelemetry-tra-6a609d8d23fe692077673a472a0170b9dfb21aa2"
+  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-3451-fix-Add-OpenTelemetryLogFi-e85f0be07a17c99ab6cc838c12a8d42922a5ce49"
   #             resources: null  # Commented out for dev environment
   #             # resources:
   #             #   requests:
@@ -252,7 +252,7 @@ patches:
   #     metadata:
   #       name: celery-exam-submission-worker
   #       annotations:
-  #         kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-3448-feat-Add-OpenTelemetry-tra-6a609d8d23fe692077673a472a0170b9dfb21aa2"
+  #         kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-3451-fix-Add-OpenTelemetryLogFi-e85f0be07a17c99ab6cc838c12a8d42922a5ce49"
   #     spec:
   #       replicas: 1
   #       template:
@@ -260,7 +260,7 @@ patches:
   #           serviceAccountName: dev-examxv2-sa
   #           containers:
   #           - name: celery-exam-submission-worker
-  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-3448-feat-Add-OpenTelemetry-tra-6a609d8d23fe692077673a472a0170b9dfb21aa2"
+  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-3451-fix-Add-OpenTelemetryLogFi-e85f0be07a17c99ab6cc838c12a8d42922a5ce49"
   #             resources: null  # Commented out for dev environment
   #             # resources:
   #             #   requests:
@@ -304,7 +304,7 @@ patches:
       metadata:
         name: celery-question-generator-ai-worker
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-3448-feat-Add-OpenTelemetry-tra-6a609d8d23fe692077673a472a0170b9dfb21aa2"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-3451-fix-Add-OpenTelemetryLogFi-e85f0be07a17c99ab6cc838c12a8d42922a5ce49"
       spec:
         replicas: 1
         template:
@@ -312,7 +312,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-3448-feat-Add-OpenTelemetry-tra-6a609d8d23fe692077673a472a0170b9dfb21aa2"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-3451-fix-Add-OpenTelemetryLogFi-e85f0be07a17c99ab6cc838c12a8d42922a5ce49"
               resources: null  # Commented out for dev environment
               # resources:
               #   requests:
@@ -357,7 +357,7 @@ patches:
   #     metadata:
   #       name: celery-flower
   #       annotations:
-  #         kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-3448-feat-Add-OpenTelemetry-tra-6a609d8d23fe692077673a472a0170b9dfb21aa2"
+  #         kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-3451-fix-Add-OpenTelemetryLogFi-e85f0be07a17c99ab6cc838c12a8d42922a5ce49"
   #     spec:
   #       replicas: 1
   #       template:
@@ -365,7 +365,7 @@ patches:
   #           serviceAccountName: dev-examxv2-sa
   #           containers:
   #           - name: flower
-  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-3448-feat-Add-OpenTelemetry-tra-6a609d8d23fe692077673a472a0170b9dfb21aa2"
+  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-3451-fix-Add-OpenTelemetryLogFi-e85f0be07a17c99ab6cc838c12a8d42922a5ce49"
   #             resources: null  # Commented out for dev environment
   #             # resources:
   #             #   requests:
