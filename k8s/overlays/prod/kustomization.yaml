@@ -38,6 +38,11 @@ patches:
               env:
               - name: WORKERS
                 value: "4"
+              
+              # OpenTelemetry resource attributes for production environment
+              - name: OTEL_RESOURCE_ATTRIBUTES
+                value: "service.version=1.0.0,deployment.environment=production,k8s.cluster.name=greatify-prod-cluster"
+              
               - name: OPIK_URL_OVERRIDE
                 value: "https://www.comet.com/opik/api"
               - name: OPIK_API_KEY

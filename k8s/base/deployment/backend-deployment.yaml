@@ -70,19 +70,36 @@ spec:
             - name: WORKERS
               value: "16"
             
-            # OpenTelemetry Configuration
+            # OpenTelemetry Configuration (for opentelemetry-instrument wrapper)
+            # All configuration is done via environment variables as per OpenTelemetry best practices
+            # Reference: https://opentelemetry.io/docs/zero-code/python/
+            
             - name: ENABLE_OTEL
               value: "true"
             
+            # Service identification
             - name: OTEL_SERVICE_NAME
               value: "examx-backend"
             
+            # OTLP exporter endpoint (where to send telemetry data)
             - name: OTEL_EXPORTER_OTLP_ENDPOINT
               value: "http://otel-collector-gateway-opentelemetry-collector.monitoring.svc.cluster.local:4317"
             
-            # Enable log correlation (injects trace_id and span_id into logs)
+            # Protocol to use for OTLP export (grpc is default and recommended)
+            - name: OTEL_EXPORTER_OTLP_PROTOCOL
+              value: "grpc"
+            
+            # Enable automatic log correlation (injects trace_id and span_id into logs)
             - name: OTEL_PYTHON_LOG_CORRELATION
               value: "true"
+            
+            # Enable automatic logging instrumentation
+            - name: OTEL_PYTHON_LOGGING_AUTO_INSTRUMENTATION_ENABLED
+              value: "true"
+            
+            # Resource attributes (additional metadata attached to all telemetry)
+            - name: OTEL_RESOURCE_ATTRIBUTES
+              value: "service.version=1.0.0,deployment.environment=development"
             
             # K8s metadata for OpenTelemetry (auto-detected)
             - name: NAMESPACE
