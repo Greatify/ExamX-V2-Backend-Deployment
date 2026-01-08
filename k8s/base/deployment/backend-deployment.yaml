@@ -80,6 +80,10 @@ spec:
             - name: OTEL_EXPORTER_OTLP_ENDPOINT
               value: "http://otel-collector-gateway-opentelemetry-collector.monitoring.svc.cluster.local:4317"
             
+            # Enable log correlation (injects trace_id and span_id into logs)
+            - name: OTEL_PYTHON_LOG_CORRELATION
+              value: "true"
+            
             # K8s metadata for OpenTelemetry (auto-detected)
             - name: NAMESPACE
               valueFrom:
