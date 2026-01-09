@@ -77,9 +77,9 @@ spec:
             - name: ENABLE_OTEL
               value: "true"
             
-            # Service identification
+            # Service identification (matches deployment/container name)
             - name: OTEL_SERVICE_NAME
-              value: "examx-backend"
+              value: "examxv2-backend"
             
             # OTLP exporter endpoint (where to send telemetry data)
             - name: OTEL_EXPORTER_OTLP_ENDPOINT
