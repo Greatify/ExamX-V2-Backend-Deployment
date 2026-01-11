@@ -126,20 +126,6 @@ jobs:
           echo "SNAPSHOT_IDS=$SNAPSHOT_IDS" >> $GITHUB_OUTPUT
           echo "TIMESTAMP=$TIMESTAMP" >> $GITHUB_OUTPUT
 
-      - name: Wait for Snapshots to Complete
-        run: |
-          SNAPSHOT_IDS="${{ steps.create-snapshots.outputs.SNAPSHOT_IDS }}"
-          echo "Waiting for snapshots to complete: $SNAPSHOT_IDS"
-          
-          for SNAPSHOT_ID in $SNAPSHOT_IDS; do
-            echo "Checking status of snapshot: $SNAPSHOT_ID"
-            aws ec2 wait snapshot-completed --snapshot-ids "$SNAPSHOT_ID" || {
-              echo "⚠️  Warning: Snapshot $SNAPSHOT_ID did not complete within timeout (may still be in progress)"
-            }
-          done
-          
-          echo "✅ All snapshots initiated successfully"
-
       - name: Cleanup Old Snapshots (Keep last 7 days)
         run: |
           INSTANCE_ID="${{ steps.find-instance.outputs.INSTANCE_ID }}"
