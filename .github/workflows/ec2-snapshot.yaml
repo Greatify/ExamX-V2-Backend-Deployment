@@ -1,0 +1,175 @@
+name: EC2 Instance Snapshot
+
+on:
+  schedule:
+    # Runs every day at 1:00 AM IST (7:30 PM UTC previous day)
+    - cron: '30 19 * * *'
+  workflow_dispatch:  # Allow manual triggering
+
+concurrency:
+  group: ec2-snapshot-${{ github.workflow }}
+  cancel-in-progress: false  # Don't cancel ongoing snapshot operations
+
+jobs:
+  create-snapshot:
+    runs-on: ubuntu-latest
+    environment: prod  # Adjust environment as needed
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v3
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Find EC2 Instance ID by IP
+        id: find-instance
+        run: |
+          INSTANCE_IP="${{ secrets.EC2_INSTANCE_IP }}"
+          echo "Looking for EC2 instance with IP: $INSTANCE_IP"
+          
+          # Find instance ID by public IP
+          INSTANCE_ID=$(aws ec2 describe-instances \
+            --filters "Name=ip-address,Values=$INSTANCE_IP" \
+            --query 'Reservations[0].Instances[0].InstanceId' \
+            --output text)
+          
+          # If not found by public IP, try private IP
+          if [ "$INSTANCE_ID" == "None" ] || [ -z "$INSTANCE_ID" ]; then
+            echo "Instance not found by public IP, trying private IP..."
+            INSTANCE_ID=$(aws ec2 describe-instances \
+              --filters "Name=private-ip-address,Values=$INSTANCE_IP" \
+              --query 'Reservations[0].Instances[0].InstanceId' \
+              --output text)
+          fi
+          
+          if [ "$INSTANCE_ID" == "None" ] || [ -z "$INSTANCE_ID" ]; then
+            echo "❌ Error: Could not find instance with IP $INSTANCE_IP"
+            exit 1
+          fi
+          
+          echo "✅ Found EC2 Instance: $INSTANCE_ID"
+          echo "INSTANCE_ID=$INSTANCE_ID" >> $GITHUB_OUTPUT
+          
+          # Get instance name
+          INSTANCE_NAME=$(aws ec2 describe-instances \
+            --instance-ids "$INSTANCE_ID" \
+            --query 'Reservations[0].Instances[0].Tags[?Key==`Name`].Value' \
+            --output text)
+          
+          echo "Instance Name: $INSTANCE_NAME"
+          echo "INSTANCE_NAME=$INSTANCE_NAME" >> $GITHUB_OUTPUT
+
+      - name: Get Volume IDs
+        id: get-volumes
+        run: |
+          INSTANCE_ID="${{ steps.find-instance.outputs.INSTANCE_ID }}"
+          echo "Getting volumes attached to instance: $INSTANCE_ID"
+          
+          # Get all volume IDs attached to the instance
+          VOLUME_IDS=$(aws ec2 describe-instances \
+            --instance-ids "$INSTANCE_ID" \
+            --query 'Reservations[0].Instances[0].BlockDeviceMappings[*].Ebs.VolumeId' \
+            --output text)
+          
+          if [ -z "$VOLUME_IDS" ]; then
+            echo "❌ Error: No volumes found for instance $INSTANCE_ID"
+            exit 1
+          fi
+          
+          echo "✅ Found Volumes: $VOLUME_IDS"
+          echo "VOLUME_IDS=$VOLUME_IDS" >> $GITHUB_OUTPUT
+
+      - name: Create Snapshots
+        id: create-snapshots
+        run: |
+          INSTANCE_ID="${{ steps.find-instance.outputs.INSTANCE_ID }}"
+          INSTANCE_NAME="${{ steps.find-instance.outputs.INSTANCE_NAME }}"
+          VOLUME_IDS="${{ steps.get-volumes.outputs.VOLUME_IDS }}"
+          TIMESTAMP=$(date +%Y-%m-%d-%H-%M-%S)
+          
+          SNAPSHOT_IDS=""
+          
+          for VOLUME_ID in $VOLUME_IDS; do
+            echo "Creating snapshot for volume: $VOLUME_ID"
+            
+            # Get volume name if exists
+            VOLUME_NAME=$(aws ec2 describe-volumes \
+              --volume-ids "$VOLUME_ID" \
+              --query 'Volumes[0].Tags[?Key==`Name`].Value' \
+              --output text)
+            
+            if [ -z "$VOLUME_NAME" ] || [ "$VOLUME_NAME" == "None" ]; then
+              VOLUME_NAME="unnamed"
+            fi
+            
+            # Create snapshot with descriptive name
+            SNAPSHOT_ID=$(aws ec2 create-snapshot \
+              --volume-id "$VOLUME_ID" \
+              --description "Automated snapshot of $VOLUME_NAME ($VOLUME_ID) from instance $INSTANCE_NAME ($INSTANCE_ID) - $TIMESTAMP" \
+              --tag-specifications "ResourceType=snapshot,Tags=[{Key=Name,Value=Auto-Snapshot-$INSTANCE_NAME-$VOLUME_NAME-$TIMESTAMP},{Key=Instance,Value=$INSTANCE_ID},{Key=Volume,Value=$VOLUME_ID},{Key=CreatedBy,Value=GitHub-Actions},{Key=Automated,Value=true},{Key=Timestamp,Value=$TIMESTAMP}]" \
+              --query 'SnapshotId' \
+              --output text)
+            
+            if [ -n "$SNAPSHOT_ID" ] && [ "$SNAPSHOT_ID" != "None" ]; then
+              echo "✅ Created snapshot: $SNAPSHOT_ID for volume $VOLUME_ID"
+              SNAPSHOT_IDS="$SNAPSHOT_IDS $SNAPSHOT_ID"
+            else
+              echo "❌ Failed to create snapshot for volume $VOLUME_ID"
+              exit 1
+            fi
+          done
+          
+          echo "SNAPSHOT_IDS=$SNAPSHOT_IDS" >> $GITHUB_OUTPUT
+          echo "TIMESTAMP=$TIMESTAMP" >> $GITHUB_OUTPUT
+
+      - name: Wait for Snapshots to Complete
+        run: |
+          SNAPSHOT_IDS="${{ steps.create-snapshots.outputs.SNAPSHOT_IDS }}"
+          echo "Waiting for snapshots to complete: $SNAPSHOT_IDS"
+          
+          for SNAPSHOT_ID in $SNAPSHOT_IDS; do
+            echo "Checking status of snapshot: $SNAPSHOT_ID"
+            aws ec2 wait snapshot-completed --snapshot-ids "$SNAPSHOT_ID" || {
+              echo "⚠️  Warning: Snapshot $SNAPSHOT_ID did not complete within timeout (may still be in progress)"
+            }
+          done
+          
+          echo "✅ All snapshots initiated successfully"
+
+      - name: Cleanup Old Snapshots (Keep last 7 days)
+        run: |
+          INSTANCE_ID="${{ steps.find-instance.outputs.INSTANCE_ID }}"
+          RETENTION_DAYS=7
+          CUTOFF_DATE=$(date -u -d "$RETENTION_DAYS days ago" +%Y-%m-%d)
+          
+          echo "Cleaning up automated snapshots older than $RETENTION_DAYS days (before $CUTOFF_DATE)"
+          
+          # Find old automated snapshots for this instance
+          OLD_SNAPSHOTS=$(aws ec2 describe-snapshots \
+            --owner-ids self \
+            --filters "Name=tag:Instance,Values=$INSTANCE_ID" "Name=tag:Automated,Values=true" \
+            --query "Snapshots[?StartTime<'$CUTOFF_DATE'].SnapshotId" \
+            --output text)
+          
+          if [ -z "$OLD_SNAPSHOTS" ] || [ "$OLD_SNAPSHOTS" == "None" ]; then
+            echo "No old snapshots to delete"
+          else
+            for SNAPSHOT_ID in $OLD_SNAPSHOTS; do
+              echo "Deleting old snapshot: $SNAPSHOT_ID"
+              aws ec2 delete-snapshot --snapshot-id "$SNAPSHOT_ID" && \
+                echo "✅ Deleted snapshot: $SNAPSHOT_ID" || \
+                echo "⚠️  Failed to delete snapshot: $SNAPSHOT_ID"
+            done
+          fi
+
+      - name: Summary
+        run: |
+          echo "✅ EC2 Snapshot Operation Completed"
+          echo "Instance: ${{ steps.find-instance.outputs.INSTANCE_NAME }} (${{ steps.find-instance.outputs.INSTANCE_ID }})"
+          echo "IP Address: ${{ secrets.EC2_INSTANCE_IP }}"
+          echo "Timestamp: ${{ steps.create-snapshots.outputs.TIMESTAMP }}"
+          echo "Snapshots Created: ${{ steps.create-snapshots.outputs.SNAPSHOT_IDS }}"
