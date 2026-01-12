@@ -27,7 +27,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3464-Question-upload-validation-af282f12f414db2e4c9564031da2fc5a45629ceb"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3498-Student-progress-Report-Ad-35e35da90440ab8d3d9bc6fbe7124d6438087903"
               resources:
                requests:
                  cpu: "4"
@@ -65,7 +65,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3464-Question-upload-validation-af282f12f414db2e4c9564031da2fc5a45629ceb"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3498-Student-progress-Report-Ad-35e35da90440ab8d3d9bc6fbe7124d6438087903"
               resources:
                 requests:
                   cpu: "250m"
@@ -116,7 +116,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3464-Question-upload-validation-af282f12f414db2e4c9564031da2fc5a45629ceb"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3498-Student-progress-Report-Ad-35e35da90440ab8d3d9bc6fbe7124d6438087903"
               resources:
                 requests:
                   cpu: "300m"
@@ -166,7 +166,7 @@ patches:
   #           serviceAccountName: examxv2-stg-secret-service
   #           containers:
   #           - name: celery-bulk-export-worker
-  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3464-Question-upload-validation-af282f12f414db2e4c9564031da2fc5a45629ceb"
+  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3498-Student-progress-Report-Ad-35e35da90440ab8d3d9bc6fbe7124d6438087903"
   #             resources:
   #               requests:
   #                 cpu: "2"
@@ -214,7 +214,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3464-Question-upload-validation-af282f12f414db2e4c9564031da2fc5a45629ceb"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3498-Student-progress-Report-Ad-35e35da90440ab8d3d9bc6fbe7124d6438087903"
               resources:
                 requests:
                   cpu: "300m"
@@ -264,7 +264,7 @@ patches:
   #           serviceAccountName: examxv2-stg-secret-service
   #           containers:
   #           - name: celery-exam-submission-worker
-  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3464-Question-upload-validation-af282f12f414db2e4c9564031da2fc5a45629ceb"
+  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3498-Student-progress-Report-Ad-35e35da90440ab8d3d9bc6fbe7124d6438087903"
   #             resources:
   #               requests:
   #                 cpu: "2"
@@ -311,7 +311,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3464-Question-upload-validation-af282f12f414db2e4c9564031da2fc5a45629ceb"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3498-Student-progress-Report-Ad-35e35da90440ab8d3d9bc6fbe7124d6438087903"
               resources:
                 requests:
                   cpu: "300m"
@@ -361,7 +361,7 @@ patches:
   #           serviceAccountName: examxv2-stg-secret-service
   #           containers:
   #           - name: celery-exam-submission-worker
-  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3464-Question-upload-validation-af282f12f414db2e4c9564031da2fc5a45629ceb"
+  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3498-Student-progress-Report-Ad-35e35da90440ab8d3d9bc6fbe7124d6438087903"
   #             env:
   #             - name: OPIK_URL_OVERRIDE
   #               value: "https://www.comet.com/opik/api"
@@ -388,7 +388,7 @@ patches:
   #           serviceAccountName: examxv2-stg-secret-service
   #           containers:
   #           - name: flower
-  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3464-Question-upload-validation-af282f12f414db2e4c9564031da2fc5a45629ceb"
+  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3498-Student-progress-Report-Ad-35e35da90440ab8d3d9bc6fbe7124d6438087903"
   #             resources:
   #               requests:
   #                 cpu: "200m"
