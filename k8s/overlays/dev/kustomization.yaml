@@ -468,7 +468,7 @@ patches:
             metricName: "celery_default_queue_backlog"
             threshold: "1"
             query: |
-              sum(examx_celery_queue_pending{queue="default"} + examx_celery_queue_active{queue="default"})
+              sum(examx_celery_queue_pending{queue="default",namespace="dev-examxv2"} + examx_celery_queue_active{queue="default",namespace="dev-examxv2"})
     target:
       kind: ScaledObject
       name: celery-worker-default-scaler
@@ -489,7 +489,7 @@ patches:
             metricName: "celery_bulk_upload_queue_backlog"
             threshold: "1"
             query: |
-              sum(examx_celery_queue_pending{queue="bulk_upload"} + examx_celery_queue_active{queue="bulk_upload"})
+              sum(examx_celery_queue_pending{queue="bulk_upload",namespace="dev-examxv2"} + examx_celery_queue_active{queue="bulk_upload",namespace="dev-examxv2"})
     target:
       kind: ScaledObject
       name: celery-bulk-upload-worker-scaler
@@ -532,7 +532,7 @@ patches:
             metricName: "celery_enrichment_queue_backlog"
             threshold: "1"
             query: |
-              sum(examx_celery_queue_pending{queue="question_enrichment"} + examx_celery_queue_active{queue="question_enrichment"})
+              sum(examx_celery_queue_pending{queue="question_enrichment",namespace="dev-examxv2"} + examx_celery_queue_active{queue="question_enrichment",namespace="dev-examxv2"})
     target:
       kind: ScaledObject
       name: celery-enrichment-worker-scaler
@@ -553,7 +553,7 @@ patches:
             metricName: "celery_exam_submission_queue_backlog"
             threshold: "1"
             query: |
-              sum(examx_celery_queue_pending{queue="exam_submissions"} + examx_celery_queue_active{queue="exam_submissions"})
+              sum(examx_celery_queue_pending{queue="exam_submissions",namespace="dev-examxv2"} + examx_celery_queue_active{queue="exam_submissions",namespace="dev-examxv2"})
     target:
       kind: ScaledObject
       name: celery-exam-submission-worker-scaler
@@ -574,7 +574,7 @@ patches:
             metricName: "celery_question_generator_ai_backlog"
             threshold: "1"
             query: |
-              sum(examx_celery_queue_pending{queue="question_generator_ai"} + examx_celery_queue_active{queue="question_generator_ai"})
+              sum(examx_celery_queue_pending{queue="question_generator_ai",namespace="dev-examxv2"} + examx_celery_queue_active{queue="question_generator_ai",namespace="dev-examxv2"})
     target:
       kind: ScaledObject
       name: celery-question-generator-ai-worker-scaler
