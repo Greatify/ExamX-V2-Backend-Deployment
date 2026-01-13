@@ -20,6 +20,10 @@ spec:
     metadata:
       labels:
         app: examxv2-backend
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "80"
+        prometheus.io/path: "/metrics"
     spec:
       serviceAccountName: examxv2-sa # Placeholder, overridden in overlays
       terminationGracePeriodSeconds: 30

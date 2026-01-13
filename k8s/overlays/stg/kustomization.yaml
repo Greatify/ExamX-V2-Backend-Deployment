@@ -38,6 +38,11 @@ patches:
               env:
               - name: WORKERS
                 value: "4"
+              
+              # OpenTelemetry resource attributes for staging environment
+              - name: OTEL_RESOURCE_ATTRIBUTES
+                value: "service.version=1.0.0,deployment.environment=staging,k8s.cluster.name=greatify-dev-stg-cluster"
+              
               - name: OPIK_URL_OVERRIDE
                 value: "https://www.comet.com/opik/api"
               - name: OPIK_API_KEY

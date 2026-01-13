@@ -20,6 +20,10 @@ spec:
     metadata:
       labels:
         app: celery-flower
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "5555"
+        prometheus.io/path: "/metrics"
     spec:
       serviceAccountName: examxv2-sa
       terminationGracePeriodSeconds: 30
