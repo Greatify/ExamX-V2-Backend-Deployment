@@ -75,8 +75,9 @@ spec:
               value: "examxv2-celery-bulk-export"
             
             # OTLP exporter endpoint (where to send telemetry data)
+            # NOTE: Port 4317 is for gRPC protocol, port 4318 is for HTTP protocol
             - name: OTEL_EXPORTER_OTLP_ENDPOINT
-              value: "http://otel-collector-gateway-opentelemetry-collector.monitoring.svc.cluster.local:4317"
+              value: "http://alloy.observability.svc.cluster.local:4317"
             
             # Protocol to use for OTLP export (grpc is default and recommended)
             - name: OTEL_EXPORTER_OTLP_PROTOCOL
@@ -104,6 +105,19 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.name
+            
+            # ==========================================
+            # Pyroscope Continuous Profiling
+            # ==========================================
+            - name: ENABLE_PYROSCOPE
+              value: "true"
+            
+            - name: PYROSCOPE_APPLICATION_NAME
+              value: "examxv2-celery-bulk-export"
+            
+            # Pyroscope profiles are sent to Alloy, which forwards to Pyroscope backend
+            - name: PYROSCOPE_SERVER_ADDRESS
+              value: "http://alloy.observability.svc.cluster.local:4040"
           volumeMounts:
             - name: examxv2-secrets-volume
               mountPath: /mnt/secret-store
