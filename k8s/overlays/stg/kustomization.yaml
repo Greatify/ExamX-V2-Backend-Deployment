@@ -505,7 +505,7 @@ patches:
         triggers:
         - type: prometheus
           metadata:
-            serverAddress: "http://prometheus-prometheus.monitoring.svc.cluster.local:9090"
+            serverAddress: "http://prometheus-kube-prometheus-prometheus.observability.svc.cluster.local:9090"
             metricName: "celery_default_queue_backlog"
             threshold: "1"
             query: |
@@ -527,7 +527,7 @@ patches:
         triggers:
         - type: prometheus
           metadata:
-            serverAddress: "http://prometheus-prometheus.monitoring.svc.cluster.local:9090"
+            serverAddress: "http://prometheus-kube-prometheus-prometheus.observability.svc.cluster.local:9090"
             metricName: "celery_bulk_upload_queue_backlog"
             threshold: "1"
             query: |
@@ -549,7 +549,7 @@ patches:
         triggers:
         - type: prometheus
           metadata:
-            serverAddress: "http://prometheus-prometheus.monitoring.svc.cluster.local:9090"
+            serverAddress: "http://prometheus-kube-prometheus-prometheus.observability.svc.cluster.local:9090"
             metricName: "celery_enrichment_queue_backlog"
             threshold: "1"
             query: |
@@ -571,7 +571,7 @@ patches:
         triggers:
         - type: prometheus
           metadata:
-            serverAddress: "http://prometheus-prometheus.monitoring.svc.cluster.local:9090"
+            serverAddress: "http://prometheus-kube-prometheus-prometheus.observability.svc.cluster.local:9090"
             metricName: "celery_exam_submission_queue_backlog"
             threshold: "1"
             query: |
@@ -593,7 +593,7 @@ patches:
         triggers:
         - type: prometheus
           metadata:
-            serverAddress: "http://prometheus-prometheus.monitoring.svc.cluster.local:9090"
+            serverAddress: "http://prometheus-kube-prometheus-prometheus.observability.svc.cluster.local:9090"
             metricName: "celery_question_generator_ai_backlog"
             threshold: "1"
             query: |

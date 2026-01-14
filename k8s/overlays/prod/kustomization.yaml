@@ -27,22 +27,17 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Fixing-unordered-question-calculati-3efaca550ab129faf4fb1db55efea5b1e65db563"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-3443-Restrict-Nursing-templates-7dc13bc50859a9c3c7a98588b7eba97a66e8510f"
               resources:
                 requests:
-                  cpu: "2"
-                  memory: "8Gi"
-                limits:
                   cpu: "4"
                   memory: "16Gi"
+                limits:
+                  cpu: "6"
+                  memory: "20Gi"
               env:
               - name: WORKERS
-                value: "4"
-              
-              # OpenTelemetry resource attributes for production environment
-              - name: OTEL_RESOURCE_ATTRIBUTES
-                value: "service.version=1.0.0,deployment.environment=production,k8s.cluster.name=greatify-prod-cluster"
-              
+                value: "6"
               - name: OPIK_URL_OVERRIDE
                 value: "https://www.comet.com/opik/api"
               - name: OPIK_API_KEY
@@ -52,10 +47,57 @@ patches:
               - name: OPIK_PROJECT_NAME
                 value: "Prod"
               - name: REDIS_URL
-                value: "redis://master.examx-v2-prod.kti2un.aps1.cache.amazonaws.com:6379"
+                value: "rediss://master.examx-v2-prod.kti2un.aps1.cache.amazonaws.com:6379"
     target:
       kind: Deployment
       name: examxv2-backend
+
+  # # Celery Exam Submission Worker patches
+  # - patch: |-
+  #     apiVersion: apps/v1
+  #     kind: Deployment
+  #     metadata:
+  #       name: celery-exam-submission-worker
+  #     spec:
+  #       replicas: 1
+  #       template:
+  #         spec:
+  #           serviceAccountName: examxv2-production-sa
+  #           containers:
+  #           - name: celery-exam-submission-worker
+  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-3443-Restrict-Nursing-templates-7dc13bc50859a9c3c7a98588b7eba97a66e8510f"
+  #             resources:
+  #               requests:
+  #                 cpu: "4"
+  #                 memory: "16Gi"
+  #               limits:
+  #                 cpu: "8"
+  #                 memory: "32Gi"
+  #             command:
+  #               - celery
+  #               - -A
+  #               - examx
+  #               - worker
+  #               - --pool=prefork
+  #               - --concurrency=16
+  #               - --queues=exam_submissions
+  #               - --hostname=exam_worker@%h
+  #               - --max-tasks-per-child=50
+  #               - --time-limit=120
+  #               - --loglevel=info
+  #               - -E
+  #             env:
+  #             - name: OPIK_URL_OVERRIDE
+  #               value: "https://www.comet.com/opik/api"
+  #             - name: OPIK_API_KEY
+  #               value: "Y5T3WoqNxJ22ypw1M8qivydis"
+  #             - name: OPIK_WORKSPACE
+  #               value: "greatify-prod"
+  #             - name: OPIK_PROJECT_NAME
+  #               value: "Prod"
+  #   target:
+  #     kind: Deployment
+  #     name: celery-exam-submission-worker
 
   # Celery Worker patches
   - patch: |-
@@ -70,7 +112,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Fixing-unordered-question-calculati-3efaca550ab129faf4fb1db55efea5b1e65db563"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-3443-Restrict-Nursing-templates-7dc13bc50859a9c3c7a98588b7eba97a66e8510f"
               resources:
                 requests:
                   cpu: "2"
@@ -102,7 +144,7 @@ patches:
               - name: OPIK_PROJECT_NAME
                 value: "Prod"
               - name: REDIS_URL
-                value: "redis://master.examx-v2-prod.kti2un.aps1.cache.amazonaws.com:6379"
+                value: "rediss://master.examx-v2-prod.kti2un.aps1.cache.amazonaws.com:6379"
     target:
       kind: Deployment
       name: celery-worker-default
@@ -120,7 +162,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Fixing-unordered-question-calculati-3efaca550ab129faf4fb1db55efea5b1e65db563"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-3443-Restrict-Nursing-templates-7dc13bc50859a9c3c7a98588b7eba97a66e8510f"
               resources:
                 requests:
                   cpu: "2"
@@ -152,10 +194,58 @@ patches:
               - name: OPIK_PROJECT_NAME
                 value: "Prod"
               - name: REDIS_URL
-                value: "redis://master.examx-v2-prod.kti2un.aps1.cache.amazonaws.com:6379"
+                value: "rediss://master.examx-v2-prod.kti2un.aps1.cache.amazonaws.com:6379"
     target:
       kind: Deployment
       name: celery-bulk-upload-worker
+
+  # # Celery Bulk Export Worker patches
+  # - patch: |-
+  #     apiVersion: apps/v1
+  #     kind: Deployment
+  #     metadata:
+  #       name: celery-bulk-export-worker
+  #     spec:
+  #       replicas: 1
+  #       template:
+  #         spec:
+  #           serviceAccountName: examxv2-production-sa
+  #           containers:
+  #           - name: celery-bulk-export-worker
+  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-3443-Restrict-Nursing-templates-7dc13bc50859a9c3c7a98588b7eba97a66e8510f"
+  #             resources:
+  #               requests:
+  #                 cpu: "2"
+  #                 memory: "4Gi"
+  #               limits:
+  #                 cpu: "3"
+  #                 memory: "8Gi"
+  #             command:
+  #             - celery
+  #             - -A
+  #             - examx
+  #             - worker
+  #             - -P
+  #             - prefork
+  #             - -c
+  #             - "3"
+  #             - -Q
+  #             - bulk_export
+  #             - -l
+  #             - info
+  #             - -E
+  #             env:
+  #             - name: OPIK_URL_OVERRIDE
+  #               value: "https://www.comet.com/opik/api"
+  #             - name: OPIK_API_KEY
+  #               value: "Y5T3WoqNxJ22ypw1M8qivydis"
+  #             - name: OPIK_WORKSPACE
+  #               value: "greatify-prod"
+  #             - name: OPIK_PROJECT_NAME
+  #               value: "Prod"
+  #   target:
+  #     kind: Deployment
+  #     name: celery-bulk-export-worker
 
   # Celery Enrichment Worker patches
   - patch: |-
@@ -170,7 +260,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Fixing-unordered-question-calculati-3efaca550ab129faf4fb1db55efea5b1e65db563"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-3443-Restrict-Nursing-templates-7dc13bc50859a9c3c7a98588b7eba97a66e8510f"
               resources:
                 requests:
                   cpu: "2"
@@ -202,7 +292,7 @@ patches:
               - name: OPIK_PROJECT_NAME
                 value: "Prod"
               - name: REDIS_URL
-                value: "redis://master.examx-v2-prod.kti2un.aps1.cache.amazonaws.com:6379"
+                value: "rediss://master.examx-v2-prod.kti2un.aps1.cache.amazonaws.com:6379"
     target:
       kind: Deployment
       name: celery-enrichment-worker
@@ -220,7 +310,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Fixing-unordered-question-calculati-3efaca550ab129faf4fb1db55efea5b1e65db563"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-3443-Restrict-Nursing-templates-7dc13bc50859a9c3c7a98588b7eba97a66e8510f"
               resources:
                 requests:
                   cpu: "2"
@@ -252,7 +342,7 @@ patches:
               - name: OPIK_PROJECT_NAME
                 value: "Prod"
               - name: REDIS_URL
-                value: "redis://master.examx-v2-prod.kti2un.aps1.cache.amazonaws.com:6379"
+                value: "rediss://master.examx-v2-prod.kti2un.aps1.cache.amazonaws.com:6379"
     target:
       kind: Deployment
       name: celery-question-generator-ai-worker
@@ -280,31 +370,31 @@ patches:
   #     kind: Deployment
   #     name: celery-beat
 
-  # Celery Flower patches
-  - patch: |-
-      apiVersion: apps/v1
-      kind: Deployment
-      metadata:
-        name: celery-flower
-      spec:
-        replicas: 1
-        template:
-          spec:
-            serviceAccountName: examxv2-production-sa
-            containers:
-            - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Fixing-unordered-question-calculati-3efaca550ab129faf4fb1db55efea5b1e65db563"
-              resources:
-                requests:
-                  cpu: "250m"
-                  memory: "2Gi"
-                limits:
-                  cpu: "500m"
-                  memory: "4Gi"
-    target:
-      kind: Deployment
-      name: celery-flower
-  # Backend Autoscaler patches
+  # # Celery Flower patches
+  # - patch: |-
+  #     apiVersion: apps/v1
+  #     kind: Deployment
+  #     metadata:
+  #       name: celery-flower
+  #     spec:
+  #       replicas: 1
+  #       template:
+  #         spec:
+  #           serviceAccountName: examxv2-production-sa
+  #           containers:
+  #           - name: flower
+  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-3443-Restrict-Nursing-templates-7dc13bc50859a9c3c7a98588b7eba97a66e8510f"
+  #             resources:
+  #               requests:
+  #                 cpu: "250m"
+  #                 memory: "2Gi"
+  #               limits:
+  #                 cpu: "500m"
+  #                 memory: "4Gi"
+  #   target:
+  #     kind: Deployment
+  #     name: celery-flower
+  # Backend Autoscaler patches (keep this - KEDA doesn't manage backend)
   - patch: |-
       apiVersion: autoscaling/v2
       kind: HorizontalPodAutoscaler
@@ -317,7 +407,7 @@ patches:
       kind: HorizontalPodAutoscaler
       name: examxv2-backend-pod-autoscaler
 
-  # Celery Worker Autoscaler patches
+  # Celery Worker Autoscaler patches - COMMENTED OUT (using KEDA instead)
   # - patch: |-
   #     apiVersion: autoscaling/v2
   #     kind: HorizontalPodAutoscaler
@@ -334,7 +424,7 @@ patches:
   #     kind: HorizontalPodAutoscaler
   #     name: celery-worker-default-autoscaler
 
-  # Celery Bulk Upload Worker Autoscaler patches
+  # Celery Bulk Upload Worker Autoscaler patches - COMMENTED OUT (using KEDA instead)
   # - patch: |-
   #     apiVersion: autoscaling/v2
   #     kind: HorizontalPodAutoscaler
@@ -350,7 +440,7 @@ patches:
   #     kind: HorizontalPodAutoscaler
   #     name: celery-bulk-upload-worker-autoscaler
 
-  # Celery Enrichment Worker Autoscaler patches
+  # Celery Enrichment Worker Autoscaler patches - COMMENTED OUT (using KEDA instead)
   # - patch: |-
   #     apiVersion: autoscaling/v2
   #     kind: HorizontalPodAutoscaler
@@ -367,7 +457,7 @@ patches:
   #     kind: HorizontalPodAutoscaler
   #     name: celery-enrichment-worker-autoscaler
 
-  # Celery Question Generator AI Worker Autoscaler patches
+  # Celery Question Generator AI Worker Autoscaler patches - COMMENTED OUT (using KEDA instead)
   # - patch: |-
   #     apiVersion: autoscaling/v2
   #     kind: HorizontalPodAutoscaler
@@ -383,6 +473,23 @@ patches:
   #     kind: HorizontalPodAutoscaler
   #     name: celery-question-generator-ai-worker-autoscaler
 
+  # # Celery Bulk Export Worker Autoscaler patches
+  # - patch: |-
+  #     apiVersion: autoscaling/v2
+  #     kind: HorizontalPodAutoscaler
+  #     metadata:
+  #       name: celery-bulk-export-worker-autoscaler
+  #     spec:
+  #       minReplicas: 1
+  #       maxReplicas: 10
+  #       scaleTargetRef:
+  #         apiVersion: apps/v1
+  #         kind: Deployment
+  #         name: celery-bulk-export-worker
+  #   target:
+  #     kind: HorizontalPodAutoscaler
+  #     name: celery-bulk-export-worker-autoscaler
+
   # Ingress patches
   - patch: |-
       apiVersion: networking.k8s.io/v1
@@ -395,7 +502,7 @@ patches:
           alb.ingress.kubernetes.io/cors-allow-origin: >-
             https://examx.ai,https://www.examx.ai,https://*.examx.ai
           alb.ingress.kubernetes.io/load-balancer-attributes: >-
-            idle_timeout.timeout_seconds=60,
+            idle_timeout.timeout_seconds=600,
             deletion_protection.enabled=true,
             routing.http2.enabled=true,
             routing.http.drop_invalid_header_fields.enabled=true,
@@ -455,25 +562,25 @@ patches:
   #     kind: HorizontalPodAutoscaler
   #     name: redis-pod-autoscaler
 
-  # KEDA ScaledObject patches for production environment
+  # KEDA ScaledObject patches for Production environment
   - patch: |-
       apiVersion: keda.sh/v1alpha1
       kind: ScaledObject
       metadata:
         name: celery-worker-default-scaler
       spec:
-        minReplicaCount: 2  
-        maxReplicaCount: 30 
-        pollingInterval: 10 
-        cooldownPeriod: 60
+        minReplicaCount: 2
+        maxReplicaCount: 20
+        cooldownPeriod: 120
+        pollingInterval: 15
         triggers:
-        - type: redis
+        - type: prometheus
           metadata:
-            address: "master.examx-v2-prod.kti2un.aps1.cache.amazonaws.com:6379"
-            listName: "default"
-            listLength: "1"
-            enableTLS: "true"
-            unsafeSsl: "true"
+            serverAddress: "https://prometheus-prod-43-prod-ap-south-1.grafana.net/api/prom"
+            metricName: "celery_default_queue_backlog"
+            threshold: "10"
+            query: |
+              sum(examx_celery_queue_pending{queue="default",namespace="examxv2-production"} + examx_celery_queue_active{queue="default",namespace="examxv2-production"})
     target:
       kind: ScaledObject
       name: celery-worker-default-scaler
@@ -484,18 +591,18 @@ patches:
       metadata:
         name: celery-bulk-upload-worker-scaler
       spec:
-        minReplicaCount: 2 
-        maxReplicaCount: 15 
-        pollingInterval: 5  
-        cooldownPeriod: 60
+        minReplicaCount: 1
+        maxReplicaCount: 20
+        cooldownPeriod: 120
+        pollingInterval: 15
         triggers:
-        - type: redis
+        - type: prometheus
           metadata:
-            address: "master.examx-v2-prod.kti2un.aps1.cache.amazonaws.com:6379"
-            listName: "bulk_upload"
-            listLength: "1"
-            enableTLS: "true"
-            unsafeSsl: "true"
+            serverAddress: "https://prometheus-prod-43-prod-ap-south-1.grafana.net/api/prom"
+            metricName: "celery_bulk_upload_queue_backlog"
+            threshold: "10"
+            query: |
+              sum(examx_celery_queue_pending{queue="bulk_upload",namespace="examxv2-production"} + examx_celery_queue_active{queue="bulk_upload",namespace="examxv2-production"})
     target:
       kind: ScaledObject
       name: celery-bulk-upload-worker-scaler
@@ -506,18 +613,18 @@ patches:
       metadata:
         name: celery-enrichment-worker-scaler
       spec:
-        minReplicaCount: 1
-        maxReplicaCount: 25
-        pollingInterval: 10
-        cooldownPeriod: 60
+        minReplicaCount: 2
+        maxReplicaCount: 20
+        cooldownPeriod: 120
+        pollingInterval: 15
         triggers:
-        - type: redis
+        - type: prometheus
           metadata:
-            address: "master.examx-v2-prod.kti2un.aps1.cache.amazonaws.com:6379"
-            listName: "question_enrichment"
-            listLength: "20" 
-            enableTLS: "true"
-            unsafeSsl: "true"
+            serverAddress: "https://prometheus-prod-43-prod-ap-south-1.grafana.net/api/prom"
+            metricName: "celery_enrichment_queue_backlog"
+            threshold: "10"
+            query: |
+              sum(examx_celery_queue_pending{queue="question_enrichment",namespace="examxv2-production"} + examx_celery_queue_active{queue="question_enrichment",namespace="examxv2-production"})
     target:
       kind: ScaledObject
       name: celery-enrichment-worker-scaler
@@ -526,20 +633,42 @@ patches:
       apiVersion: keda.sh/v1alpha1
       kind: ScaledObject
       metadata:
+        name: celery-exam-submission-worker-scaler
+      spec:
+        minReplicaCount: 1
+        maxReplicaCount: 20
+        cooldownPeriod: 120
+        pollingInterval: 10
+        triggers:
+        - type: prometheus
+          metadata:
+            serverAddress: "https://prometheus-prod-43-prod-ap-south-1.grafana.net/api/prom"
+            metricName: "celery_exam_submission_queue_backlog"
+            threshold: "10"
+            query: |
+              sum(examx_celery_queue_pending{queue="exam_submissions",namespace="examxv2-production"} + examx_celery_queue_active{queue="exam_submissions",namespace="examxv2-production"})
+    target:
+      kind: ScaledObject
+      name: celery-exam-submission-worker-scaler
+
+  - patch: |-
+      apiVersion: keda.sh/v1alpha1
+      kind: ScaledObject
+      metadata:
         name: celery-question-generator-ai-worker-scaler
       spec:
         minReplicaCount: 1
-        maxReplicaCount: 12
-        pollingInterval: 15 
-        cooldownPeriod: 60
+        maxReplicaCount: 20
+        cooldownPeriod: 120
+        pollingInterval: 15
         triggers:
-        - type: redis
+        - type: prometheus
           metadata:
-            address: "master.examx-v2-prod.kti2un.aps1.cache.amazonaws.com:6379"
-            listName: "question_generator_ai"
-            listLength: "1"
-            enableTLS: "true"
-            unsafeSsl: "true"
+            serverAddress: "https://prometheus-prod-43-prod-ap-south-1.grafana.net/api/prom"
+            metricName: "celery_question_generator_ai_backlog"
+            threshold: "10"
+            query: |
+              sum(examx_celery_queue_pending{queue="question_generator_ai",namespace="examxv2-production"} + examx_celery_queue_active{queue="question_generator_ai",namespace="examxv2-production"})
     target:
       kind: ScaledObject
       name: celery-question-generator-ai-worker-scaler

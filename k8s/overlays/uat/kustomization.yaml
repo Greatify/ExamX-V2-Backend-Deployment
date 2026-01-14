@@ -29,22 +29,17 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-Add-async-multi-exam-PDF-export-wit-ef3d10d43daf5d79def274a9d14abc5a2f248d2f"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-EXM-3358-Remove-cut-off-timezone-in-a7cae0611bbd01fc1d2863b0a4ef6bb1f96639cd"
               resources:
                 requests:
-                  cpu: "2"
-                  memory: "8Gi"
+                  cpu: "4"
+                  memory: "16Gi"
                 limits:
                   cpu: "4"
                   memory: "16Gi"
               env:
               - name: WORKERS
                 value: "4"
-              
-              # OpenTelemetry resource attributes for UAT environment
-              - name: OTEL_RESOURCE_ATTRIBUTES
-                value: "service.version=1.0.0,deployment.environment=uat,k8s.cluster.name=greatify-prod-cluster"
-              
               - name: OPIK_URL_OVERRIDE
                 value: "https://www.comet.com/opik/api"
               - name: OPIK_API_KEY
@@ -54,7 +49,7 @@ patches:
               - name: OPIK_PROJECT_NAME
                 value: "Prod"
               - name: REDIS_URL
-                value: "redis://master.examx-v2-uat.kti2un.aps1.cache.amazonaws.com:6379"
+                value: "rediss://master.examxv2-uat.kti2un.aps1.cache.amazonaws.com:6379"
     target:
       kind: Deployment
       name: examxv2-backend
@@ -72,7 +67,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-Add-async-multi-exam-PDF-export-wit-ef3d10d43daf5d79def274a9d14abc5a2f248d2f"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-EXM-3358-Remove-cut-off-timezone-in-a7cae0611bbd01fc1d2863b0a4ef6bb1f96639cd"
               resources:
                 requests:
                   cpu: "2"
@@ -104,7 +99,7 @@ patches:
               - name: OPIK_PROJECT_NAME
                 value: "Prod"
               - name: REDIS_URL
-                value: "redis://master.examx-v2-uat.kti2un.aps1.cache.amazonaws.com:6379"
+                value: "rediss://master.examxv2-uat.kti2un.aps1.cache.amazonaws.com:6379"
     target:
       kind: Deployment
       name: celery-worker-default
@@ -123,7 +118,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-Add-async-multi-exam-PDF-export-wit-ef3d10d43daf5d79def274a9d14abc5a2f248d2f"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-EXM-3358-Remove-cut-off-timezone-in-a7cae0611bbd01fc1d2863b0a4ef6bb1f96639cd"
               resources:
                 requests:
                   cpu: "2"
@@ -139,7 +134,7 @@ patches:
               - -P
               - prefork
               - -c
-              - "3"
+              - "4"
               - -Q
               - bulk_upload
               - -l
@@ -155,10 +150,9 @@ patches:
               - name: OPIK_PROJECT_NAME
                 value: "Prod"
               - name: REDIS_URL
-                value: "redis://master.examx-v2-uat.kti2un.aps1.cache.amazonaws.com:6379"
-
+                value: "rediss://master.examxv2-uat.kti2un.aps1.cache.amazonaws.com:6379"
     target:
-      kind: Deployment  
+      kind: Deployment
       name: celery-bulk-upload-worker
 
   # Celery Enrichment Worker patches
@@ -174,7 +168,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-Add-async-multi-exam-PDF-export-wit-ef3d10d43daf5d79def274a9d14abc5a2f248d2f"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-EXM-3358-Remove-cut-off-timezone-in-a7cae0611bbd01fc1d2863b0a4ef6bb1f96639cd"
               resources:
                 requests:
                   cpu: "2"
@@ -206,7 +200,7 @@ patches:
               - name: OPIK_PROJECT_NAME
                 value: "Prod"
               - name: REDIS_URL
-                value: "redis://master.examx-v2-uat.kti2un.aps1.cache.amazonaws.com:6379"
+                value: "rediss://master.examxv2-uat.kti2un.aps1.cache.amazonaws.com:6379"
     target:
       kind: Deployment
       name: celery-enrichment-worker
@@ -224,7 +218,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-Add-async-multi-exam-PDF-export-wit-ef3d10d43daf5d79def274a9d14abc5a2f248d2f"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-EXM-3358-Remove-cut-off-timezone-in-a7cae0611bbd01fc1d2863b0a4ef6bb1f96639cd"
               resources:
                 requests:
                   cpu: "2"
@@ -256,35 +250,35 @@ patches:
               - name: OPIK_PROJECT_NAME
                 value: "Prod"
               - name: REDIS_URL
-                value: "redis://master.examx-v2-uat.kti2un.aps1.cache.amazonaws.com:6379"
+                value: "rediss://master.examxv2-uat.kti2un.aps1.cache.amazonaws.com:6379"
     target:
       kind: Deployment
       name: celery-question-generator-ai-worker
 
-  # Celery Flower patches
-  - patch: |-
-      apiVersion: apps/v1
-      kind: Deployment
-      metadata:
-        name: celery-flower
-      spec:
-        replicas: 1
-        template:
-          spec:
-            serviceAccountName: examxv2-stg-secret-service
-            containers:
-            - name: flower
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-Add-async-multi-exam-PDF-export-wit-ef3d10d43daf5d79def274a9d14abc5a2f248d2f"
-              resources:
-                requests:
-                  cpu: "250m"
-                  memory: "2Gi"
-                limits:
-                  cpu: "500m"
-                  memory: "4Gi"
-    target:
-      kind: Deployment
-      name: celery-flower
+  # # Celery Flower patches
+  # - patch: |-
+  #     apiVersion: apps/v1
+  #     kind: Deployment
+  #     metadata:
+  #       name: celery-flower
+  #     spec:
+  #       replicas: 1
+  #       template:
+  #         spec:
+  #           serviceAccountName: examxv2-stg-secret-service
+  #           containers:
+  #           - name: flower
+  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:uat-EXM-3358-Remove-cut-off-timezone-in-a7cae0611bbd01fc1d2863b0a4ef6bb1f96639cd"
+  #             resources:
+  #               requests:
+  #                 cpu: "250m"
+  #                 memory: "2Gi"
+  #               limits:
+  #                 cpu: "500m"
+  #                 memory: "4Gi"
+  #   target:
+  #     kind: Deployment
+  #     name: celery-flower
 
   # Secrets patches
   - patch: |-
@@ -318,7 +312,7 @@ patches:
       name: examxv2-google-credentials
 
   # Autoscaling patches for UAT environment
-  # Backend Autoscaler patches (following production pattern)
+  # Backend Autoscaler patches (keep this - KEDA doesn't manage backend)
   - patch: |-
       apiVersion: autoscaling/v2
       kind: HorizontalPodAutoscaler
@@ -331,7 +325,7 @@ patches:
       kind: HorizontalPodAutoscaler
       name: examxv2-backend-pod-autoscaler
 
-  # Celery Worker Autoscaler patches (following production pattern)
+  # Celery Worker Autoscaler patches - COMMENTED OUT (using KEDA instead)
   # - patch: |-
   #     apiVersion: autoscaling/v2
   #     kind: HorizontalPodAutoscaler
@@ -348,7 +342,7 @@ patches:
   #     kind: HorizontalPodAutoscaler
   #     name: celery-worker-default-autoscaler
 
-  # Celery Bulk Upload Worker Autoscaler patches (following production pattern)
+  # Celery Bulk Upload Worker Autoscaler patches - COMMENTED OUT (using KEDA instead)
   # - patch: |-
   #     apiVersion: autoscaling/v2
   #     kind: HorizontalPodAutoscaler
@@ -364,7 +358,7 @@ patches:
   #     kind: HorizontalPodAutoscaler
   #     name: celery-bulk-upload-worker-autoscaler
 
-  # Celery Enrichment Worker Autoscaler patches (following production pattern)
+  # Celery Enrichment Worker Autoscaler patches - COMMENTED OUT (using KEDA instead)
   # - patch: |-
   #     apiVersion: autoscaling/v2
   #     kind: HorizontalPodAutoscaler
@@ -380,7 +374,7 @@ patches:
   #     kind: HorizontalPodAutoscaler
   #     name: celery-enrichment-worker-autoscaler
 
-  # Celery Question Generator AI Worker Autoscaler patches (following production pattern)
+  # Celery Question Generator AI Worker Autoscaler patches - COMMENTED OUT (using KEDA instead)
   # - patch: |-
   #     apiVersion: autoscaling/v2
   #     kind: HorizontalPodAutoscaler
@@ -396,18 +390,19 @@ patches:
   #     kind: HorizontalPodAutoscaler
   #     name: celery-question-generator-ai-worker-autoscaler
 
-  # Celery Flower Autoscaler patches (following production pattern)
-  - patch: |-
-      apiVersion: autoscaling/v2
-      kind: HorizontalPodAutoscaler
-      metadata:
-        name: celery-flower-autoscaler
-      spec:
-        minReplicas: 1
-        maxReplicas: 2
-    target:
-      kind: HorizontalPodAutoscaler
-      name: celery-flower-autoscaler
+  # # Celery Flower Autoscaler patches (following production pattern)
+  # - patch: |-
+  #     apiVersion: autoscaling/v2
+  #     kind: HorizontalPodAutoscaler
+  #     metadata:
+  #       name: celery-flower-autoscaler
+  #     spec:
+  #       minReplicas: 1
+  #       maxReplicas: 2
+  #   target:
+  #     kind: HorizontalPodAutoscaler
+  #     name: celery-flower-autoscaler
+
   # KEDA ScaledObject patches for UAT environment
   - patch: |-
       apiVersion: keda.sh/v1alpha1
@@ -416,17 +411,17 @@ patches:
         name: celery-worker-default-scaler
       spec:
         minReplicaCount: 1
-        maxReplicaCount: 8
-        pollingInterval: 15
+        maxReplicaCount: 10
         cooldownPeriod: 60
+        pollingInterval: 15
         triggers:
-        - type: redis
+        - type: prometheus
           metadata:
-            address: "master.examx-v2-uat.kti2un.aps1.cache.amazonaws.com:6379"
-            listName: "default"
-            listLength: "1"
-            enableTLS: "true"
-            unsafeSsl: "true"
+            serverAddress: "https://prometheus-prod-43-prod-ap-south-1.grafana.net/api/prom"
+            metricName: "celery_default_queue_backlog"
+            threshold: "0.5"
+            query: |
+              sum(examx_celery_queue_pending{queue="default",namespace="uat-examxv2"} + examx_celery_queue_active{queue="default",namespace="uat-examxv2"})
     target:
       kind: ScaledObject
       name: celery-worker-default-scaler
@@ -438,17 +433,17 @@ patches:
         name: celery-bulk-upload-worker-scaler
       spec:
         minReplicaCount: 1
-        maxReplicaCount: 6
-        pollingInterval: 10
+        maxReplicaCount: 10
         cooldownPeriod: 60
+        pollingInterval: 15
         triggers:
-        - type: redis
+        - type: prometheus
           metadata:
-            address: "master.examx-v2-uat.kti2un.aps1.cache.amazonaws.com:6379"
-            listName: "bulk_upload"
-            listLength: "1"
-            enableTLS: "true"
-            unsafeSsl: "true"
+            serverAddress: "https://prometheus-prod-43-prod-ap-south-1.grafana.net/api/prom"
+            metricName: "celery_bulk_upload_queue_backlog"
+            threshold: "0.5"
+            query: |
+              sum(examx_celery_queue_pending{queue="bulk_upload",namespace="uat-examxv2"} + examx_celery_queue_active{queue="bulk_upload",namespace="uat-examxv2"})
     target:
       kind: ScaledObject
       name: celery-bulk-upload-worker-scaler
@@ -460,17 +455,17 @@ patches:
         name: celery-enrichment-worker-scaler
       spec:
         minReplicaCount: 1
-        maxReplicaCount: 6
-        pollingInterval: 15
+        maxReplicaCount: 10
         cooldownPeriod: 60
+        pollingInterval: 15
         triggers:
-        - type: redis
+        - type: prometheus
           metadata:
-            address: "master.examx-v2-uat.kti2un.aps1.cache.amazonaws.com:6379"
-            listName: "question_enrichment"
-            listLength: "1"
-            enableTLS: "true"
-            unsafeSsl: "true"
+            serverAddress: "https://prometheus-prod-43-prod-ap-south-1.grafana.net/api/prom"
+            metricName: "celery_enrichment_queue_backlog"
+            threshold: "0.5"
+            query: |
+              sum(examx_celery_queue_pending{queue="question_enrichment",namespace="uat-examxv2"} + examx_celery_queue_active{queue="question_enrichment",namespace="uat-examxv2"})
     target:
       kind: ScaledObject
       name: celery-enrichment-worker-scaler
@@ -479,20 +474,42 @@ patches:
       apiVersion: keda.sh/v1alpha1
       kind: ScaledObject
       metadata:
+        name: celery-exam-submission-worker-scaler
+      spec:
+        minReplicaCount: 1
+        maxReplicaCount: 10
+        cooldownPeriod: 60
+        pollingInterval: 10
+        triggers:
+        - type: prometheus
+          metadata:
+            serverAddress: "https://prometheus-prod-43-prod-ap-south-1.grafana.net/api/prom"
+            metricName: "celery_exam_submission_queue_backlog"
+            threshold: "0.5"
+            query: |
+              sum(examx_celery_queue_pending{queue="exam_submissions",namespace="uat-examxv2"} + examx_celery_queue_active{queue="exam_submissions",namespace="uat-examxv2"})
+    target:
+      kind: ScaledObject
+      name: celery-exam-submission-worker-scaler
+
+  - patch: |-
+      apiVersion: keda.sh/v1alpha1
+      kind: ScaledObject
+      metadata:
         name: celery-question-generator-ai-worker-scaler
       spec:
         minReplicaCount: 1
-        maxReplicaCount: 4
-        pollingInterval: 15
+        maxReplicaCount: 10
         cooldownPeriod: 60
+        pollingInterval: 15
         triggers:
-        - type: redis
+        - type: prometheus
           metadata:
-            address: "master.examx-v2-uat.kti2un.aps1.cache.amazonaws.com:6379"
-            listName: "question_generator_ai"
-            listLength: "1"
-            enableTLS: "true"
-            unsafeSsl: "true"
+            serverAddress: "https://prometheus-prod-43-prod-ap-south-1.grafana.net/api/prom"
+            metricName: "celery_question_generator_ai_backlog"
+            threshold: "0.5"
+            query: |
+              sum(examx_celery_queue_pending{queue="question_generator_ai",namespace="uat-examxv2"} + examx_celery_queue_active{queue="question_generator_ai",namespace="uat-examxv2"})
     target:
       kind: ScaledObject
       name: celery-question-generator-ai-worker-scaler
