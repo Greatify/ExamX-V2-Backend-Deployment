@@ -115,6 +115,18 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.name
+            
+            # ==========================================
+            # Pyroscope Continuous Profiling
+            # ==========================================
+            - name: ENABLE_PYROSCOPE
+              value: "true"
+            
+            - name: PYROSCOPE_APPLICATION_NAME
+              value: "examxv2-backend"
+            
+            - name: PYROSCOPE_SERVER_ADDRESS
+              value: "http://pyroscope.monitoring.svc.cluster.local:4040"
           volumeMounts:
             - name: examxv2-secrets-volume
               mountPath: /mnt/secret-store
