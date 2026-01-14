@@ -45,6 +45,8 @@ spec:
               cpu: "2"
               memory: "8Gi"
           env:
+            - name: DJANGO_ALLOW_ASYNC_UNSAFE
+              value: "true" # Required for gevent pool compatibility with Django 4.x
             # OpenTelemetry Configuration (same as backend, except service name)
             - name: ENABLE_OTEL
               value: "true"
