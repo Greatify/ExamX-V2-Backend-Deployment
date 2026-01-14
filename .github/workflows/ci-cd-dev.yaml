@@ -133,24 +133,24 @@ jobs:
           path: backend_image_tag.txt
           if-no-files-found: error
 
-      - name: Send Docker build failure notification
-        if: failure()
-        uses: 8398a7/action-slack@v3
-        with:
-          status: ${{ job.status }}
-          author_name: Docker Build Failure 🐳
-          mention: channel
-          if_mention: always
-          job_name: build-backend-dev-image
-          channel: examxv2-backend-alerts
-          username: ExamX-V2-CICD
-          text: |
-            ❌ *Docker build failed for dev deployment* 🐳
-            *Commit:* `${{ github.event.inputs.commit_sha }}`
-            *Message:* ${{ github.event.inputs.commit_message }}
-            Please fix the Docker build issues.
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      # - name: Send Docker build failure notification
+      #   if: failure()
+      #   uses: 8398a7/action-slack@v3
+      #   with:
+      #     status: ${{ job.status }}
+      #     author_name: Docker Build Failure 🐳
+      #     mention: channel
+      #     if_mention: always
+      #     job_name: build-backend-dev-image
+      #     channel: examxv2-backend-alerts
+      #     username: ExamX-V2-CICD
+      #     text: |
+      #       ❌ *Docker build failed for dev deployment* 🐳
+      #       *Commit:* `${{ github.event.inputs.commit_sha }}`
+      #       *Message:* ${{ github.event.inputs.commit_message }}
+      #       Please fix the Docker build issues.
+      #   env:
+      #     SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
   deploy-backend-dev:
     runs-on: ubuntu-24.04-arm
@@ -209,44 +209,44 @@ jobs:
         run: |
           kubectl apply -k k8s/overlays/dev
 
-      - name: Send deployment success notification
-        if: success()
-        uses: 8398a7/action-slack@v3
-        with:
-          status: ${{ job.status }}
-          author_name: Backend Deployment Success
-          mention: channel
-          if_mention: success
-          job_name: deploy-backend-dev
-          channel: examxv2-backend-alerts
-          username: ExamX-V2-CICD
-          text: |
-            :rocket: *Backend deployment to dev environment succeeded*
+      # - name: Send deployment success notification
+      #   if: success()
+      #   uses: 8398a7/action-slack@v3
+      #   with:
+      #     status: ${{ job.status }}
+      #     author_name: Backend Deployment Success
+      #     mention: channel
+      #     if_mention: success
+      #     job_name: deploy-backend-dev
+      #     channel: examxv2-backend-alerts
+      #     username: ExamX-V2-CICD
+      #     text: |
+      #       :rocket: *Backend deployment to dev environment succeeded*
             
-            *Commit:* `${{ github.event.inputs.commit_sha }}`
-            *Message:* ${{ github.event.inputs.commit_message }}
+      #       *Commit:* `${{ github.event.inputs.commit_sha }}`
+      #       *Message:* ${{ github.event.inputs.commit_message }}
             
-            Your changes have been deployed successfully to Development.
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      #       Your changes have been deployed successfully to Development.
+      #   env:
+      #     SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
-      - name: Send deployment failure notification
-        if: failure()
-        uses: 8398a7/action-slack@v3
-        with:
-          status: ${{ job.status }}
-          author_name: Deployment Failure ❌
-          mention: channel
-          if_mention: failure
-          job_name: deploy-backend-dev
-          channel: examxv2-backend-alerts
-          username: ExamX-V2-CICD
-          text: |
-            ❌ *Dev Deployment Failed*
+      # - name: Send deployment failure notification
+      #   if: failure()
+      #   uses: 8398a7/action-slack@v3
+      #   with:
+      #     status: ${{ job.status }}
+      #     author_name: Deployment Failure ❌
+      #     mention: channel
+      #     if_mention: failure
+      #     job_name: deploy-backend-dev
+      #     channel: examxv2-backend-alerts
+      #     username: ExamX-V2-CICD
+      #     text: |
+      #       ❌ *Dev Deployment Failed*
             
-            *Commit:* `${{ github.event.inputs.commit_sha }}`
-            *Message:* ${{ github.event.inputs.commit_message }}
+      #       *Commit:* `${{ github.event.inputs.commit_sha }}`
+      #       *Message:* ${{ github.event.inputs.commit_message }}
             
-            Please check the logs and fix the issues immediately.
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      #       Please check the logs and fix the issues immediately.
+      #   env:
+      #     SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
