@@ -38,6 +38,15 @@ patches:
               env:
               - name: WORKERS
                 value: "6"
+              
+              # OpenTelemetry configuration for production environment
+              - name: ENABLE_OTEL
+                value: "true"
+              - name: OTEL_EXPORTER_OTLP_ENDPOINT
+                value: "https://tempo-prod-19-prod-ap-south-1.grafana.net/tempo"
+              - name: OTEL_RESOURCE_ATTRIBUTES
+                value: "service.version=1.0.0,deployment.environment=production,k8s.cluster.name=greatify-prod-cluster"
+              
               - name: OPIK_URL_OVERRIDE
                 value: "https://www.comet.com/opik/api"
               - name: OPIK_API_KEY
