@@ -7,6 +7,7 @@ resources:
   - storage/pv.yaml
   - storage/pvc.yaml
   - backend-ingress.yaml
+  - grafana-cloud-auth.yaml
   # - ingress-class-params.yaml
 
 labels:
@@ -416,6 +417,8 @@ patches:
         pollingInterval: 15
         triggers:
         - type: prometheus
+          authenticationRef:
+            name: grafana-cloud-prometheus-auth
           metadata:
             serverAddress: "https://prometheus-prod-43-prod-ap-south-1.grafana.net/api/prom"
             metricName: "celery_default_queue_backlog"
@@ -438,6 +441,8 @@ patches:
         pollingInterval: 15
         triggers:
         - type: prometheus
+          authenticationRef:
+            name: grafana-cloud-prometheus-auth
           metadata:
             serverAddress: "https://prometheus-prod-43-prod-ap-south-1.grafana.net/api/prom"
             metricName: "celery_bulk_upload_queue_backlog"
@@ -460,6 +465,8 @@ patches:
         pollingInterval: 15
         triggers:
         - type: prometheus
+          authenticationRef:
+            name: grafana-cloud-prometheus-auth
           metadata:
             serverAddress: "https://prometheus-prod-43-prod-ap-south-1.grafana.net/api/prom"
             metricName: "celery_enrichment_queue_backlog"
@@ -482,6 +489,8 @@ patches:
         pollingInterval: 10
         triggers:
         - type: prometheus
+          authenticationRef:
+            name: grafana-cloud-prometheus-auth
           metadata:
             serverAddress: "https://prometheus-prod-43-prod-ap-south-1.grafana.net/api/prom"
             metricName: "celery_exam_submission_queue_backlog"
@@ -504,6 +513,8 @@ patches:
         pollingInterval: 15
         triggers:
         - type: prometheus
+          authenticationRef:
+            name: grafana-cloud-prometheus-auth
           metadata:
             serverAddress: "https://prometheus-prod-43-prod-ap-south-1.grafana.net/api/prom"
             metricName: "celery_question_generator_ai_backlog"

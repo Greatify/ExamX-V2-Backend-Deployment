@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: grafana-cloud-prometheus-credentials
+  namespace: uat-examxv2
+type: Opaque
+stringData:
+  # Replace these with your actual Grafana Cloud credentials
+  # username: your-grafana-instance-id (e.g., 12345)
+  # password: your-grafana-cloud-api-key
+  username: "REPLACE_WITH_GRAFANA_INSTANCE_ID"
+  password: "REPLACE_WITH_GRAFANA_API_KEY"
+---
+apiVersion: keda.sh/v1alpha1
+kind: TriggerAuthentication
+metadata:
+  name: grafana-cloud-prometheus-auth
+  namespace: uat-examxv2
+spec:
+  secretTargetRef:
+    - parameter: username
+      name: grafana-cloud-prometheus-credentials
+      key: username
+    - parameter: password
+      name: grafana-cloud-prometheus-credentials
+      key: password

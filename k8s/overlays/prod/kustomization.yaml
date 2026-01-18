@@ -6,6 +6,7 @@ resources:
   - ../../base
   - storage/pv.yaml
   - storage/pvc.yaml
+  - grafana-cloud-auth.yaml
 
 labels:
   - pairs:
@@ -578,16 +579,18 @@ patches:
       metadata:
         name: celery-worker-default-scaler
       spec:
-        minReplicaCount: 2
+        minReplicaCount: 1
         maxReplicaCount: 20
         cooldownPeriod: 120
         pollingInterval: 15
         triggers:
         - type: prometheus
+          authenticationRef:
+            name: grafana-cloud-prometheus-auth
           metadata:
             serverAddress: "https://prometheus-prod-43-prod-ap-south-1.grafana.net/api/prom"
             metricName: "celery_default_queue_backlog"
-            threshold: "10"
+            threshold: "0.5"
             query: |
               sum(examx_celery_queue_pending{queue="default",namespace="examxv2-production"} + examx_celery_queue_active{queue="default",namespace="examxv2-production"})
     target:
@@ -606,10 +609,12 @@ patches:
         pollingInterval: 15
         triggers:
         - type: prometheus
+          authenticationRef:
+            name: grafana-cloud-prometheus-auth
           metadata:
             serverAddress: "https://prometheus-prod-43-prod-ap-south-1.grafana.net/api/prom"
             metricName: "celery_bulk_upload_queue_backlog"
-            threshold: "10"
+            threshold: "0.5"
             query: |
               sum(examx_celery_queue_pending{queue="bulk_upload",namespace="examxv2-production"} + examx_celery_queue_active{queue="bulk_upload",namespace="examxv2-production"})
     target:
@@ -622,16 +627,18 @@ patches:
       metadata:
         name: celery-enrichment-worker-scaler
       spec:
-        minReplicaCount: 2
+        minReplicaCount: 1
         maxReplicaCount: 20
         cooldownPeriod: 120
         pollingInterval: 15
         triggers:
         - type: prometheus
+          authenticationRef:
+            name: grafana-cloud-prometheus-auth
           metadata:
             serverAddress: "https://prometheus-prod-43-prod-ap-south-1.grafana.net/api/prom"
             metricName: "celery_enrichment_queue_backlog"
-            threshold: "10"
+            threshold: "0.5"
             query: |
               sum(examx_celery_queue_pending{queue="question_enrichment",namespace="examxv2-production"} + examx_celery_queue_active{queue="question_enrichment",namespace="examxv2-production"})
     target:
@@ -650,10 +657,12 @@ patches:
         pollingInterval: 10
         triggers:
         - type: prometheus
+          authenticationRef:
+            name: grafana-cloud-prometheus-auth
           metadata:
             serverAddress: "https://prometheus-prod-43-prod-ap-south-1.grafana.net/api/prom"
             metricName: "celery_exam_submission_queue_backlog"
-            threshold: "10"
+            threshold: "0.5"
             query: |
               sum(examx_celery_queue_pending{queue="exam_submissions",namespace="examxv2-production"} + examx_celery_queue_active{queue="exam_submissions",namespace="examxv2-production"})
     target:
@@ -672,10 +681,12 @@ patches:
         pollingInterval: 15
         triggers:
         - type: prometheus
+          authenticationRef:
+            name: grafana-cloud-prometheus-auth
           metadata:
             serverAddress: "https://prometheus-prod-43-prod-ap-south-1.grafana.net/api/prom"
             metricName: "celery_question_generator_ai_backlog"
-            threshold: "10"
+            threshold: "0.5"
             query: |
               sum(examx_celery_queue_pending{queue="question_generator_ai",namespace="examxv2-production"} + examx_celery_queue_active{queue="question_generator_ai",namespace="examxv2-production"})
     target:
