@@ -27,7 +27,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-3443-Restrict-Nursing-templates-7dc13bc50859a9c3c7a98588b7eba97a66e8510f"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Enhance-OpenTelemetry-configuration-3f19570d302e9dd5efa9d63beca2968ae534bd66"
               resources:
                 requests:
                   cpu: "4"
@@ -81,7 +81,7 @@ patches:
   #           serviceAccountName: examxv2-production-sa
   #           containers:
   #           - name: celery-exam-submission-worker
-  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-3443-Restrict-Nursing-templates-7dc13bc50859a9c3c7a98588b7eba97a66e8510f"
+  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Enhance-OpenTelemetry-configuration-3f19570d302e9dd5efa9d63beca2968ae534bd66"
   #             resources:
   #               requests:
   #                 cpu: "4"
@@ -128,7 +128,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-3443-Restrict-Nursing-templates-7dc13bc50859a9c3c7a98588b7eba97a66e8510f"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Enhance-OpenTelemetry-configuration-3f19570d302e9dd5efa9d63beca2968ae534bd66"
               resources:
                 requests:
                   cpu: "2"
@@ -192,7 +192,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-3443-Restrict-Nursing-templates-7dc13bc50859a9c3c7a98588b7eba97a66e8510f"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Enhance-OpenTelemetry-configuration-3f19570d302e9dd5efa9d63beca2968ae534bd66"
               resources:
                 requests:
                   cpu: "2"
@@ -256,7 +256,7 @@ patches:
   #           serviceAccountName: examxv2-production-sa
   #           containers:
   #           - name: celery-bulk-export-worker
-  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-3443-Restrict-Nursing-templates-7dc13bc50859a9c3c7a98588b7eba97a66e8510f"
+  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Enhance-OpenTelemetry-configuration-3f19570d302e9dd5efa9d63beca2968ae534bd66"
   #             resources:
   #               requests:
   #                 cpu: "2"
@@ -304,7 +304,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-3443-Restrict-Nursing-templates-7dc13bc50859a9c3c7a98588b7eba97a66e8510f"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Enhance-OpenTelemetry-configuration-3f19570d302e9dd5efa9d63beca2968ae534bd66"
               resources:
                 requests:
                   cpu: "2"
@@ -368,7 +368,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-3443-Restrict-Nursing-templates-7dc13bc50859a9c3c7a98588b7eba97a66e8510f"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Enhance-OpenTelemetry-configuration-3f19570d302e9dd5efa9d63beca2968ae534bd66"
               resources:
                 requests:
                   cpu: "2"
@@ -455,7 +455,7 @@ patches:
   #           serviceAccountName: examxv2-production-sa
   #           containers:
   #           - name: flower
-  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-3443-Restrict-Nursing-templates-7dc13bc50859a9c3c7a98588b7eba97a66e8510f"
+  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Enhance-OpenTelemetry-configuration-3f19570d302e9dd5efa9d63beca2968ae534bd66"
   #             resources:
   #               requests:
   #                 cpu: "250m"
