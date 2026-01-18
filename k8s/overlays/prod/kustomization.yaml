@@ -41,8 +41,9 @@ patches:
                 value: "6"
               
               # OpenTelemetry configuration for production environment
+              # TODO: Update gunicorn.conf.py to support HTTP exporter before enabling
               - name: ENABLE_OTEL
-                value: "true"
+                value: "false"
               - name: OTEL_EXPORTER_OTLP_PROTOCOL
                 value: "http/protobuf"
               - name: OTEL_EXPORTER_OTLP_TRACES_PROTOCOL
