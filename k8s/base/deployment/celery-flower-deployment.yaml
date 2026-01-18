@@ -20,6 +20,10 @@ spec:
     metadata:
       labels:
         app: celery-flower
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "5555"
+        prometheus.io/path: "/metrics"
     spec:
       serviceAccountName: examxv2-sa
       terminationGracePeriodSeconds: 30
@@ -50,6 +54,59 @@ spec:
             limits:
               cpu: "2"
               memory: "8Gi"
+          env:
+            # OpenTelemetry Configuration (same as backend, except service name)
+            - name: ENABLE_OTEL
+              value: "true"
+            
+            # Service identification (matches deployment name)
+            - name: OTEL_SERVICE_NAME
+              value: "examxv2-celery-flower"
+            
+            # OTLP exporter endpoint (where to send telemetry data)
+            # NOTE: Port 4317 is for gRPC protocol, port 4318 is for HTTP protocol
+            - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              value: "http://alloy.observability.svc.cluster.local:4317"
+            
+            # Protocol to use for OTLP export (grpc is default and recommended)
+            - name: OTEL_EXPORTER_OTLP_PROTOCOL
+              value: "grpc"
+            
+            # Enable automatic log correlation (injects trace_id and span_id into logs)
+            - name: OTEL_PYTHON_LOG_CORRELATION
+              value: "true"
+            
+            # Enable automatic logging instrumentation
+            - name: OTEL_PYTHON_LOGGING_AUTO_INSTRUMENTATION_ENABLED
+              value: "true"
+            
+            # Resource attributes (additional metadata attached to all telemetry)
+            - name: OTEL_RESOURCE_ATTRIBUTES
+              value: "service.version=1.0.0,deployment.environment=development"
+            
+            # K8s metadata for OpenTelemetry (auto-detected)
+            - name: NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            
+            - name: HOSTNAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            
+            # ==========================================
+            # Pyroscope Continuous Profiling
+            # ==========================================
+            - name: ENABLE_PYROSCOPE
+              value: "true"
+            
+            - name: PYROSCOPE_APPLICATION_NAME
+              value: "examxv2-celery-flower"
+            
+            # Pyroscope profiles are sent to Alloy, which forwards to Pyroscope backend
+            - name: PYROSCOPE_SERVER_ADDRESS
+              value: "http://alloy.observability.svc.cluster.local:4040"
           command:
             - celery
             - -A
