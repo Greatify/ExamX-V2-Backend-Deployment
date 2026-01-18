@@ -28,7 +28,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-3203-QR-CodeBased-Answer-Upload-8cb053a75d782ae83f521ecde416e5fad94d96ba"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Enhance-OpenTelemetry-configuration-755b0e1a3091edeb20cefea216f7f5072d746d42"
               resources:
                 requests:
                   cpu: "4"
@@ -83,7 +83,7 @@ patches:
   #           serviceAccountName: examxv2-production-sa
   #           containers:
   #           - name: celery-exam-submission-worker
-  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-3203-QR-CodeBased-Answer-Upload-8cb053a75d782ae83f521ecde416e5fad94d96ba"
+  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Enhance-OpenTelemetry-configuration-755b0e1a3091edeb20cefea216f7f5072d746d42"
   #             resources:
   #               requests:
   #                 cpu: "4"
@@ -130,7 +130,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-3203-QR-CodeBased-Answer-Upload-8cb053a75d782ae83f521ecde416e5fad94d96ba"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Enhance-OpenTelemetry-configuration-755b0e1a3091edeb20cefea216f7f5072d746d42"
               resources:
                 requests:
                   cpu: "2"
@@ -180,7 +180,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-3203-QR-CodeBased-Answer-Upload-8cb053a75d782ae83f521ecde416e5fad94d96ba"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Enhance-OpenTelemetry-configuration-755b0e1a3091edeb20cefea216f7f5072d746d42"
               resources:
                 requests:
                   cpu: "2"
@@ -230,7 +230,7 @@ patches:
   #           serviceAccountName: examxv2-production-sa
   #           containers:
   #           - name: celery-bulk-export-worker
-  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-3203-QR-CodeBased-Answer-Upload-8cb053a75d782ae83f521ecde416e5fad94d96ba"
+  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Enhance-OpenTelemetry-configuration-755b0e1a3091edeb20cefea216f7f5072d746d42"
   #             resources:
   #               requests:
   #                 cpu: "2"
@@ -278,7 +278,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-3203-QR-CodeBased-Answer-Upload-8cb053a75d782ae83f521ecde416e5fad94d96ba"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Enhance-OpenTelemetry-configuration-755b0e1a3091edeb20cefea216f7f5072d746d42"
               resources:
                 requests:
                   cpu: "2"
@@ -328,7 +328,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-3203-QR-CodeBased-Answer-Upload-8cb053a75d782ae83f521ecde416e5fad94d96ba"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Enhance-OpenTelemetry-configuration-755b0e1a3091edeb20cefea216f7f5072d746d42"
               resources:
                 requests:
                   cpu: "2"
@@ -401,7 +401,7 @@ patches:
   #           serviceAccountName: examxv2-production-sa
   #           containers:
   #           - name: flower
-  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-3203-QR-CodeBased-Answer-Upload-8cb053a75d782ae83f521ecde416e5fad94d96ba"
+  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-Enhance-OpenTelemetry-configuration-755b0e1a3091edeb20cefea216f7f5072d746d42"
   #             resources:
   #               requests:
   #                 cpu: "250m"
