@@ -4,6 +4,11 @@ metadata:
   name: examxv2-backend-service
   labels:
     app: examxv2-backend
+  annotations:
+    # Grafana Alloy auto-discovery annotations
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "80"
+    prometheus.io/path: "/celery-metrics"
 spec:
   selector:
     app: examxv2-backend

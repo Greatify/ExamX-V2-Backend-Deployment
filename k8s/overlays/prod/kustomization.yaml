@@ -44,7 +44,9 @@ patches:
               - name: ENABLE_OTEL
                 value: "true"
               - name: OTEL_EXPORTER_OTLP_ENDPOINT
-                value: "https://tempo-prod-19-prod-ap-south-1.grafana.net/tempo"
+                value: "https://otlp-gateway-prod-ap-south-1.grafana.net:443"
+              - name: OTEL_EXPORTER_OTLP_HEADERS
+                value: "Authorization=Basic OTc0NDQ5OmdsY19leUp2SWpvaU1URTJORFV3T1NJc0ltNGlPaUp6ZEdGamF5MDVOelEwTkRrdGFXNTBaV2R5WVhScGIyNHRaM0psWVhScFpua3RjSEp2WkMxamJIVnpkR1Z5TFc1bGR5MW5jbVZoZEdsbWVTMXdjbTlrTFdOc2RYTjBaWEl0Ym1WM0lpd2lheUk2SWpReE9XUTFRVXBOT1dWbWJWYzBTalE1VXpsVldtVXdUbUlpTENKdElqcDdJbklpT2lKd2NtOWtMV0Z3TFhOdmRYUm9MVEVpIn0="
               - name: OTEL_RESOURCE_ATTRIBUTES
                 value: "service.version=1.0.0,deployment.environment=production,k8s.cluster.name=greatify-prod-cluster"
               
