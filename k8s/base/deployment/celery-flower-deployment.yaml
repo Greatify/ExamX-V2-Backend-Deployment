@@ -106,7 +106,7 @@ spec:
             
             # Pyroscope profiles are sent to Alloy, which forwards to Pyroscope backend
             - name: PYROSCOPE_SERVER_ADDRESS
-              value: "http://alloy.observability.svc.cluster.local:4040"
+              value: "http://pyroscope.observability.svc.cluster.local:4040"
           command:
             - celery
             - -A
