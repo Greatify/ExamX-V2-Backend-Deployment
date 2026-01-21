@@ -27,7 +27,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3567-Exam-System-should-need-a-69aa0cf8432e2619153dd0ed76e2434a5dff5cb2"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3617-Desktop-App-After-adding-g-ab13cb1450991a58c865b82e7d1abf1f431a094a"
               resources:
                requests:
                  cpu: "4"
@@ -70,7 +70,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3567-Exam-System-should-need-a-69aa0cf8432e2619153dd0ed76e2434a5dff5cb2"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3617-Desktop-App-After-adding-g-ab13cb1450991a58c865b82e7d1abf1f431a094a"
               resources:
                 requests:
                   cpu: "250m"
@@ -121,7 +121,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3567-Exam-System-should-need-a-69aa0cf8432e2619153dd0ed76e2434a5dff5cb2"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3617-Desktop-App-After-adding-g-ab13cb1450991a58c865b82e7d1abf1f431a094a"
               resources:
                 requests:
                   cpu: "300m"
@@ -171,7 +171,7 @@ patches:
   #           serviceAccountName: examxv2-stg-secret-service
   #           containers:
   #           - name: celery-bulk-export-worker
-  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3567-Exam-System-should-need-a-69aa0cf8432e2619153dd0ed76e2434a5dff5cb2"
+  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3617-Desktop-App-After-adding-g-ab13cb1450991a58c865b82e7d1abf1f431a094a"
   #             resources:
   #               requests:
   #                 cpu: "2"
@@ -219,7 +219,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3567-Exam-System-should-need-a-69aa0cf8432e2619153dd0ed76e2434a5dff5cb2"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3617-Desktop-App-After-adding-g-ab13cb1450991a58c865b82e7d1abf1f431a094a"
               resources:
                 requests:
                   cpu: "300m"
@@ -269,7 +269,7 @@ patches:
   #           serviceAccountName: examxv2-stg-secret-service
   #           containers:
   #           - name: celery-exam-submission-worker
-  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3567-Exam-System-should-need-a-69aa0cf8432e2619153dd0ed76e2434a5dff5cb2"
+  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3617-Desktop-App-After-adding-g-ab13cb1450991a58c865b82e7d1abf1f431a094a"
   #             resources:
   #               requests:
   #                 cpu: "2"
@@ -316,7 +316,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3567-Exam-System-should-need-a-69aa0cf8432e2619153dd0ed76e2434a5dff5cb2"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3617-Desktop-App-After-adding-g-ab13cb1450991a58c865b82e7d1abf1f431a094a"
               resources:
                 requests:
                   cpu: "300m"
@@ -366,7 +366,7 @@ patches:
   #           serviceAccountName: examxv2-stg-secret-service
   #           containers:
   #           - name: celery-exam-submission-worker
-  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3567-Exam-System-should-need-a-69aa0cf8432e2619153dd0ed76e2434a5dff5cb2"
+  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3617-Desktop-App-After-adding-g-ab13cb1450991a58c865b82e7d1abf1f431a094a"
   #             env:
   #             - name: OPIK_URL_OVERRIDE
   #               value: "https://www.comet.com/opik/api"
@@ -393,7 +393,7 @@ patches:
   #           serviceAccountName: examxv2-stg-secret-service
   #           containers:
   #           - name: flower
-  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3567-Exam-System-should-need-a-69aa0cf8432e2619153dd0ed76e2434a5dff5cb2"
+  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-3617-Desktop-App-After-adding-g-ab13cb1450991a58c865b82e7d1abf1f431a094a"
   #             resources:
   #               requests:
   #                 cpu: "200m"
