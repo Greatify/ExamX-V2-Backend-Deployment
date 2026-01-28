@@ -27,7 +27,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-4251-Updated-input-validation-l-91e69fd4a65748384ec9735bd3e5d314cc984442"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-3751-should-not-display-on-admi-ced576f67108770afc04e8568856f48703365ab8"
               resources:
                 requests:
                   cpu: "4"
@@ -81,7 +81,7 @@ patches:
   #           serviceAccountName: examxv2-production-sa
   #           containers:
   #           - name: celery-exam-submission-worker
-  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-4251-Updated-input-validation-l-91e69fd4a65748384ec9735bd3e5d314cc984442"
+  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-3751-should-not-display-on-admi-ced576f67108770afc04e8568856f48703365ab8"
   #             resources:
   #               requests:
   #                 cpu: "4"
@@ -128,7 +128,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-4251-Updated-input-validation-l-91e69fd4a65748384ec9735bd3e5d314cc984442"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-3751-should-not-display-on-admi-ced576f67108770afc04e8568856f48703365ab8"
               resources:
                 requests:
                   cpu: "2"
@@ -192,7 +192,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-4251-Updated-input-validation-l-91e69fd4a65748384ec9735bd3e5d314cc984442"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-3751-should-not-display-on-admi-ced576f67108770afc04e8568856f48703365ab8"
               resources:
                 requests:
                   cpu: "2"
@@ -256,7 +256,7 @@ patches:
   #           serviceAccountName: examxv2-production-sa
   #           containers:
   #           - name: celery-bulk-export-worker
-  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-4251-Updated-input-validation-l-91e69fd4a65748384ec9735bd3e5d314cc984442"
+  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-3751-should-not-display-on-admi-ced576f67108770afc04e8568856f48703365ab8"
   #             resources:
   #               requests:
   #                 cpu: "2"
@@ -304,7 +304,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-4251-Updated-input-validation-l-91e69fd4a65748384ec9735bd3e5d314cc984442"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-3751-should-not-display-on-admi-ced576f67108770afc04e8568856f48703365ab8"
               resources:
                 requests:
                   cpu: "2"
@@ -368,7 +368,7 @@ patches:
             serviceAccountName: examxv2-production-sa
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-4251-Updated-input-validation-l-91e69fd4a65748384ec9735bd3e5d314cc984442"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-3751-should-not-display-on-admi-ced576f67108770afc04e8568856f48703365ab8"
               resources:
                 requests:
                   cpu: "2"
@@ -455,7 +455,7 @@ patches:
   #           serviceAccountName: examxv2-production-sa
   #           containers:
   #           - name: flower
-  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-4251-Updated-input-validation-l-91e69fd4a65748384ec9735bd3e5d314cc984442"
+  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:prod-EXM-3751-should-not-display-on-admi-ced576f67108770afc04e8568856f48703365ab8"
   #             resources:
   #               requests:
   #                 cpu: "250m"
