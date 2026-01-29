@@ -37,7 +37,7 @@ patches:
                   memory: "20Gi"
               env:
               - name: WORKERS
-                value: "6"
+                value: "4"
               
               # OpenTelemetry configuration for production environment
               # Uses local Grafana Cloud Alloy receiver for better reliability
