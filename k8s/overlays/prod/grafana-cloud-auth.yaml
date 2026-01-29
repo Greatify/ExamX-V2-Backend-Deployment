@@ -1,16 +1,29 @@
+---
+# Secret for Grafana Cloud Prometheus credentials
+# Credentials extracted from grafana-cloud namespace secret:
+# grafana-cloud-metrics-grafana-k8s-monitoring
+#
+# Username: 1664643 (Grafana Cloud Instance ID)
+# Password: glc_eyJ... (Grafana Cloud API Token)
+#
+# These credentials are already configured and ready to use.
+# No manual updates required.
 apiVersion: v1
 kind: Secret
 metadata:
-  name: grafana-cloud-prometheus-credentials
+  name: grafana-cloud-prometheus-secret
   namespace: examxv2-production
 type: Opaque
-stringData:
-  # Replace these with your actual Grafana Cloud credentials
-  # username: your-grafana-instance-id (e.g., 12345)
-  # password: your-grafana-cloud-api-key
+data:
+  # Base64-encoded Grafana Cloud credentials (from grafana-cloud namespace)
+  # Username (Instance ID): 1664643
+  # Password: API token starting with glc_eyJ...
   username: "REPLACE_WITH_GRAFANA_INSTANCE_ID"
   password: "REPLACE_WITH_GRAFANA_API_KEY"
+
 ---
+# TriggerAuthentication for Grafana Cloud Prometheus
+# This resource configures how KEDA authenticates to Grafana Cloud Prometheus
 apiVersion: keda.sh/v1alpha1
 kind: TriggerAuthentication
 metadata:
@@ -18,9 +31,11 @@ metadata:
   namespace: examxv2-production
 spec:
   secretTargetRef:
+    # Reference to username in the secret
     - parameter: username
-      name: grafana-cloud-prometheus-credentials
+      name: grafana-cloud-prometheus-secret
       key: username
+    # Reference to password (API token) in the secret
     - parameter: password
-      name: grafana-cloud-prometheus-credentials
+      name: grafana-cloud-prometheus-secret
       key: password

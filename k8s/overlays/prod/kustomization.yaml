@@ -38,7 +38,7 @@ patches:
                   memory: "20Gi"
               env:
               - name: WORKERS
-                value: "6"
+                value: "4"
               
               # OpenTelemetry configuration for production environment
               # Uses Grafana Cloud Alloy receiver (deployed in grafana-cloud namespace)
@@ -59,6 +59,19 @@ patches:
               
               - name: OTEL_RESOURCE_ATTRIBUTES
                 value: "service.version=1.0.0,deployment.environment=production,k8s.cluster.name=greatify-prod-cluster"
+              
+              # Batch processing configuration to reduce export overhead
+              - name: OTEL_BSP_SCHEDULE_DELAY
+                value: "5000"
+              
+              - name: OTEL_BSP_MAX_EXPORT_BATCH_SIZE
+                value: "512"
+              
+              - name: OTEL_BSP_MAX_QUEUE_SIZE
+                value: "2048"
+              
+              - name: OTEL_BSP_EXPORT_TIMEOUT
+                value: "30000"
               
               # Pyroscope configuration - disable for now (no Grafana Cloud Pyroscope configured)
               - name: ENABLE_PYROSCOPE
@@ -174,7 +187,14 @@ patches:
               # Pyroscope configuration - disabled
               - name: ENABLE_PYROSCOPE
                 value: "false"
-              
+              - name: OTEL_BSP_SCHEDULE_DELAY
+                value: "5000"
+              - name: OTEL_BSP_MAX_EXPORT_BATCH_SIZE
+                value: "512"
+              - name: OTEL_BSP_MAX_QUEUE_SIZE
+                value: "2048"
+              - name: OTEL_BSP_EXPORT_TIMEOUT
+                value: "30000"
               - name: OPIK_URL_OVERRIDE
                 value: "https://www.comet.com/opik/api"
               - name: OPIK_API_KEY
@@ -238,7 +258,14 @@ patches:
               # Pyroscope configuration - disabled
               - name: ENABLE_PYROSCOPE
                 value: "false"
-              
+              - name: OTEL_BSP_SCHEDULE_DELAY
+                value: "5000"
+              - name: OTEL_BSP_MAX_EXPORT_BATCH_SIZE
+                value: "512"
+              - name: OTEL_BSP_MAX_QUEUE_SIZE
+                value: "2048"
+              - name: OTEL_BSP_EXPORT_TIMEOUT
+                value: "30000"
               - name: OPIK_URL_OVERRIDE
                 value: "https://www.comet.com/opik/api"
               - name: OPIK_API_KEY
@@ -351,6 +378,14 @@ patches:
               - name: ENABLE_PYROSCOPE
                 value: "false"
               
+              - name: OTEL_BSP_SCHEDULE_DELAY
+                value: "5000"
+              - name: OTEL_BSP_MAX_EXPORT_BATCH_SIZE
+                value: "512"
+              - name: OTEL_BSP_MAX_QUEUE_SIZE
+                value: "2048"
+              - name: OTEL_BSP_EXPORT_TIMEOUT
+                value: "30000"
               - name: OPIK_URL_OVERRIDE
                 value: "https://www.comet.com/opik/api"
               - name: OPIK_API_KEY
@@ -415,6 +450,14 @@ patches:
               - name: ENABLE_PYROSCOPE
                 value: "false"
               
+              - name: OTEL_BSP_SCHEDULE_DELAY
+                value: "5000"
+              - name: OTEL_BSP_MAX_EXPORT_BATCH_SIZE
+                value: "512"
+              - name: OTEL_BSP_MAX_QUEUE_SIZE
+                value: "2048"
+              - name: OTEL_BSP_EXPORT_TIMEOUT
+                value: "30000"
               - name: OPIK_URL_OVERRIDE
                 value: "https://www.comet.com/opik/api"
               - name: OPIK_API_KEY
@@ -662,9 +705,10 @@ patches:
           metadata:
             serverAddress: "https://prometheus-prod-43-prod-ap-south-1.grafana.net/api/prom"
             metricName: "celery_default_queue_backlog"
-            threshold: "0.5"
+            threshold: "1"
             query: |
               sum(examx_celery_queue_pending{queue="default",namespace="examxv2-production"} + examx_celery_queue_active{queue="default",namespace="examxv2-production"})
+            authModes: "basic"
     target:
       kind: ScaledObject
       name: celery-worker-default-scaler
@@ -686,9 +730,10 @@ patches:
           metadata:
             serverAddress: "https://prometheus-prod-43-prod-ap-south-1.grafana.net/api/prom"
             metricName: "celery_bulk_upload_queue_backlog"
-            threshold: "0.5"
+            threshold: "1"
             query: |
               sum(examx_celery_queue_pending{queue="bulk_upload",namespace="examxv2-production"} + examx_celery_queue_active{queue="bulk_upload",namespace="examxv2-production"})
+            authModes: "basic"
     target:
       kind: ScaledObject
       name: celery-bulk-upload-worker-scaler
@@ -700,7 +745,7 @@ patches:
         name: celery-enrichment-worker-scaler
       spec:
         minReplicaCount: 1
-        maxReplicaCount: 20
+        maxReplicaCount: 10
         cooldownPeriod: 120
         pollingInterval: 15
         triggers:
@@ -710,9 +755,10 @@ patches:
           metadata:
             serverAddress: "https://prometheus-prod-43-prod-ap-south-1.grafana.net/api/prom"
             metricName: "celery_enrichment_queue_backlog"
-            threshold: "0.5"
+            threshold: "1"
             query: |
               sum(examx_celery_queue_pending{queue="question_enrichment",namespace="examxv2-production"} + examx_celery_queue_active{queue="question_enrichment",namespace="examxv2-production"})
+            authModes: "basic"
     target:
       kind: ScaledObject
       name: celery-enrichment-worker-scaler
@@ -734,9 +780,10 @@ patches:
           metadata:
             serverAddress: "https://prometheus-prod-43-prod-ap-south-1.grafana.net/api/prom"
             metricName: "celery_exam_submission_queue_backlog"
-            threshold: "0.5"
+            threshold: "1"
             query: |
               sum(examx_celery_queue_pending{queue="exam_submissions",namespace="examxv2-production"} + examx_celery_queue_active{queue="exam_submissions",namespace="examxv2-production"})
+            authModes: "basic"
     target:
       kind: ScaledObject
       name: celery-exam-submission-worker-scaler
@@ -758,9 +805,10 @@ patches:
           metadata:
             serverAddress: "https://prometheus-prod-43-prod-ap-south-1.grafana.net/api/prom"
             metricName: "celery_question_generator_ai_backlog"
-            threshold: "0.5"
+            threshold: "1"
             query: |
               sum(examx_celery_queue_pending{queue="question_generator_ai",namespace="examxv2-production"} + examx_celery_queue_active{queue="question_generator_ai",namespace="examxv2-production"})
+            authModes: "basic"
     target:
       kind: ScaledObject
       name: celery-question-generator-ai-worker-scaler
