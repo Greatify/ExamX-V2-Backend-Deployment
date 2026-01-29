@@ -30,7 +30,7 @@ patches:
       metadata:
         name: examxv2-backend
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-4307-Updating-qp-twice-by-CSV-c-899a6f6164ddc36133258fa8c6eb964ced3ebbce"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-4299-Offline-examination-6316-4654851be25a72a7945ecd90b96dc3030bb5fbde"
       spec:
         replicas: 1
         template:
@@ -38,7 +38,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-4307-Updating-qp-twice-by-CSV-c-899a6f6164ddc36133258fa8c6eb964ced3ebbce"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-4299-Offline-examination-6316-4654851be25a72a7945ecd90b96dc3030bb5fbde"
               resources:
                 requests:
                   cpu: "2"
@@ -75,7 +75,7 @@ patches:
       metadata:
         name: celery-worker-default
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-4307-Updating-qp-twice-by-CSV-c-899a6f6164ddc36133258fa8c6eb964ced3ebbce"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-4299-Offline-examination-6316-4654851be25a72a7945ecd90b96dc3030bb5fbde"
       spec:
         replicas: 0
         template:
@@ -83,7 +83,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-4307-Updating-qp-twice-by-CSV-c-899a6f6164ddc36133258fa8c6eb964ced3ebbce"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-4299-Offline-examination-6316-4654851be25a72a7945ecd90b96dc3030bb5fbde"
               resources: null  # Commented out for dev environment
               # resources:
               #   requests:
@@ -127,7 +127,7 @@ patches:
       metadata:
         name: celery-bulk-upload-worker
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-4307-Updating-qp-twice-by-CSV-c-899a6f6164ddc36133258fa8c6eb964ced3ebbce"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-4299-Offline-examination-6316-4654851be25a72a7945ecd90b96dc3030bb5fbde"
       spec:
         replicas: 0
         template:
@@ -135,7 +135,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-4307-Updating-qp-twice-by-CSV-c-899a6f6164ddc36133258fa8c6eb964ced3ebbce"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-4299-Offline-examination-6316-4654851be25a72a7945ecd90b96dc3030bb5fbde"
               resources: null  # Commented out for dev environment
               # resources:
               #   requests:
@@ -180,7 +180,7 @@ patches:
   #     metadata:
   #       name: celery-bulk-export-worker
   #       annotations:
-  #         kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-4307-Updating-qp-twice-by-CSV-c-899a6f6164ddc36133258fa8c6eb964ced3ebbce"
+  #         kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-4299-Offline-examination-6316-4654851be25a72a7945ecd90b96dc3030bb5fbde"
   #     spec:
   #       replicas: 1
   #       template:
@@ -188,7 +188,7 @@ patches:
   #           serviceAccountName: dev-examxv2-sa
   #           containers:
   #           - name: celery-bulk-export-worker
-  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-4307-Updating-qp-twice-by-CSV-c-899a6f6164ddc36133258fa8c6eb964ced3ebbce"
+  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-4299-Offline-examination-6316-4654851be25a72a7945ecd90b96dc3030bb5fbde"
   #             resources: null  # Commented out for dev environment
   #             # resources:
   #             #   requests:
@@ -257,7 +257,7 @@ patches:
   #     metadata:
   #       name: celery-exam-submission-worker
   #       annotations:
-  #         kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-4307-Updating-qp-twice-by-CSV-c-899a6f6164ddc36133258fa8c6eb964ced3ebbce"
+  #         kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-4299-Offline-examination-6316-4654851be25a72a7945ecd90b96dc3030bb5fbde"
   #     spec:
   #       replicas: 1
   #       template:
@@ -265,7 +265,7 @@ patches:
   #           serviceAccountName: dev-examxv2-sa
   #           containers:
   #           - name: celery-exam-submission-worker
-  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-4307-Updating-qp-twice-by-CSV-c-899a6f6164ddc36133258fa8c6eb964ced3ebbce"
+  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-4299-Offline-examination-6316-4654851be25a72a7945ecd90b96dc3030bb5fbde"
   #             resources: null  # Commented out for dev environment
   #             # resources:
   #             #   requests:
@@ -309,7 +309,7 @@ patches:
       metadata:
         name: celery-question-generator-ai-worker
         annotations:
-          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-4307-Updating-qp-twice-by-CSV-c-899a6f6164ddc36133258fa8c6eb964ced3ebbce"
+          kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-4299-Offline-examination-6316-4654851be25a72a7945ecd90b96dc3030bb5fbde"
       spec:
         replicas: 0
         template:
@@ -317,7 +317,7 @@ patches:
             serviceAccountName: dev-examxv2-sa
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-4307-Updating-qp-twice-by-CSV-c-899a6f6164ddc36133258fa8c6eb964ced3ebbce"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-4299-Offline-examination-6316-4654851be25a72a7945ecd90b96dc3030bb5fbde"
               resources: null  # Commented out for dev environment
               # resources:
               #   requests:
@@ -362,7 +362,7 @@ patches:
   #     metadata:
   #       name: celery-flower
   #       annotations:
-  #         kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-4307-Updating-qp-twice-by-CSV-c-899a6f6164ddc36133258fa8c6eb964ced3ebbce"
+  #         kubernetes.io/change-cause: Updated to "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-4299-Offline-examination-6316-4654851be25a72a7945ecd90b96dc3030bb5fbde"
   #     spec:
   #       replicas: 1
   #       template:
@@ -370,7 +370,7 @@ patches:
   #           serviceAccountName: dev-examxv2-sa
   #           containers:
   #           - name: flower
-  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-4307-Updating-qp-twice-by-CSV-c-899a6f6164ddc36133258fa8c6eb964ced3ebbce"
+  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:dev-EXM-4299-Offline-examination-6316-4654851be25a72a7945ecd90b96dc3030bb5fbde"
   #             resources: null  # Commented out for dev environment
   #             # resources:
   #             #   requests:
