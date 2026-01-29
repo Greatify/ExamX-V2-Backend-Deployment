@@ -40,21 +40,31 @@ patches:
                 value: "6"
               
               # OpenTelemetry configuration for production environment
-              # TODO: Update gunicorn.conf.py to support HTTP exporter before enabling
+              # Uses local Grafana Cloud Alloy receiver for better reliability
               - name: ENABLE_OTEL
                 value: "true"
+              
               - name: OTEL_EXPORTER_OTLP_PROTOCOL
-                value: "http/protobuf"
-              - name: OTEL_EXPORTER_OTLP_TRACES_PROTOCOL
-                value: "http/protobuf"
+                value: "grpc"
+              
               - name: OTEL_EXPORTER_OTLP_ENDPOINT
-                value: "https://otlp-gateway-prod-ap-south-1.grafana.net/otlp"
-              - name: OTEL_EXPORTER_OTLP_TRACES_ENDPOINT
-                value: "https://otlp-gateway-prod-ap-south-1.grafana.net/otlp/v1/traces"
-              - name: OTEL_EXPORTER_OTLP_HEADERS
-                value: "Authorization=Basic OTc0NDQ5OmdsY19leUp2SWpvaU1URTJORFV3T1NJc0ltNGlPaUp6ZEdGamF5MDVOelEwTkRrdGFXNTBaV2R5WVhScGIyNHRaM0psWVhScFpua3RjSEp2WkMxamJIVnpkR1Z5TFc1bGR5MW5jbVZoZEdsbWVTMXdjbTlrTFdOc2RYTjBaWEl0Ym1WM0lpd2lheUk2SWpReE9XUTFRVXBOT1dWbWJWYzBTalE1VXpsVldtVXdUbUlpTENKdElqcDdJbklpT2lKd2NtOWtMV0Z3TFhOdmRYUm9MVEVpIn0="
+                value: "http://grafana-k8s-monitoring-alloy-receiver.grafana-cloud.svc.cluster.local:4317"
+              
               - name: OTEL_RESOURCE_ATTRIBUTES
                 value: "service.version=1.0.0,deployment.environment=production,k8s.cluster.name=greatify-prod-cluster"
+              
+              # Batch processing configuration to reduce export overhead
+              - name: OTEL_BSP_SCHEDULE_DELAY
+                value: "5000"
+              
+              - name: OTEL_BSP_MAX_EXPORT_BATCH_SIZE
+                value: "512"
+              
+              - name: OTEL_BSP_MAX_QUEUE_SIZE
+                value: "2048"
+              
+              - name: OTEL_BSP_EXPORT_TIMEOUT
+                value: "30000"
               
               - name: OPIK_URL_OVERRIDE
                 value: "https://www.comet.com/opik/api"
@@ -151,21 +161,24 @@ patches:
               - info
               - -E
               env:
-              # OpenTelemetry configuration for production environment
+              # OpenTelemetry configuration (same as backend)
               - name: ENABLE_OTEL
                 value: "true"
+              
               - name: OTEL_EXPORTER_OTLP_PROTOCOL
-                value: "http/protobuf"
-              - name: OTEL_EXPORTER_OTLP_TRACES_PROTOCOL
-                value: "http/protobuf"
+                value: "grpc"
+              
               - name: OTEL_EXPORTER_OTLP_ENDPOINT
-                value: "https://otlp-gateway-prod-ap-south-1.grafana.net/otlp"
-              - name: OTEL_EXPORTER_OTLP_TRACES_ENDPOINT
-                value: "https://otlp-gateway-prod-ap-south-1.grafana.net/otlp/v1/traces"
-              - name: OTEL_EXPORTER_OTLP_HEADERS
-                value: "Authorization=Basic OTc0NDQ5OmdsY19leUp2SWpvaU1URTJORFV3T1NJc0ltNGlPaUp6ZEdGamF5MDVOelEwTkRrdGFXNTBaV2R5WVhScGIyNHRaM0psWVhScFpua3RjSEp2WkMxamJIVnpkR1Z5TFc1bGR5MW5jbVZoZEdsbWVTMXdjbTlrTFdOc2RYTjBaWEl0Ym1WM0lpd2lheUk2SWpReE9XUTFRVXBOT1dWbWJWYzBTalE1VXpsVldtVXdUbUlpTENKdElqcDdJbklpT2lKd2NtOWtMV0Z3TFhOdmRYUm9MVEVpIn0="
+                value: "http://grafana-k8s-monitoring-alloy-receiver.grafana-cloud.svc.cluster.local:4317"
+              
               - name: OTEL_RESOURCE_ATTRIBUTES
                 value: "service.version=1.0.0,deployment.environment=production,k8s.cluster.name=greatify-prod-cluster"
+              
+              - name: OTEL_BSP_SCHEDULE_DELAY
+                value: "5000"
+              
+              - name: OTEL_BSP_MAX_EXPORT_BATCH_SIZE
+                value: "512"
               
               - name: OPIK_URL_OVERRIDE
                 value: "https://www.comet.com/opik/api"
@@ -215,21 +228,24 @@ patches:
               - info
               - -E
               env:
-              # OpenTelemetry configuration for production environment
+              # OpenTelemetry configuration (same as backend)
               - name: ENABLE_OTEL
                 value: "true"
+              
               - name: OTEL_EXPORTER_OTLP_PROTOCOL
-                value: "http/protobuf"
-              - name: OTEL_EXPORTER_OTLP_TRACES_PROTOCOL
-                value: "http/protobuf"
+                value: "grpc"
+              
               - name: OTEL_EXPORTER_OTLP_ENDPOINT
-                value: "https://otlp-gateway-prod-ap-south-1.grafana.net/otlp"
-              - name: OTEL_EXPORTER_OTLP_TRACES_ENDPOINT
-                value: "https://otlp-gateway-prod-ap-south-1.grafana.net/otlp/v1/traces"
-              - name: OTEL_EXPORTER_OTLP_HEADERS
-                value: "Authorization=Basic OTc0NDQ5OmdsY19leUp2SWpvaU1URTJORFV3T1NJc0ltNGlPaUp6ZEdGamF5MDVOelEwTkRrdGFXNTBaV2R5WVhScGIyNHRaM0psWVhScFpua3RjSEp2WkMxamJIVnpkR1Z5TFc1bGR5MW5jbVZoZEdsbWVTMXdjbTlrTFdOc2RYTjBaWEl0Ym1WM0lpd2lheUk2SWpReE9XUTFRVXBOT1dWbWJWYzBTalE1VXpsVldtVXdUbUlpTENKdElqcDdJbklpT2lKd2NtOWtMV0Z3TFhOdmRYUm9MVEVpIn0="
+                value: "http://grafana-k8s-monitoring-alloy-receiver.grafana-cloud.svc.cluster.local:4317"
+              
               - name: OTEL_RESOURCE_ATTRIBUTES
                 value: "service.version=1.0.0,deployment.environment=production,k8s.cluster.name=greatify-prod-cluster"
+              
+              - name: OTEL_BSP_SCHEDULE_DELAY
+                value: "5000"
+              
+              - name: OTEL_BSP_MAX_EXPORT_BATCH_SIZE
+                value: "512"
               
               - name: OPIK_URL_OVERRIDE
                 value: "https://www.comet.com/opik/api"
@@ -327,21 +343,24 @@ patches:
               - info
               - -E
               env:
-              # OpenTelemetry configuration for production environment
+              # OpenTelemetry configuration (same as backend)
               - name: ENABLE_OTEL
                 value: "true"
+              
               - name: OTEL_EXPORTER_OTLP_PROTOCOL
-                value: "http/protobuf"
-              - name: OTEL_EXPORTER_OTLP_TRACES_PROTOCOL
-                value: "http/protobuf"
+                value: "grpc"
+              
               - name: OTEL_EXPORTER_OTLP_ENDPOINT
-                value: "https://otlp-gateway-prod-ap-south-1.grafana.net/otlp"
-              - name: OTEL_EXPORTER_OTLP_TRACES_ENDPOINT
-                value: "https://otlp-gateway-prod-ap-south-1.grafana.net/otlp/v1/traces"
-              - name: OTEL_EXPORTER_OTLP_HEADERS
-                value: "Authorization=Basic OTc0NDQ5OmdsY19leUp2SWpvaU1URTJORFV3T1NJc0ltNGlPaUp6ZEdGamF5MDVOelEwTkRrdGFXNTBaV2R5WVhScGIyNHRaM0psWVhScFpua3RjSEp2WkMxamJIVnpkR1Z5TFc1bGR5MW5jbVZoZEdsbWVTMXdjbTlrTFdOc2RYTjBaWEl0Ym1WM0lpd2lheUk2SWpReE9XUTFRVXBOT1dWbWJWYzBTalE1VXpsVldtVXdUbUlpTENKdElqcDdJbklpT2lKd2NtOWtMV0Z3TFhOdmRYUm9MVEVpIn0="
+                value: "http://grafana-k8s-monitoring-alloy-receiver.grafana-cloud.svc.cluster.local:4317"
+              
               - name: OTEL_RESOURCE_ATTRIBUTES
                 value: "service.version=1.0.0,deployment.environment=production,k8s.cluster.name=greatify-prod-cluster"
+              
+              - name: OTEL_BSP_SCHEDULE_DELAY
+                value: "5000"
+              
+              - name: OTEL_BSP_MAX_EXPORT_BATCH_SIZE
+                value: "512"
               
               - name: OPIK_URL_OVERRIDE
                 value: "https://www.comet.com/opik/api"
@@ -391,21 +410,24 @@ patches:
               - info
               - -E
               env:
-              # OpenTelemetry configuration for production environment
+              # OpenTelemetry configuration (same as backend)
               - name: ENABLE_OTEL
                 value: "true"
+              
               - name: OTEL_EXPORTER_OTLP_PROTOCOL
-                value: "http/protobuf"
-              - name: OTEL_EXPORTER_OTLP_TRACES_PROTOCOL
-                value: "http/protobuf"
+                value: "grpc"
+              
               - name: OTEL_EXPORTER_OTLP_ENDPOINT
-                value: "https://otlp-gateway-prod-ap-south-1.grafana.net/otlp"
-              - name: OTEL_EXPORTER_OTLP_TRACES_ENDPOINT
-                value: "https://otlp-gateway-prod-ap-south-1.grafana.net/otlp/v1/traces"
-              - name: OTEL_EXPORTER_OTLP_HEADERS
-                value: "Authorization=Basic OTc0NDQ5OmdsY19leUp2SWpvaU1URTJORFV3T1NJc0ltNGlPaUp6ZEdGamF5MDVOelEwTkRrdGFXNTBaV2R5WVhScGIyNHRaM0psWVhScFpua3RjSEp2WkMxamJIVnpkR1Z5TFc1bGR5MW5jbVZoZEdsbWVTMXdjbTlrTFdOc2RYTjBaWEl0Ym1WM0lpd2lheUk2SWpReE9XUTFRVXBOT1dWbWJWYzBTalE1VXpsVldtVXdUbUlpTENKdElqcDdJbklpT2lKd2NtOWtMV0Z3TFhOdmRYUm9MVEVpIn0="
+                value: "http://grafana-k8s-monitoring-alloy-receiver.grafana-cloud.svc.cluster.local:4317"
+              
               - name: OTEL_RESOURCE_ATTRIBUTES
                 value: "service.version=1.0.0,deployment.environment=production,k8s.cluster.name=greatify-prod-cluster"
+              
+              - name: OTEL_BSP_SCHEDULE_DELAY
+                value: "5000"
+              
+              - name: OTEL_BSP_MAX_EXPORT_BATCH_SIZE
+                value: "512"
               
               - name: OPIK_URL_OVERRIDE
                 value: "https://www.comet.com/opik/api"
