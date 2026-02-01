@@ -27,7 +27,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: examxv2-backend
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-4347-Exam-Due-Date-Time-Display-5cdb65022d1aa00ca7c8eab5de75d935ab3b6b76"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-4395-Enrichment-queued-even-whe-4979fabf76380bac4ac572f137e19dfa162bf104"
               resources:
                requests:
                  cpu: "4"
@@ -70,7 +70,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-worker-default
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-4347-Exam-Due-Date-Time-Display-5cdb65022d1aa00ca7c8eab5de75d935ab3b6b76"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-4395-Enrichment-queued-even-whe-4979fabf76380bac4ac572f137e19dfa162bf104"
               resources:
                 requests:
                   cpu: "250m"
@@ -121,7 +121,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-bulk-upload-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-4347-Exam-Due-Date-Time-Display-5cdb65022d1aa00ca7c8eab5de75d935ab3b6b76"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-4395-Enrichment-queued-even-whe-4979fabf76380bac4ac572f137e19dfa162bf104"
               resources:
                 requests:
                   cpu: "300m"
@@ -171,7 +171,7 @@ patches:
   #           serviceAccountName: examxv2-stg-secret-service
   #           containers:
   #           - name: celery-bulk-export-worker
-  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-4347-Exam-Due-Date-Time-Display-5cdb65022d1aa00ca7c8eab5de75d935ab3b6b76"
+  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-4395-Enrichment-queued-even-whe-4979fabf76380bac4ac572f137e19dfa162bf104"
   #             resources:
   #               requests:
   #                 cpu: "2"
@@ -219,7 +219,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-enrichment-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-4347-Exam-Due-Date-Time-Display-5cdb65022d1aa00ca7c8eab5de75d935ab3b6b76"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-4395-Enrichment-queued-even-whe-4979fabf76380bac4ac572f137e19dfa162bf104"
               resources:
                 requests:
                   cpu: "300m"
@@ -269,7 +269,7 @@ patches:
   #           serviceAccountName: examxv2-stg-secret-service
   #           containers:
   #           - name: celery-exam-submission-worker
-  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-4347-Exam-Due-Date-Time-Display-5cdb65022d1aa00ca7c8eab5de75d935ab3b6b76"
+  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-4395-Enrichment-queued-even-whe-4979fabf76380bac4ac572f137e19dfa162bf104"
   #             resources:
   #               requests:
   #                 cpu: "2"
@@ -316,7 +316,7 @@ patches:
             serviceAccountName: examxv2-stg-secret-service
             containers:
             - name: celery-question-generator-ai-worker
-              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-4347-Exam-Due-Date-Time-Display-5cdb65022d1aa00ca7c8eab5de75d935ab3b6b76"
+              image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-4395-Enrichment-queued-even-whe-4979fabf76380bac4ac572f137e19dfa162bf104"
               resources:
                 requests:
                   cpu: "300m"
@@ -366,7 +366,7 @@ patches:
   #           serviceAccountName: examxv2-stg-secret-service
   #           containers:
   #           - name: celery-exam-submission-worker
-  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-4347-Exam-Due-Date-Time-Display-5cdb65022d1aa00ca7c8eab5de75d935ab3b6b76"
+  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-4395-Enrichment-queued-even-whe-4979fabf76380bac4ac572f137e19dfa162bf104"
   #             env:
   #             - name: OPIK_URL_OVERRIDE
   #               value: "https://www.comet.com/opik/api"
@@ -393,7 +393,7 @@ patches:
   #           serviceAccountName: examxv2-stg-secret-service
   #           containers:
   #           - name: flower
-  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-4347-Exam-Due-Date-Time-Display-5cdb65022d1aa00ca7c8eab5de75d935ab3b6b76"
+  #             image: "399600302704.dkr.ecr.ap-south-1.amazonaws.com/examxv2-backend:stg-EXM-4395-Enrichment-queued-even-whe-4979fabf76380bac4ac572f137e19dfa162bf104"
   #             resources:
   #               requests:
   #                 cpu: "200m"
